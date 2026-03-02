@@ -434,24 +434,29 @@ export const accordionItemsParcours: AccordionItem[] = [
               fileName="emsi²"
               fileUrl="/actions-outils/sante-mentale/emsi%C2%B2.pdf"
             />
-            <DownloadButton
-              fileName="Réponse Psy"
-              fileUrl="/actions-outils/sante-mentale/flyer-Reponse-Psy.pdf"
-            />
           </div>
         </div>
 
-        {/* Section 2: Re-Med */}
+        {/* Section 2: Re-Med + Réponse Psy */}
         <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
           <h4 className="text-xl font-bold text-foreground mb-4">
             Dispositif réservé aux médecins généralistes du territoire:
           </h4>
-          <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
-            <p className="font-bold text-primary text-lg mb-2">Re-Med</p>
-            <p className="text-sm text-muted-foreground italic">
-              (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
-              projet Parcours Santé mentale 'boite à outils')
-            </p>
+          <div className="space-y-3">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
+              <p className="font-bold text-primary text-lg mb-2">Re-Med</p>
+              <p className="text-sm text-muted-foreground italic">
+                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
+                projet Parcours Santé mentale 'boite à outils')
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
+              <p className="font-bold text-primary text-lg mb-2">Réponse Psy</p>
+              <p className="text-sm text-muted-foreground italic">
+                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
+                projet Parcours Santé mentale 'boite à outils')
+              </p>
+            </div>
           </div>
         </div>
 
