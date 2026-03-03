@@ -183,7 +183,7 @@ function AgeSelectionForm({
           return (
             <button
               key={group.age_group}
-              onClick={() => onSelect(group.age_group)}
+              onClick={() => onSelect(group.age_group === "Tous âges" ? null : group.age_group)}
               className={`group relative flex items-center gap-4 p-4 rounded-2xl border-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg ${config.color}`}
             >
               <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/80 shadow-sm">
@@ -409,6 +409,35 @@ function EmergencyNumbersSection({ resources }: { resources: Resource[] }) {
   );
 }
 
+// Deduplicate resources across all age groups for the "full directory" view
+function buildDeduplicatedSections(ageGroups: AgeGroup[]): Section[] {
+  const resourceKey = (r: Resource) => `${r.name}|${r.phone}|${r.address}`;
+  const sectionMap = new Map<string, { resources: Resource[]; seen: Set<string> }>();
+  const sectionOrder: string[] = [];
+
+  for (const group of ageGroups) {
+    for (const section of group.sections) {
+      if (!sectionMap.has(section.section_title)) {
+        sectionMap.set(section.section_title, { resources: [], seen: new Set() });
+        sectionOrder.push(section.section_title);
+      }
+      const entry = sectionMap.get(section.section_title)!;
+      for (const resource of section.resources) {
+        const key = resourceKey(resource);
+        if (!entry.seen.has(key)) {
+          entry.seen.add(key);
+          entry.resources.push(resource);
+        }
+      }
+    }
+  }
+
+  return sectionOrder.map((title) => ({
+    section_title: title,
+    resources: sectionMap.get(title)!.resources,
+  }));
+}
+
 // Contenu de l'annuaire filtré
 function AnnuaireContent({
   category,
@@ -421,12 +450,6 @@ function AnnuaireContent({
   const isEmergencySection = (sectionTitle: string) =>
     sectionTitle.toLowerCase().includes("urgence");
 
-  // Filter age groups based on selection
-  // "Tous âges" shows ALL resources from ALL categories
-  const filteredGroups = (category === null || category === "Tous âges")
-    ? ageGroups
-    : ageGroups.filter(g => g.age_group === category);
-
   // Always show "Tous âges" section (emergency numbers) for specific age categories
   const tousAgesGroup = ageGroups.find(g => g.age_group === "Tous âges");
   const showTousAges = category !== null && category !== "Tous âges" && tousAgesGroup;
@@ -436,6 +459,15 @@ function AnnuaireContent({
   const tousAgesEmergencyResources =
     tousAgesGroup?.sections.find((s) => isEmergencySection(s.section_title))
       ?.resources || [];
+
+  // For "full directory" view: deduplicated flat sections
+  const isFullView = category === null;
+  const deduplicatedSections = isFullView ? buildDeduplicatedSections(ageGroups) : [];
+
+  // For specific age group view
+  const filteredGroups = isFullView
+    ? []
+    : ageGroups.filter(g => g.age_group === category);
 
   return (
     <div className="space-y-6">
@@ -450,30 +482,43 @@ function AnnuaireContent({
 
       <div className="text-center space-y-1">
         <h3 className="text-xl font-bold text-foreground">
-          {(category === null || category === "Tous âges") ? "Annuaire complet" : `Ressources : ${category}`}
+          {isFullView ? "Annuaire complet" : `Ressources : ${category}`}
         </h3>
         {category && category !== "Tous âges" && (
           <p className="text-muted-foreground text-sm">
             Voici les structures adaptées à votre profil
           </p>
         )}
-        {category === "Tous âges" && (
-          <p className="text-muted-foreground text-sm">
-            Toutes les ressources et numéros d'urgence
-          </p>
-        )}
       </div>
 
-      {/* Display filtered groups */}
-      {filteredGroups.map((group) => {
-        const config = ageConfig[group.age_group] || {
-          icon: Users,
-          color: "bg-gray-50",
-          iconColor: "text-gray-600",
-        };
-        const Icon = config.icon;
+      {/* Vue annuaire complet : sections dédupliquées */}
+      {isFullView && deduplicatedSections.map((section) => {
+        if (isEmergencySection(section.section_title)) {
+          return (
+            <EmergencyNumbersSection
+              key={section.section_title}
+              resources={section.resources}
+            />
+          );
+        }
+        return (
+          <Card key={section.section_title} className="border-border rounded-2xl overflow-hidden bg-card">
+            <CardContent className="p-5">
+              <h4 className="text-base font-bold text-card-foreground mb-4">
+                {section.section_title}
+              </h4>
+              <div className="grid md:grid-cols-2 gap-3">
+                {section.resources.map((resource, idx) => (
+                  <ResourceCard key={idx} resource={resource} />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        );
+      })}
 
-        // Special handling for "Tous âges" - use EmergencyNumbersSection
+      {/* Vue par tranche d'âge : affichage normal par groupe */}
+      {!isFullView && filteredGroups.map((group) => {
         if (group.age_group === "Tous âges") {
           const emergencySection = group.sections.find((s) =>
             isEmergencySection(s.section_title)
@@ -484,16 +529,6 @@ function AnnuaireContent({
 
           return (
             <div key={group.age_group} className="space-y-4">
-              {category === null && (
-                <div className="flex items-center gap-3 pt-4 border-t border-border">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${config.color.split(' ')[0]}`}>
-                    <Icon className={`w-5 h-5 ${config.iconColor}`} />
-                  </div>
-                  <h3 className="text-lg font-bold text-foreground">{group.age_group}</h3>
-                </div>
-              )}
-
-              {/* Other sections (like Aidants) */}
               {otherSections.map((section) => (
                 <Card key={section.section_title} className="border-border rounded-2xl overflow-hidden bg-card">
                   <CardContent className="p-5">
@@ -508,8 +543,6 @@ function AnnuaireContent({
                   </CardContent>
                 </Card>
               ))}
-
-              {/* Emergency numbers with improved design */}
               {emergencySection && (
                 <EmergencyNumbersSection resources={emergencySection.resources} />
               )}
@@ -519,15 +552,6 @@ function AnnuaireContent({
 
         return (
           <div key={group.age_group} className="space-y-4">
-            {category === null && (
-              <div className="flex items-center gap-3 pt-4 border-t border-border">
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${config.color.split(' ')[0]}`}>
-                  <Icon className={`w-5 h-5 ${config.iconColor}`} />
-                </div>
-                <h3 className="text-lg font-bold text-foreground">{group.age_group}</h3>
-              </div>
-            )}
-
             {group.sections.map((section) => (
               <Card key={section.section_title} className="border-border rounded-2xl overflow-hidden bg-card">
                 <CardContent className="p-5">
@@ -549,7 +573,7 @@ function AnnuaireContent({
         );
       })}
 
-      {/* Show emergency numbers for all categories */}
+      {/* Numéros d'urgence et aidants affichés pour toutes les catégories d'âge */}
       {showTousAges && (
         <div className="space-y-4 pt-2">
           {tousAgesAidantsSections.map((section) => (
