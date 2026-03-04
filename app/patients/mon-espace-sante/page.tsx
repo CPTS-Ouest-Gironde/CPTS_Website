@@ -60,7 +60,10 @@ export default function MonEspaceSantePage() {
                 </a>
 
                 <Link href={data.intro.tutorialButton.href}>
-                  <Button size="lg" className="mt-6 w-full sm:w-auto gap-2">
+                  <Button
+                    size="lg"
+                    className="mt-6 w-full sm:w-auto gap-2 h-auto py-3 text-sm sm:text-base whitespace-normal leading-snug text-left sm:text-center"
+                  >
                     <BookOpen className="w-4 h-4" />
                     {data.intro.tutorialButton.label}
                   </Button>
