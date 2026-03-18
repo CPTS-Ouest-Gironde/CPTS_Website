@@ -31,11 +31,11 @@ export default function DiversificationAlimentairePage() {
 
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 lg:p-6 space-y-3">
               <p className="text-base lg:text-lg font-semibold text-foreground">
-                L&apos;atelier du 05 mars 2026 est complet.
+                Atelier proposé tous les deux mois. Places limitées à 15.
               </p>
               <p className="text-muted-foreground">
-                Prochain atelier le <strong className="text-foreground">7 mai 2026</strong>.
-                Inscriptions en scannant le QR code sur l&apos;affiche ou directement sur Doctolib.
+                Inscriptions en scannant le QR code sur l&apos;affiche ou
+                directement sur Doctolib.
               </p>
               <a
                 href={DOCTOLIB_URL}
@@ -57,7 +57,7 @@ export default function DiversificationAlimentairePage() {
             <div className="max-w-2xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-border bg-card">
               <div className="relative w-full aspect-[3/4]">
                 <Image
-                  src="/actu/Affiche-divers-alimentaire-20.11.25-pdf.jpg"
+                  src="/actu/affiche-diversification-alimentaire.webp"
                   alt="Affiche Diversification Alimentaire - Jeunes parents"
                   fill
                   className="object-contain"

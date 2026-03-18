@@ -23,7 +23,7 @@ const actualites = [
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
-    image: "/actu/Affiche-divers-alimentaire-20.11.25-pdf.jpg",
+    image: "/actu/affiche-diversification-alimentaire.webp",
     link: "/actualites/diversification-alimentaire",
   },
 ];
