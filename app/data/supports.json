@@ -79,6 +79,12 @@
       "description": "10 exemplaires"
     },
     {
+      "id": "affiche-diversification-alimentaire",
+      "name": "Affiche diversification alimentaire",
+      "image": "/actu/affiche-diversification-alimentaire.webp",
+      "description": "2 exemplaires"
+    },
+    {
       "id": "reglette-epof",
       "name": "Réglette EPOF testez vous",
       "image": "/supports/reglette-EPOF.webp",
