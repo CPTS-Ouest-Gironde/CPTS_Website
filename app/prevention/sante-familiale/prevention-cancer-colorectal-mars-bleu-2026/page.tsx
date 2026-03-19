@@ -11,12 +11,21 @@ import {
   ExternalLink,
   MapPin,
 } from "lucide-react";
-import { InstagramEmbed } from "@/components/instagram-embed";
 import { Card, CardContent } from "@/components/ui/card";
 import data from "@/app/data/cancer-colorectal-mars-bleu-2026.json";
 
 export default function CancerColorectalPage() {
-  const { intro, chiffresClés, facteurs, depistage, participation, commentSeFaireDepister, exclus, evenements, instagram } = data;
+  const {
+    intro,
+    chiffresClés,
+    facteurs,
+    depistage,
+    participation,
+    commentSeFaireDepister,
+    exclus,
+    evenements,
+    linkedin,
+  } = data;
   const exclusHighlights = ["patients à hauts risques", "symptômes suspects"];
 
   const renderExclusItem = (text: string) => {
@@ -429,11 +438,30 @@ export default function CancerColorectalPage() {
               </CardContent>
             </Card>
 
-            {/* INSTAGRAM */}
+            {/* LINKEDIN */}
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-foreground">{instagram.title}</h2>
-              <p className="text-sm text-muted-foreground">{instagram.text}</p>
-              <InstagramEmbed url={instagram.url} />
+              <h2 className="text-xl font-bold text-foreground">{linkedin.title}</h2>
+              <p className="text-sm text-muted-foreground">{linkedin.text}</p>
+
+              <div className="flex justify-center">
+                <div className="relative w-full max-w-[560px] h-[980px] sm:h-[900px] lg:h-[820px] rounded-2xl overflow-hidden border border-blue-100 bg-white shadow-sm transition-shadow hover:shadow-md">
+                  <a
+                    href={linkedin.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ouvrir le post LinkedIn: ${linkedin.title}`}
+                    className="absolute inset-0 z-10"
+                  />
+                  <iframe
+                    src={linkedin.embedUrl}
+                    className="w-full h-full pointer-events-none"
+                    frameBorder="0"
+                    allowFullScreen
+                    title={linkedin.title}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
 
           </div>

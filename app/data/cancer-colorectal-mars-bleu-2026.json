@@ -151,13 +151,10 @@
       }
     ]
   },
-  "instagram": {
-    "title": "Le dépistage vu par Danièle, créatrice de contenu",
-    "text": "Le dépistage du cancer colorectal vu par Danièle créatrice de contenu : faites comme elle, allez vous tester !",
-    "url": "https://www.instagram.com/reel/CpkFogwgVup/?utm_source=ig_embed",
-    "thumbnail": "/prevention/sante-famille/cancer-colorectal/migna-insta.jpg",
-    "thumbnailAlt": "Miniature du reel Instagram - Je suis Danielle, Studio Danielle",
-    "account": "crcdc.na",
-    "accountLocation": "Bordeaux, France"
+  "linkedin": {
+    "title": "Post LinkedIn : Ligue contre le cancer",
+    "text": "Post de sensibilisation Mars Bleu.",
+    "url": "https://www.linkedin.com/posts/ligue-contre-le-cancer_vachier-marsbleu-activity-7431697959311998976-HW6d",
+    "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:activity:7431697959311998976"
   }
 }
