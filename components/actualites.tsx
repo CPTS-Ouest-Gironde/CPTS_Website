@@ -12,9 +12,9 @@ import {
 
 const actualites = [
   {
-    title: "Besoin d'un medecin ? suivez le bon chemin.",
-    image: "/actu/acces-aux-soins/Acces-Aux-Soins-1.jpg",
-    link: "/actualites/acces-aux-soins",
+    title: "Vous souffrez d'une rhinite allergique ?",
+    image: "/actu/affiche-rhinite.webp",
+    link: "/actualites/rhinite-allergique",
   },
   {
     title: "Rappel sur la bonne utilisation des certificats médicaux",
