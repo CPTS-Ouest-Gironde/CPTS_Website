@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Header } from "@/components/header";
@@ -60,6 +60,27 @@ interface Memo {
 
 export default function InsuffisanceCardiaquePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const shouldAutoOpenTest = () => {
+      const { hash, searchParams } = new URL(window.location.href);
+      const normalizedHash = hash.toLowerCase();
+      const testParam = searchParams.get("test")?.toLowerCase();
+      const autoTestParam = searchParams.get("autotest")?.toLowerCase();
+
+      return (
+        normalizedHash === "#epof" ||
+        normalizedHash === "#test-epof" ||
+        normalizedHash === "#autotest-epof" ||
+        testParam === "epof" ||
+        autoTestParam === "epof"
+      );
+    };
+
+    if (shouldAutoOpenTest()) {
+      setIsModalOpen(true);
+    }
+  }, []);
 
   return (
     <main className="min-h-screen relative">
