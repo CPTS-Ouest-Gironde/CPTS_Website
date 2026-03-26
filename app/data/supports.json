@@ -27,7 +27,7 @@
     {
       "id": "cpts",
       "name": "Affiche CPTS",
-      "image": "/supports/Flyer usagers CPTS_OuestGironde.webp",
+      "image": "/supports/Flyer-CPTS-Ouest-Gironde-A3.webp",
       "description": "1 exemplaire (A3)"
     },
     {
@@ -45,7 +45,7 @@
     {
       "id": "flyer-cpts",
       "name": "Flyer CPTS",
-      "image": "/supports/Flyer usagers CPTS_OuestGironde.webp",
+      "image": "/supports/Flyer-CPTS-Ouest-Gironde-A5.webp",
       "description": "5 exemplaires (A5)"
     },
     {
