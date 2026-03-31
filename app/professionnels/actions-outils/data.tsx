@@ -1043,7 +1043,7 @@ export const accordionItemsSSE: AccordionItem[] = [
             <img
               src="/actions-outils/SSE/Flyer SSE_page-0001.webp"
               alt="Flyer SSE — Sensibilisation au SSE et CPTS"
-              className="w-full max-w-xs h-auto rounded-xl border border-border shadow-sm"
+              className="w-full h-auto rounded-xl border border-border shadow-sm"
             />
           </div>
         </div>
