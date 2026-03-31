@@ -10,6 +10,7 @@ import {
   accordionItemsAcces,
   accordionItemsParcours,
   accordionItemsPrevention,
+  accordionItemsSSE,
 } from "./data";
 
 export default function ActionsOutilsPage() {
@@ -109,6 +110,31 @@ export default function ActionsOutilsPage() {
               {/* Accordéons */}
               <AccordionSection
                 items={accordionItemsParcours}
+                openAccordion={openAccordion}
+                onToggle={toggleAccordion}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Section SSE */}
+        <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 to-accent/5 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-bl from-accent/20 to-transparent rounded-full blur-3xl" />
+            <div className="absolute bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-3xl" />
+          </div>
+
+          <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                  Situations Sanitaires Exceptionnelles (SSE)
+                </h2>
+                <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+              </div>
+
+              <AccordionSection
+                items={accordionItemsSSE}
                 openAccordion={openAccordion}
                 onToggle={toggleAccordion}
               />

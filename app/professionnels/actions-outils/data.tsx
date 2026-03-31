@@ -963,3 +963,91 @@ Les professionnels de santé de la CPTS impliqués: Médecins Généralistes et 
     files: [],
   },
 ];
+
+export const accordionItemsSSE: AccordionItem[] = [
+  {
+    id: "sse-presentation",
+    title: "SSE — Situations Sanitaires Exceptionnelles",
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-5">
+        <p className="text-muted-foreground leading-relaxed">
+          Une situation sanitaire exceptionnelle (SSE) se caractérise par la
+          survenue d'un événement émergent, inhabituel et/ou méconnu qui dépasse
+          le cadre de la gestion courante d'une situation sanitaire. Ces
+          situations sont susceptibles d'engendrer de façon immédiate et
+          imprévisible une augmentation sensible de la demande de soins ou une
+          perturbation de l'organisation de l'offre de soins.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Le facteur déclencheur d'une SSE peut être d'origine purement
+          sanitaire (ex. : pandémie du Covid-19), ou alors lié à des événements
+          extérieurs au domaine sanitaire tels que la survenue d'un événement
+          majeur sur le territoire (aléa naturel, anthropique ou technologique)
+          avec des répercussions sanitaires.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Les CPTS ont joué un rôle actif pendant la crise sanitaire Covid-19 et
+          ont démontré que, dans la réponse aux situations sanitaires
+          exceptionnelles, elles constituent un lien pertinent entre les
+          différents acteurs engagés sur un territoire.
+        </p>
+        <div className="flex flex-col gap-6 pt-2">
+          {/* Miniature vidéo */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
+              Vidéo — Le sac d&apos;urgence
+            </h4>
+            <a
+              href="https://drive.google.com/file/d/18mvxT6HEz-V5P32GdLCbF-BY3z0D30w3/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full max-w-lg rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-200"
+            >
+              <img
+                src="/actions-outils/SSE/migna-sac-urgence.webp"
+                alt="Sac D'urgence En Pôle santé — Dr Chloé Galmiche"
+                className="w-full h-auto"
+              />
+              <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-5 h-5 text-primary ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-2">
+                <p className="text-white text-xs font-medium">Voir la vidéo →</p>
+              </div>
+            </a>
+          </div>
+
+          {/* Schéma SSE */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
+              Organisation du dispositif
+            </h4>
+            <img
+              src="/actions-outils/SSE/schema-SSE.webp"
+              alt="Schéma du dispositif SSE — ORSAN et coordination territoriale"
+              className="w-full h-auto rounded-xl border border-border shadow-sm"
+            />
+          </div>
+
+          {/* Flyer */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
+              Formation SimAirlec — Sensibilisation SSE
+            </h4>
+            <img
+              src="/actions-outils/SSE/Flyer SSE_page-0001.webp"
+              alt="Flyer SSE — Sensibilisation au SSE et CPTS"
+              className="w-full max-w-xs h-auto rounded-xl border border-border shadow-sm"
+            />
+          </div>
+        </div>
+      </div>
+    ),
+  },
+];
