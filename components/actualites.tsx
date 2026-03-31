@@ -17,9 +17,9 @@ const actualites = [
     link: "/actualites/rhinite-allergique",
   },
   {
-    title: "Rappel sur la bonne utilisation des certificats médicaux",
-    image: "/actu/Affiche-BESOIN-DUN-CERTIFICAT-MEDICAL-15-pdf.jpg",
-    link: "/actualites/certificats-medicaux",
+    title: "Dépistage diabète & hypertension — Pharmacie Arago, 28 et 29 avril 2026",
+    image: "/actu/affiche-pharma-ARAGO 28-29 avril _page-0001.webp",
+    link: "/actualites/pharma-arago-avril",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
