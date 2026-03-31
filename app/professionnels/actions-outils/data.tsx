@@ -56,7 +56,7 @@ Comment : Saisir la CPAM de situations d'assur√©s via un formulaire de saisine √
     files: [
       {
         name: "Affiche pour les rhinites allergiques",
-        url: "https://drive.google.com/file/d/1l5Q86gdQxVzKlH8d1DuNimN654-0gOpZ/view?usp=drive_link",
+        url: "https://drive.google.com/file/d/1uuVGvvxw-8opQ1dra0wGogIhPY4LXlK3/view?usp=drive_link",
       },
       {
         name: "Je souhaite participer au SAS",
