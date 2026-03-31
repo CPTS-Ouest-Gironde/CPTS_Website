@@ -1028,11 +1028,20 @@ export const accordionItemsSSE: AccordionItem[] = [
             <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
               Organisation du dispositif
             </h4>
-            <img
-              src="/actions-outils/SSE/schema-SSE.webp"
-              alt="Schéma du dispositif SSE — ORSAN et coordination territoriale"
-              className="w-full h-auto rounded-xl border border-border shadow-sm"
-            />
+            <button
+              className="group relative block w-full text-left"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-sse-image", { detail: { src: "/actions-outils/SSE/schema-SSE.webp", alt: "Schéma du dispositif SSE — ORSAN et coordination territoriale" } }))}
+              aria-label="Agrandir le schéma"
+            >
+              <img
+                src="/actions-outils/SSE/schema-SSE.webp"
+                alt="Schéma du dispositif SSE — ORSAN et coordination territoriale"
+                className="w-full h-auto rounded-xl border border-border shadow-sm group-hover:opacity-90 transition-opacity"
+              />
+              <div className="absolute top-2 right-2 w-8 h-8 rounded-lg bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">
+                <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+              </div>
+            </button>
           </div>
 
           {/* Flyer */}
@@ -1040,11 +1049,20 @@ export const accordionItemsSSE: AccordionItem[] = [
             <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
               Formation SimAirlec — Sensibilisation SSE
             </h4>
-            <img
-              src="/actions-outils/SSE/Flyer SSE_page-0001.webp"
-              alt="Flyer SSE — Sensibilisation au SSE et CPTS"
-              className="w-full h-auto rounded-xl border border-border shadow-sm"
-            />
+            <button
+              className="group relative block w-full text-left"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-sse-image", { detail: { src: "/actions-outils/SSE/Flyer SSE_page-0001.webp", alt: "Flyer SSE — Sensibilisation au SSE et CPTS" } }))}
+              aria-label="Agrandir le flyer"
+            >
+              <img
+                src="/actions-outils/SSE/Flyer SSE_page-0001.webp"
+                alt="Flyer SSE — Sensibilisation au SSE et CPTS"
+                className="w-full h-auto rounded-xl border border-border shadow-sm group-hover:opacity-90 transition-opacity"
+              />
+              <div className="absolute top-2 right-2 w-8 h-8 rounded-lg bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">
+                <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+              </div>
+            </button>
           </div>
         </div>
       </div>

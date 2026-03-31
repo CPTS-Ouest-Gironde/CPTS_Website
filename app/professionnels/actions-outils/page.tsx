@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import Image from "next/image";
 import { AccordionSection } from "./components/AccordionSection";
 import { TestezVousModal } from "@/components/testez-vous-modal";
+import { Dialog, DialogContent, DialogTitle, VisuallyHidden } from "@/components/ui/dialog";
 import {
   accordionItemsAcces,
   accordionItemsParcours,
@@ -16,6 +17,7 @@ import {
 export default function ActionsOutilsPage() {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sseImage, setSseImage] = useState<{ src: string; alt: string } | null>(null);
 
   const toggleAccordion = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
@@ -29,6 +31,17 @@ export default function ActionsOutilsPage() {
     window.addEventListener('open-epof-modal', handleOpenModal);
     return () => {
       window.removeEventListener('open-epof-modal', handleOpenModal);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleOpenSseImage = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      setSseImage(detail);
+    };
+    window.addEventListener('open-sse-image', handleOpenSseImage);
+    return () => {
+      window.removeEventListener('open-sse-image', handleOpenSseImage);
     };
   }, []);
 
@@ -177,6 +190,25 @@ export default function ActionsOutilsPage() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      <Dialog open={!!sseImage} onOpenChange={() => setSseImage(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden">
+          <VisuallyHidden>
+            <DialogTitle>{sseImage?.alt ?? "Aperçu"}</DialogTitle>
+          </VisuallyHidden>
+          {sseImage && (
+            <div className="p-6">
+              <div className="relative w-full bg-muted rounded-2xl overflow-hidden">
+                <img
+                  src={sseImage.src}
+                  alt={sseImage.alt}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
