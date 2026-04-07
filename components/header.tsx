@@ -56,6 +56,12 @@ const protectedProfessionalLinks = [
   { label: "Les formations", href: "/professionnels/formations" },
 ] as const
 
+const logoutButtonToneClass =
+  "border-red-200/70 bg-red-50/55 text-red-700 hover:bg-red-100/70 hover:text-red-800"
+
+const logoutDropdownToneClass =
+  "text-red-700 bg-red-50/55 border border-red-200/70 hover:bg-red-100/70 hover:text-red-800"
+
 export function Header() {
   const router = useRouter()
   const supabase = useMemo(() => createClient(), [])
@@ -162,12 +168,23 @@ export function Header() {
                   </button>
                   <div className="absolute top-full left-0 mt-2 w-80 bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
                     <div className="py-2 px-2">
-                      <Link
-                        href="/professionnels/adhesion"
-                        className="block px-4 py-2.5 text-sm font-medium text-foreground/70 hover:bg-primary/8 hover:text-primary rounded-lg transition-all duration-200"
-                      >
-                        Adhésion
-                      </Link>
+                      {isAuthenticated && (
+                        <Link
+                          href="/professionnels"
+                          className="block px-4 py-2.5 text-sm font-semibold text-foreground/80 hover:bg-primary/8 hover:text-primary rounded-lg transition-all duration-200"
+                        >
+                          Tableau de bord pro
+                        </Link>
+                      )}
+
+                      {!isAuthenticated && (
+                        <Link
+                          href="/professionnels/adhesion"
+                          className="block px-4 py-2.5 text-sm font-medium text-foreground/70 hover:bg-primary/8 hover:text-primary rounded-lg transition-all duration-200"
+                        >
+                          Adhésion
+                        </Link>
+                      )}
 
                       {protectedProfessionalLinks.map((link) => (
                         <Link
@@ -183,7 +200,7 @@ export function Header() {
                       {isAuthenticated && (
                         <button
                           onClick={handleSignOut}
-                          className="mt-2 w-full flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-foreground/80 hover:bg-primary/8 hover:text-primary rounded-lg transition-all duration-200 border-t border-border/40"
+                          className={`mt-2 w-full flex items-center gap-2 px-4 py-2.5 text-sm font-semibold rounded-lg transition-all duration-200 ${logoutDropdownToneClass}`}
                         >
                           <LogOut className="w-4 h-4" />
                           Se déconnecter
@@ -265,9 +282,22 @@ export function Header() {
               </nav>
 
               <div className="hidden xl:flex items-center gap-2 flex-shrink-0">
-                <Button asChild size="lg" variant="outline" className="rounded-full font-semibold text-sm px-5 h-11">
-                  <Link href={espaceProHref}>Espace Pro</Link>
-                </Button>
+                {isAuthenticated ? (
+                  <Button
+                    type="button"
+                    size="lg"
+                    variant="outline"
+                    className={`rounded-full font-semibold text-sm px-5 h-11 ${logoutButtonToneClass}`}
+                    onClick={handleSignOut}
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Se déconnecter
+                  </Button>
+                ) : (
+                  <Button asChild size="lg" variant="outline" className="rounded-full font-semibold text-sm px-5 h-11">
+                    <Link href={espaceProHref}>Espace Pro</Link>
+                  </Button>
+                )}
                 <Button
                   size="lg"
                   className="rounded-full font-semibold text-sm px-6 h-11 shadow-lg hover:shadow-xl transition-all duration-200"
@@ -308,13 +338,25 @@ export function Header() {
                   </button>
                   {openDropdown === "professionnels" && (
                     <div className="mt-2 ml-3 space-y-1 border-l-2 border-primary/20 pl-4">
-                      <Link
-                        href="/professionnels/adhesion"
-                        className="block py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-all duration-200"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Adhésion
-                      </Link>
+                      {isAuthenticated && (
+                        <Link
+                          href="/professionnels"
+                          className="block py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-all duration-200"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Tableau de bord pro
+                        </Link>
+                      )}
+
+                      {!isAuthenticated && (
+                        <Link
+                          href="/professionnels/adhesion"
+                          className="block py-2 text-sm font-medium text-foreground/70 hover:text-primary transition-all duration-200"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Adhésion
+                        </Link>
+                      )}
                       {protectedProfessionalLinks.map((link) => (
                         <Link
                           key={link.href}
@@ -329,7 +371,7 @@ export function Header() {
                       {isAuthenticated && (
                         <button
                           onClick={handleSignOut}
-                          className="block py-2 text-sm font-semibold text-foreground/80 hover:text-primary transition-all duration-200"
+                          className={`w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${logoutDropdownToneClass}`}
                         >
                           Se déconnecter
                         </button>
@@ -425,11 +467,24 @@ export function Header() {
                 </Link>
 
                 <div className="px-4 pt-3 space-y-2">
-                  <Button asChild size="lg" variant="outline" className="w-full rounded-full font-semibold text-base h-12">
-                    <Link href={espaceProHref} onClick={() => setIsMenuOpen(false)}>
-                      Espace Pro
-                    </Link>
-                  </Button>
+                  {isAuthenticated ? (
+                    <Button
+                      type="button"
+                      size="lg"
+                      variant="outline"
+                      className={`w-full rounded-full font-semibold text-base h-12 ${logoutButtonToneClass}`}
+                      onClick={handleSignOut}
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Se déconnecter
+                    </Button>
+                  ) : (
+                    <Button asChild size="lg" variant="outline" className="w-full rounded-full font-semibold text-base h-12">
+                      <Link href={espaceProHref} onClick={() => setIsMenuOpen(false)}>
+                        Espace Pro
+                      </Link>
+                    </Button>
+                  )}
                   <Button
                     size="lg"
                     className="w-full rounded-full font-semibold text-base h-12 shadow-lg hover:shadow-xl transition-all duration-200"
@@ -447,7 +502,11 @@ export function Header() {
         </div>
       </header>
 
-      <SocialModal isOpen={isSocialModalOpen} onClose={() => setIsSocialModalOpen(false)} />
+      <SocialModal
+        isOpen={isSocialModalOpen}
+        onClose={() => setIsSocialModalOpen(false)}
+        showAdhesionCta={!isAuthenticated}
+      />
 
       <AlertDialog open={isAccessDialogOpen} onOpenChange={setIsAccessDialogOpen}>
         <AlertDialogContent className="rounded-3xl border-2 p-0 overflow-hidden">
