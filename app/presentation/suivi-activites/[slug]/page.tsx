@@ -238,6 +238,10 @@ export default async function SuiviActiviteArticlePage({ params }: PageProps) {
     article.slug === ATELIER_DIVERSIFICATION_5_MARS_2026_SLUG
       ? "https://www.doctolib.fr/dieteticien/merignac/celine-maillard-merignac/booking/availabilities?specialityId=414&telehealth=false&placeId=practice-763409&motiveIds%5B%5D=13383386&pid=practice-763409&source=profile"
       : null;
+  const webinarVideoEmbedUrl =
+    article.slug === WEBINAIRE_RHINITE_ALLERGIQUE_SLUG
+      ? "https://www.youtube-nocookie.com/embed/-O7xYjJR3uE?rel=0&modestbranding=1"
+      : null;
 
   return (
     <main className="min-h-screen bg-background">
@@ -321,6 +325,23 @@ export default async function SuiviActiviteArticlePage({ params }: PageProps) {
                   </div>
                 </article>
               </div>
+
+              {webinarVideoEmbedUrl && (
+                <article className="rounded-3xl border border-border bg-card p-4 lg:p-6">
+                  <h3 className="text-xl font-bold text-foreground mb-4">
+                    Vidéo du webinaire
+                  </h3>
+                  <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black/90">
+                    <iframe
+                      src={webinarVideoEmbedUrl}
+                      title="Webinaire Ville Hôp : asthme et rhinite allergique"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="w-full h-full"
+                    />
+                  </div>
+                </article>
+              )}
 
               {hasCarousel && (
                 <article className="rounded-3xl border border-border bg-card p-4 lg:p-6">
