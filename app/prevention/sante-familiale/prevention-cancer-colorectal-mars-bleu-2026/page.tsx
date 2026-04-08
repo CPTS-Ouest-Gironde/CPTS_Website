@@ -26,6 +26,10 @@ export default function CancerColorectalPage() {
     evenements,
     linkedin,
   } = data;
+  const isResourceHubExternal =
+    "resourceHub" in commentSeFaireDepister &&
+    !!commentSeFaireDepister.resourceHub &&
+    /^https?:\/\//.test(commentSeFaireDepister.resourceHub.url);
   const exclusHighlights = ["patients à hauts risques", "symptômes suspects"];
 
   const renderExclusItem = (text: string) => {
@@ -142,8 +146,8 @@ export default function CancerColorectalPage() {
                     </p>
                     <a
                       href={commentSeFaireDepister.resourceHub.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      target={isResourceHubExternal ? "_blank" : undefined}
+                      rel={isResourceHubExternal ? "noopener noreferrer" : undefined}
                       className="inline-flex items-center gap-2 rounded-full bg-cyan-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-cyan-800"
                     >
                       {commentSeFaireDepister.resourceHub.urlLabel}
