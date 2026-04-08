@@ -7,17 +7,16 @@ export function Footer() {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Logo */}
-          <div className="flex items-center bg-white rounded-2xl p-3 shadow-sm">
+          <div className="flex items-center bg-white rounded-xl p-2 shadow-sm">
             <Image
-              src="/logo-cpts.png"
+              src="/favicon.svg"
               alt="CPTS Ouest Gironde"
-              width={200}
-              height={64}
-              className="h-12 sm:h-14 lg:h-16 object-contain"
-              style={{ width: "auto" }}
+              width={130}
+              height={87}
+              className="w-[100px] sm:w-[115px] lg:w-[130px] h-auto object-contain"
+              style={{ height: "auto" }}
               loading="lazy"
-              quality={85}
-              sizes="(max-width: 640px) 160px, (max-width: 1024px) 180px, 200px"
+              sizes="(max-width: 640px) 100px, (max-width: 1024px) 115px, 130px"
             />
           </div>
 
