@@ -68,6 +68,8 @@ export function VideosView({ type }: VideosViewProps) {
   // Vue "Venez on vous aide" - Texte + lien externe + ressources
   if (type === "aide") {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const isInternalResourcesLink =
+      venezAideData.livingPageLink.url.startsWith("/");
 
     return (
       <>
@@ -88,8 +90,8 @@ export function VideosView({ type }: VideosViewProps) {
             </p>
             <a
               href={venezAideData.livingPageLink.url}
-              target="_blank"
-              rel="noopener noreferrer"
+              target={isInternalResourcesLink ? undefined : "_blank"}
+              rel={isInternalResourcesLink ? undefined : "noopener noreferrer"}
               className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-600 text-white rounded-full font-semibold hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-xl"
             >
               <span>{venezAideData.livingPageLink.label}</span>

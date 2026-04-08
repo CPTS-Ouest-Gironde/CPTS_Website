@@ -3,7 +3,7 @@
   "description": "Pour vous accompagner, nous avons créé des supports et questionnaires dédiés aux professionnels de santé pour la gestion de votre santé mentale. Ces outils vous permettront de mieux comprendre votre situation et de trouver les ressources adaptées à vos besoins.",
   "note": "Rapprochez-vous d'un professionnel de santé pour remplir le formulaire.",
   "livingPageLink": {
-    "url": "https://cpts.livingpage.fr/ma-livingpage?id=321&nom=sante-mentale-les-dispositifs-du-territoire",
+    "url": "/sante-mental/les-dispositifs-du-territoire",
     "label": "Accéder aux ressources"
   },
   "resources": [
