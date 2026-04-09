@@ -86,10 +86,10 @@ export default async function ProfessionnelsHubPage() {
                     Tableau de bord
                   </p>
                   <h1 className="mt-3 text-3xl sm:text-4xl font-bold text-foreground text-balance">
-                    Bienvenue {greetingName}.
+                    Bienvenue sur votre espace professionnel.
                   </h1>
                   <p className="mt-4 max-w-3xl text-base sm:text-lg text-muted-foreground leading-relaxed">
-                    Retrouvez vos accès rapides à l&apos;espace professionnel.
+                    Bonjour {greetingName}. Retrouvez vos accès rapides à l&apos;espace professionnel.
                   </p>
                 </CardContent>
               </Card>
