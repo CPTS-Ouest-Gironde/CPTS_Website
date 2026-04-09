@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Linkedin, Facebook, Instagram, Copy, Check, Loader2 } from "lucide-react"
 import { containsForbiddenLink } from "@/lib/message-content"
+import { getPublicFormErrorDetails, type PublicFormErrorVariant } from "@/lib/public-form-errors"
 
 const EMAIL = "info@cpts-ouest-gironde.fr"
 
@@ -14,6 +15,7 @@ export function Contact() {
   const [isLoading, setIsLoading] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  const [errorVariant, setErrorVariant] = useState<PublicFormErrorVariant>("error")
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -43,9 +45,11 @@ export function Contact() {
     e.preventDefault()
     setStatus("idle")
     setErrorMessage("")
+    setErrorVariant("error")
 
     if (containsForbiddenLink(formData.message)) {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("Les liens ne sont pas autorisés dans le message.")
       return
     }
@@ -64,12 +68,14 @@ export function Contact() {
         setErrorMessage("")
         setFormData({ firstName: "", lastName: "", email: "", message: "" })
       } else {
-        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        const apiError = await getPublicFormErrorDetails(response, "contact")
         setStatus("error")
-        setErrorMessage(payload?.error || "Une erreur est survenue. Veuillez réessayer.")
+        setErrorVariant(apiError.variant)
+        setErrorMessage(apiError.message)
       }
     } catch {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("Une erreur est survenue. Veuillez réessayer.")
     } finally {
       setIsLoading(false)
@@ -239,7 +245,13 @@ export function Contact() {
               )}
 
               {status === "error" && (
-                <div className="p-3 rounded-xl bg-red-100 text-red-800 text-sm font-medium">
+                <div
+                  className={`p-3 rounded-xl text-sm font-medium ${
+                    errorVariant === "warning"
+                      ? "bg-amber-100 text-amber-900 border border-amber-200"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
                   {errorMessage || "Une erreur est survenue. Veuillez réessayer."}
                 </div>
               )}

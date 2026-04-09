@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { isIP } from "node:net"
 import { z } from "zod"
 import {
   containsForbiddenLink,
@@ -100,13 +101,91 @@ export const supportOrderSchema = z
   })
   .strict()
 
+function parseIpCandidate(candidate: string | null) {
+  if (!candidate) {
+    return null
+  }
+
+  const trimmedCandidate = candidate.trim()
+  if (!trimmedCandidate) {
+    return null
+  }
+
+  if (isIP(trimmedCandidate)) {
+    return trimmedCandidate
+  }
+
+  const ipv4WithPortMatch = trimmedCandidate.match(/^(\d{1,3}(?:\.\d{1,3}){3}):\d+$/)
+  if (ipv4WithPortMatch && isIP(ipv4WithPortMatch[1]) === 4) {
+    return ipv4WithPortMatch[1]
+  }
+
+  const ipv6WithPortMatch = trimmedCandidate.match(/^\[([0-9A-Fa-f:]+)\]:\d+$/)
+  if (ipv6WithPortMatch && isIP(ipv6WithPortMatch[1]) === 6) {
+    return ipv6WithPortMatch[1]
+  }
+
+  return null
+}
+
+function getClientIp(request: Request) {
+  // Priority order:
+  // 1) x-vercel-forwarded-for (trusted in production on Vercel because platform-managed)
+  // 2) x-forwarded-for first IP only for non-Vercel production fallback deployments
+  // 3) stable local fallback to keep rate limiting effective in dev
+  const vercelForwardedFor = request.headers.get("x-vercel-forwarded-for")
+  if (vercelForwardedFor) {
+    const firstVercelIp = parseIpCandidate(vercelForwardedFor.split(",")[0] ?? null)
+    if (firstVercelIp) {
+      return firstVercelIp
+    }
+  }
+
+  const isVercelRuntime = process.env.VERCEL === "1"
+  if (!isVercelRuntime && process.env.NODE_ENV === "production") {
+    const forwardedFor = request.headers.get("x-forwarded-for")
+    if (forwardedFor) {
+      const firstForwardedIp = parseIpCandidate(forwardedFor.split(",")[0] ?? null)
+      if (firstForwardedIp) {
+        return firstForwardedIp
+      }
+    }
+  }
+
+  return process.env.NODE_ENV === "production" ? "unknown" : "unknown-local"
+}
+
+function pruneExpiredRateLimitBuckets(now: number) {
+  for (const [bucketKey, bucket] of rateLimitStore) {
+    if (bucket.resetAt <= now) {
+      rateLimitStore.delete(bucketKey)
+    }
+  }
+}
+
+function normalizeHost(value: string) {
+  const trimmedValue = value.trim()
+  if (!trimmedValue) {
+    return null
+  }
+
+  try {
+    if (/^[a-z]+:\/\//i.test(trimmedValue)) {
+      return new URL(trimmedValue).host.toLowerCase()
+    }
+
+    return new URL(`https://${trimmedValue}`).host.toLowerCase()
+  } catch {
+    return null
+  }
+}
+
 export function applyRateLimit(request: Request, key: RateLimitKey) {
-  const forwardedFor = request.headers.get("x-forwarded-for")
-  const forwardedClientIp = forwardedFor?.split(",").at(-1)?.trim()
-  const clientIp = request.headers.get("x-real-ip") || forwardedClientIp || "unknown"
+  const clientIp = getClientIp(request)
   const bucketKey = `${key}:${clientIp}`
   const now = Date.now()
   const rule = RATE_LIMIT_RULES[key]
+  pruneExpiredRateLimitBuckets(now)
   const bucket = rateLimitStore.get(bucketKey)
 
   if (!bucket || bucket.resetAt <= now) {
@@ -142,28 +221,23 @@ export function enforceTrustedOrigin(request: Request) {
   }
 
   const requestUrl = new URL(request.url)
-  const trustedHosts = new Set<string>([requestUrl.host])
-
-  const forwardedHost = request.headers.get("x-forwarded-host")
-  if (forwardedHost) {
-    trustedHosts.add(forwardedHost)
+  const requestHost = normalizeHost(requestUrl.host)
+  if (!requestHost) {
+    return NextResponse.json({ error: "Configuration serveur invalide." }, { status: 500 })
   }
+  const trustedHosts = new Set<string>([requestHost])
 
   const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL
   if (configuredSiteUrl) {
-    try {
-      trustedHosts.add(new URL(configuredSiteUrl).host)
-    } catch {
+    const configuredHost = normalizeHost(configuredSiteUrl)
+    if (!configuredHost) {
       return NextResponse.json({ error: "Configuration serveur invalide." }, { status: 500 })
     }
+    trustedHosts.add(configuredHost)
   }
 
-  try {
-    const originUrl = new URL(origin)
-    if (!trustedHosts.has(originUrl.host)) {
-      return NextResponse.json({ error: "Origine non autorisee." }, { status: 403 })
-    }
-  } catch {
+  const originHost = normalizeHost(origin)
+  if (!originHost || !trustedHosts.has(originHost)) {
     return NextResponse.json({ error: "Origine non autorisee." }, { status: 403 })
   }
 

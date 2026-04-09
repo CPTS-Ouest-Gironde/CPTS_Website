@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogTitle, VisuallyHidden } from "@/components/ui/dialog"
-import { Check, Plus, Minus, ShoppingCart, ZoomIn, X, Loader2 } from "lucide-react"
+import { Check, Plus, Minus, ShoppingCart, ZoomIn, X, Loader2, AlertTriangle } from "lucide-react"
 import Image from "next/image"
 import data from "@/app/data/supports.json"
 import {
@@ -16,6 +16,7 @@ import {
   isValidPersonName,
   isValidPostalAddress,
 } from "@/lib/message-content"
+import { getPublicFormErrorDetails, type PublicFormErrorVariant } from "@/lib/public-form-errors"
 
 interface Support {
   id: string
@@ -38,6 +39,7 @@ export default function SupportsPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState("")
+  const [errorVariant, setErrorVariant] = useState<PublicFormErrorVariant>("error")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -68,27 +70,32 @@ export default function SupportsPage() {
     e.preventDefault()
     setStatus("idle")
     setErrorMessage("")
+    setErrorVariant("error")
 
     if (containsForbiddenLink(formData.name)) {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("Les liens ne sont pas autorisés dans le nom.")
       return
     }
 
     if (!isValidPersonName(formData.name)) {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("Le nom et le prénom contiennent des caractères invalides.")
       return
     }
 
     if (containsForbiddenLink(formData.address)) {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("Les liens ne sont pas autorisés dans l'adresse postale.")
       return
     }
 
     if (!isValidPostalAddress(formData.address)) {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("L'adresse postale contient des caractères invalides.")
       return
     }
@@ -120,12 +127,14 @@ export default function SupportsPage() {
         setSelectedSupports([])
         setFormData({ name: "", email: "", phone: "", address: "" })
       } else {
-        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        const apiError = await getPublicFormErrorDetails(response, "supports-order")
         setStatus("error")
-        setErrorMessage(payload?.error || "Une erreur est survenue. Veuillez réessayer.")
+        setErrorVariant(apiError.variant)
+        setErrorMessage(apiError.message)
       }
     } catch {
       setStatus("error")
+      setErrorVariant("error")
       setErrorMessage("Une erreur est survenue. Veuillez réessayer.")
     } finally {
       setIsLoading(false)
@@ -401,11 +410,29 @@ export default function SupportsPage() {
                       )}
 
                       {status === "error" && (
-                        <div className="p-4 rounded-2xl bg-red-50 border border-red-200 flex items-start gap-3">
-                          <div className="w-5 h-5 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <X className="w-3 h-3 text-white" />
+                        <div
+                          className={`p-4 rounded-2xl border flex items-start gap-3 ${
+                            errorVariant === "warning"
+                              ? "bg-amber-50 border-amber-200"
+                              : "bg-red-50 border-red-200"
+                          }`}
+                        >
+                          <div
+                            className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                              errorVariant === "warning" ? "bg-amber-500" : "bg-red-600"
+                            }`}
+                          >
+                            {errorVariant === "warning" ? (
+                              <AlertTriangle className="w-3 h-3 text-white" />
+                            ) : (
+                              <X className="w-3 h-3 text-white" />
+                            )}
                           </div>
-                          <p className="text-sm font-medium text-red-800">
+                          <p
+                            className={`text-sm font-medium ${
+                              errorVariant === "warning" ? "text-amber-800" : "text-red-800"
+                            }`}
+                          >
                             {errorMessage || "Une erreur est survenue. Veuillez réessayer ou nous contacter."}
                           </p>
                         </div>
