@@ -8,9 +8,10 @@ import Link from "next/link"
 interface SocialModalProps {
   isOpen: boolean
   onClose: () => void
+  showAdhesionCta?: boolean
 }
 
-export function SocialModal({ isOpen, onClose }: SocialModalProps) {
+export function SocialModal({ isOpen, onClose, showAdhesionCta = true }: SocialModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-lg">
@@ -62,21 +63,22 @@ export function SocialModal({ isOpen, onClose }: SocialModalProps) {
             </a>
           </div>
 
-          {/* Section Adhésion Professionnels */}
-          <div className="mt-4 pt-6 border-t border-border space-y-3">
-            <p className="text-center text-sm text-muted-foreground">
-              Vous êtes professionnel de santé ?
-            </p>
-            <Link href="/professionnels/adhesion" onClick={onClose} className="block">
-              <Button
-                size="lg"
-                className="w-full rounded-full font-semibold text-base h-12 shadow-lg hover:shadow-xl transition-all duration-200"
-              >
-                <UserPlus className="w-4 h-4 mr-2" />
-                Adhérer
-              </Button>
-            </Link>
-          </div>
+          {showAdhesionCta && (
+            <div className="mt-4 pt-6 border-t border-border space-y-3">
+              <p className="text-center text-sm text-muted-foreground">
+                Vous êtes professionnel de santé ?
+              </p>
+              <Link href="/professionnels/adhesion" onClick={onClose} className="block">
+                <Button
+                  size="lg"
+                  className="w-full rounded-full font-semibold text-base h-12 shadow-lg hover:shadow-xl transition-all duration-200"
+                >
+                  <UserPlus className="w-4 h-4 mr-2" />
+                  Adhérer
+                </Button>
+              </Link>
+            </div>
+          )}
         </div>
       </DialogContent>
     </Dialog>
