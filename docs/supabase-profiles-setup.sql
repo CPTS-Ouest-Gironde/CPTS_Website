@@ -1,5 +1,5 @@
 -- =========================================================
--- Supabase: table profiles (name/surname) for pro area
+-- Supabase: table profiles (name/surname/role) for pro area
 -- Execute in Supabase SQL Editor
 -- =========================================================
 
@@ -8,6 +8,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
   first_name text,
   last_name text,
+  role text not null default 'adherent' check (role in ('adherent', 'membre_ca', 'collaborateur')),
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -76,16 +77,26 @@ language plpgsql
 security definer
 set search_path = public
 as $$
+declare
+  user_role text;
 begin
-  insert into public.profiles (id, first_name, last_name)
+  user_role := nullif(trim(coalesce(new.raw_user_meta_data ->> 'role', '')), '');
+
+  if user_role is null or user_role not in ('adherent', 'membre_ca', 'collaborateur') then
+    user_role := 'adherent';
+  end if;
+
+  insert into public.profiles (id, first_name, last_name, role)
   values (
     new.id,
     nullif(trim(coalesce(new.raw_user_meta_data ->> 'first_name', '')), ''),
-    nullif(trim(coalesce(new.raw_user_meta_data ->> 'last_name', '')), '')
+    nullif(trim(coalesce(new.raw_user_meta_data ->> 'last_name', '')), ''),
+    user_role
   )
   on conflict (id) do update
     set first_name = coalesce(excluded.first_name, public.profiles.first_name),
         last_name = coalesce(excluded.last_name, public.profiles.last_name),
+        role = coalesce(excluded.role, public.profiles.role),
         updated_at = now();
 
   return new;
@@ -99,30 +110,14 @@ for each row
 execute function public.handle_auth_user_created();
 
 -- 5) Backfill for existing users
-insert into public.profiles (id, first_name, last_name)
+insert into public.profiles (id, first_name, last_name, role)
 select
   u.id,
   nullif(trim(coalesce(u.raw_user_meta_data ->> 'first_name', '')), ''),
-  nullif(trim(coalesce(u.raw_user_meta_data ->> 'last_name', '')), '')
+  nullif(trim(coalesce(u.raw_user_meta_data ->> 'last_name', '')), ''),
+  coalesce(
+    nullif(trim(coalesce(u.raw_user_meta_data ->> 'role', '')), ''),
+    'adherent'
+  )
 from auth.users u
 on conflict (id) do nothing;
-
--- 6) Example: update names from your own list (email, first_name, last_name)
--- Replace values below with your real list.
-with source_list(email, first_name, last_name) as (
-  values
-    ('john.doe@example.com', 'John', 'Doe'),
-    ('jane.doe@example.com', 'Jane', 'Doe')
-)
-insert into public.profiles (id, first_name, last_name)
-select
-  u.id,
-  s.first_name,
-  s.last_name
-from source_list s
-join auth.users u
-  on lower(u.email) = lower(s.email)
-on conflict (id) do update
-  set first_name = excluded.first_name,
-      last_name = excluded.last_name,
-      updated_at = now();

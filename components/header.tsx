@@ -9,12 +9,14 @@ import { Menu, X, ChevronDown, LogOut, ShieldAlert, ArrowRight, UserPlus } from 
 import { Button } from "@/components/ui/button"
 import {
   AlertDialog,
+  AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import { createClient } from "@/lib/supabase/client"
+import { isFullyAuthenticatedForProAccess } from "@/lib/supabase/pro-auth"
 
 const SocialModal = dynamic(
   () => import("./social-modal").then((mod) => mod.SocialModal),
@@ -77,24 +79,26 @@ export function Header() {
   useEffect(() => {
     let isMounted = true
 
-    async function initializeSession() {
+    async function refreshAuthState() {
       const {
         data: { user },
       } = await supabase.auth.getUser()
 
+      const isFullyAuthenticated = await isFullyAuthenticatedForProAccess(user, () =>
+        supabase.auth.getClaims(),
+      )
+
       if (isMounted) {
-        setIsAuthenticated(Boolean(user))
+        setIsAuthenticated(isFullyAuthenticated)
       }
     }
 
-    void initializeSession()
+    void refreshAuthState()
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
-      if (isMounted) {
-        setIsAuthenticated(Boolean(session?.user))
-      }
+    } = supabase.auth.onAuthStateChange(() => {
+      void refreshAuthState()
     })
 
     return () => {
@@ -510,7 +514,17 @@ export function Header() {
 
       <AlertDialog open={isAccessDialogOpen} onOpenChange={setIsAccessDialogOpen}>
         <AlertDialogContent className="rounded-3xl border-2 p-0 overflow-hidden">
-          <AlertDialogHeader className="p-6 pb-4 bg-gradient-to-br from-primary/10 to-accent/10 border-b border-border/70">
+          <AlertDialogHeader className="relative p-6 pb-4 bg-gradient-to-br from-primary/10 to-accent/10 border-b border-border/70">
+            <AlertDialogCancel asChild>
+              <button
+                type="button"
+                aria-label="Fermer la fenêtre d'accès"
+                className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-background/70 hover:text-foreground"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </AlertDialogCancel>
+
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/15 text-primary mb-1">
               <ShieldAlert className="h-6 w-6" />
             </div>
@@ -547,6 +561,7 @@ export function Header() {
             <p className="text-xs text-muted-foreground text-center">
               Déjà adhérent ? Connectez-vous à l&apos;espace pro.
             </p>
+
           </div>
         </AlertDialogContent>
       </AlertDialog>

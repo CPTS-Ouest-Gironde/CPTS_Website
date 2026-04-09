@@ -1,6 +1,6 @@
 "use client"
 
-import { FormEvent, useMemo, useState } from "react"
+import { FormEvent, useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Loader2, Lock, Eye, EyeOff, Mail, ShieldCheck, CircleCheck } from "lucide-react"
@@ -19,9 +19,39 @@ const PROFESSIONAL_BENEFITS = [
   "Suivre les formations disponibles",
   "Et bien d'autres outils à venir",
 ] as const
+const RESET_PASSWORD_COOLDOWN_SECONDS = 60
+const RESET_PASSWORD_SUCCESS_MESSAGE =
+  "Un email de réinitialisation vient d'être envoyé. Vérifiez votre boîte mail."
 
 function getSafeNextPath(value: string | null) {
-  if (!value || !value.startsWith("/")) {
+  if (!value) {
+    return "/professionnels"
+  }
+
+  // Cas attendus:
+  // "/professionnels" -> OK
+  // "/professionnels/supports" -> OK
+  // "//evil.com" -> REFUS (fallback)
+  // "https://evil.com" -> REFUS (fallback)
+  // "/\\evil.com" -> REFUS (fallback)
+  // "javascript:alert(1)" -> REFUS (fallback)
+  const hasProtocol = /^[a-zA-Z][a-zA-Z\d+\-.]*:/.test(value)
+  const hasBackslash = value.includes("\\")
+  const hasControlChars = /[\u0000-\u001F\u007F]/.test(value)
+  const hasSuspiciousEncodedSpace = /%(20|09|0a|0d)/i.test(value)
+  const hasWhitespace = /\s/.test(value)
+  const isProtocolRelative = value.startsWith("//")
+  const isStrictInternalPath = /^\/[A-Za-z0-9_-]/.test(value)
+
+  if (
+    hasProtocol ||
+    hasBackslash ||
+    hasControlChars ||
+    hasSuspiciousEncodedSpace ||
+    hasWhitespace ||
+    isProtocolRelative ||
+    !isStrictInternalPath
+  ) {
     return "/professionnels"
   }
 
@@ -39,14 +69,44 @@ export default function LoginPage() {
   const [errorMessage, setErrorMessage] = useState("")
   const [resetMessage, setResetMessage] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [resetCooldownUntil, setResetCooldownUntil] = useState<number | null>(null)
+  const [cooldownNow, setCooldownNow] = useState(() => Date.now())
 
   const nextPath = getSafeNextPath(searchParams.get("next"))
+  const resetCooldownSeconds = resetCooldownUntil
+    ? Math.max(0, Math.ceil((resetCooldownUntil - cooldownNow) / 1000))
+    : 0
+  const isResetOnCooldown = Boolean(resetCooldownUntil) && resetCooldownSeconds > 0
+
+  useEffect(() => {
+    if (!resetCooldownUntil) {
+      return
+    }
+
+    const intervalId = window.setInterval(() => {
+      const now = Date.now()
+      setCooldownNow(now)
+
+      if (now >= resetCooldownUntil) {
+        setResetCooldownUntil(null)
+        setResetMessage("")
+      }
+    }, 1000)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [resetCooldownUntil])
 
   async function handleLogin(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
+
+    if (isLoading) {
+      return
+    }
+
     setIsLoading(true)
     setErrorMessage("")
-    setResetMessage("")
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -64,6 +124,10 @@ export default function LoginPage() {
   }
 
   async function handleResetPassword() {
+    if (isSendingReset || isResetOnCooldown) {
+      return
+    }
+
     setErrorMessage("")
     setResetMessage("")
 
@@ -85,7 +149,10 @@ export default function LoginPage() {
       return
     }
 
-    setResetMessage("Un lien de réinitialisation a été envoyé à votre adresse email.")
+    const now = Date.now()
+    setResetMessage(RESET_PASSWORD_SUCCESS_MESSAGE)
+    setCooldownNow(now)
+    setResetCooldownUntil(now + RESET_PASSWORD_COOLDOWN_SECONDS * 1000)
     setIsSendingReset(false)
   }
 
@@ -192,10 +259,14 @@ export default function LoginPage() {
                       <button
                         type="button"
                         onClick={handleResetPassword}
-                        disabled={isSendingReset}
+                        disabled={isSendingReset || isResetOnCooldown}
                         className="text-sm font-medium text-primary hover:text-primary/80 underline underline-offset-4 disabled:opacity-60 disabled:cursor-not-allowed"
                       >
-                        {isSendingReset ? "Envoi en cours..." : "Mot de passe oublié ?"}
+                        {isSendingReset
+                          ? "Envoi en cours..."
+                          : isResetOnCooldown
+                            ? `Réessayer dans ${resetCooldownSeconds}s...`
+                            : "Mot de passe oublié ?"}
                       </button>
                     </div>
 

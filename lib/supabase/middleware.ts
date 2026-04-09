@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/lib/supabase/config"
+import { isFullyAuthenticatedForProAccess } from "@/lib/supabase/pro-auth"
 
 const PROTECTED_PRO_ROUTES = [
   "/professionnels",
@@ -10,6 +11,8 @@ const PROTECTED_PRO_ROUTES = [
 ] as const
 
 const PUBLIC_PRO_EXCEPTIONS = ["/professionnels/adhesion"] as const
+const SETUP_PASSWORD_PATH = "/setup-password"
+const RESET_PASSWORD_PATH = "/reset-password"
 
 function matchesRoute(pathname: string, route: string) {
   return pathname === route || pathname.startsWith(`${route}/`)
@@ -64,10 +67,14 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser()
+  const isFullyAuthenticated = await isFullyAuthenticatedForProAccess(user, () => supabase.auth.getClaims())
 
   const { pathname, search } = request.nextUrl
   const isProtectedPath = isProtectedProfessionnelsPath(pathname)
   const isLoginPath = pathname === "/login"
+  const isSetupPasswordPath = pathname === SETUP_PASSWORD_PATH
+  const isResetPasswordPath = pathname === RESET_PASSWORD_PATH
+  const isAllowedPendingPath = isSetupPasswordPath || isResetPasswordPath
 
   if (isProtectedPath && !user) {
     const redirectUrl = request.nextUrl.clone()
@@ -77,7 +84,23 @@ export async function updateSession(request: NextRequest) {
     return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
   }
 
+  if (user && !isFullyAuthenticated && !isAllowedPendingPath) {
+    const redirectUrl = request.nextUrl.clone()
+    redirectUrl.pathname = SETUP_PASSWORD_PATH
+    redirectUrl.search = ""
+
+    return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
+  }
+
   if (isLoginPath && user) {
+    const redirectUrl = request.nextUrl.clone()
+    redirectUrl.pathname = isFullyAuthenticated ? "/professionnels" : SETUP_PASSWORD_PATH
+    redirectUrl.search = ""
+
+    return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
+  }
+
+  if (isSetupPasswordPath && user && isFullyAuthenticated) {
     const redirectUrl = request.nextUrl.clone()
     redirectUrl.pathname = "/professionnels"
     redirectUrl.search = ""

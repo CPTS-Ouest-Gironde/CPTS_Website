@@ -2,7 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
-import { Loader2, LockKeyhole } from "lucide-react"
+import { Eye, EyeOff, Loader2, LockKeyhole } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -28,6 +28,8 @@ export function PasswordUpdateForm({ flow, title, description }: PasswordUpdateF
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<LinkValidationStatus>("loading")
   const [errorMessage, setErrorMessage] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   useEffect(() => {
     let isMounted = true
@@ -129,10 +131,39 @@ export function PasswordUpdateForm({ flow, title, description }: PasswordUpdateF
     setIsSubmitting(true)
     setErrorMessage("")
 
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser()
+
+    const userEmail = user?.email?.trim() ?? ""
+
+    if (userError || !userEmail) {
+      setErrorMessage("Session invalide. Demandez un nouveau lien sécurisé.")
+      setIsSubmitting(false)
+      return
+    }
+
     const { error } = await supabase.auth.updateUser({ password })
 
     if (error) {
       setErrorMessage(getAuthErrorMessage(error, "Impossible de mettre à jour le mot de passe."))
+      setIsSubmitting(false)
+      return
+    }
+
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email: userEmail,
+      password,
+    })
+
+    if (signInError) {
+      setErrorMessage(
+        getAuthErrorMessage(
+          signInError,
+          "Mot de passe mis à jour, mais la reconnexion automatique a échoué. Réessayez.",
+        ),
+      )
       setIsSubmitting(false)
       return
     }
@@ -167,30 +198,52 @@ export function PasswordUpdateForm({ flow, title, description }: PasswordUpdateF
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="password">Nouveau mot de passe</Label>
-              <Input
-                id="password"
-                type="password"
-                autoComplete="new-password"
-                placeholder="Créez un mot de passe sécurisé"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-                className="h-11 rounded-xl"
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="Créez un mot de passe sécurisé"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                  className="h-11 rounded-xl pr-11"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((previousValue) => !previousValue)}
+                  className="absolute inset-y-0 right-0 inline-flex items-center justify-center w-11 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                >
+                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="confirm-password">Confirmer le mot de passe</Label>
-              <Input
-                id="confirm-password"
-                type="password"
-                autoComplete="new-password"
-                placeholder="Confirmez votre mot de passe"
-                value={confirmPassword}
-                onChange={(event) => setConfirmPassword(event.target.value)}
-                required
-                className="h-11 rounded-xl"
-              />
+              <div className="relative">
+                <Input
+                  id="confirm-password"
+                  type={showConfirmPassword ? "text" : "password"}
+                  autoComplete="new-password"
+                  placeholder="Confirmez votre mot de passe"
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
+                  required
+                  className="h-11 rounded-xl pr-11"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword((previousValue) => !previousValue)}
+                  className="absolute inset-y-0 right-0 inline-flex items-center justify-center w-11 text-muted-foreground hover:text-foreground transition-colors"
+                  aria-label={
+                    showConfirmPassword ? "Masquer la confirmation du mot de passe" : "Afficher la confirmation du mot de passe"
+                  }
+                >
+                  {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                </button>
+              </div>
             </div>
 
             <div className="rounded-2xl border border-border bg-muted/30 p-4">
