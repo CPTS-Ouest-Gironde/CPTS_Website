@@ -1,9 +1,9 @@
 {
   "title": "Venez, on vous aide !",
-  "description": "Pour vous accompagner, nous avons créé des supports et questionnaires dédiés aux professionnels de santé pour la gestion de votre santé mentale. Ces outils vous permettront de mieux comprendre votre situation et de trouver les ressources adaptées à vos besoins.",
-  "note": "Rapprochez-vous d'un professionnel de santé pour remplir le formulaire.",
+  "description": "Pour vous accompagner, nous avons créé des supports et questionnaires dédiés aux professionnels de santé dans le cadre de l’accompagnement en santé mentale. Ces outils leur permettent de mieux évaluer les situations et d’orienter vers les ressources adaptées.",
+  "note": "",
   "livingPageLink": {
-    "url": "/sante-mental/les-dispositifs-du-territoire",
+    "url": "/professionnels/actions-outils/les-dispositifs-du-territoire",
     "label": "Accéder aux ressources"
   },
   "resources": [

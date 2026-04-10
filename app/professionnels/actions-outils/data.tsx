@@ -505,6 +505,13 @@ export const accordionItemsParcours: AccordionItem[] = [
               <h4 className="text-xl font-bold text-primary">
                 Les RCP Psy de la CPTS
               </h4>
+              <Link
+                href="/professionnels/actions-outils/les-dispositifs-du-territoire"
+                className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
+              >
+                Accéder aux ressources
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
             <p className="text-muted-foreground leading-relaxed mb-4">
               cf onglet Réunion de Concertation Pluriprofessionnelle
