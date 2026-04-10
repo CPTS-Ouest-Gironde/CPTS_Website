@@ -68,8 +68,6 @@ export function VideosView({ type }: VideosViewProps) {
   // Vue "Venez on vous aide" - Texte + lien externe + ressources
   if (type === "aide") {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const isInternalResourcesLink =
-      venezAideData.livingPageLink.url.startsWith("/");
 
     return (
       <>
@@ -82,21 +80,18 @@ export function VideosView({ type }: VideosViewProps) {
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               {venezAideData.title}
             </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-4 max-w-3xl mx-auto">
+            <p
+              className={`text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto ${
+                venezAideData.note ? "mb-4" : "mb-8"
+              }`}
+            >
               {venezAideData.description}
             </p>
-            <p className="text-muted-foreground text-base leading-relaxed mb-8 font-medium">
-              {venezAideData.note}
-            </p>
-            <a
-              href={venezAideData.livingPageLink.url}
-              target={isInternalResourcesLink ? undefined : "_blank"}
-              rel={isInternalResourcesLink ? undefined : "noopener noreferrer"}
-              className="inline-flex items-center gap-3 px-8 py-4 bg-emerald-600 text-white rounded-full font-semibold hover:bg-emerald-700 transition-colors shadow-lg hover:shadow-xl"
-            >
-              <span>{venezAideData.livingPageLink.label}</span>
-              <ExternalLink className="w-5 h-5" />
-            </a>
+            {venezAideData.note && (
+              <p className="text-muted-foreground text-base leading-relaxed mb-8 font-medium">
+                {venezAideData.note}
+              </p>
+            )}
           </div>
 
           {/* Section ressources */}
