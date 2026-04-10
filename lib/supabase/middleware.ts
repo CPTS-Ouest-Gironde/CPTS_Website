@@ -2,6 +2,14 @@ import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/lib/supabase/config"
 import { isFullyAuthenticatedForProAccess } from "@/lib/supabase/pro-auth"
+import {
+  COMPLETE_PROFILE_PATH,
+  getRequiredRolesForPath,
+  hasAnyRole,
+  hasRole,
+  readUserAccessContext,
+  requiresPharmacienProfileCompletion,
+} from "@/lib/supabase/roles"
 
 const PROTECTED_PRO_ROUTES = [
   "/professionnels",
@@ -11,6 +19,7 @@ const PROTECTED_PRO_ROUTES = [
 ] as const
 
 const PUBLIC_PRO_EXCEPTIONS = ["/professionnels/adhesion"] as const
+const ESPACE_PRO_PATH = "/espace-pro"
 const SETUP_PASSWORD_PATH = "/setup-password"
 const RESET_PASSWORD_PATH = "/reset-password"
 
@@ -28,6 +37,10 @@ function isProtectedProfessionnelsPath(pathname: string) {
   }
 
   return PROTECTED_PRO_ROUTES.some((route) => matchesRoute(pathname, route))
+}
+
+function isEspaceProPath(pathname: string) {
+  return matchesRoute(pathname, ESPACE_PRO_PATH)
 }
 
 function copySetCookieHeaders(source: NextResponse, target: NextResponse) {
@@ -71,12 +84,13 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname, search } = request.nextUrl
   const isProtectedPath = isProtectedProfessionnelsPath(pathname)
+  const isEspaceProProtectedPath = isEspaceProPath(pathname)
   const isLoginPath = pathname === "/login"
   const isSetupPasswordPath = pathname === SETUP_PASSWORD_PATH
   const isResetPasswordPath = pathname === RESET_PASSWORD_PATH
   const isAllowedPendingPath = isSetupPasswordPath || isResetPasswordPath
 
-  if (isProtectedPath && !user) {
+  if ((isProtectedPath || isEspaceProProtectedPath) && !user) {
     const redirectUrl = request.nextUrl.clone()
     redirectUrl.pathname = "/login"
     redirectUrl.searchParams.set("next", `${pathname}${search}`)
@@ -90,6 +104,35 @@ export async function updateSession(request: NextRequest) {
     redirectUrl.search = ""
 
     return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
+  }
+
+  if (user && isEspaceProProtectedPath) {
+    const { profile, roles } = await readUserAccessContext(supabase, user.id)
+    const requiredRoles = getRequiredRolesForPath(pathname)
+
+    if (pathname === COMPLETE_PROFILE_PATH && !hasRole(roles, "pharmacien_pso")) {
+      const redirectUrl = request.nextUrl.clone()
+      redirectUrl.pathname = "/professionnels"
+      redirectUrl.search = ""
+
+      return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
+    }
+
+    if (requiredRoles && !hasAnyRole(roles, requiredRoles)) {
+      const redirectUrl = request.nextUrl.clone()
+      redirectUrl.pathname = "/professionnels"
+      redirectUrl.search = ""
+
+      return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
+    }
+
+    if (requiresPharmacienProfileCompletion(pathname, roles, profile?.rpps ?? null)) {
+      const redirectUrl = request.nextUrl.clone()
+      redirectUrl.pathname = COMPLETE_PROFILE_PATH
+      redirectUrl.search = ""
+
+      return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
+    }
   }
 
   if (isLoginPath && user) {
