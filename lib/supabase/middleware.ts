@@ -4,6 +4,7 @@ import { SUPABASE_ANON_KEY, SUPABASE_URL } from "@/lib/supabase/config"
 import { isFullyAuthenticatedForProAccess } from "@/lib/supabase/pro-auth"
 import {
   COMPLETE_PROFILE_PATH,
+  getDefaultEspaceProPath,
   getRequiredRolesForPath,
   hasAnyRole,
   hasRole,
@@ -112,7 +113,7 @@ export async function updateSession(request: NextRequest) {
 
     if (pathname === COMPLETE_PROFILE_PATH && !hasRole(roles, "pharmacien_pso")) {
       const redirectUrl = request.nextUrl.clone()
-      redirectUrl.pathname = "/professionnels"
+      redirectUrl.pathname = "/espace-pro"
       redirectUrl.search = ""
 
       return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
@@ -120,13 +121,13 @@ export async function updateSession(request: NextRequest) {
 
     if (requiredRoles && !hasAnyRole(roles, requiredRoles)) {
       const redirectUrl = request.nextUrl.clone()
-      redirectUrl.pathname = "/professionnels"
+      redirectUrl.pathname = "/espace-pro"
       redirectUrl.search = ""
 
       return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
     }
 
-    if (requiresPharmacienProfileCompletion(pathname, roles, profile?.rpps ?? null)) {
+    if (requiresPharmacienProfileCompletion(pathname, roles, profile)) {
       const redirectUrl = request.nextUrl.clone()
       redirectUrl.pathname = COMPLETE_PROFILE_PATH
       redirectUrl.search = ""
@@ -136,16 +137,18 @@ export async function updateSession(request: NextRequest) {
   }
 
   if (isLoginPath && user) {
+    const { profile, roles } = await readUserAccessContext(supabase, user.id)
     const redirectUrl = request.nextUrl.clone()
-    redirectUrl.pathname = isFullyAuthenticated ? "/professionnels" : SETUP_PASSWORD_PATH
+    redirectUrl.pathname = isFullyAuthenticated ? getDefaultEspaceProPath(roles, profile) : SETUP_PASSWORD_PATH
     redirectUrl.search = ""
 
     return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))
   }
 
   if (isSetupPasswordPath && user && isFullyAuthenticated) {
+    const { profile, roles } = await readUserAccessContext(supabase, user.id)
     const redirectUrl = request.nextUrl.clone()
-    redirectUrl.pathname = "/professionnels"
+    redirectUrl.pathname = getDefaultEspaceProPath(roles, profile)
     redirectUrl.search = ""
 
     return copySetCookieHeaders(response, NextResponse.redirect(redirectUrl))

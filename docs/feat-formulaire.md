@@ -155,13 +155,13 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 1.6 Onboarding première connexion pharmacien
 
-- [ ] Page `/espace-pro/completer-profil` protégée par auth
-- [ ] Formulaire avec les champs :
+- [x] Page `/espace-pro/completer-profil` protégée par auth
+- [x] Formulaire avec les champs :
   - RPPS (texte, 10 ou 11 chiffres, obligatoire)
   - Nom de la pharmacie (texte, obligatoire)
   - Numéro FINESS de la pharmacie (texte, 9 chiffres, obligatoire)
   - Adresse de la pharmacie (texte, optionnel)
-- [ ] Server Action `completePharmacienProfile` validée par Zod :
+- [x] Server Action `completePharmacienProfile` validée par Zod :
   - Vérifie que le user a le rôle `pharmacien_pso`
   - Vérifie que le RPPS n'est pas déjà utilisé par un autre profil
   - Cherche si une pharmacie avec ce FINESS existe déjà dans la table `pharmacies`
@@ -180,44 +180,44 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 2.1 Composants réutilisables
 
-- [ ] Composant `SelectField` basé sur Radix
-- [ ] Composant `RadioYesNo`
+- [x] Composant `SelectField` basé sur Radix
+- [x] Composant `RadioYesNo`
 - [ ] Composant `DatePicker` compatible Tailwind 4
-- [ ] Composant `EchelleCinq` (échelle 1 à 5 avec légende)
-- [ ] Composant `FormSection` pour les en-têtes de sections
+- [x] Composant `EchelleCinq` (échelle 1 à 5 avec légende)
+- [x] Composant `FormSection` pour les en-têtes de sections
 
 ### 2.2 Saisie d'une ligne PMO
 
-- [ ] Route `/espace-pro/pmo/nouveau`
-- [ ] Récupération des infos du profil connecté pour l'en-tête pré-rempli
-  - Nom CPTS, FINESS CPTS, nom et prénom du délégué, RPPS du délégué
-- [ ] Formulaire avec les 15 champs
-- [ ] Server Action `createPmoEntry` validée par Zod
-- [ ] Insertion dans `pmo_entries` avec user_id et pharmacie_id
-- [ ] `revalidatePath('/espace-pro/pmo')` après insertion
-- [ ] Redirection vers la liste avec message de succès
-- [ ] Gestion des erreurs avec messages clairs
+- [x] Route `/espace-pro/pmo/nouveau`
+- [x] Récupération des infos du profil connecté pour l'en-tête pré-rempli
+  - Nom CPTS, nom de l'officine, FINESS officine, nom et prénom du pharmacien, RPPS
+- [x] Formulaire avec les 15 champs
+- [x] Server Action `createPmoEntry` validée par Zod
+- [x] Insertion dans `pmo_entries` avec user_id et pharmacie_id
+- [x] `revalidatePath('/espace-pro/pmo')` après insertion
+- [x] Redirection vers la liste avec message de succès
+- [x] Gestion des erreurs avec messages clairs
 
 ### 2.3 Liste et gestion des saisies
 
-- [ ] Route `/espace-pro/pmo` (server component)
-- [ ] Tableau des lignes du pharmacien connecté, tri par date décroissante
-- [ ] Colonnes affichées : date, sexe, âge, orientation, nb PMO, actions
-- [ ] Pagination (20 lignes par page, via `searchParams` async)
-- [ ] Bouton "Nouvelle saisie"
-- [ ] Action "Voir" → page détail `/espace-pro/pmo/[id]`
-- [ ] Action "Modifier" → page édition `/espace-pro/pmo/[id]/modifier`
-- [ ] Action "Supprimer" via Server Action avec modale de confirmation
-- [ ] Compteur "X lignes saisies"
+- [x] Route `/espace-pro/pmo` (server component)
+- [x] Tableau des lignes du pharmacien connecté, tri par date décroissante
+- [x] Colonnes affichées : date, sexe, âge, orientation, nb PMO, actions
+- [x] Pagination (20 lignes par page, via `searchParams` async)
+- [x] Bouton "Nouvelle saisie"
+- [x] Action "Voir" → page détail `/espace-pro/pmo/[id]`
+- [x] Action "Modifier" → page édition `/espace-pro/pmo/[id]/modifier`
+- [x] Action "Supprimer" via Server Action avec modale de confirmation
+- [x] Compteur "X lignes saisies"
 
 ### 2.4 Modification d'une ligne PMO
 
-- [ ] Route `/espace-pro/pmo/[id]/modifier` avec `await params`
-- [ ] Formulaire pré-rempli avec les valeurs actuelles
-- [ ] Server Action `updatePmoEntry` validée par Zod
-- [ ] Vérification RLS côté serveur (le user ne peut modifier que ses propres lignes)
-- [ ] `revalidatePath` après update
-- [ ] Redirection vers la liste
+- [x] Route `/espace-pro/pmo/[id]/modifier` avec `await params`
+- [x] Formulaire pré-rempli avec les valeurs actuelles
+- [x] Server Action `updatePmoEntry` validée par Zod
+- [x] Vérification RLS côté serveur (le user ne peut modifier que ses propres lignes)
+- [x] `revalidatePath` après update
+- [x] Redirection vers la liste
 
 ---
 
@@ -225,9 +225,9 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 3.1 Questionnaire pharmacien
 
-- [ ] Route `/espace-pro/satisfaction` protégée rôle `pharmacien_pso`
-- [ ] Pré-remplissage de l'identité depuis le profil (nom pharmacie, nom titulaire, RPPS)
-- [ ] 9 questions selon les libellés validés
+- [x] Route `/espace-pro/satisfaction` protégée rôle `pharmacien_pso`
+- [x] Pré-remplissage de l'identité depuis le profil (nom pharmacie, nom titulaire, RPPS)
+- [x] 9 questions selon les libellés validés
   - Q1 satisfaction globale (échelle 1-5)
   - Q2 facilité mise en place (échelle 1-5)
   - Q3 bénéfice pratique (échelle 1-5)
@@ -237,16 +237,16 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
   - Q7 autres incidents (oui/non)
   - Q8 description incidents (conditionnel si Q7 = oui)
   - Q9 commentaire libre
-- [ ] Légende "1 = pas du tout, 5 = tout à fait" visible
-- [ ] Server Action `submitSatisfactionPharmacien` validée par Zod
-- [ ] Insertion dans `satisfaction_pharmacien`
-- [ ] Page de remerciement après soumission
+- [x] Légende "1 = pas du tout, 5 = tout à fait" visible
+- [x] Server Action `submitSatisfactionPharmacien` validée par Zod
+- [x] Insertion dans `satisfaction_pharmacien`
+- [x] Page de remerciement après soumission
 
 ### 3.2 Questionnaire patient public
 
-- [ ] Route publique `/satisfaction-patient`
-- [ ] Questionnaire totalement global, sans paramètre dynamique ni récupération de pharmacie
-- [ ] 9 questions selon les libellés validés
+- [x] Route publique `/satisfaction-patient`
+- [x] Questionnaire totalement global, sans paramètre dynamique ni récupération de pharmacie
+- [x] 9 questions selon les libellés validés
   - Q1 raison de venue (4 choix)
   - Q2 préciser si autres (conditionnel si Q1 = autres)
   - Q3 satisfaction prise en charge (échelle 1-5)
@@ -256,11 +256,11 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
   - Q7 consultation médecin après (oui/non)
   - Q8 raison consultation (conditionnel si Q7 = oui, 4 choix)
   - Q9 commentaire libre
-- [ ] Anonymat total, pas de stockage d'IP ni d'user agent
-- [ ] Server Action `submitSatisfactionPatient` validée par Zod
-- [ ] Insertion via l'anon key Supabase
-- [ ] Page de remerciement après soumission
-- [ ] Design mobile-first (les patients scannent au comptoir)
+- [x] Anonymat total, pas de stockage d'IP ni d'user agent
+- [x] Server Action `submitSatisfactionPatient` validée par Zod
+- [x] Insertion via l'anon key Supabase
+- [x] Page de remerciement après soumission
+- [x] Design mobile-first (les patients scannent au comptoir)
 
 ### 3.3 Génération des QR codes
 

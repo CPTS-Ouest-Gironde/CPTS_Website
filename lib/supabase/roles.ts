@@ -15,9 +15,10 @@ type AppSupabaseClient = SupabaseClient<Database>
 
 type UserRoleRow = Database["public"]["Tables"]["user_roles"]["Row"]
 type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"]
+type AccessProfile = Pick<ProfileRow, "pharmacie_id" | "rpps">
 
 export type UserAccessContext = {
-  profile: Pick<ProfileRow, "pharmacie_id" | "rpps"> | null
+  profile: AccessProfile | null
   roles: UserRole[]
 }
 
@@ -70,12 +71,24 @@ export function getRequiredRolesForPath(pathname: string) {
   return matchingRoute?.roles ?? null
 }
 
-export function requiresPharmacienProfileCompletion(pathname: string, roles: readonly string[], rpps: string | null) {
+export function hasCompletedPharmacienProfile(profile: AccessProfile | null) {
+  return Boolean(profile?.rpps && profile?.pharmacie_id)
+}
+
+export function getDefaultEspaceProPath(roles: readonly string[], profile: AccessProfile | null) {
+  if (hasRole(roles, "pharmacien_pso")) {
+    return hasCompletedPharmacienProfile(profile) ? "/espace-pro/pmo" : COMPLETE_PROFILE_PATH
+  }
+
+  return "/professionnels"
+}
+
+export function requiresPharmacienProfileCompletion(pathname: string, roles: readonly string[], profile: AccessProfile | null) {
   if (!hasRole(roles, "pharmacien_pso")) {
     return false
   }
 
-  if (rpps) {
+  if (hasCompletedPharmacienProfile(profile)) {
     return false
   }
 
@@ -102,7 +115,7 @@ export async function readUserAccessContext(supabase: AppSupabaseClient, userId:
   const profile =
     profileResult.error || !profileResult.data
       ? null
-      : (profileResult.data as Pick<ProfileRow, "pharmacie_id" | "rpps">)
+      : (profileResult.data as AccessProfile)
 
   return {
     profile,
