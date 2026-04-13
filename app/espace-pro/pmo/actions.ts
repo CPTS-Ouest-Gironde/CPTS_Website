@@ -42,7 +42,7 @@ export async function deletePmoEntry(formData: FormData) {
   })
 
   if (!parsed.success) {
-    redirect(getPmoListHref())
+    redirect(getPmoListHref({}))
   }
 
   const page = parsePmoPage(parsed.data.page)

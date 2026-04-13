@@ -265,7 +265,7 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 ### 3.3 Génération des QR codes
 
 - [ ] Installer la librairie `qrcode`
-- [ ] Route admin `/espace-pro/qr-codes` protégée rôle `membre_ca`
+- [ ] Route admin `/espace-pro/qr-codes` protégée rôle `reporting_pso`
 - [ ] Génération d'un QR code global unique pointant vers `https://cpts-ouest-gironde.fr/satisfaction-patient`
 - [ ] Un bouton "Télécharger en PNG"
 - [ ] Un bouton "Télécharger la fiche A4 imprimable" (HTML imprimable avec QR code + instructions)
@@ -276,23 +276,26 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 4.1 Structure et protection
 
-- [ ] Route `/espace-pro/dashboard` protégée rôle `membre_ca`
-- [ ] Layout avec sections : en-tête + filtres, indicateurs clés, graphiques, export
+- [x] Route `/espace-pro/dashboard` protégée rôle `reporting_pso`
+- [x] Layout avec sections : en-tête + onglets, filtres, indicateurs clés, graphiques, export
+- [x] Onglets `Activité PMO` et `Satisfaction`
 - [ ] Vérification d'accès pour les 3 comptes (Corinne, Christine, Clément)
 
 ### 4.2 Filtres
 
-- [ ] Sélecteur d'année (2025, 2026, ...)
-- [ ] Sélecteur de plage de mois (début, fin)
-- [ ] Sélecteur de pharmacie (toutes par défaut, multi-sélection possible)
-- [ ] Filtres pilotés via `searchParams` async de Next 16
-- [ ] Les changements de filtres mettent à jour l'URL et rechargent la page
+- [x] Sélecteur d'année (2025, 2026, ...)
+- [x] Sélecteur de plage de mois (début, fin)
+- [x] Sélecteur de pharmacie (toutes par défaut, multi-sélection possible)
+- [x] Filtres pilotés via `searchParams` async de Next 16
+- [x] Les changements de filtres mettent à jour l'URL et rechargent la page
+- [x] Layout compact sur une ligne en desktop
+- [x] Les données de satisfaction restent globales et ne dépendent pas des filtres PMO
 
 ### 4.3 Fonction d'agrégation serveur
 
-- [ ] Fonction serveur `getDashboardStats(filters)` côté server component
-- [ ] Récupération des lignes `pmo_entries` selon les filtres
-- [ ] Calculs retournés :
+- [x] Fonction serveur `getDashboardStats(filters)` côté server component
+- [x] Récupération des lignes `pmo_entries` selon les filtres
+- [x] Calculs retournés :
   - `total_patients` : count
   - `nb_pharmacies_actives` : count distinct de pharmacie_id
   - `moyenne_patients_par_pharmacie` : total / nb_pharmacies_actives
@@ -308,26 +311,33 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 4.4 Affichage des indicateurs
 
-- [ ] Cards pour les indicateurs clés (total patients, nb pharmacies, moyennes)
-- [ ] Formatage des pourcentages à 1 décimale
-- [ ] État "aucune donnée" si filtres ne retournent rien
+- [x] Cards pour les indicateurs clés (total patients, nb pharmacies, moyennes)
+- [x] Formatage des pourcentages à 1 décimale
+- [x] État "aucune donnée" si filtres ne retournent rien
 
 ### 4.5 Graphiques
 
-- [ ] Installer `recharts`
-- [ ] Graphique barres verticales : répartition par tranche d'âge
-- [ ] Camembert : répartition par sexe
-- [ ] Graphique barres horizontales : taux de prescription par molécule
-- [ ] Responsive et cohérent avec la charte du site
+- [x] Installer `recharts`
+- [x] Graphique barres verticales : répartition par tranche d'âge
+- [x] Camembert : répartition par sexe
+- [x] Bloc compact "Prescription et délivrance" avec pourcentages exacts à la place du graphique horizontal
+- [x] Responsive et cohérent avec la charte du site
 
 ### 4.6 Export CSV
 
-- [ ] Server Action ou route handler qui génère le CSV
-- [ ] Bouton "Exporter en CSV"
-- [ ] Génération du CSV des données agrégées selon les filtres actifs
-- [ ] Nommage : `export-pso-rhinite-YYYY-MM-DD.csv`
-- [ ] Contenu : les indicateurs + détail par pharmacie
-- [ ] Encodage UTF-8 avec BOM pour compatibilité Excel
+- [x] Server Action ou route handler qui génère le CSV
+- [x] Bouton "Exporter en CSV"
+- [x] Génération du CSV des données agrégées selon les filtres actifs
+- [x] Nommage : `export-pso-rhinite-YYYY-MM-DD.csv`
+- [x] Contenu : les indicateurs + détail par pharmacie
+- [x] Encodage UTF-8 avec BOM pour compatibilité Excel
+
+### 4.7 Onglet Satisfaction
+
+- [x] Agrégation globale des réponses `satisfaction_pharmacien`
+- [x] Agrégation globale des réponses `satisfaction_patient`
+- [x] Section "Retours pharmaciens" : volume, moyennes Q1 à Q5, total effets indésirables graves, incidents, commentaires
+- [x] Section "Retours patients" : volume, répartitions, moyennes Q3 à Q5, taux de renouvellement, taux de consultation après, commentaires
 
 ---
 
@@ -335,7 +345,7 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 5.1 Navigation et intégration
 
-- [ ] Ajouter les liens vers les nouveaux modules depuis l'espace pro existant
+- [x] Ajouter les liens vers les nouveaux modules depuis l'espace pro existant
 - [ ] Menu utilisateur adapté selon le rôle
 - [ ] Breadcrumbs sur les pages profondes
 - [ ] Cohérence visuelle avec le design existant (couleurs, typo, espacements)
@@ -367,14 +377,14 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 - [ ] Création manuelle initiale des pharmacies participantes si nécessaire
 - [ ] Invitation des pharmaciens par email avec attribution du rôle `pharmacien_pso`
-- [ ] Création des 3 comptes membre_ca (Corinne, Christine, Clément)
+- [ ] Création des 3 comptes reporting_pso (Corinne, Christine, Clément)
 - [ ] Envoi d'un email d'onboarding aux pharmaciens avec instructions de première connexion
 
 ### 6.2 Tests manuels en conditions réelles
 
 - [ ] Parcours pharmacien complet : invitation → setup password → connexion `/login` → complétion profil → saisie PMO → modification → suppression → questionnaire satisfaction
 - [ ] Parcours patient complet : scan QR code simulé → questionnaire → soumission → remerciement
-- [ ] Parcours membre_ca : connexion → dashboard → filtres → export CSV → génération QR codes
+- [ ] Parcours reporting_pso : connexion → dashboard → filtres → export CSV → génération QR codes
 - [ ] Vérification RLS : pharmacien A ne voit pas les lignes de pharmacien B
 - [ ] Vérification RLS : pharmacien A ne peut pas accéder au dashboard
 - [ ] Vérification RLS : visiteur anonyme ne peut pas lire `satisfaction_patient`

@@ -3,6 +3,7 @@ import {
   ArrowRight,
   BookOpenCheck,
   BriefcaseMedical,
+  ChartColumnBig,
   Megaphone,
   type LucideIcon,
 } from "lucide-react"
@@ -10,6 +11,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { hasRole, readUserAccessContext } from "@/lib/supabase/roles"
 import { createClient } from "@/lib/supabase/server"
 
 type ProfileRecord = {
@@ -56,21 +58,35 @@ export default async function ProfessionnelsHubPage() {
   } = await supabase.auth.getUser()
 
   let profile: ProfileRecord | null = null
+  let hasReportingPsoRole = false
 
   if (user) {
-    const profileResult = await supabase
-      .from("profiles")
-      .select("first_name,last_name")
-      .eq("id", user.id)
-      .maybeSingle()
+    const [profileResult, accessContext] = await Promise.all([
+      supabase.from("profiles").select("first_name,last_name").eq("id", user.id).maybeSingle(),
+      readUserAccessContext(supabase, user.id),
+    ])
 
     if (!profileResult.error) {
       profile = (profileResult.data as ProfileRecord | null) ?? null
     }
+
+    hasReportingPsoRole = hasRole(accessContext.roles, "reporting_pso")
   }
 
   const fullName = [profile?.first_name, profile?.last_name].filter(Boolean).join(" ").trim()
   const greetingName = fullName || "Professionnel"
+  const shortcuts = hasReportingPsoRole
+    ? [
+        {
+          title: "Dashboard PSO",
+          description: "Consultez les indicateurs du protocole Rhinite Allergique.",
+          href: "/espace-pro/dashboard",
+          ctaLabel: "Accéder",
+          icon: ChartColumnBig,
+        },
+        ...PROFESSIONAL_SHORTCUTS,
+      ]
+    : PROFESSIONAL_SHORTCUTS
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -95,7 +111,7 @@ export default async function ProfessionnelsHubPage() {
               </Card>
 
               <div className="grid gap-4 lg:grid-cols-3">
-                {PROFESSIONAL_SHORTCUTS.map((shortcut) => {
+                {shortcuts.map((shortcut) => {
                   const Icon = shortcut.icon
 
                   return (
