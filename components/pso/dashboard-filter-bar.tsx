@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState, useTransition } from "react"
-import { Building2, Check, Filter } from "lucide-react"
+import { Building2, Calendar, Check, Filter } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -84,6 +84,20 @@ export function DashboardFilterBar({ filters, pharmacies, yearOptions }: Dashboa
       startMonth: normalizedStartMonth,
       year: parsedYear,
     })
+  }
+
+  function handleFullYear() {
+    const parsedYear = Number(year)
+    const nextFilters = {
+      endMonth: 12,
+      pharmacyIds: selectedPharmacyIds,
+      startMonth: 1,
+      year: parsedYear,
+    }
+
+    setStartMonth("1")
+    setEndMonth("12")
+    applyFilters(nextFilters)
   }
 
   return (
@@ -199,7 +213,19 @@ export function DashboardFilterBar({ filters, pharmacies, yearOptions }: Dashboa
         </Popover>
       </label>
 
-      <div className="flex lg:justify-end">
+      <div className="flex flex-col gap-2 sm:flex-row lg:justify-end">
+        <Button
+          className="h-10 w-full rounded-full px-4 lg:w-auto"
+          disabled={isPending}
+          onClick={handleFullYear}
+          size="sm"
+          type="button"
+          variant="outline"
+        >
+          <Calendar className="h-4 w-4" />
+          Année complète
+        </Button>
+
         <Button className="h-10 w-full rounded-full px-5 lg:w-auto" disabled={isPending} type="submit">
           <Filter className="h-4 w-4" />
           {isPending ? "Application..." : "Appliquer"}

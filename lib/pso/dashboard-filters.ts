@@ -46,8 +46,11 @@ export type DashboardFilters = {
 }
 
 export type DashboardPharmacyOption = {
+  finess: string
   id: string
   nom: string
+  pharmacienRpps: string | null
+  pharmacienTitulaire: string | null
 }
 
 function getFirstSearchParamValue(value: string | string[] | undefined) {
@@ -193,6 +196,24 @@ export function getDashboardHref(filters: DashboardFilters, view: DashboardView 
 
 export function getDashboardExportHref(filters: DashboardFilters) {
   return `/espace-pro/dashboard/export?${buildDashboardQueryString(filters)}`
+}
+
+export function getDashboardDetailExportHref(filters: DashboardFilters) {
+  return `/espace-pro/dashboard/export-detail?${buildDashboardQueryString(filters)}`
+}
+
+export function getDashboardPharmacyHref(filters: DashboardFilters, pharmacyId: string, page = 1) {
+  const searchParams = new URLSearchParams(buildDashboardQueryString(filters))
+
+  if (page > 1) {
+    searchParams.set("page", String(page))
+  }
+
+  return `/espace-pro/dashboard/pharmacie/${pharmacyId}?${searchParams.toString()}`
+}
+
+export function getDashboardPharmacyExportHref(filters: DashboardFilters, pharmacyId: string) {
+  return `/espace-pro/dashboard/pharmacie/${pharmacyId}/export?${buildDashboardQueryString(filters)}`
 }
 
 export function getDashboardPharmacySummary(

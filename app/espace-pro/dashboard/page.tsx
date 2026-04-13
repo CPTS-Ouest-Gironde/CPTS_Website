@@ -7,10 +7,12 @@ import { DashboardCharts } from "@/components/pso/dashboard-charts"
 import { DashboardExportButton } from "@/components/pso/dashboard-export-button"
 import { DashboardFilterBar } from "@/components/pso/dashboard-filter-bar"
 import { DashboardMetricCard } from "@/components/pso/dashboard-metric-card"
+import { DashboardPharmacyDetailTable } from "@/components/pso/dashboard-pharmacy-detail-table"
 import { DashboardSatisfactionPanel } from "@/components/pso/dashboard-satisfaction-panel"
 import { FormSection } from "@/components/pso/form-section"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
+  getDashboardDetailExportHref,
   getDashboardExportHref,
   getDashboardHref,
   getDashboardYearOptions,
@@ -104,7 +106,8 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
   let pmoStats: DashboardStats | null = null
   let pharmacies: DashboardPharmacyOption[] = []
   let yearOptions: number[] = []
-  let exportHref = ""
+  let aggregateExportHref = ""
+  let detailExportHref = ""
   let satisfactionStatsError = false
   let satisfactionStats: DashboardSatisfactionStats | null = null
 
@@ -112,7 +115,8 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     pharmacies = await getDashboardPharmacyOptions(supabase)
     filters = sanitizeDashboardFilters(parsedFilters, pharmacies)
     yearOptions = getDashboardYearOptions(filters.year)
-    exportHref = getDashboardExportHref(filters)
+    aggregateExportHref = getDashboardExportHref(filters)
+    detailExportHref = getDashboardDetailExportHref(filters)
 
     try {
       pmoStats = await getDashboardStats(supabase, filters, pharmacies)
@@ -137,20 +141,14 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
             <div className="mx-auto max-w-7xl space-y-6">
               <Card className="rounded-[2rem] border border-[#0a7a3e]/15 bg-card shadow-sm">
                 <CardContent className="space-y-5 p-7 sm:p-9">
-                  <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
-                    <div className="space-y-4">
-                      <FormSection
-                        description="Consultez les indicateurs PSO Rhinite Allergique consolidés automatiquement à partir des saisies PMO et des questionnaires de satisfaction."
-                        eyebrow="Dashboard PSO"
-                        title="Tableau de bord de reporting"
-                      />
+                  <div className="space-y-4">
+                    <FormSection
+                      description="Consultez les indicateurs PSO Rhinite Allergique consolidés automatiquement à partir des saisies PMO et des questionnaires de satisfaction."
+                      eyebrow="Dashboard PSO"
+                      title="Tableau de bord de reporting"
+                    />
 
-                      <DashboardTabs activeView={activeView} filters={filters} />
-                    </div>
-
-                    {activeView === "pmo" ? (
-                      <DashboardExportButton disabled={!pmoStats || !pmoStats.hasData || pmoStatsError} href={exportHref} />
-                    ) : null}
+                    <DashboardTabs activeView={activeView} filters={filters} />
                   </div>
 
                   {activeView === "pmo" ? (
@@ -293,6 +291,17 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                           </div>
                         </CardContent>
                       </Card>
+                    </div>
+
+                    <DashboardPharmacyDetailTable details={pmoStats.pharmacyDetails} filters={filters} />
+
+                    <div className="flex flex-col gap-3 sm:flex-row sm:justify-end">
+                      <DashboardExportButton
+                        disabled={!pmoStats.hasData}
+                        href={detailExportHref}
+                        label="Exporter le détail"
+                      />
+                      <DashboardExportButton disabled={!pmoStats.hasData} href={aggregateExportHref} />
                     </div>
                   </>
                 ) : null

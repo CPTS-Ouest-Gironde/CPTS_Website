@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 
 type DashboardExportButtonProps = {
   disabled?: boolean
+  label?: string
   href: string
 }
 
@@ -27,7 +28,11 @@ function buildFallbackFileName() {
   return `export-pso-rhinite-${new Date().toISOString().slice(0, 10)}.csv`
 }
 
-export function DashboardExportButton({ disabled = false, href }: DashboardExportButtonProps) {
+export function DashboardExportButton({
+  disabled = false,
+  href,
+  label = "Exporter en CSV",
+}: DashboardExportButtonProps) {
   const [isDownloading, setIsDownloading] = useState(false)
   const [toast, setToast] = useState<ExportToast>(null)
 
@@ -70,7 +75,7 @@ export function DashboardExportButton({ disabled = false, href }: DashboardExpor
       link.remove()
       window.URL.revokeObjectURL(objectUrl)
       setToast({
-        message: "L'export CSV a bien été téléchargé.",
+        message: "Le fichier CSV a bien été téléchargé.",
         tone: "success",
       })
     } catch {
@@ -87,7 +92,7 @@ export function DashboardExportButton({ disabled = false, href }: DashboardExpor
     <>
       <Button className="h-11 rounded-full px-5" disabled={disabled || isDownloading} onClick={handleClick} type="button">
         {isDownloading ? <LoaderCircle className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
-        {isDownloading ? "Génération..." : "Exporter en CSV"}
+        {isDownloading ? "Génération..." : label}
       </Button>
 
       {toast ? (
