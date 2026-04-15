@@ -22,7 +22,7 @@ type PharmacyRow = Pick<Database["public"]["Tables"]["pharmacies"]["Row"], "fine
 type PharmacienRoleRow = Pick<Database["public"]["Tables"]["user_roles"]["Row"], "user_id">
 type TitulaireProfileRow = Pick<
   Database["public"]["Tables"]["profiles"]["Row"],
-  "created_at" | "first_name" | "id" | "last_name" | "pharmacie_id" | "rpps"
+  "created_at" | "first_name" | "id" | "last_name" | "pharmacie_id" | "rpps" | "titulaire"
 >
 type PharmacienProfileRow = Pick<Database["public"]["Tables"]["profiles"]["Row"], "first_name" | "id" | "last_name" | "rpps">
 type PmoEntryStatsRow = Pick<
@@ -306,6 +306,14 @@ function getCsvText(value: string | null | undefined, fallback = "") {
   return normalizeOptionalText(value) ?? fallback
 }
 
+function getDashboardPharmacienName(firstName: string | null | undefined, lastName: string | null | undefined) {
+  return formatDisplayName(firstName, lastName) ?? "Nom non renseigné"
+}
+
+function getDashboardPharmacienRpps(rpps: string | null | undefined) {
+  return normalizeOptionalText(rpps) ?? "RPPS non renseigné"
+}
+
 function createMutablePharmacyDetail(pharmacy: DashboardPharmacyOption): MutablePharmacyDetail {
   return {
     antiH1Count: 0,
@@ -371,7 +379,7 @@ async function getDashboardTitulaireMap(
 
   const profilesResult = await supabase
     .from("profiles")
-    .select("id,pharmacie_id,first_name,last_name,rpps,created_at")
+    .select("id,pharmacie_id,first_name,last_name,rpps,created_at,titulaire")
     .in("id", pharmacienIds)
     .in("pharmacie_id", pharmacyIds)
 
@@ -383,6 +391,7 @@ async function getDashboardTitulaireMap(
     .filter((profile: TitulaireProfileRow) => Boolean(profile.pharmacie_id))
     .sort(
       (first, second) =>
+        Number(second.titulaire) - Number(first.titulaire) ||
         new Date(first.created_at).getTime() - new Date(second.created_at).getTime() ||
         first.id.localeCompare(second.id),
     )
@@ -395,8 +404,8 @@ async function getDashboardTitulaireMap(
     }
 
     titulaireMap.set(titulaire.pharmacie_id, {
-      nom: formatDisplayName(titulaire.first_name, titulaire.last_name),
-      rpps: normalizeOptionalText(titulaire.rpps),
+      nom: getDashboardPharmacienName(titulaire.first_name, titulaire.last_name),
+      rpps: getDashboardPharmacienRpps(titulaire.rpps),
     })
   }
 

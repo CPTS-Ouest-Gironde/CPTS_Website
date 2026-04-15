@@ -185,6 +185,7 @@ export type Database = {
           pharmacie_id: string | null
           role: string
           rpps: string | null
+          titulaire: boolean
           updated_at: string
         }
         Insert: {
@@ -195,6 +196,7 @@ export type Database = {
           pharmacie_id?: string | null
           role?: string
           rpps?: string | null
+          titulaire?: boolean
           updated_at?: string
         }
         Update: {
@@ -205,6 +207,7 @@ export type Database = {
           pharmacie_id?: string | null
           role?: string
           rpps?: string | null
+          titulaire?: boolean
           updated_at?: string
         }
         Relationships: [

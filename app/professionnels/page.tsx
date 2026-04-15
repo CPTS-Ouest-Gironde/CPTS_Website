@@ -58,6 +58,7 @@ export default async function ProfessionnelsHubPage() {
   } = await supabase.auth.getUser()
 
   let profile: ProfileRecord | null = null
+  let hasPharmacienPsoRole = false
   let hasReportingPsoRole = false
 
   if (user) {
@@ -70,23 +71,35 @@ export default async function ProfessionnelsHubPage() {
       profile = (profileResult.data as ProfileRecord | null) ?? null
     }
 
+    hasPharmacienPsoRole = hasRole(accessContext.roles, "pharmacien_pso")
     hasReportingPsoRole = hasRole(accessContext.roles, "reporting_pso")
   }
 
   const fullName = [profile?.first_name, profile?.last_name].filter(Boolean).join(" ").trim()
   const greetingName = fullName || "Professionnel"
-  const shortcuts = hasReportingPsoRole
-    ? [
-        {
-          title: "Dashboard PSO",
-          description: "Consultez les indicateurs du protocole Rhinite Allergique.",
-          href: "/espace-pro/dashboard",
-          ctaLabel: "Accéder",
-          icon: ChartColumnBig,
-        },
-        ...PROFESSIONAL_SHORTCUTS,
-      ]
-    : PROFESSIONAL_SHORTCUTS
+  const privilegedShortcuts: ShortcutItem[] = []
+
+  if (hasPharmacienPsoRole) {
+    privilegedShortcuts.push({
+      title: "Espace PMO",
+      description: "Accédez à votre tableau de saisie PMO Rhinite Allergique.",
+      href: "/espace-pro/pmo",
+      ctaLabel: "Accéder",
+      icon: BriefcaseMedical,
+    })
+  }
+
+  if (hasReportingPsoRole) {
+    privilegedShortcuts.push({
+      title: "Dashboard PSO",
+      description: "Consultez les indicateurs du protocole Rhinite Allergique.",
+      href: "/espace-pro/dashboard",
+      ctaLabel: "Accéder",
+      icon: ChartColumnBig,
+    })
+  }
+
+  const shortcuts = privilegedShortcuts.length > 0 ? [...privilegedShortcuts, ...PROFESSIONAL_SHORTCUTS] : PROFESSIONAL_SHORTCUTS
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

@@ -6,7 +6,7 @@ type PharmacyRow = Database["public"]["Tables"]["pharmacies"]["Row"]
 type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"]
 
 type PharmacySummary = Pick<PharmacyRow, "adresse" | "finess" | "id" | "nom">
-type ProfileSummary = Pick<ProfileRow, "first_name" | "id" | "last_name" | "pharmacie_id" | "rpps">
+type ProfileSummary = Pick<ProfileRow, "first_name" | "id" | "last_name" | "pharmacie_id" | "rpps" | "titulaire">
 
 export type PsoProfileRecord = ProfileSummary & {
   pharmacy: PharmacySummary | null
@@ -18,7 +18,7 @@ export async function getPsoProfileRecord(
 ): Promise<PsoProfileRecord | null> {
   const profileResult = await supabase
     .from("profiles")
-    .select("id,first_name,last_name,rpps,pharmacie_id")
+    .select("id,first_name,last_name,rpps,pharmacie_id,titulaire")
     .eq("id", userId)
     .maybeSingle()
 

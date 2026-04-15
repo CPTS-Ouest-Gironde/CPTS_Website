@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import { Loader2 } from "lucide-react"
 import { completePharmacienProfile } from "@/app/espace-pro/completer-profil/actions"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
@@ -30,10 +31,13 @@ export function CompleteProfileForm({ initialValues }: CompleteProfileFormProps)
   const [isSubmitting, startTransition] = useTransition()
   const form = useForm<CompleteProfileInput>({
     defaultValues: {
+      firstName: initialValues?.firstName ?? "",
+      lastName: initialValues?.lastName ?? "",
       pharmacieAdresse: initialValues?.pharmacieAdresse ?? "",
       pharmacieFiness: initialValues?.pharmacieFiness ?? "",
       pharmacieNom: initialValues?.pharmacieNom ?? "",
       rpps: initialValues?.rpps ?? "",
+      titulaire: initialValues?.titulaire ?? false,
     },
     resolver: zodResolver(completeProfileSchema),
   })
@@ -57,9 +61,12 @@ export function CompleteProfileForm({ initialValues }: CompleteProfileFormProps)
 
   function onSubmit(values: CompleteProfileInput) {
     const formData = new FormData()
+    formData.set("firstName", values.firstName)
+    formData.set("lastName", values.lastName)
     formData.set("rpps", values.rpps)
     formData.set("pharmacieNom", values.pharmacieNom)
     formData.set("pharmacieFiness", values.pharmacieFiness)
+    formData.set("titulaire", String(values.titulaire))
     formData.set("pharmacieAdresse", values.pharmacieAdresse ?? "")
 
     startTransition(() => {
@@ -75,6 +82,36 @@ export function CompleteProfileForm({ initialValues }: CompleteProfileFormProps)
             {state.formError}
           </div>
         ) : null}
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="lastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nom</FormLabel>
+                <FormControl>
+                  <Input {...field} className="h-11 rounded-xl border-border/70" placeholder="Dupont" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="firstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Prénom</FormLabel>
+                <FormControl>
+                  <Input {...field} className="h-11 rounded-xl border-border/70" placeholder="Marie" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
         <FormField
           control={form.control}
@@ -124,6 +161,23 @@ export function CompleteProfileForm({ initialValues }: CompleteProfileFormProps)
                   inputMode="numeric"
                   placeholder="9 chiffres"
                 />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <FormField
+          control={form.control}
+          name="titulaire"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Titulaire</FormLabel>
+              <FormControl>
+                <label className="flex min-h-11 items-center gap-3 rounded-xl border border-border/70 bg-background px-4 py-2 text-sm text-foreground">
+                  <Checkbox checked={field.value} onCheckedChange={(checked) => field.onChange(checked === true)} />
+                  <span>Je suis le titulaire de cette officine</span>
+                </label>
               </FormControl>
               <FormMessage />
             </FormItem>

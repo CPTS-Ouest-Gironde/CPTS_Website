@@ -88,7 +88,13 @@ export default async function CompleteProfilPage() {
                 <CardContent>
                   <CompleteProfileForm
                     initialValues={{
+                      firstName: profileRecord?.first_name ?? "",
+                      lastName: profileRecord?.last_name ?? "",
+                      pharmacieAdresse: profileRecord?.pharmacy?.adresse ?? "",
+                      pharmacieFiness: profileRecord?.pharmacy?.finess ?? "",
+                      pharmacieNom: profileRecord?.pharmacy?.nom ?? "",
                       rpps: profileRecord?.rpps ?? "",
+                      titulaire: profileRecord?.titulaire ?? false,
                     }}
                   />
                 </CardContent>

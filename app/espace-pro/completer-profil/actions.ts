@@ -23,6 +23,20 @@ function getStringValue(formData: FormData, key: CompleteProfileFieldName) {
   return typeof value === "string" ? value : ""
 }
 
+function getBooleanValue(formData: FormData, key: CompleteProfileFieldName) {
+  const value = formData.get(key)
+
+  if (value === "true") {
+    return true
+  }
+
+  if (value === "false") {
+    return false
+  }
+
+  return value
+}
+
 function getValidationState(error: ZodError<CompleteProfileInput>): CompleteProfileActionState {
   return {
     ...INITIAL_STATE,
@@ -62,10 +76,13 @@ export async function completePharmacienProfile(
   }
 
   const parsed = completeProfileSchema.safeParse({
+    firstName: getStringValue(formData, "firstName"),
+    lastName: getStringValue(formData, "lastName"),
     pharmacieAdresse: getStringValue(formData, "pharmacieAdresse"),
     pharmacieFiness: getStringValue(formData, "pharmacieFiness"),
     pharmacieNom: getStringValue(formData, "pharmacieNom"),
     rpps: getStringValue(formData, "rpps"),
+    titulaire: getBooleanValue(formData, "titulaire"),
   })
 
   if (!parsed.success) {
@@ -74,7 +91,12 @@ export async function completePharmacienProfile(
 
   const { error: updateRppsError } = await supabase
     .from("profiles")
-    .update({ rpps: parsed.data.rpps })
+    .update({
+      first_name: parsed.data.firstName,
+      last_name: parsed.data.lastName,
+      rpps: parsed.data.rpps,
+      titulaire: parsed.data.titulaire,
+    })
     .eq("id", user.id)
 
   if (updateRppsError) {

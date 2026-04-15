@@ -142,9 +142,12 @@ export const satisfactionPatientSchema = z
   })
 
 export const completeProfileSchema = z.object({
+  firstName: requiredTrimmedText(1, 120),
+  lastName: requiredTrimmedText(1, 120),
   rpps: z.string().trim().regex(rppsRegex, "Le RPPS doit contenir 10 ou 11 chiffres."),
   pharmacieNom: requiredTrimmedText(2, 160),
   pharmacieFiness: z.string().trim().regex(finessRegex, "Le FINESS doit contenir 9 chiffres."),
+  titulaire: z.boolean(),
   pharmacieAdresse: optionalTrimmedText(300),
 })
 
