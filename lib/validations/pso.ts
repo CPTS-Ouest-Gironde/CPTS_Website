@@ -48,8 +48,7 @@ const scoreOneToFive = z.number().int().min(1).max(5)
 
 export const pmoEntrySchema = z.object({
   dateRealisation: z.string().regex(dateOnlyRegex, "Date invalide."),
-  medecinDelegantNom: requiredTrimmedText(2, 160),
-  medecinDelegantRpps: z.string().trim().regex(rppsRegex, "RPPS invalide."),
+  medecinDelegantId: z.string().uuid("Médecin délégant invalide."),
   patientSexe: z.enum(psoPatientSexeValues),
   patientAge: z.enum(psoPatientAgeValues),
   patientMedecinTraitant: z.boolean(),
@@ -61,7 +60,25 @@ export const pmoEntrySchema = z.object({
   nbProduitsPmo: z.enum(psoProductCountValues),
   dispensationConseil: z.boolean(),
   nbProduitsConseil: z.enum(psoProductCountValues),
-  effetIndesirable: optionalTrimmedText(2000),
+  effetIndesirableDescription: optionalTrimmedText(2000),
+  effetIndesirableSignale: z.boolean(),
+  renouvellement: z.boolean(),
+}).superRefine((value, ctx) => {
+  if (value.effetIndesirableSignale && !value.effetIndesirableDescription) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["effetIndesirableDescription"],
+      message: "La description de l'effet indésirable est obligatoire.",
+    })
+  }
+
+  if (!value.effetIndesirableSignale && value.effetIndesirableDescription) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["effetIndesirableDescription"],
+      message: "La description doit rester vide si aucun effet indésirable n'est signalé.",
+    })
+  }
 })
 
 export const satisfactionPharmacienSchema = z

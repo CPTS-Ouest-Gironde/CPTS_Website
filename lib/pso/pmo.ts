@@ -16,7 +16,7 @@ export type PmoSuccessValue = (typeof pmoSuccessValues)[number]
 export const PmoOrientationLabels: Record<string, string> = {
   medecin_delegant: "Médecin délégant",
   medecin_traitant: "Médecin traitant",
-  officine: "Retour officine",
+  officine: "Officine",
   urgences: "Urgences",
 }
 
@@ -141,6 +141,7 @@ export async function getPmoEntryRecord(supabase: AppSupabaseClient, entryId: st
         prescription_antiallergique_nasal,
         prescription_collyre,
         prescription_corticoide_nasal,
+        renouvellement,
         updated_at,
         user_id
       `,
@@ -155,13 +156,15 @@ export async function getPmoEntryRecord(supabase: AppSupabaseClient, entryId: st
   return result.data as PmoEntryRow
 }
 
-export function toPmoEntryInput(entry: PmoEntryRow): PmoEntryInput {
+export function toPmoEntryInput(entry: PmoEntryRow, medecinDelegantId = ""): PmoEntryInput {
+  const effetIndesirable = entry.effet_indesirable?.trim() ?? ""
+
   return {
     dateRealisation: entry.date_realisation,
     dispensationConseil: entry.dispensation_conseil,
-    effetIndesirable: entry.effet_indesirable ?? "",
-    medecinDelegantNom: entry.medecin_delegant_nom,
-    medecinDelegantRpps: entry.medecin_delegant_rpps,
+    effetIndesirableDescription: effetIndesirable,
+    effetIndesirableSignale: effetIndesirable.length > 0,
+    medecinDelegantId,
     nbProduitsConseil: entry.nb_produits_conseil as PmoEntryInput["nbProduitsConseil"],
     nbProduitsPmo: entry.nb_produits_pmo as PmoEntryInput["nbProduitsPmo"],
     orientation: entry.orientation as PmoEntryInput["orientation"],
@@ -172,5 +175,6 @@ export function toPmoEntryInput(entry: PmoEntryRow): PmoEntryInput {
     prescriptionAntiallergiqueNasal: entry.prescription_antiallergique_nasal,
     prescriptionCollyre: entry.prescription_collyre,
     prescriptionCorticoideNasal: entry.prescription_corticoide_nasal,
+    renouvellement: entry.renouvellement,
   }
 }

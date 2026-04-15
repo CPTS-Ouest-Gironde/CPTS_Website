@@ -39,6 +39,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      medecins_delegants: {
+        Row: {
+          actif: boolean
+          created_at: string
+          id: string
+          nom: string
+          prenom: string
+          rpps: string
+          updated_at: string
+        }
+        Insert: {
+          actif?: boolean
+          created_at?: string
+          id?: string
+          nom: string
+          prenom: string
+          rpps: string
+          updated_at?: string
+        }
+        Update: {
+          actif?: boolean
+          created_at?: string
+          id?: string
+          nom?: string
+          prenom?: string
+          rpps?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       pharmacies: {
         Row: {
           adresse: string | null
@@ -86,6 +116,7 @@ export type Database = {
           prescription_antiallergique_nasal: boolean
           prescription_collyre: boolean
           prescription_corticoide_nasal: boolean
+          renouvellement: boolean
           updated_at: string
           user_id: string
         }
@@ -108,6 +139,7 @@ export type Database = {
           prescription_antiallergique_nasal: boolean
           prescription_collyre: boolean
           prescription_corticoide_nasal: boolean
+          renouvellement?: boolean
           updated_at?: string
           user_id: string
         }
@@ -130,6 +162,7 @@ export type Database = {
           prescription_antiallergique_nasal?: boolean
           prescription_collyre?: boolean
           prescription_corticoide_nasal?: boolean
+          renouvellement?: boolean
           updated_at?: string
           user_id?: string
         }
@@ -232,6 +265,7 @@ export type Database = {
       satisfaction_pharmacien: {
         Row: {
           acces_soins: number
+          annee_reference: number
           appreciation_patients: number
           autres_incidents: boolean
           benefice_pratique: number
@@ -248,6 +282,7 @@ export type Database = {
         }
         Insert: {
           acces_soins: number
+          annee_reference?: number
           appreciation_patients: number
           autres_incidents: boolean
           benefice_pratique: number
@@ -264,6 +299,7 @@ export type Database = {
         }
         Update: {
           acces_soins?: number
+          annee_reference?: number
           appreciation_patients?: number
           autres_incidents?: boolean
           benefice_pratique?: number

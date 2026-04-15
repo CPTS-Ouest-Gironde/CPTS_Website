@@ -144,7 +144,6 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
   - `/espace-pro/pmo/*` → rôle `pharmacien_pso`
   - `/espace-pro/satisfaction` → rôle `pharmacien_pso`
   - `/espace-pro/dashboard` → rôle `reporting_pso`
-  - `/espace-pro/qr-codes` → rôle `reporting_pso`
   - `/satisfaction-patient/*` → public
 
 ### 1.5 Schémas Zod partagés
@@ -182,7 +181,7 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 - [x] Composant `SelectField` basé sur Radix
 - [x] Composant `RadioYesNo`
-- [ ] Composant `DatePicker` compatible Tailwind 4
+- [x] ~~Composant `DatePicker` compatible Tailwind 4~~ → utilisation de l'input HTML natif type=date, validé en démo
 - [x] Composant `EchelleCinq` (échelle 1 à 5 avec légende)
 - [x] Composant `FormSection` pour les en-têtes de sections
 
@@ -196,6 +195,9 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Insertion dans `pmo_entries` avec user_id et pharmacie_id
 - [x] `revalidatePath('/espace-pro/pmo')` après insertion
 - [x] Redirection vers la liste avec message de succès
+- [x] Bouton `Enregistrer et nouvelle entrée` sur `/espace-pro/pmo/nouveau`
+- [x] Réinitialisation du formulaire après sauvegarde avec toast discret en bas à droite
+- [x] Avertissement de doublon souple avant création si la nouvelle entrée est identique à la précédente
 - [x] Gestion des erreurs avec messages clairs
 
 ### 2.3 Liste et gestion des saisies
@@ -204,7 +206,7 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Tableau des lignes du pharmacien connecté, tri par date décroissante
 - [x] Colonnes affichées : date, sexe, âge, orientation, nb PMO, actions
 - [x] Pagination (20 lignes par page, via `searchParams` async)
-- [x] Bouton "Nouvelle saisie"
+- [x] Boutons "Nouvelle entrée" en haut et sous le tableau
 - [x] Action "Voir" → page détail `/espace-pro/pmo/[id]`
 - [x] Action "Modifier" → page édition `/espace-pro/pmo/[id]/modifier`
 - [x] Action "Supprimer" via Server Action avec modale de confirmation
@@ -241,6 +243,9 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Server Action `submitSatisfactionPharmacien` validée par Zod
 - [x] Insertion dans `satisfaction_pharmacien`
 - [x] Page de remerciement après soumission
+- [x] Limitation à une réponse par pharmacien et par année de référence
+- [x] Questionnaire accessible toute l'année avec une seule réponse par année
+- [x] Card de rappel affichée uniquement en septembre et octobre si aucune réponse n'existe pour l'année en cours
 
 ### 3.2 Questionnaire patient public
 
@@ -261,16 +266,6 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Insertion via l'anon key Supabase
 - [x] Page de remerciement après soumission
 - [x] Design mobile-first (les patients scannent au comptoir)
-
-### 3.3 Génération des QR codes
-
-- [ ] Installer la librairie `qrcode`
-- [ ] Route admin `/espace-pro/qr-codes` protégée rôle `reporting_pso`
-- [ ] Génération d'un QR code global unique pointant vers `https://cpts-ouest-gironde.fr/satisfaction-patient`
-- [ ] Un bouton "Télécharger en PNG"
-- [ ] Un bouton "Télécharger la fiche A4 imprimable" (HTML imprimable avec QR code + instructions)
-
----
 
 ## Phase 4 — Dashboard CA
 
@@ -338,6 +333,16 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Agrégation globale des réponses `satisfaction_patient`
 - [x] Section "Retours pharmaciens" : volume, moyennes Q1 à Q5, total effets indésirables graves, incidents, commentaires
 - [x] Section "Retours patients" : volume, répartitions, moyennes Q3 à Q5, taux de renouvellement, taux de consultation après, commentaires
+- [x] Filtre par année sur les retours pharmaciens avec sélection de l'année de référence
+
+### 4.8 Détail par pharmacie et exports enrichis
+
+- [x] Section "Détail par pharmacie" dans le dashboard (onglet Activité PMO) : tableau avec FINESS, pharmacien titulaire, RPPS et nombre de saisies
+- [x] Page d'audit `/espace-pro/dashboard/pharmacie/[pharmacie_id]` accessible aux `reporting_pso`, lecture seule, paginée, avec toutes les colonnes des saisies PMO
+- [x] Export CSV agrégé enrichi avec FINESS, pharmacien titulaire et RPPS par pharmacie
+- [x] Nouvel export CSV détaillé global : 1 ligne par saisie PMO avec toutes les colonnes (pharmacie, FINESS, pharmacien, RPPS pharmacien, date, données patient, prescriptions, médecin délégant, RPPS médecin délégant)
+- [x] Export CSV ciblé sur la page d'audit par officine
+- [x] Bouton "Année complète" dans la barre de filtres pour basculer rapidement sur Janvier-Décembre (utile pour la facturation annuelle ARS)
 
 ---
 
@@ -345,28 +350,29 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ### 5.1 Navigation et intégration
 
-- [x] Ajouter les liens vers les nouveaux modules depuis l'espace pro existant
+- [x] Ajouter les liens vers les nouveaux modules depuis l'espace pro existant (card "Dashboard PSO" sur /professionnels pour reporting_pso)
+- [ ] Ajouter une card "Saisie PMO" sur /professionnels visible uniquement pour les pharmacien_pso (TODO polish)
 - [ ] Menu utilisateur adapté selon le rôle
 - [ ] Breadcrumbs sur les pages profondes
-- [ ] Cohérence visuelle avec le design existant (couleurs, typo, espacements)
+- [ ] Cohérence visuelle avec le design existant
 
 ### 5.2 États et retours utilisateur
 
 - [ ] Loading states via `loading.tsx` sur les pages concernées
-- [ ] Messages de succès après actions (saisie, modification, suppression)
-- [ ] Messages d'erreur explicites renvoyés par les Server Actions
-- [ ] États vides (aucune saisie, aucune donnée dashboard)
+- [x] Messages de succès après actions (toast discret en bas à droite, partout)
+- [x] Messages d'erreur explicites renvoyés par les Server Actions
+- [x] États vides (aucune saisie, aucune donnée dashboard)
 
 ### 5.3 Mobile
 
-- [ ] Questionnaire patient totalement mobile-first
-- [ ] Saisie PMO utilisable sur tablette
-- [ ] Dashboard lisible sur mobile (graphiques adaptatifs)
+- [x] Questionnaire patient totalement mobile-first
+- [ ] Saisie PMO utilisable sur tablette (non testé)
+- [ ] Dashboard lisible sur mobile (graphiques Recharts à corriger, problème connu)
 
 ### 5.4 RGPD
 
-- [ ] Bandeau d'information RGPD sur le formulaire patient public
-- [ ] Mention sur les pages de saisie PMO rappelant l'absence de données identifiantes
+- [ ] Bandeau d'information RGPD sur le formulaire patient public (à vérifier)
+- [x] Mention sur les pages de saisie PMO rappelant l'absence de données identifiantes (bandeau bouclier vert)
 - [ ] Lien vers la politique de confidentialité du site
 
 ---
@@ -384,7 +390,7 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 - [ ] Parcours pharmacien complet : invitation → setup password → connexion `/login` → complétion profil → saisie PMO → modification → suppression → questionnaire satisfaction
 - [ ] Parcours patient complet : scan QR code simulé → questionnaire → soumission → remerciement
-- [ ] Parcours reporting_pso : connexion → dashboard → filtres → export CSV → génération QR codes
+- [ ] Parcours reporting_pso : connexion → dashboard → filtres → export CSV
 - [ ] Vérification RLS : pharmacien A ne voit pas les lignes de pharmacien B
 - [ ] Vérification RLS : pharmacien A ne peut pas accéder au dashboard
 - [ ] Vérification RLS : visiteur anonyme ne peut pas lire `satisfaction_patient`
@@ -406,13 +412,26 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 ### 6.5 Documentation
 
 - [ ] Guide utilisateur pharmacien (1 page) : comment se connecter, comment saisir, comment remplir le questionnaire
-- [ ] Guide utilisateur CA (1 page) : dashboard, filtres, export, QR codes
+- [ ] Guide utilisateur CA (1 page) : dashboard, filtres, export
 - [ ] Mise à disposition des guides dans l'espace pro
+
+---
+
+## Multi-rôles et profils combinés
+
+Le système de rôles via `user_roles` est nativement multi-rôles. Un même utilisateur peut cumuler plusieurs rôles, ce qui couvre les cas métier suivants :
+
+- Pharmacien adhérent : `adherent` + `pharmacien_pso` → accès à l'espace adhérent classique ET au tableau de saisie PMO
+- Membre CA reporting : `membre_ca` + `reporting_pso` → accès à l'espace adhérent ET au dashboard PSO de reporting
+- Pharmacien titulaire d'une CPTS : peut cumuler les 4 rôles selon les besoins
+
+Aucun changement DB nécessaire, le helper `has_role()` et la fonction `readUserAccessContext` gèrent déjà ces combinaisons. Le seul travail restant est l'affichage conditionnel des cards sur la page `/professionnels` selon les rôles présents.
 
 ---
 
 ## Hors périmètre du devis (à proposer en avenant)
 
+- **Calcul automatique de l'indemnisation par pharmacie** : génération de fiches de facturation par officine, multiplication des saisies par la grille tarifaire ARS, totaux mensuels et annuels. Nécessite la grille tarifaire ARS officielle. Estimation 2-3h.
 - Export annuel avec rémunération (nécessite grille tarifaire ARS/CPAM)
 - Tableau croisé PMO délivrés × Conseil délivrés
 - Export PDF formaté
@@ -427,7 +446,8 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 
 ## Dépendances CPTS (à obtenir avant démarrage)
 
-- [ ] Liste des pharmaciens participants : nom, prénom, RPPS, email, nom officine, FINESS
+- [x] Liste des pharmaciens participants : reçue le 13/04 (20 pharmaciens, nom/prénom/email uniquement, RPPS et FINESS seront saisis par les pharmaciens lors de l'onboarding)
+  - Note : doublons à clarifier : Sandra Gainza et Crysta Selva partagent le même email pro. Valérie Barrand a 2 emails.
 - [ ] Validation écrite des libellés des 2 questionnaires
 - [ ] Confirmation RGPD par retour email
 - [x] QR code global unique validé

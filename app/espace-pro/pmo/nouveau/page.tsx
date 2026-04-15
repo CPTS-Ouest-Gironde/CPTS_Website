@@ -5,6 +5,7 @@ import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { PmoEntryForm } from "@/components/pso/pmo-entry-form"
 import { Button } from "@/components/ui/button"
+import { getActiveMedecinsDelegants } from "@/lib/pso/medecins-delegants"
 import { getPsoProfileRecord } from "@/lib/pso/profile"
 import {
   hasCompletedPharmacienProfile,
@@ -23,9 +24,10 @@ export default async function NewPmoEntryPage() {
     redirect("/login?next=/espace-pro/pmo/nouveau")
   }
 
-  const [{ profile, roles }, profileRecord] = await Promise.all([
+  const [{ profile, roles }, profileRecord, medecinsDelegants] = await Promise.all([
     readUserAccessContext(supabase, user.id),
     getPsoProfileRecord(supabase, user.id),
+    getActiveMedecinsDelegants(supabase),
   ])
 
   if (!hasRole(roles, "pharmacien_pso")) {
@@ -51,9 +53,9 @@ export default async function NewPmoEntryPage() {
                 </Link>
               </Button>
 
-              <h1 className="text-3xl font-bold tracking-tight text-foreground">Nouvelle saisie</h1>
+              <h1 className="text-3xl font-bold tracking-tight text-foreground">Nouvelle entrée</h1>
 
-              <PmoEntryForm />
+              <PmoEntryForm medecinsDelegants={medecinsDelegants} showSaveAndCreateAnotherButton />
             </div>
           </div>
         </section>

@@ -39,6 +39,7 @@ type PmoEntryStatsRow = Pick<
   | "prescription_antiallergique_nasal"
   | "prescription_collyre"
   | "prescription_corticoide_nasal"
+  | "renouvellement"
 >
 type PmoEntryDetailRow = Pick<
   Database["public"]["Tables"]["pmo_entries"]["Row"],
@@ -60,6 +61,7 @@ type PmoEntryDetailRow = Pick<
   | "prescription_antiallergique_nasal"
   | "prescription_collyre"
   | "prescription_corticoide_nasal"
+  | "renouvellement"
   | "user_id"
 >
 
@@ -79,6 +81,7 @@ type MutablePharmacyDetail = {
   pharmacienRpps: string | null
   pharmacienTitulaire: string | null
   pharmacieId: string
+  renouvellementCount: number
   totalPatients: number
   urgencesCount: number
 }
@@ -108,6 +111,7 @@ export type DashboardPharmacyDetail = {
   pharmacieFiness: string
   pharmacieId: string
   pharmacieNom: string
+  tauxRenouvellements: number
   tauxDispensationConseil: number
   totalPatients: number
   totalProduitsParPatient: number
@@ -140,6 +144,7 @@ export type DashboardPmoDetailRow = {
   prescriptionAntiallergiqueNasal: boolean
   prescriptionCollyre: boolean
   prescriptionCorticoideNasal: boolean
+  renouvellement: boolean
 }
 
 export type DashboardPmoDetailPage = {
@@ -150,6 +155,7 @@ export type DashboardPmoDetailPage = {
 }
 
 export type DashboardStats = {
+  dispensationConseil: DashboardBreakdown
   hasData: boolean
   moyennePatientsParPharmacie: number
   moyenneProduitsConseil: number
@@ -158,10 +164,10 @@ export type DashboardStats = {
   patientsSansMedecinTraitant: DashboardBreakdown
   pharmacyDetails: DashboardPharmacyDetail[]
   prescriptions: {
-    antiH1Pct: number
-    antiallergiqueNasalPct: number
-    collyrePct: number
-    corticoideNasalPct: number
+    antiH1: DashboardBreakdown
+    antiallergiqueNasal: DashboardBreakdown
+    collyre: DashboardBreakdown
+    corticoideNasal: DashboardBreakdown
   }
   repartitionAge: DashboardAgeBreakdown
   repartitionSexe: {
@@ -173,7 +179,7 @@ export type DashboardStats = {
     medecinTraitant: number
     urgences: number
   }
-  tauxDispensationConseil: number
+  renouvellements: DashboardBreakdown
   totalPatients: number
   totalProduitsParPatient: number
 }
@@ -188,6 +194,7 @@ const dashboardPmoStatsFields = [
   "prescription_collyre",
   "prescription_antiallergique_nasal",
   "prescription_corticoide_nasal",
+  "renouvellement",
   "nb_produits_pmo",
   "dispensation_conseil",
   "nb_produits_conseil",
@@ -207,6 +214,7 @@ const dashboardPmoDetailFields = [
   "prescription_collyre",
   "prescription_antiallergique_nasal",
   "prescription_corticoide_nasal",
+  "renouvellement",
   "nb_produits_pmo",
   "dispensation_conseil",
   "nb_produits_conseil",
@@ -238,6 +246,7 @@ function createAgeBreakdown(): DashboardAgeBreakdown {
 
 function createEmptyStats(): DashboardStats {
   return {
+    dispensationConseil: { n: 0, pct: 0 },
     hasData: false,
     moyennePatientsParPharmacie: 0,
     moyenneProduitsConseil: 0,
@@ -246,10 +255,10 @@ function createEmptyStats(): DashboardStats {
     patientsSansMedecinTraitant: { n: 0, pct: 0 },
     pharmacyDetails: [],
     prescriptions: {
-      antiH1Pct: 0,
-      antiallergiqueNasalPct: 0,
-      collyrePct: 0,
-      corticoideNasalPct: 0,
+      antiH1: { n: 0, pct: 0 },
+      antiallergiqueNasal: { n: 0, pct: 0 },
+      collyre: { n: 0, pct: 0 },
+      corticoideNasal: { n: 0, pct: 0 },
     },
     repartitionAge: createAgeBreakdown(),
     repartitionSexe: {
@@ -261,7 +270,7 @@ function createEmptyStats(): DashboardStats {
       medecinTraitant: 0,
       urgences: 0,
     },
-    tauxDispensationConseil: 0,
+    renouvellements: { n: 0, pct: 0 },
     totalPatients: 0,
     totalProduitsParPatient: 0,
   }
@@ -314,6 +323,7 @@ function createMutablePharmacyDetail(pharmacy: DashboardPharmacyOption): Mutable
     pharmacienRpps: pharmacy.pharmacienRpps,
     pharmacienTitulaire: pharmacy.pharmacienTitulaire,
     pharmacieId: pharmacy.id,
+    renouvellementCount: 0,
     totalPatients: 0,
     urgencesCount: 0,
   }
@@ -451,6 +461,7 @@ function mapDashboardPmoEntries(
       prescriptionAntiallergiqueNasal: entry.prescription_antiallergique_nasal,
       prescriptionCollyre: entry.prescription_collyre,
       prescriptionCorticoideNasal: entry.prescription_corticoide_nasal,
+      renouvellement: entry.renouvellement,
     }
   })
 }
@@ -546,6 +557,7 @@ export async function getDashboardStats(
   let dispensationConseilCount = 0
   let produitsPmoTotal = 0
   let produitsConseilTotal = 0
+  let renouvellementCount = 0
 
   for (const entry of entries) {
     const produitsPmo = toProductCount(entry.nb_produits_pmo)
@@ -563,6 +575,11 @@ export async function getDashboardStats(
     pharmacyDetail.totalPatients += 1
     pharmacyDetail.moyenneProduitsPmoTotal += produitsPmo
     pharmacyDetail.moyenneProduitsConseilTotal += produitsConseil
+
+    if (entry.renouvellement) {
+      renouvellementCount += 1
+      pharmacyDetail.renouvellementCount += 1
+    }
 
     if (entry.patient_sexe === "femme") {
       femmesCount += 1
@@ -643,6 +660,7 @@ export async function getDashboardStats(
       pharmacieFiness: detail.finess,
       pharmacieId: detail.pharmacieId,
       pharmacieNom: detail.nom,
+      tauxRenouvellements: toRoundedNumber(toPercentage(detail.renouvellementCount, detail.totalPatients)),
       tauxDispensationConseil: toRoundedNumber(toPercentage(detail.dispensationConseilCount, detail.totalPatients)),
       totalPatients: detail.totalPatients,
       totalProduitsParPatient: toRoundedNumber(
@@ -658,6 +676,10 @@ export async function getDashboardStats(
     .sort((first, second) => second.totalPatients - first.totalPatients || first.pharmacieNom.localeCompare(second.pharmacieNom))
 
   return {
+    dispensationConseil: {
+      n: dispensationConseilCount,
+      pct: toRoundedNumber(toPercentage(dispensationConseilCount, totalPatients)),
+    },
     hasData: true,
     moyennePatientsParPharmacie: toRoundedNumber(toAverage(totalPatients, nbPharmaciesActives), 2),
     moyenneProduitsConseil: toRoundedNumber(toAverage(produitsConseilTotal, totalPatients), 2),
@@ -669,10 +691,22 @@ export async function getDashboardStats(
     },
     pharmacyDetails,
     prescriptions: {
-      antiH1Pct: toRoundedNumber(toPercentage(antiH1Count, totalPatients)),
-      antiallergiqueNasalPct: toRoundedNumber(toPercentage(antiallergiqueNasalCount, totalPatients)),
-      collyrePct: toRoundedNumber(toPercentage(collyreCount, totalPatients)),
-      corticoideNasalPct: toRoundedNumber(toPercentage(corticoideNasalCount, totalPatients)),
+      antiH1: {
+        n: antiH1Count,
+        pct: toRoundedNumber(toPercentage(antiH1Count, totalPatients)),
+      },
+      antiallergiqueNasal: {
+        n: antiallergiqueNasalCount,
+        pct: toRoundedNumber(toPercentage(antiallergiqueNasalCount, totalPatients)),
+      },
+      collyre: {
+        n: collyreCount,
+        pct: toRoundedNumber(toPercentage(collyreCount, totalPatients)),
+      },
+      corticoideNasal: {
+        n: corticoideNasalCount,
+        pct: toRoundedNumber(toPercentage(corticoideNasalCount, totalPatients)),
+      },
     },
     repartitionAge,
     repartitionSexe: {
@@ -690,7 +724,10 @@ export async function getDashboardStats(
       medecinTraitant: medecinTraitantCount,
       urgences: urgencesCount,
     },
-    tauxDispensationConseil: toRoundedNumber(toPercentage(dispensationConseilCount, totalPatients)),
+    renouvellements: {
+      n: renouvellementCount,
+      pct: toRoundedNumber(toPercentage(renouvellementCount, totalPatients)),
+    },
     totalPatients,
     totalProduitsParPatient: toRoundedNumber(toAverage(produitsPmoTotal + produitsConseilTotal, totalPatients), 2),
   }
@@ -788,21 +825,34 @@ export function createDashboardCsv(
       "Patients sans médecin traitant",
       `${stats.patientsSansMedecinTraitant.n} (${toCsvValue(stats.patientsSansMedecinTraitant.pct)} %)`,
     ]),
-    buildCsvRow(["Réorientation urgences", stats.reorientations.urgences]),
-    buildCsvRow(["Réorientation médecin délégant", stats.reorientations.medecinDelegant]),
-    buildCsvRow(["Réorientation médecin traitant", stats.reorientations.medecinTraitant]),
-    buildCsvRow(["Prescription anti-H1", `${toCsvValue(stats.prescriptions.antiH1Pct)} %`]),
-    buildCsvRow(["Prescription collyre", `${toCsvValue(stats.prescriptions.collyrePct)} %`]),
+    buildCsvRow([
+      "Taux de renouvellements",
+      `${stats.renouvellements.n} (${toCsvValue(stats.renouvellements.pct)} %)`,
+    ]),
+    buildCsvRow(["Prise en charge urgences", stats.reorientations.urgences]),
+    buildCsvRow(["Prise en charge médecin délégant", stats.reorientations.medecinDelegant]),
+    buildCsvRow(["Prise en charge médecin traitant", stats.reorientations.medecinTraitant]),
+    buildCsvRow([
+      "Prescription anti-H1",
+      `${stats.prescriptions.antiH1.n} (${toCsvValue(stats.prescriptions.antiH1.pct)} %)`,
+    ]),
+    buildCsvRow([
+      "Prescription collyre",
+      `${stats.prescriptions.collyre.n} (${toCsvValue(stats.prescriptions.collyre.pct)} %)`,
+    ]),
     buildCsvRow([
       "Prescription antiallergique nasal",
-      `${toCsvValue(stats.prescriptions.antiallergiqueNasalPct)} %`,
+      `${stats.prescriptions.antiallergiqueNasal.n} (${toCsvValue(stats.prescriptions.antiallergiqueNasal.pct)} %)`,
     ]),
     buildCsvRow([
       "Prescription corticoïde nasal",
-      `${toCsvValue(stats.prescriptions.corticoideNasalPct)} %`,
+      `${stats.prescriptions.corticoideNasal.n} (${toCsvValue(stats.prescriptions.corticoideNasal.pct)} %)`,
     ]),
     buildCsvRow(["Moyenne produits PMO", toCsvValue(stats.moyenneProduitsPmo, 2)]),
-    buildCsvRow(["Taux dispensation conseil", `${toCsvValue(stats.tauxDispensationConseil)} %`]),
+    buildCsvRow([
+      "Taux dispensation conseil",
+      `${stats.dispensationConseil.n} (${toCsvValue(stats.dispensationConseil.pct)} %)`,
+    ]),
     buildCsvRow(["Moyenne produits conseil", toCsvValue(stats.moyenneProduitsConseil, 2)]),
     buildCsvRow(["Total produits par patient", toCsvValue(stats.totalProduitsParPatient, 2)]),
     "",
@@ -817,9 +867,10 @@ export function createDashboardCsv(
       "Patients",
       "Patients sans MT",
       "% sans MT",
-      "Urgences",
-      "Medecin delegant",
-      "Medecin traitant",
+      "Renouvellement",
+      "Prise en charge urgences",
+      "Prise en charge medecin delegant",
+      "Prise en charge medecin traitant",
       "% anti-H1",
       "% collyre",
       "% antiallergique nasal",
@@ -840,6 +891,7 @@ export function createDashboardCsv(
         "",
         0,
         0,
+        "0 %",
         "0 %",
         0,
         0,
@@ -865,6 +917,7 @@ export function createDashboardCsv(
           detail.totalPatients,
           detail.patientsSansMedecinTraitant.n,
           `${toCsvValue(detail.patientsSansMedecinTraitant.pct)} %`,
+          `${toCsvValue(detail.tauxRenouvellements)} %`,
           detail.reorientations.urgences,
           detail.reorientations.medecinDelegant,
           detail.reorientations.medecinTraitant,
@@ -899,7 +952,8 @@ export function createDashboardDetailedCsv(entries: readonly DashboardPmoDetailR
       "Sexe",
       "Tranche d'âge",
       "Médecin traitant",
-      "Orientation",
+      "Prise en charge",
+      "Renouvellement",
       "Prescription anti-H1",
       "Prescription collyre",
       "Prescription antiallergique nasal",
@@ -922,6 +976,7 @@ export function createDashboardDetailedCsv(entries: readonly DashboardPmoDetailR
         entry.patientAge,
         getYesNoLabel(entry.patientMedecinTraitant),
         getPmoOrientationLabel(entry.orientation),
+        getYesNoLabel(entry.renouvellement),
         getYesNoLabel(entry.prescriptionAntiH1),
         getYesNoLabel(entry.prescriptionCollyre),
         getYesNoLabel(entry.prescriptionAntiallergiqueNasal),

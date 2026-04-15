@@ -2,7 +2,9 @@ import { redirect } from "next/navigation"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { SatisfactionPharmacienForm } from "@/components/pso/satisfaction-pharmacien-form"
+import { Card, CardContent } from "@/components/ui/card"
 import { getPsoProfileRecord } from "@/lib/pso/profile"
+import { getSatisfactionPharmacienReferenceYear } from "@/lib/pso/satisfaction-pharmacien"
 import {
   hasCompletedPharmacienProfile,
   hasRole,
@@ -33,6 +35,16 @@ export default async function SatisfactionPharmacienPage() {
     redirect("/espace-pro/completer-profil")
   }
 
+  const currentReferenceYear = getSatisfactionPharmacienReferenceYear()
+  const existingResponseResult = await supabase
+    .from("satisfaction_pharmacien")
+    .select("id")
+    .eq("user_id", user.id)
+    .eq("annee_reference", currentReferenceYear)
+    .limit(1)
+    .maybeSingle()
+  const hasAnsweredCurrentYear = !existingResponseResult.error && Boolean(existingResponseResult.data)
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
@@ -50,7 +62,20 @@ export default async function SatisfactionPharmacienPage() {
                 </p>
               </div>
 
-              <SatisfactionPharmacienForm />
+              {hasAnsweredCurrentYear ? (
+                <Card className="rounded-3xl border border-border/80 bg-card shadow-sm">
+                  <CardContent className="space-y-2 p-6">
+                    <h2 className="text-lg font-semibold text-foreground">
+                      Vous avez déjà complété le questionnaire pour cette année
+                    </h2>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      Votre réponse pour l&apos;année {currentReferenceYear} a déjà été enregistrée.
+                    </p>
+                  </CardContent>
+                </Card>
+              ) : (
+                <SatisfactionPharmacienForm />
+              )}
             </div>
           </div>
         </section>

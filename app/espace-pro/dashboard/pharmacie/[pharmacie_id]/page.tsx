@@ -171,7 +171,7 @@ export default async function DashboardPharmacyAuditPage({
                           <TableHead>Sexe</TableHead>
                           <TableHead>Tranche d&apos;âge</TableHead>
                           <TableHead>Médecin traitant</TableHead>
-                          <TableHead>Orientation</TableHead>
+                          <TableHead>Prise en charge</TableHead>
                           <TableHead>anti-H1</TableHead>
                           <TableHead>collyre</TableHead>
                           <TableHead>antiallergique nasal</TableHead>

@@ -8,6 +8,7 @@ import { DashboardExportButton } from "@/components/pso/dashboard-export-button"
 import { DashboardFilterBar } from "@/components/pso/dashboard-filter-bar"
 import { DashboardMetricCard } from "@/components/pso/dashboard-metric-card"
 import { DashboardPharmacyDetailTable } from "@/components/pso/dashboard-pharmacy-detail-table"
+import { DashboardSatisfactionFilterBar } from "@/components/pso/dashboard-satisfaction-filter-bar"
 import { DashboardSatisfactionPanel } from "@/components/pso/dashboard-satisfaction-panel"
 import { FormSection } from "@/components/pso/form-section"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -24,7 +25,11 @@ import {
   type DashboardSearchParams,
   type DashboardView,
 } from "@/lib/pso/dashboard-filters"
-import { getDashboardSatisfactionStats, type DashboardSatisfactionStats } from "@/lib/pso/dashboard-satisfaction"
+import {
+  getDashboardSatisfactionStats,
+  getDashboardSatisfactionYearOptions,
+  type DashboardSatisfactionStats,
+} from "@/lib/pso/dashboard-satisfaction"
 import { getDashboardPharmacyOptions, getDashboardStats, type DashboardStats } from "@/lib/pso/dashboard-stats"
 import { hasRole, readUserAccessContext } from "@/lib/supabase/roles"
 import { createClient } from "@/lib/supabase/server"
@@ -50,6 +55,10 @@ function formatPercentage(value: number) {
     maximumFractionDigits: 1,
     minimumFractionDigits: 1,
   }).format(value)
+}
+
+function formatBreakdown(value: { n: number; pct: number }) {
+  return `${formatInteger(value.n)} (${formatPercentage(value.pct)} %)`
 }
 
 function getDashboardTabClass(isActive: boolean) {
@@ -125,7 +134,8 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     }
   } else {
     try {
-      satisfactionStats = await getDashboardSatisfactionStats(supabase)
+      yearOptions = await getDashboardSatisfactionYearOptions(supabase, filters.year)
+      satisfactionStats = await getDashboardSatisfactionStats(supabase, filters.year)
     } catch {
       satisfactionStatsError = true
     }
@@ -154,9 +164,12 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                   {activeView === "pmo" ? (
                     <DashboardFilterBar filters={filters} pharmacies={pharmacies} yearOptions={yearOptions} />
                   ) : (
-                    <p className="text-sm text-muted-foreground">
-                      Les retours de satisfaction sont affichés globalement. Ils ne sont pas filtrés par période ni par pharmacie.
-                    </p>
+                    <div className="space-y-3">
+                      <DashboardSatisfactionFilterBar filters={filters} yearOptions={yearOptions} />
+                      <p className="text-sm text-muted-foreground">
+                        Les retours pharmaciens sont filtrés par année. Les retours patients restent affichés globalement.
+                      </p>
+                    </div>
                   )}
                 </CardContent>
               </Card>
@@ -209,12 +222,17 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       <DashboardMetricCard
                         helper="Part des patients sans médecin traitant déclaré."
                         label="Patients sans médecin traitant"
-                        value={`${formatInteger(pmoStats.patientsSansMedecinTraitant.n)} (${formatPercentage(pmoStats.patientsSansMedecinTraitant.pct)} %)`}
+                        value={formatBreakdown(pmoStats.patientsSansMedecinTraitant)}
+                      />
+                      <DashboardMetricCard
+                        helper="Part des saisies correspondant à un renouvellement de prise en charge."
+                        label="Taux de renouvellements"
+                        value={formatBreakdown(pmoStats.renouvellements)}
                       />
                       <DashboardMetricCard
                         helper="Pourcentage de saisies avec dispensation conseil."
                         label="Taux de dispensation conseil"
-                        value={`${formatPercentage(pmoStats.tauxDispensationConseil)} %`}
+                        value={formatBreakdown(pmoStats.dispensationConseil)}
                       />
                       <DashboardMetricCard
                         helper="Moyenne des produits délivrés dans le cadre PMO."
@@ -233,7 +251,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                     <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
                       <Card className="rounded-[2rem] border border-border/80 bg-card shadow-sm">
                         <CardHeader>
-                          <CardTitle className="text-base">Réorientations observées</CardTitle>
+                          <CardTitle className="text-base">Prises en charge observées</CardTitle>
                         </CardHeader>
                         <CardContent className="grid gap-4 sm:grid-cols-3">
                           <div className="rounded-2xl bg-[#f3f6f3] p-4">
@@ -267,26 +285,22 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                         <CardContent className="space-y-4">
                           <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f3f6f3] px-4 py-3">
                             <span className="text-sm text-muted-foreground">Anti-H1</span>
-                            <span className="text-sm font-semibold text-foreground">
-                              {formatPercentage(pmoStats.prescriptions.antiH1Pct)} %
-                            </span>
+                            <span className="text-sm font-semibold text-foreground">{formatBreakdown(pmoStats.prescriptions.antiH1)}</span>
                           </div>
                           <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f3f6f3] px-4 py-3">
                             <span className="text-sm text-muted-foreground">Collyre</span>
-                            <span className="text-sm font-semibold text-foreground">
-                              {formatPercentage(pmoStats.prescriptions.collyrePct)} %
-                            </span>
+                            <span className="text-sm font-semibold text-foreground">{formatBreakdown(pmoStats.prescriptions.collyre)}</span>
                           </div>
                           <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f3f6f3] px-4 py-3">
                             <span className="text-sm text-muted-foreground">Antiallergique nasal</span>
                             <span className="text-sm font-semibold text-foreground">
-                              {formatPercentage(pmoStats.prescriptions.antiallergiqueNasalPct)} %
+                              {formatBreakdown(pmoStats.prescriptions.antiallergiqueNasal)}
                             </span>
                           </div>
                           <div className="flex items-center justify-between gap-4 rounded-2xl bg-[#f3f6f3] px-4 py-3">
                             <span className="text-sm text-muted-foreground">Corticoïde nasal</span>
                             <span className="text-sm font-semibold text-foreground">
-                              {formatPercentage(pmoStats.prescriptions.corticoideNasalPct)} %
+                              {formatBreakdown(pmoStats.prescriptions.corticoideNasal)}
                             </span>
                           </div>
                         </CardContent>

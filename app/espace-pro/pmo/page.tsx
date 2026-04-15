@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { ArrowRight, PlusCircle } from "lucide-react"
+import { PlusCircle } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { FormSection } from "@/components/pso/form-section"
@@ -28,6 +28,10 @@ import {
 } from "@/lib/pso/pmo"
 import { getPsoProfileRecord } from "@/lib/pso/profile"
 import {
+  getSatisfactionPharmacienReferenceYear,
+  isSatisfactionPharmacienResponseWindowOpen,
+} from "@/lib/pso/satisfaction-pharmacien"
+import {
   hasCompletedPharmacienProfile,
   hasRole,
   readUserAccessContext,
@@ -54,8 +58,10 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
 
   const from = (params.page - 1) * PMO_PAGE_SIZE
   const to = from + PMO_PAGE_SIZE - 1
+  const currentReferenceYear = getSatisfactionPharmacienReferenceYear()
+  const isSatisfactionWindowOpen = isSatisfactionPharmacienResponseWindowOpen()
 
-  const [{ profile, roles }, profileRecord, entriesResult, satisfactionResult] = await Promise.all([
+  const [{ profile, roles }, profileRecord, entriesResult] = await Promise.all([
     readUserAccessContext(supabase, user.id),
     getPsoProfileRecord(supabase, user.id),
     supabase
@@ -64,7 +70,6 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
       .order("date_realisation", { ascending: false })
       .order("created_at", { ascending: false })
       .range(from, to),
-    supabase.from("satisfaction_pharmacien").select("id").eq("user_id", user.id).limit(1).maybeSingle(),
   ])
 
   if (!hasRole(roles, "pharmacien_pso")) {
@@ -86,7 +91,19 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
   const currentPage = Math.min(params.page, totalPages)
   const hasPreviousPage = currentPage > 1
   const hasNextPage = currentPage < totalPages
-  const showSatisfactionReminder = !satisfactionResult.error && !satisfactionResult.data
+  let showSatisfactionReminder = false
+
+  if (isSatisfactionWindowOpen) {
+    const satisfactionResult = await supabase
+      .from("satisfaction_pharmacien")
+      .select("id")
+      .eq("user_id", user.id)
+      .eq("annee_reference", currentReferenceYear)
+      .limit(1)
+      .maybeSingle()
+
+    showSatisfactionReminder = !satisfactionResult.error && !satisfactionResult.data
+  }
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -109,7 +126,7 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
                     <div className="flex flex-col gap-3 sm:flex-row">
                       <Button asChild className="h-11 rounded-full px-5 font-semibold">
                         <Link href="/espace-pro/pmo/nouveau">
-                          Nouvelle saisie
+                          Nouvelle entrée
                           <PlusCircle className="h-4 w-4" />
                         </Link>
                       </Button>
@@ -134,8 +151,8 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
                     {entries.length > 0 ? (
                       <Button asChild className="rounded-full px-4" variant="outline">
                         <Link href="/espace-pro/pmo/nouveau">
-                          Saisir à nouveau
-                          <ArrowRight className="h-4 w-4" />
+                          Nouvelle entrée
+                          <PlusCircle className="h-4 w-4" />
                         </Link>
                       </Button>
                     ) : null}
@@ -143,7 +160,7 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
 
                   {entries.length === 0 ? (
                     <div className="rounded-2xl border border-dashed border-border px-5 py-8 text-sm text-muted-foreground">
-                      Aucune saisie pour le moment. Utilisez le bouton « Nouvelle saisie » pour commencer.
+                      Aucune saisie pour le moment. Utilisez le bouton « Nouvelle entrée » pour commencer.
                     </div>
                   ) : (
                     <Table>
@@ -152,7 +169,7 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
                           <TableHead>Date</TableHead>
                           <TableHead>Sexe</TableHead>
                           <TableHead>Âge</TableHead>
-                          <TableHead>Orientation</TableHead>
+                          <TableHead>Prise en charge</TableHead>
                           <TableHead>Nb PMO</TableHead>
                           <TableHead className="w-[72px] text-right">Actions</TableHead>
                         </TableRow>
@@ -175,31 +192,42 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
                   )}
 
                   {entries.length > 0 ? (
-                    <div className="flex flex-col gap-3 border-t border-border/70 pt-4 sm:flex-row sm:items-center sm:justify-between">
-                      <p className="text-sm text-muted-foreground">
-                        Page {currentPage} sur {totalPages}
-                      </p>
+                    <div className="space-y-4 border-t border-border/70 pt-4">
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                        <p className="text-sm text-muted-foreground">
+                          Page {currentPage} sur {totalPages}
+                        </p>
 
-                      <div className="flex items-center gap-2">
-                        {hasPreviousPage ? (
-                          <Button asChild className="rounded-full px-4" variant="outline">
-                            <Link href={getPmoListHref({ page: currentPage - 1 })}>Précédent</Link>
-                          </Button>
-                        ) : (
-                          <Button className="rounded-full px-4" disabled variant="outline">
-                            Précédent
-                          </Button>
-                        )}
+                        <div className="flex items-center gap-2">
+                          {hasPreviousPage ? (
+                            <Button asChild className="rounded-full px-4" variant="outline">
+                              <Link href={getPmoListHref({ page: currentPage - 1 })}>Précédent</Link>
+                            </Button>
+                          ) : (
+                            <Button className="rounded-full px-4" disabled variant="outline">
+                              Précédent
+                            </Button>
+                          )}
 
-                        {hasNextPage ? (
-                          <Button asChild className="rounded-full px-4" variant="outline">
-                            <Link href={getPmoListHref({ page: currentPage + 1 })}>Suivant</Link>
-                          </Button>
-                        ) : (
-                          <Button className="rounded-full px-4" disabled variant="outline">
-                            Suivant
-                          </Button>
-                        )}
+                          {hasNextPage ? (
+                            <Button asChild className="rounded-full px-4" variant="outline">
+                              <Link href={getPmoListHref({ page: currentPage + 1 })}>Suivant</Link>
+                            </Button>
+                          ) : (
+                            <Button className="rounded-full px-4" disabled variant="outline">
+                              Suivant
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex justify-center sm:justify-end">
+                        <Button asChild className="h-11 rounded-full px-5 font-semibold">
+                          <Link href="/espace-pro/pmo/nouveau">
+                            Nouvelle entrée
+                            <PlusCircle className="h-4 w-4" />
+                          </Link>
+                        </Button>
                       </div>
                     </div>
                   ) : null}

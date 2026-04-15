@@ -13,8 +13,6 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import {
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
@@ -42,6 +40,13 @@ const sexChartConfig = {
   },
 }
 
+function formatPercentage(value: number) {
+  return new Intl.NumberFormat("fr-FR", {
+    maximumFractionDigits: 1,
+    minimumFractionDigits: 1,
+  }).format(value)
+}
+
 export function DashboardCharts({ stats }: DashboardChartsProps) {
   const ageData = [
     { age: "<15", patients: stats.repartitionAge["<15"] },
@@ -53,8 +58,20 @@ export function DashboardCharts({ stats }: DashboardChartsProps) {
   ]
 
   const sexData = [
-    { fill: "#0a7a3e", key: "femmes", label: "Femmes", value: stats.repartitionSexe.femmes.n },
-    { fill: "#8fbf9e", key: "hommes", label: "Hommes", value: stats.repartitionSexe.hommes.n },
+    {
+      fill: "#0a7a3e",
+      key: "femmes",
+      label: "Femmes",
+      pct: stats.repartitionSexe.femmes.pct,
+      value: stats.repartitionSexe.femmes.n,
+    },
+    {
+      fill: "#8fbf9e",
+      key: "hommes",
+      label: "Hommes",
+      pct: stats.repartitionSexe.hommes.pct,
+      value: stats.repartitionSexe.hommes.n,
+    },
   ]
 
   return (
@@ -82,16 +99,18 @@ export function DashboardCharts({ stats }: DashboardChartsProps) {
           <CardTitle className="text-base">Répartition par sexe</CardTitle>
           <p className="text-sm text-muted-foreground">Vue d'ensemble de la patientèle PSO.</p>
         </CardHeader>
-        <CardContent className="pt-0">
-          <ChartContainer className="h-[260px] w-full" config={sexChartConfig}>
+        <CardContent className="space-y-4 pt-0">
+          <ChartContainer className="h-[220px] w-full" config={sexChartConfig}>
             <PieChart accessibilityLayer>
               <ChartTooltip
                 content={
                   <ChartTooltipContent
-                    formatter={(value, name) => (
+                    formatter={(value, name, item) => (
                       <div className="flex w-full items-center justify-between gap-3">
                         <span>{name}</span>
-                        <span className="font-mono">{value}</span>
+                        <span className="font-mono">
+                          {value} ({formatPercentage(Number(item.payload?.pct ?? 0))} %)
+                        </span>
                       </div>
                     )}
                   />
@@ -102,9 +121,24 @@ export function DashboardCharts({ stats }: DashboardChartsProps) {
                   <Cell key={item.key} fill={item.fill} />
                 ))}
               </Pie>
-              <ChartLegend content={<ChartLegendContent nameKey="key" />} verticalAlign="bottom" />
             </PieChart>
           </ChartContainer>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {sexData.map((item) => (
+              <div
+                key={item.key}
+                className="flex items-center justify-between gap-4 rounded-2xl bg-[#f3f6f3] px-4 py-3"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="h-3 w-3 rounded-full" style={{ backgroundColor: item.fill }} />
+                  <span className="text-sm text-foreground">{item.label}</span>
+                </div>
+                <span className="text-sm font-semibold text-foreground">
+                  {item.value} ({formatPercentage(item.pct)} %)
+                </span>
+              </div>
+            ))}
+          </div>
         </CardContent>
       </Card>
     </div>

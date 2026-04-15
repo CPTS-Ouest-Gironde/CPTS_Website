@@ -97,12 +97,13 @@ export default async function PmoDetailPage({ params }: PmoDetailPageProps) {
               <Card className="rounded-3xl border border-border/80 bg-card shadow-sm">
                 <CardContent className="grid gap-4 p-6 sm:grid-cols-2">
                   <DetailField label="Date de réalisation" value={formatPmoDate(entry.date_realisation)} />
-                  <DetailField label="Orientation" value={getPmoOrientationLabel(entry.orientation)} />
+                  <DetailField label="Prise en charge" value={getPmoOrientationLabel(entry.orientation)} />
                   <DetailField label="Nom médecin délégant" value={entry.medecin_delegant_nom} />
                   <DetailField label="RPPS médecin délégant" value={entry.medecin_delegant_rpps} />
                   <DetailField label="Sexe" value={getPmoPatientSexeLabel(entry.patient_sexe)} />
                   <DetailField label="Tranche d&apos;âge" value={entry.patient_age} />
                   <DetailField label="Médecin traitant" value={getYesNoLabel(entry.patient_medecin_traitant)} />
+                  <DetailField label="Renouvellement" value={getYesNoLabel(entry.renouvellement)} />
                   <DetailField label="Prescription anti-H1" value={getYesNoLabel(entry.prescription_anti_h1)} />
                   <DetailField label="Prescription collyre" value={getYesNoLabel(entry.prescription_collyre)} />
                   <DetailField

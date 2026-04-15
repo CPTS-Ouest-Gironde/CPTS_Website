@@ -5,6 +5,10 @@ import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { PmoEntryForm } from "@/components/pso/pmo-entry-form"
 import { Button } from "@/components/ui/button"
+import {
+  getActiveMedecinsDelegants,
+  getSelectedMedecinDelegantId,
+} from "@/lib/pso/medecins-delegants"
 import { getPmoEntryRecord, parsePmoEntryId, toPmoEntryInput } from "@/lib/pso/pmo"
 import { getPsoProfileRecord } from "@/lib/pso/profile"
 import {
@@ -38,10 +42,11 @@ export default async function EditPmoEntryPage({ params }: EditPmoEntryPageProps
     redirect(`/login?next=/espace-pro/pmo/${entryId}/modifier`)
   }
 
-  const [{ profile, roles }, profileRecord, entry] = await Promise.all([
+  const [{ profile, roles }, profileRecord, entry, medecinsDelegants] = await Promise.all([
     readUserAccessContext(supabase, user.id),
     getPsoProfileRecord(supabase, user.id),
     getPmoEntryRecord(supabase, entryId),
+    getActiveMedecinsDelegants(supabase),
   ])
 
   if (!hasRole(roles, "pharmacien_pso")) {
@@ -56,6 +61,10 @@ export default async function EditPmoEntryPage({ params }: EditPmoEntryPageProps
     redirect("/espace-pro/pmo")
   }
 
+  const selectedMedecinDelegantId = getSelectedMedecinDelegantId(
+    medecinsDelegants,
+    entry.medecin_delegant_rpps,
+  )
   const boundUpdateAction = updatePmoEntry.bind(null, entryId)
 
   return (
@@ -76,7 +85,8 @@ export default async function EditPmoEntryPage({ params }: EditPmoEntryPageProps
               <h1 className="text-3xl font-bold tracking-tight text-foreground">Modifier la saisie</h1>
 
               <PmoEntryForm
-                defaultValues={toPmoEntryInput(entry)}
+                defaultValues={toPmoEntryInput(entry, selectedMedecinDelegantId)}
+                medecinsDelegants={medecinsDelegants}
                 submitAction={boundUpdateAction}
                 submitLabel="Enregistrer les modifications"
               />

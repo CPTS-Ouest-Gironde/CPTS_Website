@@ -39,27 +39,32 @@ export function SelectField<TFieldValues extends FieldValues, TName extends Fiel
     <FormField
       control={control}
       name={name}
-      render={({ field }) => (
-        <FormItem className={className}>
-          <FormLabel>{label}</FormLabel>
-          {description ? <FormDescription>{description}</FormDescription> : null}
-          <FormControl>
-            <Select onValueChange={field.onChange} value={typeof field.value === "string" ? field.value : undefined}>
-              <SelectTrigger className="h-11 w-full rounded-xl border-border/70 bg-background">
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-              <SelectContent>
-                {options.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
+      render={({ field }) => {
+        const fieldValue =
+          typeof field.value === "string" && field.value.length > 0 ? field.value : undefined
+
+        return (
+          <FormItem className={className}>
+            <FormLabel>{label}</FormLabel>
+            {description ? <FormDescription>{description}</FormDescription> : null}
+            <FormControl>
+              <Select onValueChange={field.onChange} value={fieldValue}>
+                <SelectTrigger className="h-11 w-full rounded-xl border-border/70 bg-background">
+                  <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+                <SelectContent>
+                  {options.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )
+      }}
     />
   )
 }

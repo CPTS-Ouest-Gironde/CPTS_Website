@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
+import { getActiveMedecinDelegantById } from "@/lib/pso/medecins-delegants"
 import { PMO_ENTRY_INITIAL_STATE, getPmoEntryValidationState, parsePmoEntryFormData, type PmoEntryActionState } from "@/lib/pso/pmo-form"
 import { getPmoListHref, parsePmoEntryId } from "@/lib/pso/pmo"
 import {
@@ -54,14 +55,27 @@ export async function updatePmoEntry(
     }
   }
 
+  const medecinDelegant = await getActiveMedecinDelegantById(supabase, parsed.data.medecinDelegantId)
+
+  if (!medecinDelegant) {
+    return {
+      ...PMO_ENTRY_INITIAL_STATE,
+      fieldErrors: {
+        medecinDelegantId: ["Sélectionnez un médecin délégant valide."],
+      },
+    }
+  }
+
   const updateResult = await supabase
     .from("pmo_entries")
     .update({
       date_realisation: parsed.data.dateRealisation,
       dispensation_conseil: parsed.data.dispensationConseil,
-      effet_indesirable: parsed.data.effetIndesirable ?? null,
-      medecin_delegant_nom: parsed.data.medecinDelegantNom,
-      medecin_delegant_rpps: parsed.data.medecinDelegantRpps,
+      effet_indesirable: parsed.data.effetIndesirableSignale
+        ? parsed.data.effetIndesirableDescription ?? null
+        : null,
+      medecin_delegant_nom: medecinDelegant.label,
+      medecin_delegant_rpps: medecinDelegant.rpps,
       nb_produits_conseil: parsed.data.nbProduitsConseil,
       nb_produits_pmo: parsed.data.nbProduitsPmo,
       orientation: parsed.data.orientation,
@@ -73,6 +87,7 @@ export async function updatePmoEntry(
       prescription_antiallergique_nasal: parsed.data.prescriptionAntiallergiqueNasal,
       prescription_collyre: parsed.data.prescriptionCollyre,
       prescription_corticoide_nasal: parsed.data.prescriptionCorticoideNasal,
+      renouvellement: parsed.data.renouvellement,
     })
     .eq("id", parsedEntryId)
     .eq("user_id", user.id)

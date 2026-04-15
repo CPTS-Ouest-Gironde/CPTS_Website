@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import type { ZodError } from "zod"
 import { createEmptyFormActionState, type FormActionState } from "@/lib/pso/form-action-state"
+import { getSatisfactionPharmacienReferenceYear } from "@/lib/pso/satisfaction-pharmacien"
 import {
   hasCompletedPharmacienProfile,
   hasRole,
@@ -73,17 +74,20 @@ export async function submitSatisfactionPharmacien(
     redirect("/espace-pro/completer-profil")
   }
 
+  const currentReferenceYear = getSatisfactionPharmacienReferenceYear()
+
   const existingResponseResult = await supabase
     .from("satisfaction_pharmacien")
     .select("id")
     .eq("user_id", user.id)
+    .eq("annee_reference", currentReferenceYear)
     .limit(1)
     .maybeSingle()
 
   if (existingResponseResult.data) {
     return {
       ...INITIAL_STATE,
-      formError: "Vous avez déjà répondu à ce questionnaire.",
+      formError: `Vous avez déjà répondu à ce questionnaire pour ${currentReferenceYear}.`,
     }
   }
 
@@ -112,6 +116,7 @@ export async function submitSatisfactionPharmacien(
 
   const insertResult = await supabase.from("satisfaction_pharmacien").insert({
     acces_soins: parsed.data.accesSoins,
+    annee_reference: currentReferenceYear,
     appreciation_patients: parsed.data.appreciationPatients,
     autres_incidents: parsed.data.autresIncidents,
     benefice_pratique: parsed.data.beneficePratique,
@@ -133,5 +138,6 @@ export async function submitSatisfactionPharmacien(
 
   revalidatePath("/espace-pro/satisfaction")
   revalidatePath("/espace-pro/pmo")
+  revalidatePath("/espace-pro/dashboard")
   redirect("/espace-pro/satisfaction/merci")
 }

@@ -41,6 +41,10 @@ function formatPercentage(value: number) {
   return `${formatDecimal(value)} %`
 }
 
+function formatCountAndPercentage(count: number, percentage: number) {
+  return `${count} (${formatPercentage(percentage)})`
+}
+
 function BreakdownList({ emptyMessage, items, note, title }: BreakdownListProps) {
   return (
     <Card className="rounded-[2rem] border border-border/80 bg-card shadow-sm">
@@ -127,7 +131,9 @@ export function DashboardSatisfactionPanel({ stats }: DashboardSatisfactionPanel
       <section className="space-y-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold text-foreground">Retours pharmaciens</h2>
-          <p className="text-sm text-muted-foreground">Synthèse globale des questionnaires complétés par les pharmaciens.</p>
+          <p className="text-sm text-muted-foreground">
+            Synthèse des questionnaires complétés par les pharmaciens pour l&apos;année {stats.pharmaciens.referenceYear}.
+          </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -167,7 +173,7 @@ export function DashboardSatisfactionPanel({ stats }: DashboardSatisfactionPanel
         <div className="space-y-1">
           <h2 className="text-xl font-semibold text-foreground">Retours patients</h2>
           <p className="text-sm text-muted-foreground">
-            Données globales du questionnaire patient, indépendantes des filtres d'activité PMO.
+            Données globales du questionnaire patient, indépendantes du filtre annuel pharmacien.
           </p>
         </div>
 
@@ -182,13 +188,16 @@ export function DashboardSatisfactionPanel({ stats }: DashboardSatisfactionPanel
             eyebrow="Intention"
             helper="Part des patients souhaitant renouveler cette prise en charge."
             label="Souhait de renouvellement"
-            value={formatPercentage(stats.patients.renewalRate)}
+            value={formatCountAndPercentage(stats.patients.renewalCount, stats.patients.renewalRate)}
           />
           <DashboardMetricCard
             eyebrow="Parcours"
             helper="Part des patients ayant consulté un médecin après le passage à la pharmacie."
             label="Consultation médecin après"
-            value={formatPercentage(stats.patients.consultationAfterRate)}
+            value={formatCountAndPercentage(
+              stats.patients.consultationAfterCount,
+              stats.patients.consultationAfterRate,
+            )}
           />
         </div>
 
