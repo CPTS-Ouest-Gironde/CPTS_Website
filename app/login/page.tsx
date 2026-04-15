@@ -25,7 +25,7 @@ const RESET_PASSWORD_SUCCESS_MESSAGE =
 
 function getSafeNextPath(value: string | null) {
   if (!value) {
-    return "/professionnels"
+    return "/espace-pro"
   }
 
   // Cas attendus:
@@ -52,7 +52,7 @@ function getSafeNextPath(value: string | null) {
     isProtocolRelative ||
     !isStrictInternalPath
   ) {
-    return "/professionnels"
+    return "/espace-pro"
   }
 
   return value

@@ -168,7 +168,7 @@ export function PasswordUpdateForm({ flow, title, description }: PasswordUpdateF
       return
     }
 
-    router.replace("/professionnels")
+    router.replace("/espace-pro")
     router.refresh()
   }
 
