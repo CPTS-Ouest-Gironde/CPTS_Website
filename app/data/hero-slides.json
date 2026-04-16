@@ -1,10 +1,10 @@
 {
   "slides": [
     {
-      "image": "/prevention/sante-famille/mars-bleu-2026.png",
-      "title": "Mars Bleu 2026 : prévention du cancer colorectal",
-      "alt": "Mars Bleu 2026",
-      "link": "/prevention/sante-familiale/prevention-cancer-colorectal-mars-bleu-2026"
+      "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
+      "title": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
+      "alt": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
+      "link": "/sante-mentale-professionnels-et-approches"
     },
     {
       "image": "/insomnie.jpg",
@@ -13,16 +13,16 @@
       "link": "/l-insomnie-la-comprendre-et-la-traiter"
     },
     {
-      "image": "/colimaçon.jpg",
-      "title": "Santé mentale : comprendre et s'orienter",
-      "alt": "Santé mentale",
-      "link": "/sante-mental"
-    },
-    {
       "image": "/mon-espace-santé.png",
       "title": "Mon espace santé : TOUT SAVOIR, TOUT COMPRENDRE et S'EN SERVIR !",
       "alt": "Mon espace santé",
       "link": "/patients/mon-espace-sante"
+    },
+    {
+      "image": "/colimaçon.jpg",
+      "title": "Santé mentale : comprendre et s'orienter",
+      "alt": "Santé mentale",
+      "link": "/sante-mental"
     }
   ]
 }
