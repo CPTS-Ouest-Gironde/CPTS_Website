@@ -4,7 +4,7 @@
     "label": "Retour à Santé mentale"
   },
   "date": "16 avril 2026",
-  "title": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
+  "title": "Santé mentale : les professionnels et les approches en psychothérapie",
   "subtitle": "La santé mentale fait partie intégrante de la santé.",
   "heroImage": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
   "intro": {
@@ -200,7 +200,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "text": "L'EMDR (Eye Movement Desensitization and Reprocessing) est une méthode thérapeutique qui utilise des **stimulations** bilatérales alternées, souvent à travers des mouvements oculaires."
+              "text": "L'EMDR (Eye Movement Desensitization and Reprocessing) est une méthode thérapeutique qui utilise des **stimulations** bilatérales alternées, souvent à travers des **mouvements oculaires**."
             },
             {
               "type": "paragraph",
@@ -246,6 +246,8 @@
       "id": "choisir-therapie",
       "title": "Quelle forme de thérapie choisir ?",
       "tone": "white",
+      "image": "/sante-mentale-professionnels-et-approches/choisir.jpeg",
+      "imageSide": "right",
       "blocks": [
         {
           "type": "paragraph",

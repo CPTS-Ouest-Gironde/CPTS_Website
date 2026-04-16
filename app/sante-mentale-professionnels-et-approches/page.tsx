@@ -95,6 +95,8 @@ type Section =
       id: string;
       title: string;
       tone: "white" | "neutral";
+      image?: string;
+      imageSide?: "left" | "right";
       blocks: Block[];
       highlight: string;
     }
@@ -168,21 +170,17 @@ export default function SanteMentaleProfessionnelsEtApprochesPage() {
       <section className="py-14 md:py-20 bg-background">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
-            <div className="lg:col-span-3 space-y-5 order-2 lg:order-1">
+            <div className="lg:col-span-3 space-y-5">
               {data.intro.paragraphs.map((p, i) => (
                 <p
                   key={i}
-                  className={
-                    i === 0
-                      ? "text-xl md:text-2xl font-light text-foreground leading-relaxed text-pretty"
-                      : "text-base md:text-lg text-muted-foreground leading-relaxed"
-                  }
+                  className="text-base md:text-lg text-muted-foreground leading-relaxed"
                 >
                   {p}
                 </p>
               ))}
             </div>
-            <div className="lg:col-span-2 order-1 lg:order-2">
+            <div className="lg:col-span-2">
               <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
                 <Image
                   src={data.intro.image}
@@ -383,20 +381,51 @@ export default function SanteMentaleProfessionnelsEtApprochesPage() {
               )}
 
               {/* CHOIX (Quelle forme de thérapie) */}
-              {section.kind === "choix" && (
-                <div className="max-w-3xl mx-auto space-y-8">
-                  <Blocks
-                    blocks={section.blocks}
-                    textClass="text-base md:text-lg text-muted-foreground leading-relaxed"
-                  />
-                  <blockquote className="relative p-7 md:p-9 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border-l-4 border-primary">
-                    <Heart className="absolute top-5 right-5 w-8 h-8 text-primary/20" />
-                    <p className="text-lg md:text-xl font-medium text-foreground leading-relaxed text-balance">
-                      {section.highlight}
-                    </p>
-                  </blockquote>
-                </div>
-              )}
+              {section.kind === "choix" &&
+                (section.image ? (
+                  <div
+                    className={`grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center ${
+                      section.imageSide === "right"
+                        ? "lg:[&>*:first-child]:order-2"
+                        : ""
+                    }`}
+                  >
+                    <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-lg">
+                      <Image
+                        src={section.image}
+                        alt=""
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                      />
+                    </div>
+                    <div className="space-y-8">
+                      <Blocks
+                        blocks={section.blocks}
+                        textClass="text-base md:text-lg text-muted-foreground leading-relaxed"
+                      />
+                      <blockquote className="relative p-7 md:p-9 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border-l-4 border-primary">
+                        <Heart className="absolute top-5 right-5 w-8 h-8 text-primary/20" />
+                        <p className="text-lg md:text-xl font-medium text-foreground leading-relaxed text-balance">
+                          {section.highlight}
+                        </p>
+                      </blockquote>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="max-w-3xl mx-auto space-y-8">
+                    <Blocks
+                      blocks={section.blocks}
+                      textClass="text-base md:text-lg text-muted-foreground leading-relaxed"
+                    />
+                    <blockquote className="relative p-7 md:p-9 rounded-2xl bg-gradient-to-br from-primary/10 via-primary/5 to-background border-l-4 border-primary">
+                      <Heart className="absolute top-5 right-5 w-8 h-8 text-primary/20" />
+                      <p className="text-lg md:text-xl font-medium text-foreground leading-relaxed text-balance">
+                        {section.highlight}
+                      </p>
+                    </blockquote>
+                  </div>
+                ))}
 
               {/* STRUCTURES (Où s'adresser) */}
               {section.kind === "structures" && (
