@@ -12,11 +12,6 @@ import {
 
 const actualites = [
   {
-    title: "Endométriose : dépistage et prise en charge",
-    image: "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
-    link: "/endometriose-depistage-prise-en-charge",
-  },
-  {
     title: "Vous souffrez d'une rhinite allergique ?",
     image: "/actu/affiche-rhinite.webp",
     link: "/actualites/rhinite-allergique",
@@ -101,7 +96,7 @@ export function Actualites() {
           </div>
 
           {/* Desktop: Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-6">
+          <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-6">
             {actualites.map((actu, index) => (
               <div key={index} className="flex">
                 <ActuCard actu={actu} />

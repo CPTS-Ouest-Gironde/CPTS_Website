@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     ],
   },
   alternates: {
-    canonical: "/endometriose-depistage-prise-en-charge",
+    canonical: "/prevention/sante-familiale/endometriose-depistage-prise-en-charge",
   },
 };
 
@@ -90,7 +90,7 @@ export default function EndometrioseDepistagePriseEnChargePage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <div>
-              <BackToActualitesLink className="mb-6" withMobileTopOffset={false} />
+              <BackToActualitesLink href="/prevention/sante-familiale" label="Santé familiale" className="mb-6" withMobileTopOffset={false} />
               <div className="mb-4 flex items-center gap-2 text-sm text-[#8f4545]">
                 <Calendar className="h-4 w-4 text-[#8f4545]" />
                 <span>{data.date}</span>
