@@ -1,0 +1,11 @@
+export { TableOfContents } from "@/components/endometriose-article/table-of-contents";
+export { DefinitionSectionView } from "@/components/endometriose-article/section-definition";
+export { StatsSectionView } from "@/components/endometriose-article/section-stats";
+export { SymptomesSectionView } from "@/components/endometriose-article/section-symptomes";
+export { DiagnosticSectionView } from "@/components/endometriose-article/section-diagnostic";
+export { ProfessionnelsSectionView } from "@/components/endometriose-article/section-professionnels";
+export { TraitementsSectionView } from "@/components/endometriose-article/section-traitements";
+export { MultidisciplinaireSectionView } from "@/components/endometriose-article/section-multidisciplinaire";
+export { AnnuaireSectionView } from "@/components/endometriose-article/section-annuaire";
+export { VideosSectionView } from "@/components/endometriose-article/section-videos";
+export { ResourcesSectionView } from "@/components/endometriose-article/section-resources";

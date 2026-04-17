@@ -29,6 +29,7 @@ next-env.d.ts
 # ai agent instructions
 CLAUDE.md
 PROJET_STRUCTURE.md
+AGENTS.md
 .claudeignore
 
 # macOS
@@ -37,3 +38,17 @@ PROJET_STRUCTURE.md
 SECURITY_AUDIT.md
 PROJECT_STRUCTURE.md
 # docs/feat-formulaire.md
+
+# CPTS - Données personnelles import adhérents (ne jamais commit)
+docs/cpts/import-adherents/*.csv
+docs/cpts/import-adherents/state.json
+docs/cpts/import-adherents/logs/
+
+
+# Script d'import adhérents CPTS (ponctuel, non versionné)
+scripts/import-adherents.js
+scripts/import-adherents.mjs
+scripts/import-adherents.*
+*-issues.csv 
+*-clean.csv
+
