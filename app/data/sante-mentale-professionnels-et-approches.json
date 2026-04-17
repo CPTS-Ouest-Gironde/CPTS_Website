@@ -1,0 +1,316 @@
+{
+  "backLink": {
+    "href": "/sante-mental",
+    "label": "Retour à Santé mentale"
+  },
+  "date": "16 avril 2026",
+  "title": "Santé mentale : les professionnels et les approches en psychothérapie",
+  "subtitle": "La santé mentale fait partie intégrante de la santé.",
+  "heroImage": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
+  "intro": {
+    "image": "/sante-mentale-professionnels-et-approches/mal-etre.jpg",
+    "paragraphs": [
+      "Au cours de la vie, chacun peut traverser des périodes difficiles : stress, anxiété, difficultés relationnelles, événements de vie ou sentiment de mal-être.",
+      "Dans ces situations, il peut être utile d'échanger avec un professionnel de la santé mentale.",
+      "Plusieurs professionnels peuvent proposer un accompagnement psychologique ou psychothérapeutique, et différentes approches existent pour répondre aux besoins de chacun."
+    ]
+  },
+  "sections": [
+    {
+      "kind": "professionnels",
+      "id": "professionnels",
+      "title": "Quels professionnels consulter ?",
+      "intro": [
+        "Les différents professionnels de santé peuvent être à votre écoute : votre médecin généraliste, votre sage-femme, votre IDE, votre pharmacien, votre kinésithérapeute, etc. Ils sauront vous orienter vers des spécialistes de la santé mentale.",
+        "Plusieurs professionnels interviennent dans le champ de la santé mentale."
+      ],
+      "tone": "neutral",
+      "professionals": [
+        {
+          "title": "Le psychologue",
+          "iconName": "GraduationCap",
+          "image": "/sante-mentale-professionnels-et-approches/consultation-psychologue.jpg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Le psychologue est un professionnel formé à la psychologie à l'université (niveau master en psychologie)."
+            },
+            {
+              "type": "paragraph",
+              "text": "Il accompagne les personnes à travers :"
+            },
+            {
+              "type": "list",
+              "items": [
+                "des entretiens psychologiques",
+                "des psychothérapies",
+                "parfois des bilans psychologiques"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Le psychologue peut recevoir des enfants, des adolescents ou des adultes, en individuel, en couple ou en famille."
+            },
+            {
+              "type": "paragraph",
+              "text": "Les consultations chez un psychologue ne sont généralement pas remboursées par l'Assurance maladie, sauf dans certains dispositifs spécifiques (Mon Soutien Psy, en 2026 : 12 consultations annuelles prises en charge ; Santé Psy Étudiant)."
+            }
+          ]
+        },
+        {
+          "title": "Le psychiatre",
+          "iconName": "Stethoscope",
+          "image": "/sante-mentale-professionnels-et-approches/psychiatrie.jpg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Le psychiatre est un médecin spécialisé en psychiatrie."
+            },
+            { "type": "paragraph", "text": "Il peut :" },
+            {
+              "type": "list",
+              "items": [
+                "poser un diagnostic médical",
+                "prescrire des médicaments si nécessaire",
+                "proposer un suivi psychothérapeutique"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Les consultations chez un psychiatre sont remboursées par l'Assurance maladie."
+            },
+            {
+              "type": "paragraph",
+              "text": "Les psychiatres exercent en cabinet, à l'hôpital ou dans des structures publiques de santé mentale comme les centres médico-psychologiques (CMP)."
+            }
+          ]
+        },
+        {
+          "title": "Le psychothérapeute",
+          "iconName": "BadgeCheck",
+          "image": "/sante-mentale-professionnels-et-approches/psycotherapeute.jpeg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Le titre de psychothérapeute est réglementé en France."
+            },
+            {
+              "type": "paragraph",
+              "text": "Pour l'utiliser, les professionnels doivent être inscrits sur le registre national des psychothérapeutes, après avoir suivi une formation spécifique en psychopathologie."
+            },
+            {
+              "type": "paragraph",
+              "text": "Les psychologues et les psychiatres peuvent porter ce titre, ainsi que certains professionnels ayant suivi la formation requise."
+            },
+            {
+              "type": "paragraph",
+              "text": "Il existe également des appellations comme « thérapeute », « psychopraticien » ou « coach » qui ne sont pas des titres réglementés. Il peut donc être utile de se renseigner sur la formation du professionnel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "approches",
+      "id": "approches",
+      "title": "Les différentes approches psychothérapeutiques",
+      "intro": [
+        "Les professionnels de la santé mentale peuvent se former à différentes approches thérapeutiques. Ces approches reposent sur des modèles théoriques différents, mais elles ont toutes pour objectif d'accompagner la personne dans la compréhension de ses difficultés et dans l'amélioration de son bien-être."
+      ],
+      "tone": "white",
+      "approaches": [
+        {
+          "title": "Les approches psychodynamiques",
+          "iconName": "Waves",
+          "image": "/sante-mentale-professionnels-et-approches/approches-psychodynamiques.jpg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Ces approches s'intéressent au fonctionnement psychique, aux **émotions** et à l'**histoire personnelle**."
+            },
+            {
+              "type": "paragraph",
+              "text": "Le travail thérapeutique permet notamment d'explorer :"
+            },
+            {
+              "type": "list",
+              "items": [
+                "les expériences de vie",
+                "les relations importantes",
+                "certains mécanismes psychologiques qui peuvent influencer le vécu actuel"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "La **parole et l'écoute** occupent une place centrale dans ces approches."
+            }
+          ]
+        },
+        {
+          "title": "Les thérapies cognitivo-comportementales (TCC)",
+          "iconName": "Wrench",
+          "image": "/sante-mentale-professionnels-et-approches/tcc.jpg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Les thérapies cognitivo-comportementales s'intéressent aux liens entre :"
+            },
+            {
+              "type": "list",
+              "items": ["les pensées", "les émotions", "les comportements"]
+            },
+            {
+              "type": "paragraph",
+              "text": "Elles proposent souvent des outils concrets et des **exercices** qui permettent d'observer certains mécanismes et d'expérimenter progressivement de nouvelles façons de réagir dans différentes situations."
+            }
+          ]
+        },
+        {
+          "title": "Les approches systémiques",
+          "iconName": "Network",
+          "image": "/sante-mentale-professionnels-et-approches/approches-systemiques.jpg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Les approches systémiques considèrent que les difficultés d'une personne peuvent être liées à son environnement relationnel."
+            },
+            {
+              "type": "paragraph",
+              "text": "Elles s'intéressent notamment aux **interactions** dans :"
+            },
+            {
+              "type": "list",
+              "items": [
+                "la famille",
+                "le couple",
+                "les relations sociales ou professionnelles"
+              ]
+            },
+            {
+              "type": "paragraph",
+              "text": "Selon les situations, la thérapie peut se dérouler en individuel, en couple ou en famille."
+            }
+          ]
+        },
+        {
+          "title": "L'EMDR",
+          "subtitle": "Eye Movement Desensitization and Reprocessing",
+          "iconName": "Eye",
+          "image": "/sante-mentale-professionnels-et-approches/EMDR.jpeg",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "L'EMDR (Eye Movement Desensitization and Reprocessing) est une méthode thérapeutique qui utilise des **stimulations** bilatérales alternées, souvent à travers des **mouvements oculaires**."
+            },
+            {
+              "type": "paragraph",
+              "text": "Cette approche vise à aider le cerveau à **traiter** certains **souvenirs** ou **événements** difficiles qui restent fortement chargés sur le plan émotionnel."
+            },
+            {
+              "type": "paragraph",
+              "text": "Elle est utilisée par des professionnels formés à cette méthode et peut s'inscrire dans un accompagnement psychothérapeutique plus global."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "criteres",
+      "id": "quand-consulter",
+      "title": "Savoir quand consulter ?",
+      "intro": [
+        "Consulter un professionnel de la santé mentale peut être utile lorsque :"
+      ],
+      "tone": "neutral",
+      "image": "/sante-mentale-professionnels-et-approches/quand-consulter.jpg",
+      "imageSide": "left",
+      "criteria": [
+        { "iconName": "Clock", "text": "un mal-être persiste dans le temps" },
+        {
+          "iconName": "AlertTriangle",
+          "text": "certaines difficultés deviennent envahissantes dans la vie quotidienne"
+        },
+        {
+          "iconName": "Users",
+          "text": "les relations familiales, sociales ou professionnelles deviennent plus difficiles"
+        },
+        {
+          "iconName": "Heart",
+          "text": "un événement difficile a été vécu (deuil, séparation, traumatisme)"
+        }
+      ],
+      "callout": "Il n'est pas nécessaire d'attendre qu'une situation devienne très difficile pour demander de l'aide. Parler avec un professionnel peut permettre de prendre du recul et d'être accompagné dans ce que l'on traverse."
+    },
+    {
+      "kind": "choix",
+      "id": "choisir-therapie",
+      "title": "Quelle forme de thérapie choisir ?",
+      "tone": "white",
+      "image": "/sante-mentale-professionnels-et-approches/choisir.jpeg",
+      "imageSide": "right",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Il existe plusieurs approches en psychothérapie et il n'existe pas une méthode unique adaptée à toutes les situations."
+        },
+        { "type": "paragraph", "text": "Le choix dépend notamment :" },
+        {
+          "type": "list",
+          "items": [
+            "de la difficulté rencontrée",
+            "des attentes de la personne",
+            "de la formation et de l'approche du professionnel"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Lors d'une première consultation, le professionnel peut expliquer sa manière de travailler et proposer l'accompagnement qui semble le plus adapté."
+        }
+      ],
+      "highlight": "La relation de confiance avec le professionnel joue souvent un rôle important dans le travail thérapeutique."
+    },
+    {
+      "kind": "structures",
+      "id": "ou-s-adresser",
+      "title": "Où s'adresser ?",
+      "intro": [
+        "Sur le territoire, plusieurs structures peuvent proposer un accompagnement en santé mentale :"
+      ],
+      "tone": "neutral",
+      "structures": [
+        {
+          "iconName": "Stethoscope",
+          "name": "Cabinets libéraux",
+          "description": "Psychologues et psychiatres"
+        },
+        {
+          "iconName": "Building2",
+          "name": "CMP",
+          "description": "Centres médico-psychologiques"
+        },
+        {
+          "iconName": "Users",
+          "name": "MDA",
+          "description": "Maisons des adolescents"
+        },
+        {
+          "iconName": "MessageCircle",
+          "name": "PAEJ",
+          "description": "Points accueil écoute jeunes"
+        }
+      ],
+      "advice": "Vous pouvez consulter l'annuaire de la CPTS ou demander conseil à votre médecin traitant.",
+      "annuaireLink": {
+        "href": "/sante-mental#annuaire",
+        "label": "Consulter l'annuaire santé mentale"
+      },
+      "resource": {
+        "title": "Ressources pour les professionnels de santé",
+        "paragraphs": [
+          "Il est également possible de solliciter, via votre médecin généraliste ou un autre professionnel de santé, une aide à la prise en charge en santé mentale : supervision en santé mentale, RCP santé mentale, consultation psychiatre Clinique des Pins."
+        ],
+        "note": "Un lien vers les processus de prise en charge sera ajouté ultérieurement."
+      }
+    }
+  ]
+}

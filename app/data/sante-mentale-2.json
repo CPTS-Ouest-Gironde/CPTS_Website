@@ -37,6 +37,15 @@
       "hasContent": true
     },
     {
+      "title": "Professionnels & approches",
+      "description": "Les professionnels de la santé mentale et les différentes approches thérapeutiques",
+      "iconName": "Stethoscope",
+      "color": "bg-teal-100 hover:bg-teal-200 dark:bg-teal-900/30 dark:hover:bg-teal-900/50",
+      "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
+      "link": "/sante-mentale-professionnels-et-approches",
+      "hasContent": true
+    },
+    {
       "title": "Santé mentale et numérique",
       "description": "Impact du numérique sur la santé mentale",
       "iconName": "Brain",

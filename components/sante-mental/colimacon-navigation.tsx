@@ -16,6 +16,13 @@ export function ColimaconNavigation() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#annuaire") {
+      setIsAnnuaireOpen(true);
+      history.replaceState(null, "", window.location.pathname);
+    }
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
