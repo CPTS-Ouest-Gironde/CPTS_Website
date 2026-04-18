@@ -95,7 +95,7 @@
         },
         {
           "iconName": "BadgeAlert",
-          "text": "Douleurs lors de l'émission des selles, avec dyschézie et/ou ténesme"
+          "text": "Douleurs lors de l'émission des selles, avec dyschésie et/ou ténesme"
         },
         {
           "iconName": "Activity",
@@ -295,7 +295,9 @@
       "kind": "multidisciplinaire",
       "id": "prise-en-charge-multidisciplinaire",
       "title": "Prise en charge multidisciplinaire",
-      "intro": [],
+      "intro": [
+        "La meilleure prise en charge est une prise en charge globale pluriprofessionnelle avec les professions suivantes\u00A0:"
+      ],
       "tone": "neutral",
       "cards": [
         {
@@ -397,5 +399,5 @@
       ]
     }
   ],
-  "acknowledgment": "Merci au Dr Adrien Crestani et à son centre, ainsi qu'à Marie Amélie (sage-femme)."
+  "acknowledgment": "Merci au Dr Adrien Crestani et à son centre, ainsi qu'à Marie Amélie Bonnet (sage-femme)."
 }
