@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Blocks } from "@/components/sante-mentale-article/blocks";
 import type { SymptomesSection } from "@/app/data/endometriose-depistage-prise-en-charge.schema";
 import { Icon } from "@/components/endometriose-article/icon";
@@ -18,23 +19,37 @@ export function SymptomesSectionView({
       tone={section.tone}
     >
       <div className="space-y-8">
-        <div className="overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]">
-          {section.symptoms.map((symptom, i) => (
-            <div
-              key={symptom.text}
-              className={`flex items-start gap-4 px-6 py-5 md:px-8 md:py-6${i < section.symptoms.length - 1 ? " border-b border-[#e5cfc9]/60" : ""}`}
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#b85c5c]/10">
-                <Icon
-                  name={symptom.iconName}
-                  className="h-5 w-5 text-[#b85c5c]"
-                />
-              </div>
-              <p className="pt-2 text-sm leading-relaxed text-[#3d2b2f]/80 md:text-base">
-                {symptom.text}
-              </p>
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          <div className="order-2 overflow-hidden rounded-3xl border border-[#e5cfc9] shadow-xl lg:order-1">
+            <div className="relative aspect-[3/4] w-full lg:aspect-auto lg:h-full">
+              <Image
+                src={section.image}
+                alt={section.imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
             </div>
-          ))}
+          </div>
+
+          <div className="order-1 overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef] lg:order-2">
+            {section.symptoms.map((symptom, i) => (
+              <div
+                key={symptom.text}
+                className={`flex items-start gap-4 px-6 py-5 md:px-8 md:py-6${i < section.symptoms.length - 1 ? " border-b border-[#e5cfc9]/60" : ""}`}
+              >
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#b85c5c]/10">
+                  <Icon
+                    name={symptom.iconName}
+                    className="h-5 w-5 text-[#b85c5c]"
+                  />
+                </div>
+                <p className="pt-2 text-sm leading-relaxed text-[#3d2b2f]/80 md:text-base">
+                  {symptom.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1.1fr_0.9fr]">

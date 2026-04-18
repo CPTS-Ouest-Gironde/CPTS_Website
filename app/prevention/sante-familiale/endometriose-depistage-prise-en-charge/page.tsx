@@ -15,6 +15,7 @@ import {
   MultidisciplinaireSectionView,
   ProfessionnelsSectionView,
   ResourcesSectionView,
+  RisquesSectionView,
   StatsSectionView,
   SymptomesSectionView,
   TableOfContents,
@@ -71,6 +72,8 @@ function renderSection(section: EndometrioseSection) {
       return <ProfessionnelsSectionView key={section.id} section={section} />;
     case "traitements":
       return <TraitementsSectionView key={section.id} section={section} />;
+    case "risques":
+      return <RisquesSectionView key={section.id} section={section} />;
     case "multidisciplinaire":
       return <MultidisciplinaireSectionView key={section.id} section={section} />;
     case "annuaire":
@@ -114,6 +117,24 @@ export default function EndometrioseDepistagePriseEnChargePage() {
         </div>
       </section>
       {data.sections.map(renderSection)}
+      {data.acknowledgment && (
+        <div className="bg-[#faf3ef] py-12 md:py-16">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="mx-auto flex max-w-2xl flex-col items-center gap-5 rounded-3xl border border-[#e5cfc9] bg-[#3d2b2f] px-8 py-8 md:px-12 md:py-10">
+              <Image
+                src="/endometriose-depistage-prise-en-charge/ifem-logo.png"
+                alt="Logo IFEM Endo"
+                width={160}
+                height={80}
+                className="h-auto w-auto max-h-16 md:max-h-20"
+              />
+              <p className="text-center text-base leading-relaxed text-white/90 md:text-lg">
+                {data.acknowledgment}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
       <Footer />
     </main>
   );

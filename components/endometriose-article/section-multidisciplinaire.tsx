@@ -36,12 +36,12 @@ export function MultidisciplinaireSectionView({
       intro={section.intro}
       tone={section.tone}
     >
-      <div className="space-y-8">
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="mx-auto max-w-5xl">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {section.cards.map((card) => (
             <div
               key={card.title}
-              className="relative h-full overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]"
+              className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]"
             >
               <span
                 aria-hidden="true"
@@ -77,53 +77,53 @@ export function MultidisciplinaireSectionView({
               </div>
             </div>
           ))}
-        </div>
 
-        <article className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef] p-6 pl-7 md:p-8 md:pl-9">
-          <span
-            aria-hidden="true"
-            className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
-          />
-          <h3 className="text-xl font-bold text-[#3d2b2f]">
-            {section.association.title}
-          </h3>
-          <div className="mt-4 space-y-5">
-            <div className="space-y-3">
-              {section.association.paragraphs.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-base leading-relaxed text-muted-foreground md:text-lg"
+          <article className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef] p-6 pl-7 md:p-8 md:pl-9">
+            <span
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
+            />
+            <h3 className="text-xl font-bold text-[#3d2b2f]">
+              {section.association.title}
+            </h3>
+            <div className="mt-4 space-y-5">
+              <div className="space-y-3">
+                {section.association.paragraphs.map((paragraph) => (
+                  <p
+                    key={paragraph}
+                    className="text-base leading-relaxed text-muted-foreground md:text-lg"
+                  >
+                    <BoldText text={paragraph} />
+                  </p>
+                ))}
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <a
+                  href={section.association.siteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#b85c5c] px-5 py-2.5 text-sm font-semibold text-white"
+                  aria-label="Ouvrir le site de l'association DisDameDonc dans un nouvel onglet"
                 >
-                  <BoldText text={paragraph} />
-                </p>
-              ))}
-            </div>
+                  {section.association.siteLabel}
+                  <ExternalLink className="h-4 w-4" />
+                </a>
 
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <a
-                href={section.association.siteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#b85c5c] px-5 py-2.5 text-sm font-semibold text-white"
-                aria-label="Ouvrir le site de l'association DisDameDonc dans un nouvel onglet"
-              >
-                {section.association.siteLabel}
-                <ExternalLink className="h-4 w-4" />
-              </a>
-
-              <a
-                href={section.association.pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#b85c5c] px-5 py-2.5 text-sm font-semibold text-[#b85c5c]"
-                aria-label="Télécharger la plaquette PDF de DisDameDonc"
-              >
-                {section.association.pdfLabel}
-                <ExternalLink className="h-4 w-4" />
-              </a>
+                <a
+                  href={section.association.pdfUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-[#b85c5c] px-5 py-2.5 text-sm font-semibold text-[#b85c5c]"
+                  aria-label="Télécharger la plaquette PDF de DisDameDonc"
+                >
+                  {section.association.pdfLabel}
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
+        </div>
       </div>
     </SectionLayout>
   );

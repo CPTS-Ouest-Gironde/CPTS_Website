@@ -83,7 +83,7 @@ export function TraitementsSectionView({
           </p>
         </div>
 
-        {/* Ligne 1 — Image + Traitements hormonaux */}
+        {/* Ligne 1 — Image + Prise en charge de 1re intention */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start">
           <div className="overflow-hidden rounded-3xl border border-[#e5cfc9] shadow-lg">
             <Image
@@ -102,33 +102,33 @@ export function TraitementsSectionView({
               className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
             />
             <div className="px-6 py-6 pl-7 md:px-8 md:py-8 md:pl-9">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#b85c5c]/10">
-                <Icon
-                  name={hormonaux.iconName}
-                  className="h-5 w-5 text-[#b85c5c]"
-                />
-              </div>
-              <h3 className="mb-4 text-xl font-bold text-[#3d2b2f]">
-                {hormonaux.title}
-              </h3>
               <ArticleBlocks
-                blocks={hormonaux.blocks}
-                textClass="text-sm md:text-base text-muted-foreground leading-relaxed"
+                blocks={section.intro}
+                textClass="text-base md:text-lg text-muted-foreground leading-relaxed"
               />
             </div>
           </div>
         </div>
 
-        {/* Ligne 2 — Prise en charge de 1re intention */}
+        {/* Ligne 2 — Traitements hormonaux */}
         <div className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]">
           <span
             aria-hidden="true"
             className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
           />
           <div className="px-6 py-6 pl-7 md:px-8 md:py-8 md:pl-9">
+            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#b85c5c]/10">
+              <Icon
+                name={hormonaux.iconName}
+                className="h-5 w-5 text-[#b85c5c]"
+              />
+            </div>
+            <h3 className="mb-4 text-xl font-bold text-[#3d2b2f]">
+              {hormonaux.title}
+            </h3>
             <ArticleBlocks
-              blocks={section.intro}
-              textClass="text-base md:text-lg text-muted-foreground leading-relaxed"
+              blocks={hormonaux.blocks}
+              textClass="text-sm md:text-base text-muted-foreground leading-relaxed"
             />
           </div>
         </div>
@@ -156,9 +156,11 @@ export function TraitementsSectionView({
           </div>
         </div>
 
-        <p className="text-sm italic text-muted-foreground">
-          {section.credit}
-        </p>
+        {section.credit && (
+          <p className="text-sm italic text-muted-foreground">
+            {section.credit}
+          </p>
+        )}
       </div>
     </SectionLayout>
   );

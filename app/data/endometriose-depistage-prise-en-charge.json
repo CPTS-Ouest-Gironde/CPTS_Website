@@ -1,6 +1,6 @@
 {
   "date": "17 avril 2026",
-  "title": "Endométriose\u00A0: dépistage et prise en charge",
+  "title": "L'endométriose\u00A0: qu'est-ce que c'est\u00A0? Quelle prise en charge\u00A0?",
   "subtitle": "Comprendre les signes d'alerte, les examens, les traitements et les ressources de prise en charge en Gironde.",
   "heroImage": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
   "heroAlt": "Illustration stylisée d'un utérus entouré de fleurs rouges et bleues sur fond rose pâle",
@@ -40,9 +40,7 @@
       "kind": "stats",
       "id": "chiffres-cles",
       "title": "Chiffres clés",
-      "intro": [
-        "Les données partagées par la CPTS montrent l'ampleur de l'endométriose en France et en Nouvelle-Aquitaine."
-      ],
+      "intro": [],
       "tone": "neutral",
       "stats": [
         {
@@ -70,7 +68,7 @@
           "label": "présentent une infertilité"
         }
       ],
-      "note": "L'endométriose est présentée comme la 1re cause d'infertilité. Le retard diagnostique est estimé autour de 8 ans, et de 7 à 10 ans selon les données CPTS Nouvelle-Aquitaine."
+      "note": "L'endométriose est présentée comme la 1re cause d'infertilité. Le retard diagnostique est estimé autour de 8 ans, et peut aller de 7 à 10 ans."
     },
     {
       "kind": "symptomes",
@@ -80,6 +78,8 @@
         "Les douleurs sont propres à chacune. Elles peuvent être invalidantes et être responsables d'absentéisme scolaire ou professionnel."
       ],
       "tone": "white",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-symptome.jpeg",
+      "imageAlt": "Illustration d'une femme exprimant une douleur pelvienne",
       "symptoms": [
         {
           "iconName": "HeartPulse",
@@ -102,14 +102,14 @@
           "text": "Fatigue chronique qui altère le bien-être psychique"
         }
       ],
-      "painTitle": "Douleurs chroniques : ce que rappelle la fiche CPTS",
+      "painTitle": "Douleurs chroniques",
       "painBlocks": [
         {
           "type": "paragraph",
           "text": "Les douleurs peuvent être liées aux **lésions** elles-mêmes, à l'**envahissement de nerfs** par ces lésions, aux **réactions inflammatoires** et aux **adhérences fibreuses et cicatricielles**."
         }
       ],
-      "redFlagsTitle": "Drapeaux rouges signalés par le Dr Adrien Crestani",
+      "redFlagsTitle": "Quels drapeaux rouges\u00A0?",
       "redFlags": [
         "Infertilité",
         "Endométriome (neurosensibilisation)"
@@ -123,6 +123,8 @@
         "Le diagnostic peut s'appuyer sur plusieurs examens."
       ],
       "tone": "neutral",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-examens.jpeg",
+      "imageAlt": "Illustration d'une consultation médicale pour le diagnostic de l'endométriose",
       "blocks": [
         {
           "type": "list",
@@ -210,12 +212,15 @@
               "text": "L'objectif est d'obtenir une **dose hormonale fixe continue** tout le long du mois afin d'obtenir une **oligo/aménorrhée**."
             },
             {
+              "type": "paragraph",
+              "text": "Le traitement est délivré sur **prescription médicale**."
+            },
+            {
               "type": "list",
               "items": [
                 "1re intention : COP (contraception œstroprogestative) et DIENOGEST depuis 12/2025 (DIU MIRENA)",
                 "DIENOGEST 2 mg : demi-vie courte, prise à heure fixe, bloque l'ovulation et agit comme contraceptif",
                 "Avec un recul de 65 semaines, les principaux effets indésirables rapportés avec le DIENOGEST 2 mg sont les céphalées, la tension mammaire, l'acné et l'effet dépressif ; l'ensemble de ces symptômes concerne moins de 10 % des patientes",
-                "Prescription médicale",
                 "RYEQO : antagonistes de la LH-RH avec add back intégrée par NETA 0,5 mg et estradiol 1 mg ; AMM fibromes puis endométriose en Europe puis en France ; commercialisation en février 2025"
               ]
             }
@@ -226,72 +231,73 @@
           "iconName": "Microscope",
           "blocks": [
             {
-              "type": "list",
-              "items": [
-                "1. Urgent : mise en péril d'un organe, avec atteinte paramétriale, digestive, vésicale, diaphragmatique ou urétérale",
-                "2. Échec des thérapeutiques médicamenteuses",
-                "3. Infertilité",
-                "4. En première intention"
-              ]
+              "type": "paragraph",
+              "text": "La chirurgie peut être indiquée dans quatre situations."
             },
             {
-              "type": "list",
-              "items": [
-                "Exérèse uniquement",
-                "La coagulation, l'ablation, la thermocoagulation et le laser sont moins efficaces et entraînent des séquelles",
-                "Une seule chirurgie",
-                "Traiter les lésions symptomatiques",
-                "Attention aux infox : dans des mains formées, très faible taux de complications pour les chirurgies ENDOGRADE 1 et 2 ; pour les chirurgies complexes ENDOGRADE 4 en centre de référence, le taux de complications sévères est inférieur à 10 %"
-              ]
+              "type": "paragraph",
+              "text": "1. Elle est urgente en cas de mise en péril d'un organe, avec une atteinte paramétriale, digestive, vésicale, diaphragmatique ou urétérale."
+            },
+            {
+              "type": "paragraph",
+              "text": "2. Elle peut être proposée en cas d'échec des thérapeutiques médicamenteuses."
+            },
+            {
+              "type": "paragraph",
+              "text": "3. Elle est également indiquée en cas d'infertilité."
+            },
+            {
+              "type": "paragraph",
+              "text": "4. Elle peut être envisagée en première intention dans certains cas exceptionnels."
+            },
+            {
+              "type": "paragraph",
+              "text": "Modalités de la chirurgie :"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Exérèse uniquement** : la coagulation, l'ablation, la thermocoagulation et le laser sont moins efficaces et entraînent des séquelles."
+            },
+            {
+              "type": "paragraph",
+              "text": "Il faut privilégier **une seule chirurgie**."
+            },
+            {
+              "type": "paragraph",
+              "text": "Seules les **lésions symptomatiques** doivent être traitées."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Attention aux infox** : dans des mains formées, le taux de complications est très faible pour les chirurgies simples (**ENDOGRADE 1 et 2**). Pour les chirurgies complexes (**ENDOGRADE 4**), en centre de référence, le taux de complications sévères est **inférieur à 10 %**."
             }
           ]
         }
       ],
-      "credit": "Dr Adrien Crestani — IFEM Endo, Clinique Tivoli-Ducos, Bordeaux"
+      "credit": ""
+    },
+    {
+      "kind": "risques",
+      "id": "risques-associes",
+      "title": "Risques associés",
+      "intro": [],
+      "tone": "white",
+      "risks": [
+        "Risque de néoplasies des ovaires multiplié de x 1,1 à 2",
+        "Risque de maladie cardiovasculaire multiplié par x 2",
+        "Dépression multipliée par x 2",
+        "Infertilité multipliée de x 3 à x 10",
+        "Complications obstétricales",
+        "Maladies auto-immunes multipliées par x 6",
+        "Troubles de la sexualité"
+      ]
     },
     {
       "kind": "multidisciplinaire",
       "id": "prise-en-charge-multidisciplinaire",
       "title": "Prise en charge multidisciplinaire",
-      "intro": [
-        "Le Dr Adrien Crestani rappelle le caractère de maladie chronique systémique."
-      ],
-      "tone": "white",
+      "intro": [],
+      "tone": "neutral",
       "cards": [
-        {
-          "title": "Manifestations",
-          "iconName": "HeartPulse",
-          "blocks": [
-            {
-              "type": "list",
-              "items": [
-                "Douleur",
-                "Anémie",
-                "Troubles psychologiques",
-                "Infertilité",
-                "Asthénie"
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Risques associés",
-          "iconName": "BadgeAlert",
-          "blocks": [
-            {
-              "type": "list",
-              "items": [
-                "Risque de néoplasies des ovaires multiplié de x 1,1 à 2",
-                "Risque de maladie cardiovasculaire multiplié par x 2",
-                "Dépression multipliée par x 2",
-                "Infertilité multipliée de x 3 à x 10",
-                "Complications obstétricales",
-                "Maladies auto-immunes multipliées par x 6",
-                "Troubles de la sexualité"
-              ]
-            }
-          ]
-        },
         {
           "title": "Professionnels impliqués",
           "iconName": "Users",
@@ -316,7 +322,8 @@
       "association": {
         "title": "Association DisDameDonc",
         "paragraphs": [
-          "L'association d'accompagnement **DisDameDonc**, basée à Bordeaux, propose un programme ETP labellisé ARS pour les femmes atteintes d'endométriose en Gironde."
+          "**DisDameDonc** est une association d'intérêt général, née en Nouvelle-Aquitaine en 2018 et portée par un collectif d'une dizaine de professionnelles du médico-social et du soin, engagées pour une meilleure prise en compte des spécificités féminines dans le domaine de la santé.",
+          "Elle propose un programme ETP labellisé ARS pour les femmes atteintes d'endométriose en Gironde."
         ],
         "siteUrl": "https://disdamedonc.fr",
         "siteLabel": "Visiter le site de DisDameDonc",
@@ -328,10 +335,8 @@
       "kind": "annuaire",
       "id": "annuaire-gironde",
       "title": "Annuaire des centres spécialisés en Gironde",
-      "intro": [
-        "Centres cités dans l'annuaire de Gironde."
-      ],
-      "tone": "neutral",
+      "intro": [],
+      "tone": "white",
       "centers": [
         {
           "name": "CHU de Bordeaux",
@@ -362,7 +367,7 @@
       "intro": [
         "Deux témoignages vidéo sont proposés en complément."
       ],
-      "tone": "white",
+      "tone": "neutral",
       "videos": [
         {
           "title": "Maï témoigne",
@@ -381,7 +386,7 @@
       "intro": [
         "Un lien complémentaire pour poursuivre la lecture."
       ],
-      "tone": "neutral",
+      "tone": "white",
       "resources": [
         {
           "title": "Post du Ministère de la Santé",
@@ -391,5 +396,6 @@
         }
       ]
     }
-  ]
+  ],
+  "acknowledgment": "Merci au Dr Adrien Crestani et à son centre, ainsi qu'à Marie Amélie (sage-femme)."
 }

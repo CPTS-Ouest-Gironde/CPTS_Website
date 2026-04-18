@@ -5,6 +5,7 @@ export { SymptomesSectionView } from "@/components/endometriose-article/section-
 export { DiagnosticSectionView } from "@/components/endometriose-article/section-diagnostic";
 export { ProfessionnelsSectionView } from "@/components/endometriose-article/section-professionnels";
 export { TraitementsSectionView } from "@/components/endometriose-article/section-traitements";
+export { RisquesSectionView } from "@/components/endometriose-article/section-risques";
 export { MultidisciplinaireSectionView } from "@/components/endometriose-article/section-multidisciplinaire";
 export { AnnuaireSectionView } from "@/components/endometriose-article/section-annuaire";
 export { VideosSectionView } from "@/components/endometriose-article/section-videos";

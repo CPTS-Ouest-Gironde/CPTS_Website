@@ -86,6 +86,8 @@ export const symptomesSectionSchema = z.object({
   title: z.string(),
   intro: z.array(z.string()),
   tone: toneSchema,
+  image: z.string(),
+  imageAlt: z.string(),
   symptoms: z.array(symptomSchema),
   painTitle: z.string(),
   painBlocks: z.array(blockSchema),
@@ -99,6 +101,8 @@ export const diagnosticSectionSchema = z.object({
   title: z.string(),
   intro: z.array(z.string()),
   tone: toneSchema,
+  image: z.string().optional(),
+  imageAlt: z.string().optional(),
   blocks: z.array(blockSchema),
 });
 
@@ -124,7 +128,16 @@ export const traitementsSectionSchema = z.object({
   careCallout: z.string(),
   careNote: z.string(),
   treatmentCards: z.array(treatmentCardSchema),
-  credit: z.string(),
+  credit: z.string().optional(),
+});
+
+export const risquesSectionSchema = z.object({
+  kind: z.literal("risques"),
+  id: z.string(),
+  title: z.string(),
+  intro: z.array(z.string()),
+  tone: toneSchema,
+  risks: z.array(z.string()),
 });
 
 export const multidisciplinaireSectionSchema = z.object({
@@ -178,6 +191,7 @@ export const sectionSchema = z.discriminatedUnion("kind", [
   diagnosticSectionSchema,
   professionnelsSectionSchema,
   traitementsSectionSchema,
+  risquesSectionSchema,
   multidisciplinaireSectionSchema,
   annuaireSectionSchema,
   videosSectionSchema,
@@ -194,6 +208,7 @@ export const articleSchema = z.object({
     paragraphs: z.array(z.string()),
   }),
   sections: z.array(sectionSchema),
+  acknowledgment: z.string().optional(),
 });
 
 export type Tone = z.infer<typeof toneSchema>;
@@ -206,6 +221,7 @@ export type SymptomesSection = z.infer<typeof symptomesSectionSchema>;
 export type DiagnosticSection = z.infer<typeof diagnosticSectionSchema>;
 export type ProfessionnelsSection = z.infer<typeof professionnelsSectionSchema>;
 export type TraitementsSection = z.infer<typeof traitementsSectionSchema>;
+export type RisquesSection = z.infer<typeof risquesSectionSchema>;
 export type MultidisciplinaireSection = z.infer<typeof multidisciplinaireSectionSchema>;
 export type AnnuaireSection = z.infer<typeof annuaireSectionSchema>;
 export type VideosSection = z.infer<typeof videosSectionSchema>;
