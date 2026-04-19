@@ -69,8 +69,6 @@ interface TraitementsSectionViewProps {
 export function TraitementsSectionView({
   section,
 }: TraitementsSectionViewProps) {
-  const [hormonaux, chirurgie] = section.treatmentCards;
-
   return (
     <SectionLayout id={section.id} title={section.title} tone={section.tone}>
       <div className="mx-auto max-w-5xl space-y-6">
@@ -110,51 +108,30 @@ export function TraitementsSectionView({
           </div>
         </div>
 
-        {/* Ligne 2 — Traitements hormonaux */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]">
-          <span
-            aria-hidden="true"
-            className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
-          />
-          <div className="px-6 py-6 pl-7 md:px-8 md:py-8 md:pl-9">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#b85c5c]/10">
-              <Icon
-                name={hormonaux.iconName}
-                className="h-5 w-5 text-[#b85c5c]"
+        {/* Cards de traitements (rendues dynamiquement) */}
+        {section.treatmentCards.map((card) => (
+          <div key={card.title} className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]">
+            <span
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
+            />
+            <div className="px-6 py-6 pl-7 md:px-8 md:py-8 md:pl-9">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#b85c5c]/10">
+                <Icon
+                  name={card.iconName}
+                  className="h-5 w-5 text-[#b85c5c]"
+                />
+              </div>
+              <h3 className="mb-4 text-xl font-bold text-[#3d2b2f]">
+                {card.title}
+              </h3>
+              <ArticleBlocks
+                blocks={card.blocks}
+                textClass="text-sm md:text-base text-muted-foreground leading-relaxed"
               />
             </div>
-            <h3 className="mb-4 text-xl font-bold text-[#3d2b2f]">
-              {hormonaux.title}
-            </h3>
-            <ArticleBlocks
-              blocks={hormonaux.blocks}
-              textClass="text-sm md:text-base text-muted-foreground leading-relaxed"
-            />
           </div>
-        </div>
-
-        {/* Ligne 3 — Place de la chirurgie */}
-        <div className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef]">
-          <span
-            aria-hidden="true"
-            className="absolute inset-y-0 left-0 w-1 bg-[#b85c5c]/40"
-          />
-          <div className="px-6 py-6 pl-7 md:px-8 md:py-8 md:pl-9">
-            <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#b85c5c]/10">
-              <Icon
-                name={chirurgie.iconName}
-                className="h-5 w-5 text-[#b85c5c]"
-              />
-            </div>
-            <h3 className="mb-4 text-xl font-bold text-[#3d2b2f]">
-              {chirurgie.title}
-            </h3>
-            <ArticleBlocks
-              blocks={chirurgie.blocks}
-              textClass="text-sm md:text-base text-muted-foreground leading-relaxed"
-            />
-          </div>
-        </div>
+        ))}
 
         {section.credit && (
           <p className="text-sm italic text-muted-foreground">

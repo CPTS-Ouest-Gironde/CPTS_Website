@@ -45,6 +45,10 @@ export const contentCardSchema = z.object({
 export const directoryCenterSchema = z.object({
   name: z.string(),
   description: z.string(),
+  address: z.string().optional(),
+  phone: z.string().optional(),
+  phoneDisplay: z.string().optional(),
+  email: z.string().email().optional(),
 });
 
 export const videoItemSchema = z.object({

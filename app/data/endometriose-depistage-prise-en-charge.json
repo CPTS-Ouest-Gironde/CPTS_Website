@@ -6,9 +6,9 @@
   "heroAlt": "Illustration stylisée d'un utérus entouré de fleurs rouges et bleues sur fond rose pâle",
   "intro": {
     "paragraphs": [
-      "L'endométriose est une maladie définie par la présence, en dehors de l'utérus, de fragments de muqueuse utérine.",
-      "Ces fragments provoquent une réaction inflammatoire et forment des lésions et des cicatrices.",
-      "L'endométriose peut apparaître dès la puberté et les premières règles. Il s'agit d'une maladie chronique qui régresse à la ménopause."
+      "L'endométriose est une maladie caractérisée par la présence anormale, en dehors de la cavité utérine, de muqueuse ressemblant à de l'endomètre (muqueuse interne de l'utérus).",
+      "Ces tissus provoquent une réaction inflammatoire et forment des lésions et des cicatrices.",
+      "L'endométriose peut apparaître dès la puberté et les premières règles. Il s'agit d'une maladie chronique qui peut régresser à la ménopause."
     ]
   },
   "sections": [
@@ -17,13 +17,13 @@
       "id": "definition",
       "title": "Définition de l'endométriose",
       "intro": [
-        "Les lésions peuvent être différentes d'une femme à l'autre et être superficielles ou profondes."
+        "Les lésions peuvent être différentes d'une femme à l'autre, être superficielles ou profondes, et les localisations peuvent être nombreuses."
       ],
       "tone": "white",
       "blocks": [
         {
           "type": "paragraph",
-          "text": "Les organes concernés peuvent inclure les **ovaires**, le **muscle de l'utérus** dans l'adénomyose, les **trompes utérines**, les **ligaments utérins**, la **paroi du vagin** et les **organes digestifs**."
+          "text": "Parmi les organes concernés, on peut inclure les **ovaires**, le **muscle de l'utérus** dans l'adénomyose, les **trompes utérines**, les **ligaments utérins**, la **paroi du vagin** et les **organes digestifs**."
         }
       ],
       "factorsTitle": "Facteurs favorisants décrits comme multifactoriels",
@@ -68,7 +68,7 @@
           "label": "présentent une infertilité"
         }
       ],
-      "note": "L'endométriose est présentée comme la 1re cause d'infertilité. Le retard diagnostique est estimé autour de 8 ans, et peut aller de 7 à 10 ans."
+      "note": "L'endométriose est présentée comme la premiére cause d'infertilité. Le retard diagnostique est estimé autour de 8 ans, et peut aller de 7 à 10 ans."
     },
     {
       "kind": "symptomes",
@@ -110,18 +110,13 @@
         }
       ],
       "redFlagsTitle": "Quels drapeaux rouges\u00A0?",
-      "redFlags": [
-        "Infertilité",
-        "Endométriome (neurosensibilisation)"
-      ]
+      "redFlags": ["Infertilité", "Endométriome"]
     },
     {
       "kind": "diagnostic",
       "id": "diagnostic",
       "title": "Examens pour le diagnostic",
-      "intro": [
-        "Le diagnostic peut s'appuyer sur plusieurs examens."
-      ],
+      "intro": ["Le diagnostic peut s'appuyer sur plusieurs examens."],
       "tone": "neutral",
       "image": "/endometriose-depistage-prise-en-charge/endometriose-examens.jpeg",
       "imageAlt": "Illustration d'une consultation médicale pour le diagnostic de l'endométriose",
@@ -130,7 +125,7 @@
           "type": "list",
           "items": [
             "Examen gynécologique et pelvien",
-            "Échographie (centres de référence)",
+            "Échographie",
             "IRM (centres de référence)",
             "Endotest : prise en charge sous conditions et dans le cadre d'une étude"
           ]
@@ -218,7 +213,8 @@
             {
               "type": "list",
               "items": [
-                "1re intention : COP (contraception œstroprogestative) et DIENOGEST depuis 12/2025 (DIU MIRENA)",
+                "1re intention : COP (contraception œstroprogestative) et DIENOGEST depuis 12/2025",
+                "3e option : DIU MIRENA (stérilet au levonorgestrel)",
                 "DIENOGEST 2 mg : demi-vie courte, prise à heure fixe, bloque l'ovulation et agit comme contraceptif",
                 "Avec un recul de 65 semaines, les principaux effets indésirables rapportés avec le DIENOGEST 2 mg sont les céphalées, la tension mammaire, l'acné et l'effet dépressif ; l'ensemble de ces symptômes concerne moins de 10 % des patientes",
                 "RYEQO : antagonistes de la LH-RH avec add back intégrée par NETA 0,5 mg et estradiol 1 mg ; AMM fibromes puis endométriose en Europe puis en France ; commercialisation en février 2025"
@@ -244,7 +240,7 @@
             },
             {
               "type": "paragraph",
-              "text": "3. Elle est également indiquée en cas d'infertilité."
+              "text": "3. Elle est également indiquée en cas d'infertilité et échec des traitements en procréation médicalement assistée (PMA), ou en cas d'infertilité et de douleur."
             },
             {
               "type": "paragraph",
@@ -268,7 +264,33 @@
             },
             {
               "type": "paragraph",
-              "text": "**Attention aux infox** : dans des mains formées, le taux de complications est très faible pour les chirurgies simples (**ENDOGRADE 1 et 2**). Pour les chirurgies complexes (**ENDOGRADE 4**), en centre de référence, le taux de complications sévères est **inférieur à 10 %**."
+              "text": "**Attention aux infox** : dans des mains formées, le taux de complications est très faible pour les chirurgies simples (**stade 1 et 2**). Pour les chirurgies complexes (**stade 4**), en centre de référence, le taux de complications sévères est **inférieur à 10 %**."
+            }
+          ]
+        },
+        {
+          "title": "Classification ASRM (American Society for Reproductive Medicine)",
+          "iconName": "Layers",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "La classification en quatre stades permet d'évaluer la sévérité de l'endométriose en fonction de la taille et de la localisation des lésions. Cette évaluation est réalisée lors d'une intervention chirurgicale par laparoscopie."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 1 (minimale)** : petites lésions dans l'utérus, les ovaires, les trompes de Fallope et le péritoine."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 2 (légère)** : lésions plus étendues, avec possible présence de kystes endométriaux (kystes chocolat) sur les ovaires et modifications du cul-de-sac de Douglas."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 3 (modérée)** : adhérences importantes et atteinte du ligament utéro-sacré."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 4 (sévère)** : adhérences nombreuses provoquant une déformation des organes, une diminution de la mobilité et une rétroversion de l'utérus ; foyers endométriaux pouvant s'étendre à la vessie, au vagin, aux intestins et au col de l'utérus."
             }
           ]
         }
@@ -346,19 +368,40 @@
         },
         {
           "name": "Clinique Tivoli-Ducos et Centre IFEM Endo",
-          "description": "Centre spécialisé dans la prise en charge médicale et chirurgicale."
+          "description": "Centre spécialisé dans la prise en charge médicale et chirurgicale.",
+          "address": "5 Rue Auguste Poirson, 33000 Bordeaux",
+          "phone": "+33564100945",
+          "phoneDisplay": "05 64 10 09 45"
         },
         {
           "name": "Maison de santé protestante de Bagatelle",
-          "description": "Centre multidisciplinaire de prise en charge."
+          "description": "Centre multidisciplinaire de prise en charge.",
+          "address": "203 Route de Toulouse, 33401 Talence",
+          "phone": "+33557124035",
+          "phoneDisplay": "05 57 12 40 35",
+          "email": "chirurgiegyneco@mspb.com"
         },
         {
           "name": "Polyclinique Jean Villar",
-          "description": "Centre de prise en charge, membre de l'AFENA."
+          "description": "Centre de prise en charge, membre de l'AFENA.",
+          "address": "56 Avenue Maryse Bastié, 33520 Bruges",
+          "phone": "+33556286628",
+          "phoneDisplay": "05 56 28 66 28"
         },
         {
           "name": "Polyclinique Bordeaux-Rive Droite",
-          "description": "Centre de prise en charge."
+          "description": "Centre de prise en charge.",
+          "address": "24 rue des Cavailles, 33310 Lormont",
+          "phone": "+33557808484",
+          "phoneDisplay": "05 57 80 84 84"
+        },
+        {
+          "name": "Clinique Sainte-Anne (Langon)",
+          "description": "Centre expert.",
+          "address": "19 Route de Brannens, 33210 Langon",
+          "phone": "+33557985413",
+          "phoneDisplay": "05 57 98 54 13",
+          "email": "gynecochirlangon@gmail.com"
         }
       ]
     },
@@ -366,9 +409,7 @@
       "kind": "videos",
       "id": "temoignages-video",
       "title": "Témoignages vidéo",
-      "intro": [
-        "Deux témoignages vidéo sont proposés en complément."
-      ],
+      "intro": ["Deux témoignages vidéo sont proposés en complément."],
       "tone": "neutral",
       "videos": [
         {
@@ -385,9 +426,7 @@
       "kind": "resources",
       "id": "ressources-complementaires",
       "title": "Ressource complémentaire",
-      "intro": [
-        "Un lien complémentaire pour poursuivre la lecture."
-      ],
+      "intro": ["Un lien complémentaire pour poursuivre la lecture."],
       "tone": "white",
       "resources": [
         {

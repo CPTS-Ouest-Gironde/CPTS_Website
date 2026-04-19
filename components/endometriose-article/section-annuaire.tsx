@@ -1,3 +1,4 @@
+import { Mail, MapPin, Phone } from "lucide-react";
 import type { AnnuaireSection } from "@/app/data/endometriose-depistage-prise-en-charge.schema";
 import { Icon } from "@/components/endometriose-article/icon";
 import { SectionLayout } from "@/components/endometriose-article/section-layout";
@@ -34,6 +35,32 @@ export function AnnuaireSectionView({ section }: AnnuaireSectionViewProps) {
               <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
                 {center.description}
               </p>
+              {(center.address || center.phone || center.email) && (
+                <div className="mt-3 space-y-1.5">
+                  {center.address && (
+                    <div className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#b85c5c]" />
+                      <span>{center.address}</span>
+                    </div>
+                  )}
+                  {center.phone && center.phoneDisplay && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Phone className="h-4 w-4 shrink-0 text-[#b85c5c]" />
+                      <a href={`tel:${center.phone}`} className="text-[#b85c5c] hover:text-[#8f4545]">
+                        {center.phoneDisplay}
+                      </a>
+                    </div>
+                  )}
+                  {center.email && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <Mail className="h-4 w-4 shrink-0 text-[#b85c5c]" />
+                      <a href={`mailto:${center.email}`} className="text-[#b85c5c] hover:text-[#8f4545]">
+                        {center.email}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         ))}
