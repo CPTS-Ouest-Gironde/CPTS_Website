@@ -185,7 +185,7 @@
         },
         {
           "type": "paragraph",
-          "text": "Une **échographie pelvienne endovaginale** peut être proposée si elle est accessible. En cas d'échec, un **traitement hormonal de première intention** peut être proposé."
+          "text": "En cas d'échec, un **traitement hormonal de première intention** peut être proposé."
         }
       ],
       "tone": "neutral",
@@ -213,11 +213,10 @@
             {
               "type": "list",
               "items": [
-                "1re intention : COP (contraception œstroprogestative) et DIENOGEST depuis 12/2025",
+                "1re intention : COP (contraception œstroprogestative)",
+                "2e intention : DIENOGEST 2 mg depuis 12/2025, demi-vie courte, prise à heure fixe, bloque l'ovulation et agit comme contraceptif. Avec un recul de 65 semaines, les principaux effets indésirables rapportés sont les céphalées, la tension mammaire, l'acné et l'effet dépressif ; l'ensemble de ces symptômes concerne moins de 10 % des patientes.",
                 "3e option : DIU MIRENA (stérilet au levonorgestrel)",
-                "DIENOGEST 2 mg : demi-vie courte, prise à heure fixe, bloque l'ovulation et agit comme contraceptif",
-                "Avec un recul de 65 semaines, les principaux effets indésirables rapportés avec le DIENOGEST 2 mg sont les céphalées, la tension mammaire, l'acné et l'effet dépressif ; l'ensemble de ces symptômes concerne moins de 10 % des patientes",
-                "RYEQO : antagonistes de la LH-RH avec add back intégrée par NETA 0,5 mg et estradiol 1 mg ; AMM fibromes puis endométriose en Europe puis en France ; commercialisation en février 2025"
+                "4e option : RYEQO, antagonistes de la LH-RH avec add back intégrée par NETA 0,5 mg et estradiol 1 mg ; AMM fibromes puis endométriose en Europe puis en France ; commercialisation en février 2025"
               ]
             }
           ]
@@ -364,7 +363,10 @@
       "centers": [
         {
           "name": "CHU de Bordeaux",
-          "description": "Centre expert en endométriose avec prise en charge globale et multidisciplinaire."
+          "description": "Centre expert en endométriose avec prise en charge globale et multidisciplinaire.",
+          "address": "Centre Aliénor d'Aquitaine, Place Amélie Raba-Léon, 33076 Bordeaux (Hôpital de Jour, 1er étage, secteur ambulatoire, aile sud)",
+          "phone": "+33556795835",
+          "phoneDisplay": "05 56 79 58 35"
         },
         {
           "name": "Clinique Tivoli-Ducos et Centre IFEM Endo",
