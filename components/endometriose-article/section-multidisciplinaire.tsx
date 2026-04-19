@@ -37,6 +37,12 @@ export function MultidisciplinaireSectionView({
       tone={section.tone}
     >
       <div className="mx-auto max-w-5xl">
+        {section.transitionText && (
+          <p className="mb-6 hidden text-center text-base leading-relaxed text-muted-foreground md:text-lg lg:block">
+            {section.transitionText}
+          </p>
+        )}
+
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {section.cards.map((card) => (
             <div
@@ -77,6 +83,12 @@ export function MultidisciplinaireSectionView({
               </div>
             </div>
           ))}
+
+          {section.transitionText && (
+            <p className="text-center text-base leading-relaxed text-muted-foreground md:text-lg lg:hidden">
+              {section.transitionText}
+            </p>
+          )}
 
           <article className="relative overflow-hidden rounded-3xl border border-[#e5cfc9] bg-[#faf3ef] p-6 pl-7 md:p-8 md:pl-9">
             <span

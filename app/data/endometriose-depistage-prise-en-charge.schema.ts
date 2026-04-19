@@ -151,6 +151,7 @@ export const multidisciplinaireSectionSchema = z.object({
   intro: z.array(z.string()),
   tone: toneSchema,
   cards: z.array(contentCardSchema),
+  transitionText: z.string().optional(),
   association: z.object({
     title: z.string(),
     paragraphs: z.array(z.string()),

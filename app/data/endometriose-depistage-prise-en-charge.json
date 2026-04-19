@@ -73,7 +73,7 @@
     {
       "kind": "symptomes",
       "id": "symptomes",
-      "title": "Symptômes qui doivent alerter",
+      "title": "Quels symptômes doivent vous alerter ?",
       "intro": [
         "Les douleurs sont propres à chacune. Elles peuvent être invalidantes et être responsables d'absentéisme scolaire ou professionnel."
       ],
@@ -115,7 +115,7 @@
     {
       "kind": "diagnostic",
       "id": "diagnostic",
-      "title": "Examens pour le diagnostic",
+      "title": "Quels examens pour faire le diagnostic ?",
       "intro": ["Le diagnostic peut s'appuyer sur plusieurs examens."],
       "tone": "neutral",
       "image": "/endometriose-depistage-prise-en-charge/endometriose-examens.jpeg",
@@ -135,7 +135,7 @@
     {
       "kind": "professionnels",
       "id": "professionnels",
-      "title": "Professionnels vers qui se tourner",
+      "title": "Vers quels professionnels se tourner ?",
       "intro": [
         "Le dépistage et la prise en charge mobilisent plusieurs professionnels."
       ],
@@ -177,7 +177,7 @@
     {
       "kind": "traitements",
       "id": "traitements",
-      "title": "Traitements médicamenteux et chirurgicaux",
+      "title": "Quels sont les traitements médicamenteux et chirurgicaux ?",
       "intro": [
         {
           "type": "paragraph",
@@ -299,7 +299,7 @@
     {
       "kind": "risques",
       "id": "risques-associes",
-      "title": "Risques associés",
+      "title": "Quels sont les risques associés à l'endométriose ?",
       "intro": [],
       "tone": "white",
       "risks": [
@@ -320,6 +320,7 @@
         "La meilleure prise en charge est une prise en charge globale pluriprofessionnelle avec les professions suivantes\u00A0:"
       ],
       "tone": "neutral",
+      "transitionText": "Sans oublier le travail associatif investi dans la santé de la femme.",
       "cards": [
         {
           "title": "Professionnels impliqués",
