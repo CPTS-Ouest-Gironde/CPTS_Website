@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { z } from "zod"
-import { getPmoListHref, parsePmoPage } from "@/lib/pso/pmo"
+import { type DeletePmoEntryState, parsePmoPage } from "@/lib/pso/pmo"
 import {
   hasCompletedPharmacienProfile,
   hasRole,
@@ -16,7 +16,10 @@ const deletePmoEntrySchema = z.object({
   page: z.string().optional(),
 })
 
-export async function deletePmoEntry(formData: FormData) {
+export async function deletePmoEntry(
+  _previousState: DeletePmoEntryState,
+  formData: FormData,
+): Promise<DeletePmoEntryState> {
   const supabase = await createClient()
   const {
     data: { user },
@@ -42,7 +45,10 @@ export async function deletePmoEntry(formData: FormData) {
   })
 
   if (!parsed.success) {
-    redirect(getPmoListHref({}))
+    return {
+      message: "La saisie n'a pas pu être supprimée.",
+      status: "error",
+    }
   }
 
   const page = parsePmoPage(parsed.data.page)
@@ -54,12 +60,17 @@ export async function deletePmoEntry(formData: FormData) {
     .select("id")
 
   if (deleteResult.error || !deleteResult.data || deleteResult.data.length === 0) {
-    redirect(getPmoListHref({ page }))
+    return {
+      message: "La saisie n'a pas pu être supprimée. Merci de réessayer.",
+      status: "error",
+    }
   }
 
   revalidatePath("/espace-pro/pmo")
   revalidatePath(`/espace-pro/pmo/${parsed.data.entryId}`)
   revalidatePath(`/espace-pro/pmo/${parsed.data.entryId}/modifier`)
 
-  redirect(getPmoListHref({ page, success: "deleted" }))
+  return {
+    status: "success",
+  }
 }

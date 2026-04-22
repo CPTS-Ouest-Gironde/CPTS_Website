@@ -12,6 +12,10 @@ export const PMO_PAGE_SIZE = 20
 
 export const pmoSuccessValues = ["created", "updated", "deleted"] as const
 export type PmoSuccessValue = (typeof pmoSuccessValues)[number]
+export type DeletePmoEntryState = {
+  message?: string
+  status: "error" | "idle" | "success"
+}
 
 export const PmoOrientationLabels: Record<string, string> = {
   medecin_delegant: "Médecin délégant",
@@ -20,9 +24,13 @@ export const PmoOrientationLabels: Record<string, string> = {
   urgences: "Urgences",
 }
 
+export const DELETE_PMO_ENTRY_INITIAL_STATE: DeletePmoEntryState = {
+  status: "idle",
+}
+
 export const pmoSuccessMessages: Record<PmoSuccessValue, string> = {
   created: "La saisie PMO a bien été enregistrée.",
-  deleted: "La saisie PMO a bien été supprimée.",
+  deleted: "Saisie supprimée.",
   updated: "La saisie PMO a bien été mise à jour.",
 }
 
