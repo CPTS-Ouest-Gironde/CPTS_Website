@@ -110,11 +110,11 @@ const pharmacienQuestionLabels = [
 const patientQuestionLabels = [
   {
     field: "satisfaction_prise_en_charge",
-    label: "Q3 — Êtes-vous satisfait de la prise en charge proposée ?",
+    label: "Q3 — Dans quelle mesure êtes-vous satisfait de la prise en charge proposée ?",
   },
   {
     field: "conseils_aide",
-    label: "Q4 — Les conseils donnés vous ont-ils aidé ?",
+    label: "Q4 — Les conseils vous ont-ils aidé ?",
   },
   {
     field: "facilite_vie",
@@ -126,7 +126,7 @@ const patientQuestionLabels = [
 }>
 
 const patientVenueLabels: Record<PatientRaisonVenueKey, string> = {
-  affiche_saison: "Affiche de saison",
+  affiche_saison: "Affiche sur la rhinite allergique à la pharmacie",
   autres: "Autres",
   gene_symptomes: "Gêne liée aux symptômes",
   pas_acces_medecin: "Pas d'accès rapide à un médecin",

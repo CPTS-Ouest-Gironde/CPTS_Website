@@ -34,7 +34,7 @@ const INITIAL_STATE: FormActionState<SatisfactionPatientFieldName> =
   createEmptyFormActionState<SatisfactionPatientFieldName>()
 
 const raisonVenueOptions = [
-  { label: "Affiche de saison", value: "affiche_saison" },
+  { label: "Affiche sur la rhinite allergique à la pharmacie", value: "affiche_saison" },
   { label: "Gêne liée aux symptômes", value: "gene_symptomes" },
   { label: "Pas d'accès rapide à un médecin", value: "pas_acces_medecin" },
   { label: "Autres", value: "autres" },
@@ -160,8 +160,8 @@ export function SatisfactionPatientForm() {
               />
             </div>
 
-            <p className="text-sm italic text-muted-foreground">
-              *sur une échelle de 1 à 5 : 1 pas du tout - 5 tout à fait
+            <p className="text-sm text-muted-foreground">
+              Sur une échelle de 1 à 5 (1 étant « non, pas du tout » et 5 étant « oui, tout à fait »)
             </p>
 
             <SelectField
@@ -195,14 +195,14 @@ export function SatisfactionPatientForm() {
             <EchelleCinq
               compact
               control={form.control}
-              label="Êtes-vous satisfait de la prise en charge proposée ?"
+              label="Dans quelle mesure êtes-vous satisfait de la prise en charge proposée ?"
               name="satisfactionPriseEnCharge"
               showLegendLabels={false}
             />
             <EchelleCinq
               compact
               control={form.control}
-              label="Les conseils donnés vous ont-ils aidé ?"
+              label="Les conseils vous ont-ils aidé ?"
               name="conseilsAide"
               showLegendLabels={false}
             />
