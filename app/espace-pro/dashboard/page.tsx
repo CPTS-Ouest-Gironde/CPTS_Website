@@ -78,7 +78,7 @@ function DashboardTabs({ activeView, filters }: { activeView: DashboardView; fil
         className={getDashboardTabClass(activeView === "pmo")}
         href={getDashboardHref(filters, "pmo")}
       >
-        Activité PMO
+        Activité PSO
       </Link>
       <Link
         aria-current={activeView === "satisfaction" ? "page" : undefined}
@@ -153,7 +153,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                 <CardContent className="space-y-5 p-7 sm:p-9">
                   <div className="space-y-4">
                     <FormSection
-                      description="Consultez les indicateurs PSO Rhinite Allergique consolidés automatiquement à partir des saisies PMO et des questionnaires de satisfaction."
+                      description="Consultez les indicateurs PSO Rhinite Allergique consolidés automatiquement à partir des saisies PSO et des questionnaires de satisfaction."
                       eyebrow="Dashboard PSO"
                       title="Tableau de bord de reporting"
                     />
@@ -215,7 +215,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       />
                       <DashboardMetricCard
                         eyebrow="Dispensation"
-                        helper="Produits PMO et conseil confondus."
+                        helper="Produits PSO et conseil confondus."
                         label="Produits par patient"
                         value={formatDecimal(pmoStats.totalProduitsParPatient)}
                       />
@@ -235,8 +235,8 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                         value={formatBreakdown(pmoStats.dispensationConseil)}
                       />
                       <DashboardMetricCard
-                        helper="Moyenne des produits délivrés dans le cadre PMO."
-                        label="Moyenne produits PMO"
+                        helper="Moyenne des produits délivrés dans le cadre PSO."
+                        label="Moyenne produits PSO"
                         value={formatDecimal(pmoStats.moyenneProduitsPmo)}
                       />
                       <DashboardMetricCard

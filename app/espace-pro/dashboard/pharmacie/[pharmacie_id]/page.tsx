@@ -121,7 +121,7 @@ export default async function DashboardPharmacyAuditPage({
                       </Button>
 
                       <FormSection
-                        description="Consultez les saisies PMO en lecture seule pour cette pharmacie sur la période sélectionnée."
+                        description="Consultez les saisies PSO en lecture seule pour cette pharmacie sur la période sélectionnée."
                         eyebrow="Audit pharmacie"
                         title={pharmacy.nom}
                       />
@@ -153,7 +153,7 @@ export default async function DashboardPharmacyAuditPage({
 
               <Card className="rounded-[2rem] border border-border/80 bg-card shadow-sm">
                 <CardHeader className="space-y-2">
-                  <CardTitle className="text-base">Saisies PMO de la pharmacie</CardTitle>
+                  <CardTitle className="text-base">Saisies PSO de la pharmacie</CardTitle>
                   <p className="text-sm text-muted-foreground">
                     {detailPage.totalEntries} saisie(s) trouvée(s) sur la période sélectionnée.
                   </p>
@@ -176,7 +176,7 @@ export default async function DashboardPharmacyAuditPage({
                           <TableHead>collyre</TableHead>
                           <TableHead>antiallergique nasal</TableHead>
                           <TableHead>corticoïde nasal</TableHead>
-                          <TableHead>Nb produits PMO</TableHead>
+                          <TableHead>Nb produits PSO</TableHead>
                           <TableHead>Dispensation conseil</TableHead>
                           <TableHead>Nb produits conseil</TableHead>
                           <TableHead>Effet indésirable</TableHead>

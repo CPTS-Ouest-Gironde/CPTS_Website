@@ -58,12 +58,14 @@ export function SatisfactionPatientForm() {
   const form = useForm<SatisfactionPatientInput>({
     defaultValues: {
       commentaire: "",
+      raisonNonRenouvellement: "",
       raisonVenueAutre: "",
     },
     resolver: zodResolver(satisfactionPatientSchema),
   })
 
   const raisonVenue = form.watch("raisonVenue")
+  const souhaitRenouvellement = form.watch("souhaitRenouvellement")
   const consultationMedecinApres = form.watch("consultationMedecinApres")
 
   useEffect(() => {
@@ -83,6 +85,12 @@ export function SatisfactionPatientForm() {
       form.setValue("raisonConsultation", undefined)
     }
   }, [consultationMedecinApres, form])
+
+  useEffect(() => {
+    if (souhaitRenouvellement !== false) {
+      form.setValue("raisonNonRenouvellement", "")
+    }
+  }, [form, souhaitRenouvellement])
 
   useEffect(() => {
     form.clearErrors()
@@ -110,6 +118,7 @@ export function SatisfactionPatientForm() {
     formData.set("conseilsAide", String(values.conseilsAide ?? ""))
     formData.set("faciliteVie", String(values.faciliteVie ?? ""))
     formData.set("souhaitRenouvellement", String(values.souhaitRenouvellement))
+    formData.set("raisonNonRenouvellement", values.raisonNonRenouvellement ?? "")
     formData.set("consultationMedecinApres", String(values.consultationMedecinApres))
     formData.set("raisonConsultation", values.raisonConsultation ?? "")
     formData.set("commentaire", values.commentaire ?? "")
@@ -160,10 +169,6 @@ export function SatisfactionPatientForm() {
               />
             </div>
 
-            <p className="text-sm text-muted-foreground">
-              Sur une échelle de 1 à 5 (1 étant « non, pas du tout » et 5 étant « oui, tout à fait »)
-            </p>
-
             <SelectField
               control={form.control}
               label="Pour quelle raison êtes-vous venu aujourd'hui ?"
@@ -191,6 +196,10 @@ export function SatisfactionPatientForm() {
                 )}
               />
             ) : null}
+
+            <p className="text-sm text-muted-foreground">
+              Sur une échelle de 1 à 5 (1 étant « non, pas du tout » et 5 étant « oui, tout à fait »)
+            </p>
 
             <EchelleCinq
               compact
@@ -220,6 +229,27 @@ export function SatisfactionPatientForm() {
               layout="inline"
               name="souhaitRenouvellement"
             />
+
+            {souhaitRenouvellement === false ? (
+              <FormField
+                control={form.control}
+                name="raisonNonRenouvellement"
+                render={({ field }) => (
+                  <FormItem className="space-y-2">
+                    <FormLabel>Pour quelle raison ?</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        className="min-h-20 rounded-2xl border-border/70"
+                        value={field.value ?? ""}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            ) : null}
+
             <RadioYesNo
               control={form.control}
               label="Avez-vous consulté un médecin après votre passage à la pharmacie ?"

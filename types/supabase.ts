@@ -229,6 +229,7 @@ export type Database = {
           facilite_vie: number
           id: string
           raison_consultation: string | null
+          raison_non_renouvellement: string | null
           raison_venue: string
           raison_venue_autre: string | null
           satisfaction_prise_en_charge: number
@@ -243,6 +244,7 @@ export type Database = {
           facilite_vie: number
           id?: string
           raison_consultation?: string | null
+          raison_non_renouvellement?: string | null
           raison_venue: string
           raison_venue_autre?: string | null
           satisfaction_prise_en_charge: number
@@ -257,6 +259,7 @@ export type Database = {
           facilite_vie?: number
           id?: string
           raison_consultation?: string | null
+          raison_non_renouvellement?: string | null
           raison_venue?: string
           raison_venue_autre?: string | null
           satisfaction_prise_en_charge?: number

@@ -107,6 +107,7 @@ export const satisfactionPatientSchema = z
   .object({
     raisonVenue: z.enum(satisfactionPatientRaisonVenueValues),
     raisonVenueAutre: optionalTrimmedText(500),
+    raisonNonRenouvellement: optionalTrimmedText(500),
     satisfactionPriseEnCharge: scoreOneToFive,
     conseilsAide: scoreOneToFive,
     faciliteVie: scoreOneToFive,
@@ -137,6 +138,14 @@ export const satisfactionPatientSchema = z
         code: z.ZodIssueCode.custom,
         path: ["raisonConsultation"],
         message: "La raison de consultation doit rester vide.",
+      })
+    }
+
+    if (value.souhaitRenouvellement && value.raisonNonRenouvellement) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["raisonNonRenouvellement"],
+        message: "La raison doit rester vide si vous souhaitez renouveler cette prise en charge.",
       })
     }
   })
