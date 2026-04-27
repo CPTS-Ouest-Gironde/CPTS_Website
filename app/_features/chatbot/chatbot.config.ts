@@ -375,10 +375,25 @@ export const chatbotConfig: ChatbotConfig = {
       description: "Numéro national 24h/24, 7j/7.",
       value: "3114",
     },
+    "pharmacie-garde": {
+      id: "pharmacie-garde",
+      type: "external",
+      title: "Pharmacie de garde",
+      description: "Rechercher la pharmacie de garde la plus proche.",
+      href: "https://www.pharmaciedegarde.com/",
+    },
   },
   keywordIndex: [
     { keyword: "medecin traitant", resourceId: "medecin-traitant", scoreBoost: 12 },
     { keyword: "recherche medecin", resourceId: "medecin-traitant" },
+    { keyword: "docteur", resourceId: "medecin-traitant", scoreBoost: 10 },
+    { keyword: "generaliste", resourceId: "medecin-traitant", scoreBoost: 10 },
+    { keyword: "médecin généraliste", resourceId: "medecin-traitant", scoreBoost: 12 },
+    { keyword: "toubib", resourceId: "medecin-traitant", scoreBoost: 8 },
+    { keyword: "médecin de famille", resourceId: "medecin-traitant", scoreBoost: 12 },
+    { keyword: "trouver un docteur", resourceId: "medecin-traitant", scoreBoost: 12 },
+    { keyword: "pas de médecin", resourceId: "medecin-traitant", scoreBoost: 12 },
+    { keyword: "sans médecin", resourceId: "medecin-traitant", scoreBoost: 12 },
     { keyword: "cpts", resourceId: "presentation", scoreBoost: 6 },
     { keyword: "presentation cpts", resourceId: "presentation", scoreBoost: 12 },
     { keyword: "communaute professionnelle territoriale de sante", resourceId: "presentation", scoreBoost: 12 },
@@ -389,17 +404,45 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "annuaire", resourceId: "annuaire", scoreBoost: 8 },
     { keyword: "specialiste", resourceId: "annuaire" },
     { keyword: "professionnel", resourceId: "annuaire" },
+    { keyword: "trouver un professionnel", resourceId: "annuaire", scoreBoost: 12 },
+    { keyword: "liste des médecins", resourceId: "annuaire", scoreBoost: 10 },
+    { keyword: "kiné", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "kinésithérapeute", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "infirmier", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "infirmière", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "dentiste", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "sage-femme", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "orthophoniste", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "podologue", resourceId: "annuaire", scoreBoost: 8 },
+    { keyword: "ostéopathe", resourceId: "annuaire", scoreBoost: 8 },
 
     { keyword: "urgence", resourceId: "coordonnees", scoreBoost: 10 },
     { keyword: "samu", resourceId: "coordonnees" },
+    { keyword: "15", resourceId: "coordonnees", scoreBoost: 8 },
     { keyword: "112", resourceId: "coordonnees" },
+    { keyword: "sos médecin", resourceId: "coordonnees", scoreBoost: 10 },
+    { keyword: "sos", resourceId: "coordonnees", scoreBoost: 8 },
+    { keyword: "garde", resourceId: "coordonnees", scoreBoost: 8 },
+    { keyword: "médecin de garde", resourceId: "coordonnees", scoreBoost: 12 },
+    { keyword: "pharmacie de garde", resourceId: "pharmacie-garde", scoreBoost: 14 },
 
     { keyword: "sante mentale", resourceId: "sante-mentale", scoreBoost: 9 },
+    { keyword: "psychologue", resourceId: "sante-mentale-annuaire", scoreBoost: 12 },
+    { keyword: "psy", resourceId: "sante-mentale-annuaire", scoreBoost: 12 },
+    { keyword: "psychiatre", resourceId: "sante-mentale-annuaire", scoreBoost: 12 },
     { keyword: "annuaire sante mentale", resourceId: "sante-mentale-annuaire", scoreBoost: 16 },
     { keyword: "annuaire psy", resourceId: "sante-mentale-annuaire", scoreBoost: 12 },
     { keyword: "trouver un psy", resourceId: "sante-mentale-annuaire", scoreBoost: 10 },
     { keyword: "depression", resourceId: "sante-mentale" },
+    { keyword: "dépression", resourceId: "sante-mentale" },
+    { keyword: "anxiété", resourceId: "sante-mentale" },
     { keyword: "angoisse", resourceId: "sante-mentale" },
+    { keyword: "stress", resourceId: "sante-mentale" },
+    { keyword: "burnout", resourceId: "sante-mentale", scoreBoost: 10 },
+    { keyword: "mal-être", resourceId: "sante-mentale", scoreBoost: 10 },
+    { keyword: "mal être", resourceId: "sante-mentale", scoreBoost: 10 },
+    { keyword: "thérapie", resourceId: "sante-mentale", scoreBoost: 10 },
+    { keyword: "aide psychologique", resourceId: "sante-mentale", scoreBoost: 12 },
     { keyword: "suicide", resourceId: "urgence-3114", scoreBoost: 10 },
     { keyword: "sante mentale jeunes", resourceId: "sante-mentale-jeunes", scoreBoost: 12 },
     { keyword: "adolescent", resourceId: "sante-mentale-jeunes" },
@@ -408,10 +451,19 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "emsi", resourceId: "ao-emsi2", scoreBoost: 8 },
 
     { keyword: "mon espace sante", resourceId: "mon-espace-sante", scoreBoost: 12 },
+    { keyword: "mes", resourceId: "mon-espace-sante", scoreBoost: 8 },
+    { keyword: "espace santé", resourceId: "mon-espace-sante", scoreBoost: 12 },
+    { keyword: "carnet de santé numérique", resourceId: "mon-espace-sante", scoreBoost: 12 },
+    { keyword: "dossier médical", resourceId: "mon-espace-sante", scoreBoost: 10 },
+    { keyword: "dmp", resourceId: "mon-espace-sante", scoreBoost: 10 },
     { keyword: "application sante", resourceId: "mon-espace-sante" },
 
     { keyword: "prevention", resourceId: "prevention-familiale" },
     { keyword: "vaccination", resourceId: "prevention-familiale" },
+    { keyword: "vaccin", resourceId: "prevention-familiale" },
+    { keyword: "dépistage", resourceId: "prevention-familiale", scoreBoost: 8 },
+    { keyword: "bilan de santé", resourceId: "prevention-familiale", scoreBoost: 8 },
+    { keyword: "check-up", resourceId: "prevention-familiale", scoreBoost: 8 },
     { keyword: "memos suivi", resourceId: "memos-suivi", scoreBoost: 8 },
     { keyword: "fiches de suivi", resourceId: "memos-suivi", scoreBoost: 8 },
     { keyword: "diabete", resourceId: "ms-diabete", scoreBoost: 14 },
@@ -483,7 +535,7 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "maison nutrition", resourceId: "ao-maison-nutrition", scoreBoost: 10 },
     { keyword: "medprev", resourceId: "ao-medprev", scoreBoost: 10 },
     { keyword: "mots", resourceId: "ao-mots", scoreBoost: 8 },
-    { keyword: "burn out", resourceId: "ao-mots", scoreBoost: 10 },
+    { keyword: "burn out", resourceId: "sante-mentale", scoreBoost: 10 },
     { keyword: "epuisement soignant", resourceId: "ao-mots", scoreBoost: 10 },
 
     { keyword: "faq", resourceId: "faq", scoreBoost: 7 },
@@ -497,16 +549,32 @@ export const chatbotConfig: ChatbotConfig = {
     },
     "medecin-traitant": {
       id: "medecin-traitant",
-      message: "Pour la recherche de médecin traitant, voici les ressources utiles :",
+      message: "Quelle est votre situation ?",
       quickReplies: [
         {
-          id: "qr-voir-annuaire",
-          label: "Voir aussi l’annuaire",
-          value: "voir annuaire",
-          actionResourceIds: ["annuaire"],
+          id: "qr-medecin-traitant-chercher",
+          label: "Je cherche un médecin traitant",
+          value: "je cherche un medecin traitant",
+          nextNodeId: "medecin-traitant-chercher",
+        },
+        {
+          id: "qr-medecin-traitant-changer",
+          label: "Je veux changer de médecin",
+          value: "je veux changer de medecin",
+          nextNodeId: "medecin-traitant-changer",
+        },
+        {
+          id: "qr-medecin-traitant-indisponible",
+          label: "Mon médecin n'est plus disponible",
+          value: "mon medecin n est plus disponible",
+          nextNodeId: "medecin-traitant-indisponible",
         },
         restartQuickReply,
       ],
+    },
+    "medecin-traitant-chercher": {
+      id: "medecin-traitant-chercher",
+      message: "Voici les ressources utiles pour trouver un médecin traitant :",
       actions: [
         {
           type: "suggest_resources",
@@ -514,10 +582,54 @@ export const chatbotConfig: ChatbotConfig = {
         },
       ],
     },
+    "medecin-traitant-changer": {
+      id: "medecin-traitant-changer",
+      message: "Vous pouvez changer de médecin traitant à tout moment. Voici comment faire :",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["medecin-traitant"],
+        },
+      ],
+    },
+    "medecin-traitant-indisponible": {
+      id: "medecin-traitant-indisponible",
+      message: "En attendant de trouver un nouveau médecin traitant :",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["coordonnees", "annuaire"],
+        },
+      ],
+    },
     urgences: {
       id: "urgences",
-      message: "En cas de besoin urgent, voici les contacts adaptés :",
-      quickReplies: [restartQuickReply],
+      message: "De quel type d'aide avez-vous besoin ?",
+      quickReplies: [
+        {
+          id: "qr-urgence-medicale",
+          label: "Urgence médicale",
+          value: "urgence medicale",
+          nextNodeId: "urgence-medicale",
+        },
+        {
+          id: "qr-medecin-garde",
+          label: "Médecin de garde",
+          value: "medecin de garde",
+          nextNodeId: "medecin-garde",
+        },
+        {
+          id: "qr-pharmacie-garde",
+          label: "Pharmacie de garde",
+          value: "pharmacie de garde",
+          nextNodeId: "pharmacie-garde",
+        },
+        restartQuickReply,
+      ],
+    },
+    "urgence-medicale": {
+      id: "urgence-medicale",
+      message: "Appelez le 15 (SAMU) ou le 112.",
       actions: [
         {
           type: "suggest_resources",
@@ -525,14 +637,79 @@ export const chatbotConfig: ChatbotConfig = {
         },
       ],
     },
-    "sante-mentale": {
-      id: "sante-mentale",
-      message: "Pour la santé mentale, je vous propose ces ressources :",
-      quickReplies: [restartQuickReply],
+    "medecin-garde": {
+      id: "medecin-garde",
+      message: "Pour joindre un médecin de garde ou une consultation non programmée :",
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["sante-mentale", "sante-mentale-jeunes", "urgence-3114"],
+          resourceIds: ["coordonnees", "annuaire"],
+        },
+      ],
+    },
+    "pharmacie-garde": {
+      id: "pharmacie-garde",
+      message: "Pour trouver une pharmacie de garde :",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["pharmacie-garde", "coordonnees"],
+        },
+      ],
+    },
+    "sante-mentale": {
+      id: "sante-mentale",
+      message: "Comment puis-je vous orienter ?",
+      quickReplies: [
+        {
+          id: "qr-sante-mentale-psychologue",
+          label: "Je cherche un psychologue",
+          value: "je cherche un psychologue",
+          nextNodeId: "sante-mentale-psychologue",
+        },
+        {
+          id: "qr-sante-mentale-difficile",
+          label: "Je traverse une période difficile",
+          value: "je traverse une periode difficile",
+          nextNodeId: "sante-mentale-difficile",
+        },
+        {
+          id: "qr-sante-mentale-enfant",
+          label: "Pour mon enfant / adolescent",
+          value: "pour mon enfant adolescent",
+          nextNodeId: "sante-mentale-enfant",
+        },
+        restartQuickReply,
+      ],
+    },
+    "sante-mentale-psychologue": {
+      id: "sante-mentale-psychologue",
+      message: "Pour trouver un psychologue ou une ressource adaptée :",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["sante-mentale-annuaire", "sante-mentale", "ao-questions-psy"],
+        },
+      ],
+    },
+    "sante-mentale-difficile": {
+      id: "sante-mentale-difficile",
+      message:
+        "Je suis désolé que vous traversiez cela. Si vous êtes en danger immédiat, appelez le 15 ou le 112. Si vous avez des idées suicidaires ou besoin de parler rapidement, le 3114 est disponible 24h/24 et 7j/7.",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["sante-mentale", "urgence-3114", "sante-mentale-annuaire"],
+        },
+      ],
+    },
+    "sante-mentale-enfant": {
+      id: "sante-mentale-enfant",
+      message: "Pour un enfant ou un adolescent, voici les ressources les plus adaptées :",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["sante-mentale-jeunes", "sante-mentale", "sante-mentale-annuaire"],
         },
       ],
     },

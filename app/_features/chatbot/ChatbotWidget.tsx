@@ -84,6 +84,7 @@ export function ChatbotWidget() {
           className="fixed bottom-20 left-3 right-3 z-[70] sm:bottom-24 sm:left-auto sm:right-4 sm:w-[26rem]"
         >
           <ChatWindow
+            currentNodeId={state.currentNodeId}
             messages={state.messages}
             onSend={handleSend}
             onQuickReply={handleQuickReply}

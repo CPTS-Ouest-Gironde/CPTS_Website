@@ -32,6 +32,7 @@ export interface QuickReply {
   id: string
   label: string
   value: string
+  message?: string
   nextNodeId?: string
   actionResourceIds?: string[]
 }
@@ -64,7 +65,7 @@ export interface DecisionRule {
 export interface ChatbotRules {
   startNodeId: string
   fallbackNodeId: string
-  restartNodeId: string
+  restartNodeId?: string
   maxSuggestions: number
   minScore: number
   fuzzyDistanceThreshold: number

@@ -29,11 +29,13 @@ Le matching est géré par `matcher.ts` avec priorité: exact > contains > fuzzy
 3. Relier ce node depuis un quick reply via `nextNodeId`.
 
 ## Persistance et logs
-- Historique local: `localStorage` clé `cpts_chatbot_history`
-- Logs client: visibles en dev uniquement (console)
+- Historique de session: `sessionStorage` clé `cpts_chatbot_history`
+- L'historique n'est pas envoyé au serveur et disparaît à la fermeture du navigateur.
+- Aucun log client de contenu utilisateur.
 
 ## Tests
 - Lancer: `npm run test:chatbot`
 - Fichiers testés:
   - `normalize.test.ts`
   - `matcher.test.ts`
+  - `engine.test.ts`

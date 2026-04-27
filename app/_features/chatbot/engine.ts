@@ -11,22 +11,34 @@ import type {
 } from "./types"
 
 export const CHATBOT_HISTORY_KEY = "cpts_chatbot_history"
+const CHATBOT_PRIVACY_NOTICE =
+  "Cet échange n'est pas enregistré sur nos serveurs. L'historique est conservé localement sur votre navigateur et supprimé à la fermeture."
 const CHATBOT_HISTORY_VERSION = 4
+const RESOURCE_FOLLOW_UP_QUICK_REPLIES: QuickReply[] = [
+  {
+    id: "qr-resource-follow-up-yes",
+    label: "Oui, merci",
+    value: "oui merci",
+    message: "Parfait ! N'hésitez pas si vous avez d'autres questions.",
+    nextNodeId: "start",
+  },
+  {
+    id: "qr-resource-follow-up-no",
+    label: "Non, autre chose",
+    value: "non autre chose",
+    nextNodeId: "start",
+  },
+  {
+    id: "qr-resource-follow-up-contact",
+    label: "Contacter la CPTS",
+    value: "contacter la cpts",
+    actionResourceIds: ["contact-email", "coordonnees"],
+  },
+]
 const quickReplyLookupCache = new WeakMap<QuickReply[], Map<string, QuickReply>>()
 
 function isBrowser(): boolean {
   return typeof window !== "undefined"
-}
-
-function isDevelopment(): boolean {
-  return process.env.NODE_ENV === "development"
-}
-
-function logDev(event: string, payload: unknown): void {
-  if (isDevelopment()) {
-    // Minimal observability in dev only
-    console.info(`[chatbot] ${event}`, payload)
-  }
 }
 
 function createMessage(
@@ -47,6 +59,17 @@ function createMessage(
     quickReplies: extra.quickReplies,
     suggestions: extra.suggestions,
   }
+}
+
+function appendUserMessageWithPrivacyNotice(messages: ChatMessage[], text: string): ChatMessage[] {
+  const nextMessages = [...messages, createMessage("user", text)]
+  const hasPreviousUserMessage = messages.some((message) => message.role === "user")
+
+  if (hasPreviousUserMessage) {
+    return nextMessages
+  }
+
+  return [...nextMessages, createMessage("bot", CHATBOT_PRIVACY_NOTICE)]
 }
 
 function resolveNode(config: ChatbotConfig, nodeId: string): ChatNode {
@@ -71,6 +94,17 @@ function suggestionsFromResourceIds(config: ChatbotConfig, resourceIds: string[]
     .slice(0, config.rules.maxSuggestions)
 }
 
+function buildSuggestionMessages(message: string, suggestions: ResourceMatch[]): ChatMessage[] {
+  return [
+    createMessage("bot", message, {
+      suggestions,
+    }),
+    createMessage("bot", "Est-ce que cela répond à votre question ?", {
+      quickReplies: RESOURCE_FOLLOW_UP_QUICK_REPLIES,
+    }),
+  ]
+}
+
 function buildNodeMessages(config: ChatbotConfig, node: ChatNode): ChatMessage[] {
   const messages: ChatMessage[] = [
     createMessage("bot", node.message, {
@@ -92,11 +126,7 @@ function buildNodeMessages(config: ChatbotConfig, node: ChatNode): ChatMessage[]
       continue
     }
 
-    messages.push(
-      createMessage("bot", action.message ?? "Je vous conseille :", {
-        suggestions,
-      }),
-    )
+    messages.push(...buildSuggestionMessages(action.message ?? "Je vous conseille :", suggestions))
   }
 
   return messages
@@ -139,11 +169,15 @@ function applyQuickReplyWithoutUserMessage(
   const nextMessages = [...state.messages]
   let nextNodeId = state.currentNodeId
 
+  if (quickReply.message) {
+    nextMessages.push(createMessage("bot", quickReply.message))
+  }
+
   if (quickReply.actionResourceIds?.length) {
     const suggestions = suggestionsFromResourceIds(config, quickReply.actionResourceIds)
 
     if (suggestions.length) {
-      nextMessages.push(createMessage("bot", "Je vous conseille :", { suggestions }))
+      nextMessages.push(...buildSuggestionMessages("Je vous conseille :", suggestions))
     }
   }
 
@@ -157,11 +191,6 @@ function applyQuickReplyWithoutUserMessage(
     currentNodeId: nextNodeId,
     messages: nextMessages,
   }
-
-  logDev("quick-reply", {
-    quickReplyId: quickReply.id,
-    nextNodeId,
-  })
 
   return nextState
 }
@@ -206,7 +235,7 @@ export function hydrateState(config: ChatbotConfig): ChatbotState {
   }
 
   try {
-    const raw = window.localStorage.getItem(CHATBOT_HISTORY_KEY)
+    const raw = window.sessionStorage.getItem(CHATBOT_HISTORY_KEY)
     if (!raw) {
       return createInitialState(config)
     }
@@ -231,22 +260,22 @@ export function persistState(state: ChatbotState): void {
     return
   }
 
-  window.localStorage.setItem(
+  window.sessionStorage.setItem(
     CHATBOT_HISTORY_KEY,
     JSON.stringify({
       version: CHATBOT_HISTORY_VERSION,
       state,
     }),
   )
-  logDev("persist", {
-    currentNodeId: state.currentNodeId,
-    messageCount: state.messages.length,
-  })
 }
 
 export function restartConversation(config: ChatbotConfig): ChatbotState {
-  const nextState = createInitialState(config)
-  logDev("restart", { nodeId: nextState.currentNodeId })
+  const restartNode = resolveNode(config, config.rules.restartNodeId ?? "start")
+  const nextState = {
+    currentNodeId: restartNode.id,
+    messages: buildNodeMessages(config, restartNode),
+  }
+
   return nextState
 }
 
@@ -257,7 +286,7 @@ export function processQuickReply(
 ): ChatbotState {
   const stateWithUserMessage: ChatbotState = {
     ...state,
-    messages: [...state.messages, createMessage("user", quickReply.label)],
+    messages: appendUserMessageWithPrivacyNotice(state.messages, quickReply.label),
   }
 
   return applyQuickReplyWithoutUserMessage(stateWithUserMessage, config, quickReply)
@@ -274,7 +303,7 @@ export function processUserInput(
     return state
   }
 
-  const messagesWithUser = [...state.messages, createMessage("user", trimmed)]
+  const messagesWithUser = appendUserMessageWithPrivacyNotice(state.messages, trimmed)
   const normalizedInput = normalizeText(trimmed)
   const currentNode = resolveNode(config, state.currentNodeId)
   const matchedQuickReply = findTextQuickReply(currentNode, normalizedInput)
@@ -297,16 +326,25 @@ export function processUserInput(
     const suggestions = conversationalIntent.resourceIds
       ? suggestionsFromResourceIds(config, conversationalIntent.resourceIds)
       : undefined
+    const botMessages = suggestions?.length
+      ? [
+          createMessage("bot", conversationalIntent.message, {
+            quickReplies: conversationalIntent.quickReplies,
+            suggestions,
+          }),
+          createMessage("bot", "Est-ce que cela répond à votre question ?", {
+            quickReplies: RESOURCE_FOLLOW_UP_QUICK_REPLIES,
+          }),
+        ]
+      : [
+          createMessage("bot", conversationalIntent.message, {
+            quickReplies: conversationalIntent.quickReplies,
+          }),
+        ]
 
     return {
       currentNodeId: state.currentNodeId,
-      messages: [
-        ...messagesWithUser,
-        createMessage("bot", conversationalIntent.message, {
-          quickReplies: conversationalIntent.quickReplies,
-          suggestions,
-        }),
-      ],
+      messages: [...messagesWithUser, ...botMessages],
     }
   }
 
@@ -320,27 +358,13 @@ export function processUserInput(
   })
 
   if (matches.length > 0) {
-    logDev("keyword-match", {
-      input: trimmed,
-      matches: matches.map((match) => ({ resourceId: match.resource.id, score: match.score })),
-    })
-
     return {
       currentNodeId: state.currentNodeId,
-      messages: [
-        ...messagesWithUser,
-        createMessage("bot", "Je vous conseille :", {
-          suggestions: matches,
-        }),
-      ],
+      messages: [...messagesWithUser, ...buildSuggestionMessages("Je vous conseille :", matches)],
     }
   }
 
   const fallbackNode = resolveNode(config, config.rules.fallbackNodeId)
-  logDev("fallback", {
-    input: trimmed,
-    fallbackNodeId: fallbackNode.id,
-  })
 
   return {
     currentNodeId: fallbackNode.id,

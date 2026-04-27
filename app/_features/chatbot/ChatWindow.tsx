@@ -11,7 +11,12 @@ import { MessageBubble } from "./MessageBubble"
 import { QuickReplies } from "./QuickReplies"
 import type { ChatMessage, QuickReply } from "./types"
 
+const MAX_MESSAGE_LENGTH = 300
+const MESSAGE_TOO_LONG_ERROR = "Message trop long (300 caractères max)"
+export const QUICK_REPLIES_INITIAL_COUNT = 4
+
 interface ChatWindowProps {
+  currentNodeId: string
   messages: ChatMessage[]
   onSend: (input: string) => void
   onQuickReply: (reply: QuickReply) => void
@@ -19,8 +24,10 @@ interface ChatWindowProps {
   onClose: () => void
 }
 
-export function ChatWindow({ messages, onSend, onQuickReply, onRestart, onClose }: ChatWindowProps) {
+export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRestart, onClose }: ChatWindowProps) {
   const [draft, setDraft] = useState("")
+  const [inputError, setInputError] = useState<string | null>(null)
+  const [isStartQuickRepliesExpanded, setIsStartQuickRepliesExpanded] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -32,6 +39,10 @@ export function ChatWindow({ messages, onSend, onQuickReply, onRestart, onClose 
     inputRef.current?.focus()
   }, [])
 
+  useEffect(() => {
+    setIsStartQuickRepliesExpanded(false)
+  }, [currentNodeId, messages.length])
+
   const latestQuickReplies = useMemo(() => {
     const reversed = [...messages].reverse()
     const lastBotMessageWithQuickReplies = reversed.find(
@@ -41,16 +52,32 @@ export function ChatWindow({ messages, onSend, onQuickReply, onRestart, onClose 
     return lastBotMessageWithQuickReplies?.quickReplies ?? []
   }, [messages])
 
+  const shouldLimitStartQuickReplies =
+    currentNodeId === "start" &&
+    !isStartQuickRepliesExpanded &&
+    latestQuickReplies.length > QUICK_REPLIES_INITIAL_COUNT
+
+  const visibleQuickReplies = shouldLimitStartQuickReplies
+    ? latestQuickReplies.slice(0, QUICK_REPLIES_INITIAL_COUNT)
+    : latestQuickReplies
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const value = draft.trim()
     if (!value) {
+      setInputError(null)
+      return
+    }
+
+    if (value.length > MAX_MESSAGE_LENGTH) {
+      setInputError(MESSAGE_TOO_LONG_ERROR)
       return
     }
 
     onSend(value)
     setDraft("")
+    setInputError(null)
   }
 
   return (
@@ -85,7 +112,18 @@ export function ChatWindow({ messages, onSend, onQuickReply, onRestart, onClose 
         <div ref={bottomRef} />
       </div>
 
-      <QuickReplies replies={latestQuickReplies} onSelect={onQuickReply} />
+      <QuickReplies
+        replies={visibleQuickReplies}
+        onSelect={onQuickReply}
+        trailingAction={
+          shouldLimitStartQuickReplies
+            ? {
+                label: "Voir plus de catégories",
+                onClick: () => setIsStartQuickRepliesExpanded(true),
+              }
+            : undefined
+        }
+      />
 
       <form className="border-t border-border p-3" onSubmit={handleSubmit}>
         <label htmlFor="chatbot-input" className="sr-only">
@@ -96,14 +134,26 @@ export function ChatWindow({ messages, onSend, onQuickReply, onRestart, onClose 
             id="chatbot-input"
             ref={inputRef}
             value={draft}
-            onChange={(event) => setDraft(event.target.value)}
+            onChange={(event) => {
+              setDraft(event.target.value)
+              if (inputError) {
+                setInputError(null)
+              }
+            }}
             placeholder="Ex: Je cherche un médecin traitant"
             autoComplete="off"
+            aria-invalid={Boolean(inputError)}
+            aria-describedby={inputError ? "chatbot-input-error" : undefined}
           />
           <Button type="submit" size="icon" aria-label="Envoyer le message">
             <Send className="size-4" />
           </Button>
         </div>
+        {inputError ? (
+          <p id="chatbot-input-error" className="mt-2 text-xs font-medium text-destructive">
+            {inputError}
+          </p>
+        ) : null}
       </form>
     </div>
   )
