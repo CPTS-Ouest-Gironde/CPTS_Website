@@ -1,6 +1,12 @@
 {
   "slides": [
     {
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
+      "title": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
+      "alt": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
+      "link": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
+    },
+    {
       "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
       "title": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
       "alt": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",

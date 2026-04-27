@@ -1,0 +1,445 @@
+{
+  "date": "17 avril 2026",
+  "title": "L'endométriose\u00A0: qu'est-ce que c'est\u00A0? Quelle prise en charge\u00A0?",
+  "subtitle": "Comprendre les signes d'alerte, les examens, les traitements et les ressources de prise en charge en Gironde.",
+  "heroImage": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
+  "heroAlt": "Illustration stylisée d'un utérus entouré de fleurs rouges et bleues sur fond rose pâle",
+  "intro": {
+    "paragraphs": [
+      "L'endométriose est une maladie caractérisée par la présence anormale, en dehors de la cavité utérine, de muqueuse ressemblant à de l'endomètre (muqueuse interne de l'utérus).",
+      "Ces tissus provoquent une réaction inflammatoire et forment des lésions et des cicatrices.",
+      "L'endométriose peut apparaître dès la puberté et les premières règles. Il s'agit d'une maladie chronique qui peut régresser à la ménopause."
+    ]
+  },
+  "sections": [
+    {
+      "kind": "definition",
+      "id": "definition",
+      "title": "Définition de l'endométriose",
+      "intro": [
+        "Les lésions peuvent être différentes d'une femme à l'autre, être superficielles ou profondes, et les localisations peuvent être nombreuses."
+      ],
+      "tone": "white",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Tous les organes peuvent être touchés. Parmi les plus fréquemment concernés, on peut citer les **ovaires**, le **muscle de l'utérus** dans l'adénomyose, les **trompes utérines**, les **ligaments utérins**, la **paroi du vagin**, les **organes digestifs**, etc."
+        }
+      ],
+      "factorsTitle": "Facteurs favorisants décrits comme multifactoriels",
+      "factors": [
+        "Problèmes mécaniques qui obstruent l'appareil génital et favorisent les menstruations rétrogrades, par exemple des anomalies du col utérin",
+        "Prédisposition génétique avec risque familial",
+        "Réponse immunitaire et inflammatoire inadéquate de l'organisme",
+        "Exposition aux perturbateurs endocriniens",
+        "Femmes ayant un faible IMC ou un petit poids de naissance",
+        "Cycles menstruels courts et/ou règles abondantes"
+      ]
+    },
+    {
+      "kind": "stats",
+      "id": "chiffres-cles",
+      "title": "Chiffres clés",
+      "intro": [],
+      "tone": "neutral",
+      "stats": [
+        {
+          "value": "1 femme sur 10",
+          "label": "est concernée"
+        },
+        {
+          "value": "1,5 à 2,5 millions",
+          "label": "de femmes atteintes en France"
+        },
+        {
+          "value": "135 000 à 225 000",
+          "label": "femmes atteintes en Nouvelle-Aquitaine"
+        },
+        {
+          "value": "68,3 %",
+          "label": "des cas entre 25 et 49 ans"
+        },
+        {
+          "value": "70 %",
+          "label": "source de douleurs chroniques"
+        },
+        {
+          "value": "30 à 40 %",
+          "label": "présentent une infertilité"
+        }
+      ],
+      "note": "L'endométriose est présentée comme la premiére cause d'infertilité. Le retard diagnostique est estimé autour de 8 ans, et peut aller de 7 à 10 ans."
+    },
+    {
+      "kind": "symptomes",
+      "id": "symptomes",
+      "title": "Quels symptômes doivent vous alerter ?",
+      "intro": [
+        "Les douleurs sont propres à chacune. Elles peuvent être invalidantes et être responsables d'absentéisme scolaire ou professionnel."
+      ],
+      "tone": "white",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-symptome.jpeg",
+      "imageAlt": "Illustration d'une femme exprimant une douleur pelvienne",
+      "symptoms": [
+        {
+          "iconName": "HeartPulse",
+          "text": "Douleurs abdominales et pelviennes, plus fortes au moment des règles"
+        },
+        {
+          "iconName": "Users",
+          "text": "Douleurs lors des rapports sexuels, ou dyspareunie"
+        },
+        {
+          "iconName": "BadgeAlert",
+          "text": "Douleurs en urinant, ou dysurie"
+        },
+        {
+          "iconName": "BadgeAlert",
+          "text": "Douleurs lors de l'émission des selles, avec dyschésie et/ou ténesme"
+        },
+        {
+          "iconName": "Activity",
+          "text": "Fatigue chronique qui altère le bien-être psychique"
+        }
+      ],
+      "painTitle": "Douleurs chroniques",
+      "painBlocks": [
+        {
+          "type": "paragraph",
+          "text": "Les douleurs peuvent être liées aux **lésions** elles-mêmes, à l'**envahissement de nerfs** par ces lésions, aux **réactions inflammatoires** et aux **adhérences fibreuses et cicatricielles**."
+        }
+      ],
+      "redFlagsTitle": "Quels drapeaux rouges\u00A0?",
+      "redFlags": ["Infertilité", "Endométriome"]
+    },
+    {
+      "kind": "diagnostic",
+      "id": "diagnostic",
+      "title": "Quels examens pour faire le diagnostic ?",
+      "intro": ["Le diagnostic peut s'appuyer sur plusieurs examens."],
+      "tone": "neutral",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-examens.jpeg",
+      "imageAlt": "Illustration d'une consultation médicale pour le diagnostic de l'endométriose",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Examen gynécologique et pelvien",
+            "Échographie",
+            "IRM (centres de référence)",
+            "Endotest : prise en charge sous conditions et dans le cadre d'une étude"
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "professionnels",
+      "id": "professionnels",
+      "title": "Vers quels professionnels se tourner ?",
+      "intro": [
+        "Le dépistage et la prise en charge mobilisent plusieurs professionnels."
+      ],
+      "tone": "white",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-professionnels.jpg",
+      "imageAlt": "Illustration d'une praticienne entourée de symboles liés à la santé féminine",
+      "professionals": [
+        {
+          "title": "Sage-femme",
+          "iconName": "HeartHandshake",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "La sage-femme pratique en autonomie les actes cliniques et techniques nécessaires au suivi et à la surveillance des situations non pathologiques et au dépistage de situation pathologique."
+            },
+            {
+              "type": "paragraph",
+              "text": "Elle oriente ensuite la patiente vers un médecin qui établit la prise en charge."
+            }
+          ]
+        },
+        {
+          "title": "Médecin généraliste avec capacité ou DIU de gynécologie",
+          "iconName": "Stethoscope",
+          "blocks": []
+        },
+        {
+          "title": "Gynécologue",
+          "iconName": "ScanSearch",
+          "blocks": []
+        },
+        {
+          "title": "Chirurgien en gynécologie",
+          "iconName": "Syringe",
+          "blocks": []
+        }
+      ]
+    },
+    {
+      "kind": "traitements",
+      "id": "traitements",
+      "title": "Quels sont les traitements médicamenteux et chirurgicaux ?",
+      "intro": [
+        {
+          "type": "paragraph",
+          "text": "La prise en charge de première intention repose sur des **antalgiques**, avec un **AINS** en première intention."
+        },
+        {
+          "type": "paragraph",
+          "text": "En cas d'échec, un **traitement hormonal de première intention** peut être proposé."
+        }
+      ],
+      "tone": "neutral",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-traitements.jpg",
+      "imageAlt": "Illustration d'un utérus fleuri tenu entre deux mains",
+      "careCallout": "L'endométriose nécessite une prise en charge lorsqu'elle a un retentissement fonctionnel, comme la douleur ou l'infertilité, ou lorsqu'elle entraîne une altération du fonctionnement d'un organe.",
+      "careNote": "Il n'est pas nécessaire de rechercher une endométriose en cas de dysménorrhée isolée et contrôlée par une contraception hormonale, sans autre symptôme douloureux ni souhait de grossesse immédiat.",
+      "treatmentCards": [
+        {
+          "title": "Traitements hormonaux",
+          "iconName": "Pill",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Ils sont indiqués en cas d'échec d'un traitement antalgique bien mené pendant **3 mois**."
+            },
+            {
+              "type": "paragraph",
+              "text": "L'objectif est d'obtenir une **dose hormonale fixe continue** tout le long du mois afin d'obtenir une **oligo/aménorrhée**."
+            },
+            {
+              "type": "paragraph",
+              "text": "Le traitement est délivré sur **prescription médicale**."
+            },
+            {
+              "type": "list",
+              "items": [
+                "1re intention : COP (contraception œstroprogestative)",
+                "2e intention : DIENOGEST 2 mg depuis 12/2025, demi-vie courte, prise à heure fixe, bloque l'ovulation et agit comme contraceptif. Avec un recul de 65 semaines, les principaux effets indésirables rapportés sont les céphalées, la tension mammaire, l'acné et l'effet dépressif ; l'ensemble de ces symptômes concerne moins de 10 % des patientes.",
+                "3e option : DIU MIRENA (stérilet au levonorgestrel)",
+                "4e option : RYEQO, antagonistes de la LH-RH avec add back intégrée par NETA 0,5 mg et estradiol 1 mg ; AMM fibromes puis endométriose en Europe puis en France ; commercialisation en février 2025"
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Place de la chirurgie",
+          "iconName": "Microscope",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "La chirurgie peut être indiquée dans quatre situations."
+            },
+            {
+              "type": "paragraph",
+              "text": "1. Elle est urgente en cas de mise en péril d'un organe, avec une atteinte paramétriale, digestive, vésicale, diaphragmatique ou urétérale."
+            },
+            {
+              "type": "paragraph",
+              "text": "2. Elle peut être proposée en cas d'échec des thérapeutiques médicamenteuses."
+            },
+            {
+              "type": "paragraph",
+              "text": "3. Elle est également indiquée en cas d'infertilité et échec des traitements en procréation médicalement assistée (PMA), ou en cas d'infertilité et de douleur."
+            },
+            {
+              "type": "paragraph",
+              "text": "4. Elle peut être envisagée en première intention dans certains cas exceptionnels."
+            },
+            {
+              "type": "paragraph",
+              "text": "Modalités de la chirurgie :"
+            },
+            {
+              "type": "paragraph",
+              "text": "**Exérèse uniquement** : la coagulation, l'ablation, la thermocoagulation et le laser sont moins efficaces et entraînent des séquelles."
+            },
+            {
+              "type": "paragraph",
+              "text": "Il faut privilégier **une seule chirurgie**."
+            },
+            {
+              "type": "paragraph",
+              "text": "Seules les **lésions symptomatiques** doivent être traitées."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Attention aux infox** : dans des mains formées, le taux de complications est très faible pour les chirurgies simples (**stade 1 et 2**). Pour les chirurgies complexes (**stade 4**), en centre de référence, le taux de complications sévères est **inférieur à 10 %**."
+            }
+          ]
+        },
+        {
+          "title": "Classification ASRM (American Society for Reproductive Medicine)",
+          "iconName": "Layers",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "La classification en quatre stades permet d'évaluer la sévérité de l'endométriose en fonction de la taille et de la localisation des lésions. Cette évaluation est réalisée lors d'une intervention chirurgicale par laparoscopie."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 1 (minimale)** : petites lésions dans l'utérus, les ovaires, les trompes de Fallope et le péritoine."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 2 (légère)** : lésions plus étendues, avec possible présence de kystes endométriaux (kystes chocolat) sur les ovaires et modifications du cul-de-sac de Douglas."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 3 (modérée)** : adhérences importantes et atteinte du ligament utéro-sacré."
+            },
+            {
+              "type": "paragraph",
+              "text": "**Stade 4 (sévère)** : adhérences nombreuses provoquant une déformation des organes, une diminution de la mobilité et une rétroversion de l'utérus ; foyers endométriaux pouvant s'étendre à la vessie, au vagin, aux intestins et au col de l'utérus."
+            }
+          ]
+        }
+      ],
+      "credit": ""
+    },
+    {
+      "kind": "risques",
+      "id": "risques-associes",
+      "title": "Quels sont les risques associés à l'endométriose ?",
+      "intro": [],
+      "tone": "white",
+      "risks": [
+        "Risque de néoplasies des ovaires multiplié de x 1,1 à 2",
+        "Risque de maladie cardiovasculaire multiplié par x 2",
+        "Dépression multipliée par x 2",
+        "Infertilité multipliée de x 3 à x 10",
+        "Complications obstétricales",
+        "Maladies auto-immunes multipliées par x 6",
+        "Troubles de la sexualité"
+      ]
+    },
+    {
+      "kind": "multidisciplinaire",
+      "id": "prise-en-charge-multidisciplinaire",
+      "title": "Prise en charge multidisciplinaire",
+      "intro": [
+        "La meilleure prise en charge est une prise en charge globale pluriprofessionnelle avec les professions suivantes\u00A0:"
+      ],
+      "tone": "neutral",
+      "transitionText": "Sans oublier le travail associatif investi dans la santé de la femme.",
+      "cards": [
+        {
+          "title": "Professionnels impliqués",
+          "iconName": "Users",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "Algologue",
+                "Médecin généraliste",
+                "Gynécologues-obstétriciens",
+                "Kinésithérapeute",
+                "Sage-femme",
+                "Psychologue",
+                "Sexologue",
+                "+/- cardiologue",
+                "+/- endocrinologue"
+              ]
+            }
+          ]
+        }
+      ],
+      "association": {
+        "title": "Association DisDameDonc",
+        "paragraphs": [
+          "**DisDameDonc** est une association d'intérêt général, née en Nouvelle-Aquitaine en 2018 et portée par un collectif d'une dizaine de professionnelles du médico-social et du soin, engagées pour une meilleure prise en compte des spécificités féminines dans le domaine de la santé.",
+          "Elle propose un programme ETP labellisé ARS pour les femmes atteintes d'endométriose en Gironde."
+        ],
+        "siteUrl": "https://disdamedonc.fr",
+        "siteLabel": "Visiter le site de DisDameDonc",
+        "pdfUrl": "https://drive.google.com/file/d/1jfY5jgGNEOYyrOl96XlK9473kcAHedIu/view?usp=sharing",
+        "pdfLabel": "Télécharger la plaquette PDF"
+      }
+    },
+    {
+      "kind": "annuaire",
+      "id": "annuaire-gironde",
+      "title": "Annuaire des centres spécialisés en Gironde",
+      "intro": [],
+      "tone": "white",
+      "centers": [
+        {
+          "name": "CHU de Bordeaux",
+          "description": "Centre expert en endométriose avec prise en charge globale et multidisciplinaire.",
+          "address": "Centre Aliénor d'Aquitaine, Place Amélie Raba-Léon, 33076 Bordeaux (Hôpital de Jour, 1er étage, secteur ambulatoire, aile sud)",
+          "phone": "+33556795835",
+          "phoneDisplay": "05 56 79 58 35"
+        },
+        {
+          "name": "Clinique Tivoli-Ducos et Centre IFEM Endo",
+          "description": "Centre spécialisé dans la prise en charge médicale et chirurgicale.",
+          "address": "5 Rue Auguste Poirson, 33000 Bordeaux",
+          "phone": "+33564100945",
+          "phoneDisplay": "05 64 10 09 45"
+        },
+        {
+          "name": "Maison de santé protestante de Bagatelle",
+          "description": "Centre multidisciplinaire de prise en charge.",
+          "address": "203 Route de Toulouse, 33401 Talence",
+          "phone": "+33557124035",
+          "phoneDisplay": "05 57 12 40 35",
+          "email": "chirurgiegyneco@mspb.com"
+        },
+        {
+          "name": "Polyclinique Jean Villar",
+          "description": "Centre de prise en charge, membre de l'AFENA.",
+          "address": "56 Avenue Maryse Bastié, 33520 Bruges",
+          "phone": "+33556286628",
+          "phoneDisplay": "05 56 28 66 28"
+        },
+        {
+          "name": "Polyclinique Bordeaux-Rive Droite",
+          "description": "Centre de prise en charge.",
+          "address": "24 rue des Cavailles, 33310 Lormont",
+          "phone": "+33557808484",
+          "phoneDisplay": "05 57 80 84 84"
+        },
+        {
+          "name": "Clinique Sainte-Anne (Langon)",
+          "description": "Centre expert.",
+          "address": "19 Route de Brannens, 33210 Langon",
+          "phone": "+33557985413",
+          "phoneDisplay": "05 57 98 54 13",
+          "email": "gynecochirlangon@gmail.com"
+        }
+      ]
+    },
+    {
+      "kind": "videos",
+      "id": "temoignages-video",
+      "title": "Témoignages vidéo",
+      "intro": ["Deux témoignages vidéo sont proposés en complément."],
+      "tone": "neutral",
+      "videos": [
+        {
+          "title": "Maï témoigne",
+          "url": "https://www.youtube.com/shorts/pZCTpPMO9no"
+        },
+        {
+          "title": "Vivre avec endométriose et adénomyose",
+          "url": "https://www.youtube.com/shorts/9A44b2qsLwA"
+        }
+      ]
+    },
+    {
+      "kind": "resources",
+      "id": "ressources-complementaires",
+      "title": "Ressource complémentaire",
+      "intro": ["Un lien complémentaire pour poursuivre la lecture."],
+      "tone": "white",
+      "resources": [
+        {
+          "title": "Post du Ministère de la Santé",
+          "description": "Voir le post LinkedIn du Ministère de la Santé consacré à l'endométriose.",
+          "url": "https://www.linkedin.com/posts/ministere-de-la-sante_endomaeztriose-activity-7449350710778834944-Pxx3",
+          "label": "Ouvrir la ressource"
+        }
+      ]
+    }
+  ],
+  "acknowledgment": "Merci au Dr Adrien Crestani et à son centre, ainsi qu'à Marie Amélie Bonnet (sage-femme)."
+}
