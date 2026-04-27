@@ -119,7 +119,7 @@ export default async function PmoHomePage({ searchParams }: PmoPageProps) {
                   <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
                     <FormSection
                       description="Retrouvez vos saisies PSO et enregistrez une nouvelle intervention."
-                      eyebrow="Tableau PMO"
+                      eyebrow="Tableau PSO"
                       title="Bienvenue sur votre espace PSO."
                     />
 
