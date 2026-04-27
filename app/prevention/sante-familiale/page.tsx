@@ -52,7 +52,7 @@ export default function SanteFamilialePage() {
 
       {/* Hero Section - Always visible */}
       {(
-        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-rose-50/50 via-background to-pink-50/30">
+        <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-rose-50/50 via-background to-pink-50/30 pt-28 lg:pt-32">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 max-w-6xl mx-auto">
               {/* Texte */}

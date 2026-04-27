@@ -54,6 +54,22 @@
       "description": ""
     },
     {
+      "id": "violences-femmes-3919",
+      "category": "urgences-non-vitales",
+      "label": "Violences femmes info",
+      "number": "39 19",
+      "iconName": "Phone",
+      "description": "Numéro national d'écoute, d'information et d'orientation."
+    },
+    {
+      "id": "prevention-suicide-3114",
+      "category": "urgences-non-vitales",
+      "label": "Prévention du suicide",
+      "number": "31 14",
+      "iconName": "Phone",
+      "description": "Numéro national de prévention du suicide (24h/24, 7j/7)."
+    },
+    {
       "id": "adultes-pellegrin",
       "category": "urgences-medicales",
       "label": "Adultes Pellegrin",

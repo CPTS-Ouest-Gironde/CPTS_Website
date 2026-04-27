@@ -66,6 +66,7 @@ export default function MedecinTraitantPage() {
             fill
             className="object-contain"
             priority
+            sizes="550px"
             aria-hidden="true"
           />
         </div>
@@ -89,6 +90,7 @@ export default function MedecinTraitantPage() {
                 fill
                 className="object-contain"
                 priority
+                sizes="256px"
               />
             </div>
           </div>
@@ -96,17 +98,14 @@ export default function MedecinTraitantPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-12 lg:py-20 bg-secondary/20">
+      <section className="py-12 lg:py-20 bg-secondary/20 [content-visibility:auto] [contain-intrinsic-size:700px]">
         <div className="container mx-auto px-4 max-w-6xl">
           {/* Benefits Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {medecinTraitantData.benefits.map((benefit) => {
               const Icon = iconMap[benefit.iconName] || FolderOpen;
               return (
-                <Card
-                  key={benefit.id}
-                  className="hover:shadow-lg transition-shadow"
-                >
+                <Card key={benefit.id}>
                   <CardContent className="p-5 space-y-3 text-center">
                     <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
                       <Icon className="w-7 h-7 text-primary" />
@@ -126,7 +125,7 @@ export default function MedecinTraitantPage() {
       </section>
 
       {/* Choix du médecin traitant */}
-      <section className="py-10 bg-background">
+      <section className="py-10 bg-background [content-visibility:auto] [contain-intrinsic-size:380px]">
         <div className="container mx-auto px-4 max-w-4xl">
           <Card>
             <CardContent className="p-6 md:p-8 space-y-4">
@@ -145,7 +144,7 @@ export default function MedecinTraitantPage() {
       </section>
 
       {/* Déclaration */}
-      <section className="py-10 bg-secondary/10">
+      <section className="py-10 bg-secondary/10 [content-visibility:auto] [contain-intrinsic-size:520px]">
         <div className="container mx-auto px-4 max-w-4xl">
           <Card>
             <CardContent className="p-6 md:p-8 space-y-5">
@@ -196,7 +195,7 @@ export default function MedecinTraitantPage() {
       </section>
 
       {/* Image médecin traitant */}
-      <section className="py-12 bg-background">
+      <section className="py-12 bg-background [content-visibility:auto] [contain-intrinsic-size:700px]">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="relative max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-lg">
             <Image
@@ -205,13 +204,14 @@ export default function MedecinTraitantPage() {
               width={800}
               height={533}
               className="w-full h-auto"
+              sizes="(max-width: 768px) 100vw, 672px"
             />
           </div>
         </div>
       </section>
 
       {/* Vous ne trouvez pas de médecin traitant */}
-      <section className="py-10 bg-secondary/10">
+      <section className="py-10 bg-secondary/10 [content-visibility:auto] [contain-intrinsic-size:1100px]">
         <div className="container mx-auto px-4 max-w-4xl">
           <Card>
             <CardContent className="p-6 md:p-8 space-y-5">
@@ -320,7 +320,7 @@ export default function MedecinTraitantPage() {
       </section>
 
       {/* Downloads Section */}
-      <section className="py-10 bg-background">
+      <section className="py-10 bg-background [content-visibility:auto] [contain-intrinsic-size:520px]">
         <div className="container mx-auto px-4 max-w-4xl">
           <div className="space-y-5">
             <div>

@@ -68,7 +68,7 @@ export default function AdhesionPage() {
 
               <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
                 {/* Step 1 */}
-                <Card className="p-8 lg:p-10 rounded-3xl bg-card border-2 relative overflow-hidden hover:border-primary/50 transition-colors">
+                <Card className="p-8 lg:p-10 rounded-3xl bg-card border-2 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-primary/30 to-primary/50" />
                   <div className="flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 border-2 border-primary/30 text-primary text-4xl font-bold mb-6 mx-auto">
                     1
@@ -84,7 +84,7 @@ export default function AdhesionPage() {
                 </Card>
 
                 {/* Step 2 */}
-                <Card className="p-8 lg:p-10 rounded-3xl bg-card border-2 relative overflow-hidden hover:border-accent/50 transition-colors">
+                <Card className="p-8 lg:p-10 rounded-3xl bg-card border-2 relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-accent/30 to-accent/50" />
                   <div className="flex items-center justify-center w-20 h-20 rounded-full bg-accent/20 border-2 border-accent/40 text-accent-foreground text-4xl font-bold mb-6 mx-auto">
                     2
@@ -116,7 +116,7 @@ export default function AdhesionPage() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6">
-                <Card className="p-6 rounded-2xl bg-card border-2 hover:border-primary/50 transition-colors">
+                <Card className="p-6 rounded-2xl bg-card border-2">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
@@ -131,7 +131,7 @@ export default function AdhesionPage() {
                   </div>
                 </Card>
 
-                <Card className="p-6 rounded-2xl bg-card border-2 hover:border-primary/50 transition-colors">
+                <Card className="p-6 rounded-2xl bg-card border-2">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
@@ -146,7 +146,7 @@ export default function AdhesionPage() {
                   </div>
                 </Card>
 
-                <Card className="p-6 rounded-2xl bg-card border-2 hover:border-primary/50 transition-colors">
+                <Card className="p-6 rounded-2xl bg-card border-2">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
@@ -160,7 +160,7 @@ export default function AdhesionPage() {
                   </div>
                 </Card>
 
-                <Card className="p-6 rounded-2xl bg-card border-2 hover:border-primary/50 transition-colors">
+                <Card className="p-6 rounded-2xl bg-card border-2">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
@@ -175,7 +175,7 @@ export default function AdhesionPage() {
                   </div>
                 </Card>
 
-                <Card className="p-6 rounded-2xl bg-card border-2 hover:border-primary/50 transition-colors">
+                <Card className="p-6 rounded-2xl bg-card border-2">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>
@@ -190,7 +190,7 @@ export default function AdhesionPage() {
                   </div>
                 </Card>
 
-                <Card className="p-6 rounded-2xl bg-card border-2 hover:border-primary/50 transition-colors">
+                <Card className="p-6 rounded-2xl bg-card border-2">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div>

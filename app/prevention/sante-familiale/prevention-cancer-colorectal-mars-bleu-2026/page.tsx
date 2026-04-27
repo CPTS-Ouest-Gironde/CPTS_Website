@@ -11,12 +11,25 @@ import {
   ExternalLink,
   MapPin,
 } from "lucide-react";
-import { InstagramEmbed } from "@/components/instagram-embed";
 import { Card, CardContent } from "@/components/ui/card";
 import data from "@/app/data/cancer-colorectal-mars-bleu-2026.json";
 
 export default function CancerColorectalPage() {
-  const { intro, chiffresClés, facteurs, depistage, participation, commentSeFaireDepister, exclus, evenements, instagram } = data;
+  const {
+    intro,
+    chiffresClés,
+    facteurs,
+    depistage,
+    participation,
+    commentSeFaireDepister,
+    exclus,
+    evenements,
+    linkedin,
+  } = data;
+  const isResourceHubExternal =
+    "resourceHub" in commentSeFaireDepister &&
+    !!commentSeFaireDepister.resourceHub &&
+    /^https?:\/\//.test(commentSeFaireDepister.resourceHub.url);
   const exclusHighlights = ["patients à hauts risques", "symptômes suspects"];
 
   const renderExclusItem = (text: string) => {
@@ -46,7 +59,7 @@ export default function CancerColorectalPage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-24 lg:pt-32 pb-12 overflow-hidden">
+      <section className="relative pt-28 lg:pt-32 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-blue-700/5 to-background" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -121,6 +134,27 @@ export default function CancerColorectalPage() {
                   </div>
                 ))}
               </div>
+
+              {"resourceHub" in commentSeFaireDepister &&
+                commentSeFaireDepister.resourceHub && (
+                  <div className="rounded-2xl border border-cyan-200 bg-cyan-50/40 p-5 sm:p-6 space-y-3">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {commentSeFaireDepister.resourceHub.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {commentSeFaireDepister.resourceHub.text}
+                    </p>
+                    <a
+                      href={commentSeFaireDepister.resourceHub.url}
+                      target={isResourceHubExternal ? "_blank" : undefined}
+                      rel={isResourceHubExternal ? "noopener noreferrer" : undefined}
+                      className="inline-flex items-center gap-2 rounded-full bg-cyan-700 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-cyan-800"
+                    >
+                      {commentSeFaireDepister.resourceHub.urlLabel}
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  </div>
+                )}
             </div>
 
             {/* FACTEURS DE RISQUE */}
@@ -319,6 +353,9 @@ export default function CancerColorectalPage() {
                                 {"title" in evt && evt.title ? evt.title : evt.label}
                               </h3>
                               <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                                {"textBold" in evt && evt.textBold && (
+                                  <strong className="font-semibold text-foreground">{evt.textBold} </strong>
+                                )}
                                 {evt.text}
                               </p>
                               {"link" in evt && evt.link && (
@@ -405,11 +442,30 @@ export default function CancerColorectalPage() {
               </CardContent>
             </Card>
 
-            {/* INSTAGRAM */}
+            {/* LINKEDIN */}
             <div className="space-y-4">
-              <h2 className="text-xl font-bold text-foreground">{instagram.title}</h2>
-              <p className="text-sm text-muted-foreground">{instagram.text}</p>
-              <InstagramEmbed url={instagram.url} />
+              <h2 className="text-xl font-bold text-foreground">{linkedin.title}</h2>
+              <p className="text-sm text-muted-foreground">{linkedin.text}</p>
+
+              <div className="flex justify-center">
+                <div className="relative w-full max-w-[560px] h-[980px] sm:h-[900px] lg:h-[820px] rounded-2xl overflow-hidden border border-blue-100 bg-white shadow-sm transition-shadow hover:shadow-md">
+                  <a
+                    href={linkedin.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Ouvrir le post LinkedIn: ${linkedin.title}`}
+                    className="absolute inset-0 z-10"
+                  />
+                  <iframe
+                    src={linkedin.embedUrl}
+                    className="w-full h-full pointer-events-none"
+                    frameBorder="0"
+                    allowFullScreen
+                    title={linkedin.title}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
 
           </div>

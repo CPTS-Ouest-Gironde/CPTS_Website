@@ -14,7 +14,8 @@ export function DownloadButton({
   return (
     <a
       href={fileUrl}
-      download
+      target="_blank"
+      rel="noopener noreferrer"
       className={`relative flex items-center w-full px-6 py-4 bg-orange-600 text-white rounded-xl font-semibold transition-all duration-300 hover:bg-orange-700 hover:shadow-xl hover:scale-[1.02] group overflow-hidden ${className}`}
       aria-label={`Télécharger ${fileName}`}
     >

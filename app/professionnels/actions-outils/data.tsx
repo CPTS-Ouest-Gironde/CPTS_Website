@@ -55,8 +55,12 @@ Comment : Saisir la CPAM de situations d'assurés via un formulaire de saisine �
     content: "",
     files: [
       {
-        name: "Pharmacies participantes",
-        url: "/actions-outils/Affiche-Pharmacies-CPTS-OG.pdf",
+        name: "Affiche pour les rhinites allergiques",
+        url: "https://drive.google.com/file/d/1uuVGvvxw-8opQ1dra0wGogIhPY4LXlK3/view?usp=drive_link",
+      },
+      {
+        name: "Je souhaite participer au SAS",
+        url: "https://drive.google.com/file/d/1WVB2B-RZ33Km7G_8crJ4uK-B0WG05fsk/view?usp=sharing",
       },
     ],
     customContent: (
@@ -285,7 +289,7 @@ export const accordionItemsParcours: AccordionItem[] = [
         {/* Sous-titre */}
         <div className="pt-6 border-t-2 border-gray-200">
           <h3 className="text-2xl font-bold text-foreground mb-6">
-            Pour faciliter la prise en charge pluripro
+            Pour faciliter la prise en charge pluriprofessionnelle
           </h3>
           <div className="space-y-4">
             {/* <p className="text-muted-foreground leading-relaxed">
@@ -430,24 +434,29 @@ export const accordionItemsParcours: AccordionItem[] = [
               fileName="emsi²"
               fileUrl="/actions-outils/sante-mentale/emsi%C2%B2.pdf"
             />
-            <DownloadButton
-              fileName="Réponse Psy"
-              fileUrl="/actions-outils/sante-mentale/flyer-Reponse-Psy.pdf"
-            />
           </div>
         </div>
 
-        {/* Section 2: Re-Med */}
+        {/* Section 2: Re-Med + Réponse Psy */}
         <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
           <h4 className="text-xl font-bold text-foreground mb-4">
             Dispositif réservé aux médecins généralistes du territoire:
           </h4>
-          <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
-            <p className="font-bold text-primary text-lg mb-2">Re-Med</p>
-            <p className="text-sm text-muted-foreground italic">
-              (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
-              projet Parcours Santé mentale 'boite à outils')
-            </p>
+          <div className="space-y-3">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
+              <p className="font-bold text-primary text-lg mb-2">Re-Med</p>
+              <p className="text-sm text-muted-foreground italic">
+                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
+                projet Parcours Santé mentale 'boite à outils')
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
+              <p className="font-bold text-primary text-lg mb-2">Réponse Psy</p>
+              <p className="text-sm text-muted-foreground italic">
+                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
+                projet Parcours Santé mentale 'boite à outils')
+              </p>
+            </div>
           </div>
         </div>
 
@@ -496,48 +505,57 @@ export const accordionItemsParcours: AccordionItem[] = [
               <h4 className="text-xl font-bold text-primary">
                 Les RCP Psy de la CPTS
               </h4>
+              <Link
+                href="/professionnels/actions-outils/les-dispositifs-du-territoire"
+                className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
+              >
+                Accéder aux ressources
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              cf onglet Réunion de Concertation Pluriprofessionnelles
+              cf onglet Réunion de Concertation Pluriprofessionnelle
             </p>
           </div>
 
-          {/* Questionnaire d'adressage */}
+          {/* Demande d'orientation */}
           <div className="bg-primary/5 p-6 rounded-xl space-y-4">
             <h4 className="text-xl font-bold text-foreground">
-              Questionnaire d'adressage à IDE Psy
+              Demande d'orientation
             </h4>
-            <p className="text-sm text-muted-foreground">
-              (basée à Maison de Santé les Pins 33600 Pessac)
+            <p className="text-muted-foreground leading-relaxed">
+              Vous êtes en difficulté avec une prise en charge en santé mentale
+              ? Vous souhaitez un avis spécialisé pour une orientation.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Une infirmière en psychiatrie de la Maison de santé les Pins
+              (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
+              un temps dédié pour vous répondre
             </p>
 
             <div className="space-y-3">
-              <div>
-                <p className="font-semibold text-foreground mb-2">
-                  Objectifs :
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Graduer et fluidifier le parcours pour les professionnels de
-                  santé, rendre visible l'offre sur le territoire et diminuer
-                  les délais de prise en charge psychiatriques, acquérir des
-                  réflexes, autonomiser les professionnels de santé sur la mise
-                  en réseau
-                </p>
-              </div>
-
-              <div>
-                <p className="font-semibold text-foreground mb-2">
-                  Processus :
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Le professionnel de santé (MG, IDEL, Kinésithérapeute,
-                  psychologue) remplit le questionnaire d'adressage
-                  (téléchargeable sur Plexus - Projet Santé mentale 'Boite à
-                  outils') puis l'envoie à IDE Psy par MSS. IDE Psy répond par
-                  un mail au PS précisant orientation possible avec proposition
-                  de rdv téléphonique si besoin.
-                </p>
-              </div>
+              <p className="font-semibold text-foreground">Comment ?</p>
+              <ul className="space-y-2 text-muted-foreground leading-relaxed">
+                <li>
+                  • Remplir le formulaire de demande d'orientation disponible
+                  sur Plexus Santé
+                </li>
+                <li>
+                  • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
+                  <a
+                    href="mailto:elise.patenere@pro.mssante.fr"
+                    className="text-primary hover:underline font-semibold"
+                  >
+                    elise.patenere@pro.mssante.fr
+                  </a>
+                </li>
+                <li>
+                  • L'IDE Psy (Elise Patenere) répond par un mail au
+                  Professionnel de Santé proposant une orientation possible
+                  ( et/ou rdv téléphonique si besoin pour expliciter
+                  l'orientation).
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -734,7 +752,7 @@ export const accordionItemsPrevention: AccordionItem[] = [
     content: "",
     files: [],
     customContent: (
-      <div className="space-y-4">
+      <div className="space-y-5">
         <p className="text-muted-foreground leading-relaxed">
           Une prévention ciblée – vers les patients en retard dans leur
           dépistage pour leur proposer une solution de proximité.
@@ -755,13 +773,17 @@ export const accordionItemsPrevention: AccordionItem[] = [
           téléphone aux assurés
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Avec des opérations « aller vers » grâce à des professionnels de santé
-          qui se déplacent dans les quartiers
+          Avec des opérations « aller vers » grâce à des professionnels de
+          santé qui se déplacent dans les quartiers
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Une action de dépistage a été menée à la RPA Jean Brocas de Mérignac
           le 29 novembre 2024 (avec 3 Gynécologues, 1 sage femme, 1 médecin
           généraliste adhérentes de la CPTS)
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Prochaine action de dépistage au Foyer occupationnel Jenny Lepreux à
+          Mérignac le 16 avril 2026
         </p>
       </div>
     ),
@@ -816,7 +838,7 @@ export const accordionItemsPrevention: AccordionItem[] = [
         <div className="rounded-xl border border-gray-200 bg-primary/5 p-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-muted-foreground leading-relaxed">
-              Des mémos de suivi disponibles sur le site
+              Des fiches de suivi disponibles sur le site
             </p>
             <Link
               href="/prevention/memos-suivi"
@@ -946,5 +968,111 @@ Les professionnels de santé de la CPTS impliqués: Médecins Généralistes et 
       </div>
     ),
     files: [],
+  },
+];
+
+export const accordionItemsSSE: AccordionItem[] = [
+  {
+    id: "sse-presentation",
+    title: "SSE — Situations Sanitaires Exceptionnelles",
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-5">
+        <p className="text-muted-foreground leading-relaxed">
+          Une situation sanitaire exceptionnelle (SSE) se caractérise par la
+          survenue d'un événement émergent, inhabituel et/ou méconnu qui dépasse
+          le cadre de la gestion courante d'une situation sanitaire. Ces
+          situations sont susceptibles d'engendrer de façon immédiate et
+          imprévisible une augmentation sensible de la demande de soins ou une
+          perturbation de l'organisation de l'offre de soins.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Le facteur déclencheur d'une SSE peut être d'origine purement
+          sanitaire (ex. : pandémie du Covid-19), ou alors lié à des événements
+          extérieurs au domaine sanitaire tels que la survenue d'un événement
+          majeur sur le territoire (aléa naturel, anthropique ou technologique)
+          avec des répercussions sanitaires.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Les CPTS ont joué un rôle actif pendant la crise sanitaire Covid-19 et
+          ont démontré que, dans la réponse aux situations sanitaires
+          exceptionnelles, elles constituent un lien pertinent entre les
+          différents acteurs engagés sur un territoire.
+        </p>
+        <div className="flex flex-col gap-6 pt-2">
+          {/* Miniature vidéo */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
+              Vidéo — Le sac d&apos;urgence
+            </h4>
+            <a
+              href="https://drive.google.com/file/d/18mvxT6HEz-V5P32GdLCbF-BY3z0D30w3/view?usp=drive_link"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full max-w-lg rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-all duration-200"
+            >
+              <img
+                src="/actions-outils/SSE/migna-sac-urgence.webp"
+                alt="Sac D'urgence En Pôle santé — Dr Chloé Galmiche"
+                className="w-full h-auto"
+              />
+              <div className="absolute inset-0 bg-black/35 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-white/95 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-200">
+                  <svg className="w-5 h-5 text-primary ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/60 to-transparent px-3 py-2">
+                <p className="text-white text-xs font-medium">Voir la vidéo →</p>
+              </div>
+            </a>
+          </div>
+
+          {/* Schéma SSE */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
+              Organisation du dispositif
+            </h4>
+            <button
+              className="group relative block w-full text-left"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-sse-image", { detail: { src: "/actions-outils/SSE/schema-SSE.webp", alt: "Schéma du dispositif SSE — ORSAN et coordination territoriale" } }))}
+              aria-label="Agrandir le schéma"
+            >
+              <img
+                src="/actions-outils/SSE/schema-SSE.webp"
+                alt="Schéma du dispositif SSE — ORSAN et coordination territoriale"
+                className="w-full h-auto rounded-xl border border-border shadow-sm group-hover:opacity-90 transition-opacity"
+              />
+              <div className="absolute top-2 right-2 w-8 h-8 rounded-lg bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">
+                <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+              </div>
+            </button>
+          </div>
+
+          {/* Flyer */}
+          <div className="space-y-2">
+            <h4 className="font-semibold text-primary text-sm uppercase tracking-wide">
+              Formation SimAirlec — Sensibilisation SSE
+            </h4>
+            <button
+              className="group relative block w-full text-left"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-sse-image", { detail: { src: "/actions-outils/SSE/Flyer SSE_page-0001.webp", alt: "Flyer SSE — Sensibilisation au SSE et CPTS" } }))}
+              aria-label="Agrandir le flyer"
+            >
+              <img
+                src="/actions-outils/SSE/Flyer SSE_page-0001.webp"
+                alt="Flyer SSE — Sensibilisation au SSE et CPTS"
+                className="w-full h-auto rounded-xl border border-border shadow-sm group-hover:opacity-90 transition-opacity"
+              />
+              <div className="absolute top-2 right-2 w-8 h-8 rounded-lg bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow">
+                <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    ),
   },
 ];

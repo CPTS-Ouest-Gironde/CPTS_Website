@@ -5,6 +5,9 @@ import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
 import { ChatbotWidget } from "@/app/_features/chatbot/ChatbotWidget"
+import { LoadingScreen } from "@/components/loading-screen"
+import { GoogleAnalytics } from "@/components/google-analytics"
+import { CookieConsentBanner } from "@/components/cookie-consent-banner"
 import "./globals.css"
 
 const inter = Inter({
@@ -67,10 +70,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
       </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<LoadingScreen />}>
           {children}
           <ChatbotWidget />
           <Analytics />
+          <GoogleAnalytics />
+          <CookieConsentBanner />
         </Suspense>
       </body>
     </html>

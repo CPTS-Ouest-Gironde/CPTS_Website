@@ -67,10 +67,7 @@ export default function AnnuairePage() {
             {annuaireData.features.map((feature) => {
               const Icon = iconMap[feature.id] || UserCheck;
               return (
-                <Card
-                  key={feature.id}
-                  className="hover:shadow-lg transition-shadow"
-                >
+                <Card key={feature.id}>
                   <CardContent className="p-6 space-y-4 text-center">
                     <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
                       <Icon className="w-6 h-6 text-primary" />

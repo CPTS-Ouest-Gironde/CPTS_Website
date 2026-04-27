@@ -11,6 +11,10 @@
     "link": {
       "url": "https://www.ameli.fr/medecin/sante-prevention/dmp-et-mon-espace-sante/mon-espace-sante/mon-espace-sante-espace-numerique-patients",
       "label": "En savoir plus sur ameli.fr"
+    },
+    "tutorialButton": {
+      "label": "Nos ressources pour vous guider dans l'utilisation de votre Espace Santé",
+      "href": "/patients/mon-espace-sante/tuto-espace-sante"
     }
   },
   "features": [

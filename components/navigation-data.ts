@@ -23,6 +23,7 @@ export const navigationItems = [
       { label: "L'annuaire des professionnels de santé", href: "/patients/annuaire" },
       { label: "Avez-vous un médecin traitant ?", href: "/patients/medecin-traitant" },
       { label: "Mon Espace de Santé", href: "/patients/mon-espace-sante" },
+      { label: "Tuto Espace Santé", href: "/patients/mon-espace-sante/tuto-espace-sante" },
     ],
   },
   {

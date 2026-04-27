@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Header } from "@/components/header";
@@ -60,6 +60,27 @@ interface Memo {
 
 export default function InsuffisanceCardiaquePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const shouldAutoOpenTest = () => {
+      const { hash, searchParams } = new URL(window.location.href);
+      const normalizedHash = hash.toLowerCase();
+      const testParam = searchParams.get("test")?.toLowerCase();
+      const autoTestParam = searchParams.get("autotest")?.toLowerCase();
+
+      return (
+        normalizedHash === "#epof" ||
+        normalizedHash === "#test-epof" ||
+        normalizedHash === "#autotest-epof" ||
+        testParam === "epof" ||
+        autoTestParam === "epof"
+      );
+    };
+
+    if (shouldAutoOpenTest()) {
+      setIsModalOpen(true);
+    }
+  }, []);
 
   return (
     <main className="min-h-screen relative">
@@ -173,7 +194,10 @@ export default function InsuffisanceCardiaquePage() {
       </section>
 
       {/* QUELS SYMPTÔMES (EPOF) */}
-      <section className="py-12 lg:py-16 relative z-10 bg-gradient-to-br from-emerald-50/30 to-teal-50/20">
+      <section
+        id="epof"
+        className="py-12 lg:py-16 relative z-10 scroll-mt-28 lg:scroll-mt-32 bg-gradient-to-br from-emerald-50/30 to-teal-50/20"
+      >
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-10">

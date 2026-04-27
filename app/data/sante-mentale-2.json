@@ -33,12 +33,21 @@
       "iconName": "Users",
       "color": "bg-green-100 hover:bg-green-200 dark:bg-green-900/30 dark:hover:bg-green-900/50",
       "image": "/sante-mental-jeune/sante-mental-jeune.jpeg",
-      "link": "/prevention/sante-mentale-des-jeunes",
+      "link": "/prevention/sante-familiale/sante-mentale-des-jeunes",
       "hasContent": true
     },
     {
-      "title": "Dépression",
-      "description": "Reconnaître et traiter la dépression",
+      "title": "Professionnels & approches",
+      "description": "Les professionnels de la santé mentale et les différentes approches thérapeutiques",
+      "iconName": "Stethoscope",
+      "color": "bg-teal-100 hover:bg-teal-200 dark:bg-teal-900/30 dark:hover:bg-teal-900/50",
+      "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
+      "link": "/sante-mentale-professionnels-et-approches",
+      "hasContent": true
+    },
+    {
+      "title": "Santé mentale et numérique",
+      "description": "Impact du numérique sur la santé mentale",
       "iconName": "Brain",
       "color": "bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/30 dark:hover:bg-blue-900/50",
       "image": null,

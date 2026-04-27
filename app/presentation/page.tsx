@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer";
 import { Card } from "@/components/ui/card";
 import { Users, Heart, Shield, MapPin, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 // import { BackgroundGradient1 } from "@/components/background-gradient";
 
 export default function PresentationPage() {
@@ -30,7 +31,10 @@ export default function PresentationPage() {
           </section>
 
           {/* Territory Map Section */}
-          <section id="territoire" className="py-16 lg:py-24 scroll-mt-36">
+          <section
+            id="territoire"
+            className="py-16 lg:py-24 scroll-mt-36 [content-visibility:auto] [contain-intrinsic-size:900px]"
+          >
             <div className="container mx-auto px-4 lg:px-8">
               <div className="max-w-5xl mx-auto">
                 <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-8 text-center">
@@ -39,10 +43,14 @@ export default function PresentationPage() {
                 <Card className="p-8 lg:p-12 rounded-3xl bg-emerald-50/50 border-2 border-emerald-100">
                   <div className="flex flex-col lg:flex-row items-center gap-8">
                     <div className="flex-1">
-                      <img
+                      <Image
                         src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/carte-cpts-OG9ejxRXN1zudFfmXq6tfwa7kiSrpd.jpg"
                         alt="Carte du territoire CPTS Ouest Gironde"
+                        width={1536}
+                        height={1024}
                         className="w-full h-auto rounded-2xl"
+                        sizes="(max-width: 768px) calc(100vw - 5rem), (max-width: 1280px) 50vw, 640px"
+                        quality={75}
                       />
                     </div>
                     <div className="flex-1 space-y-4">
@@ -74,7 +82,7 @@ export default function PresentationPage() {
           {/* Why CPTS Section */}
           <section
             id="pourquoi"
-            className="py-16 lg:py-24 bg-accent/10 scroll-mt-36"
+            className="py-16 lg:py-24 bg-accent/10 scroll-mt-36 [content-visibility:auto] [contain-intrinsic-size:1700px]"
           >
             <div className="container mx-auto px-4 lg:px-8">
               <div className="max-w-5xl mx-auto">
@@ -82,11 +90,13 @@ export default function PresentationPage() {
                   Pourquoi une CPTS ?
                 </h2>
                 <div className="grid md:grid-cols-2 gap-8">
-                  <Card className="p-8 rounded-3xl bg-green-50/40 border-2 border-green-100 hover:border-green-200 transition-all duration-300">
+                  <Card className="p-8 rounded-3xl bg-green-50/40 border-2 border-green-100">
                     <img
                       src="/presentation/Connecting teams-cuate.svg"
                       alt="Professionnels de santé collaborant"
                       className="w-full h-74 object-contain rounded-2xl mb-6"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <h3 className="text-2xl font-bold text-foreground mb-4">
                       Mieux Travailler Ensemble
@@ -99,11 +109,13 @@ export default function PresentationPage() {
                     </p>
                   </Card>
 
-                  <Card className="p-8 rounded-3xl bg-teal-50/40 border-2 border-teal-100 hover:border-teal-200 transition-all duration-300">
+                  <Card className="p-8 rounded-3xl bg-teal-50/40 border-2 border-teal-100">
                     <img
                       src="/presentation/Public health-cuate.svg"
                       alt="Soins aux patients"
                       className="w-full h-74 object-contain rounded-2xl mb-6"
+                      loading="lazy"
+                      decoding="async"
                     />
                     <h3 className="text-2xl font-bold text-foreground mb-4">
                       Au Service des Patients
@@ -146,6 +158,8 @@ export default function PresentationPage() {
                         src="/presentation/Team goals-cuate.svg"
                         alt="Équipe de santé en réunion"
                         className="w-full h-auto object-contain rounded-2xl"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                   </div>
@@ -165,7 +179,10 @@ export default function PresentationPage() {
           </section>
 
           {/* Missions Section */}
-          <section id="missions" className="py-16 lg:py-24 scroll-mt-36">
+          <section
+            id="missions"
+            className="py-16 lg:py-24 scroll-mt-36 [content-visibility:auto] [contain-intrinsic-size:1800px]"
+          >
             <div className="container mx-auto px-4 lg:px-8">
               <div className="max-w-5xl mx-auto">
                 <h2 className="text-3xl lg:text-5xl font-bold text-foreground mb-8 text-center">
@@ -178,7 +195,7 @@ export default function PresentationPage() {
 
                 <div className="space-y-6">
                   {/* Mission 1 */}
-                  <Card className="p-8 rounded-3xl bg-emerald-50/60 border-2 border-emerald-200 hover:border-emerald-300 hover:shadow-md transition-all duration-300">
+                  <Card className="p-8 rounded-3xl bg-emerald-50/60 border-2 border-emerald-200">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
                         <span className="text-2xl font-bold text-emerald-700">
@@ -212,7 +229,7 @@ export default function PresentationPage() {
                   </Card>
 
                   {/* Mission 2 */}
-                  <Card className="p-8 rounded-3xl bg-teal-50/60 border-2 border-teal-200 hover:border-teal-300 hover:shadow-md transition-all duration-300">
+                  <Card className="p-8 rounded-3xl bg-teal-50/60 border-2 border-teal-200">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-teal-100 flex items-center justify-center flex-shrink-0">
                         <span className="text-2xl font-bold text-teal-700">
@@ -261,7 +278,7 @@ export default function PresentationPage() {
                   </Card>
 
                   {/* Mission 3 */}
-                  <Card className="p-8 rounded-3xl bg-green-50/60 border-2 border-green-200 hover:border-green-300 hover:shadow-md transition-all duration-300">
+                  <Card className="p-8 rounded-3xl bg-green-50/60 border-2 border-green-200">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-green-100 flex items-center justify-center flex-shrink-0">
                         <span className="text-2xl font-bold text-green-700">
@@ -317,7 +334,7 @@ export default function PresentationPage() {
                   </Card>
 
                   {/* Mission 4 */}
-                  <Card className="p-8 rounded-3xl bg-emerald-50/50 border-2 border-emerald-200 hover:border-emerald-300 hover:shadow-md transition-all duration-300">
+                  <Card className="p-8 rounded-3xl bg-emerald-50/50 border-2 border-emerald-200">
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
                         <span className="text-2xl font-bold text-emerald-700">
@@ -346,7 +363,7 @@ export default function PresentationPage() {
           {/* Organisation Section */}
           <section
             id="organisation"
-            className="py-16 lg:py-24 bg-accent/10 scroll-mt-36"
+            className="py-16 lg:py-24 bg-accent/10 scroll-mt-36 [content-visibility:auto] [contain-intrinsic-size:1400px]"
           >
             <div className="container mx-auto px-4 lg:px-8">
               <div className="max-w-5xl mx-auto">
@@ -354,13 +371,17 @@ export default function PresentationPage() {
                   Organisation
                 </h2>
 
-                <Card className="p-8 lg:p-12 rounded-3xl bg-teal-50/50 border-2 border-teal-100 hover:border-teal-200 transition-all duration-300 mb-8">
+                <Card className="p-8 lg:p-12 rounded-3xl bg-teal-50/50 border-2 border-teal-100 mb-8">
                   <div className="flex flex-col lg:flex-row gap-8 items-center">
                     <div className="flex-1">
-                      <img
+                      <Image
                         src="/presentation/statut-juridique.png"
                         alt="Bureau de la CPTS"
+                        width={1536}
+                        height={1024}
                         className="w-full h-auto object-contain rounded-2xl"
+                        sizes="(max-width: 768px) calc(100vw - 5rem), (max-width: 1280px) 50vw, 640px"
+                        quality={75}
                       />
                     </div>
                     <div className="flex-1">
@@ -483,7 +504,7 @@ export default function PresentationPage() {
             </div>
           </section>
 
-          <section className="py-14 lg:py-18 bg-background">
+          <section className="py-14 lg:py-18 bg-background [content-visibility:auto] [contain-intrinsic-size:320px]">
             <div className="container mx-auto px-4 lg:px-8">
               <div className="max-w-5xl mx-auto">
                 <div className="rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/5 via-card to-secondary/20 p-8 lg:p-10 text-center">

@@ -33,3 +33,12 @@ PROJET_STRUCTURE.md
 
 # macOS
 .DS_Store
+
+SECURITY_AUDIT.md
+PROJECT_STRUCTURE.md
+# docs/feat-formulaire.md
+
+# Local work files not tracked
+AGENTS.md
+docs/cpts/
+scripts/

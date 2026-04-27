@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Linkedin, Facebook, Instagram, Copy, Check, Loader2 } from "lucide-react"
+import { containsForbiddenLink } from "@/lib/message-content"
+import { getPublicFormErrorDetails, type PublicFormErrorVariant } from "@/lib/public-form-errors"
 
 const EMAIL = "info@cpts-ouest-gironde.fr"
 
@@ -12,6 +14,8 @@ export function Contact() {
   const [copied, setCopied] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+  const [errorMessage, setErrorMessage] = useState("")
+  const [errorVariant, setErrorVariant] = useState<PublicFormErrorVariant>("error")
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -39,8 +43,18 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setStatus("idle")
+    setErrorMessage("")
+    setErrorVariant("error")
+
+    if (containsForbiddenLink(formData.message)) {
+      setStatus("error")
+      setErrorVariant("error")
+      setErrorMessage("Les liens ne sont pas autorisés dans le message.")
+      return
+    }
+
+    setIsLoading(true)
 
     try {
       const response = await fetch("/api/contact", {
@@ -51,12 +65,18 @@ export function Contact() {
 
       if (response.ok) {
         setStatus("success")
+        setErrorMessage("")
         setFormData({ firstName: "", lastName: "", email: "", message: "" })
       } else {
+        const apiError = await getPublicFormErrorDetails(response, "contact")
         setStatus("error")
+        setErrorVariant(apiError.variant)
+        setErrorMessage(apiError.message)
       }
     } catch {
       setStatus("error")
+      setErrorVariant("error")
+      setErrorMessage("Une erreur est survenue. Veuillez réessayer.")
     } finally {
       setIsLoading(false)
     }
@@ -225,8 +245,14 @@ export function Contact() {
               )}
 
               {status === "error" && (
-                <div className="p-3 rounded-xl bg-red-100 text-red-800 text-sm font-medium">
-                  Une erreur est survenue. Veuillez réessayer.
+                <div
+                  className={`p-3 rounded-xl text-sm font-medium ${
+                    errorVariant === "warning"
+                      ? "bg-amber-100 text-amber-900 border border-amber-200"
+                      : "bg-red-100 text-red-800"
+                  }`}
+                >
+                  {errorMessage || "Une erreur est survenue. Veuillez réessayer."}
                 </div>
               )}
 

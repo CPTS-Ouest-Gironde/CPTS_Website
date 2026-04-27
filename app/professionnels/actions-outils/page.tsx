@@ -6,15 +6,18 @@ import { Footer } from "@/components/footer";
 import Image from "next/image";
 import { AccordionSection } from "./components/AccordionSection";
 import { TestezVousModal } from "@/components/testez-vous-modal";
+import { Dialog, DialogContent, DialogTitle, VisuallyHidden } from "@/components/ui/dialog";
 import {
   accordionItemsAcces,
   accordionItemsParcours,
   accordionItemsPrevention,
+  accordionItemsSSE,
 } from "./data";
 
 export default function ActionsOutilsPage() {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [sseImage, setSseImage] = useState<{ src: string; alt: string } | null>(null);
 
   const toggleAccordion = (id: string) => {
     setOpenAccordion(openAccordion === id ? null : id);
@@ -28,6 +31,17 @@ export default function ActionsOutilsPage() {
     window.addEventListener('open-epof-modal', handleOpenModal);
     return () => {
       window.removeEventListener('open-epof-modal', handleOpenModal);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleOpenSseImage = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      setSseImage(detail);
+    };
+    window.addEventListener('open-sse-image', handleOpenSseImage);
+    return () => {
+      window.removeEventListener('open-sse-image', handleOpenSseImage);
     };
   }, []);
 
@@ -101,7 +115,7 @@ export default function ActionsOutilsPage() {
               {/* Titre de section */}
               <div className="text-center mb-12">
                 <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                  Organisation des parcours pluripro des patients
+                  Organisation des parcours pluriprofessionnels des patients
                 </h2>
                 <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
               </div>
@@ -109,6 +123,31 @@ export default function ActionsOutilsPage() {
               {/* Accordéons */}
               <AccordionSection
                 items={accordionItemsParcours}
+                openAccordion={openAccordion}
+                onToggle={toggleAccordion}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Section SSE */}
+        <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 to-accent/5 relative overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-bl from-accent/20 to-transparent rounded-full blur-3xl" />
+            <div className="absolute bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-3xl" />
+          </div>
+
+          <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
+                  Situations Sanitaires Exceptionnelles (SSE)
+                </h2>
+                <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+              </div>
+
+              <AccordionSection
+                items={accordionItemsSSE}
                 openAccordion={openAccordion}
                 onToggle={toggleAccordion}
               />
@@ -151,6 +190,25 @@ export default function ActionsOutilsPage() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
+
+      <Dialog open={!!sseImage} onOpenChange={() => setSseImage(null)}>
+        <DialogContent className="max-w-4xl p-0 overflow-hidden">
+          <VisuallyHidden>
+            <DialogTitle>{sseImage?.alt ?? "Aperçu"}</DialogTitle>
+          </VisuallyHidden>
+          {sseImage && (
+            <div className="p-6">
+              <div className="relative w-full bg-muted rounded-2xl overflow-hidden">
+                <img
+                  src={sseImage.src}
+                  alt={sseImage.alt}
+                  className="w-full h-auto"
+                />
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

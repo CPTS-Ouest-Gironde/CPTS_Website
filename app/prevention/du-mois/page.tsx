@@ -58,7 +58,7 @@ export default function PreventionDuMoisPage() {
       </section>
 
       {/* Articles of the Month */}
-      <section className="py-10 lg:py-16 relative z-10">
+      <section className="py-10 lg:py-16 relative z-10 [content-visibility:auto] [contain-intrinsic-size:1200px]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -80,8 +80,8 @@ export default function PreventionDuMoisPage() {
                         alt={article.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-                        quality={85}
+                        sizes="(max-width: 768px) calc(100vw - 2rem), (max-width: 1200px) 50vw, 600px"
+                        quality={75}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                       <div className="absolute top-4 left-4">
@@ -108,7 +108,7 @@ export default function PreventionDuMoisPage() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 lg:py-24 relative z-10">
+      <section className="py-16 lg:py-24 relative z-10 [content-visibility:auto] [contain-intrinsic-size:1400px]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -130,7 +130,8 @@ export default function PreventionDuMoisPage() {
                         alt={category.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px"
+                        sizes="(max-width: 768px) calc(100vw - 2rem), (max-width: 1200px) 33vw, 400px"
+                        quality={75}
                       />
                     </div>
                     <div className="p-6 space-y-3">

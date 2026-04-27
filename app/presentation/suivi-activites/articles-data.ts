@@ -10,6 +10,51 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "soiree-scientifique-cardio-ess-mars-2026",
+    title: "Soirée scientifique cardiologie avec l'ESS Nouvelle-Aquitaine — 19 mars 2026",
+    image: "/suivi-activite/articles/soiree-cardio-19-mars-2026/1.webp",
+    excerpt:
+      "La CPTS Ouest Gironde et l'ESS Cardiologie Nouvelle-Aquitaine réunies pour une soirée autour de la téléexpertise, de l'insuffisance cardiaque et de l'exercice coordonné.",
+    frame: "landscape",
+    publishedAt: "19 mars 2026",
+  },
+  {
+    slug: "simulation-pluriprofessionnelle-simairlec-mars-2026",
+    title: "Journée de simulation pluriprofessionnelle avec SIMAIRLEC — 19 mars 2026",
+    image: "/suivi-activite/articles/19-mars-simairlec/simairlec-1.webp",
+    excerpt:
+      "SIMAIRLEC s'est déplacé au Pôle de Santé Robinson à Mérignac pour une journée de simulation pluriprofessionnelle avec mannequin et diffusion vidéo en direct.",
+    frame: "landscape",
+    publishedAt: "19 mars 2026",
+  },
+  {
+    slug: "webinaire-ville-hop-rhinite-allergique-mars-2026",
+    title: "Webinaire Ville Hôp : asthme et rhinite allergique",
+    image: "/suivi-activite/articles/CHU-CPTS-rhinite-allergique/1.webp",
+    excerpt:
+      "Lors du webinaire Ville Hôp du 12 mars, ville et hôpital ont échangé autour de l'asthme et de la rhinite allergique.",
+    frame: "landscape",
+    publishedAt: "12 mars 2026",
+  },
+  {
+    slug: "atelier-diversification-alimentaire-5-mars-2026",
+    title: "Retour sur l’atelier diversification alimentaire du 5 mars 2026",
+    image: "/suivi-activite/articles/diversification-alimentaire-2026/1.webp",
+    excerpt:
+      "Merci à Céline MAILLARD, diététicienne pédiatrique, et aux familles présentes pour leur participation. Prochain atelier le jeudi 7 mai 2026.",
+    frame: "landscape",
+    publishedAt: "5 mars 2026",
+  },
+  {
+    slug: "soiree-endometriose-formation-fevrier-2026",
+    title: "Soirée endométriose du mercredi 4 février 2026",
+    image: "/suivi-activite/articles/soirée-endométriose-mars-2026/image.webp",
+    excerpt:
+      "Formation sur l’endométriose avec mises à jour en physiopathologie, recommandations de traitement et accompagnement pluriprofessionnel.",
+    frame: "landscape",
+    publishedAt: "4 février 2026",
+  },
+  {
     slug: "les-matins-prevention-sante-aller-vers-les-usagers",
     title: "Les matins prévention santé : « aller vers » les usagers",
     image: "/suivi-activite/articles/les-matins-prevention-sante.jpg",

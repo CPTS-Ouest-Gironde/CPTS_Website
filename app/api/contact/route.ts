@@ -1,66 +1,49 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
+import {
+  applyRateLimit,
+  contactRequestSchema,
+  enforceTrustedOrigin,
+  escapeHtml,
+  getFormNotificationRecipients,
+  toMailtoHref,
+} from "@/lib/api-security"
+import { containsForbiddenLink } from "@/lib/message-content"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+export const runtime = "nodejs"
 
 export async function POST(request: Request) {
+  const originResponse = enforceTrustedOrigin(request)
+  if (originResponse) {
+    return originResponse
+  }
+
+  const rateLimitResponse = applyRateLimit(request, "contact")
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
+
   try {
     const body = await request.json()
-    const { firstName, lastName, email, message } = body
+    const parsedBody = contactRequestSchema.safeParse(body)
 
-    // Validation: Champs requis
-    if (!firstName || !lastName || !email || !message) {
+    if (!parsedBody.success) {
       return NextResponse.json(
-        { error: "Tous les champs sont requis" },
+        { error: "Les donnees du formulaire sont invalides." },
         { status: 400 }
       )
     }
 
-    // Validation: Types et longueurs
-    if (
-      typeof firstName !== "string" ||
-      typeof lastName !== "string" ||
-      typeof email !== "string" ||
-      typeof message !== "string"
-    ) {
+    const { firstName, lastName, email, message } = parsedBody.data
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured")
       return NextResponse.json(
-        { error: "Format de données invalide" },
-        { status: 400 }
+        { error: "Le service est temporairement indisponible." },
+        { status: 503 }
       )
     }
 
-    // Validation: Longueurs min/max
-    if (firstName.trim().length < 2 || firstName.trim().length > 50) {
-      return NextResponse.json(
-        { error: "Le prénom doit contenir entre 2 et 50 caractères" },
-        { status: 400 }
-      )
-    }
-
-    if (lastName.trim().length < 2 || lastName.trim().length > 50) {
-      return NextResponse.json(
-        { error: "Le nom doit contenir entre 2 et 50 caractères" },
-        { status: 400 }
-      )
-    }
-
-    if (message.trim().length < 10 || message.trim().length > 2000) {
-      return NextResponse.json(
-        { error: "Le message doit contenir entre 10 et 2000 caractères" },
-        { status: 400 }
-      )
-    }
-
-    // Validation: Format email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email.trim())) {
-      return NextResponse.json(
-        { error: "Format d'email invalide" },
-        { status: 400 }
-      )
-    }
-
-    // Anti-spam: Détection de contenu suspect
     const spamKeywords = [
       "viagra",
       "casino",
@@ -80,28 +63,36 @@ export async function POST(request: Request) {
       )
     }
 
-    // Anti-spam: Détection d'URLs suspectes (trop d'URLs)
-    const urlCount = (message.match(/https?:\/\//gi) || []).length
-    if (urlCount > 2) {
+    if (containsForbiddenLink(message)) {
       return NextResponse.json(
-        { error: "Trop de liens détectés dans le message" },
+        { error: "Les liens ne sont pas autorises dans le message." },
         { status: 400 }
       )
     }
 
-    // Normalisation des données
-    const cleanFirstName = firstName.trim()
-    const cleanLastName = lastName.trim()
-    const cleanEmail = email.trim().toLowerCase()
-    const cleanMessage = message.trim()
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    const notificationRecipients = getFormNotificationRecipients()
 
-    console.log("Sending email with Resend...")
-    console.log("API Key exists:", !!process.env.RESEND_API_KEY)
+    if (!notificationRecipients) {
+      console.error("Form notification recipients are not configured")
+      return NextResponse.json(
+        { error: "Le service est temporairement indisponible." },
+        { status: 503 }
+      )
+    }
+
+    const safeSubjectFirstName = firstName.replace(/[\r\n]+/g, " ")
+    const safeSubjectLastName = lastName.replace(/[\r\n]+/g, " ")
+    const safeFirstName = escapeHtml(firstName)
+    const safeLastName = escapeHtml(lastName)
+    const safeEmail = escapeHtml(email)
+    const safeMessage = escapeHtml(message)
+    const replyToHref = toMailtoHref(email)
 
     const { data, error } = await resend.emails.send({
-      from: "CPTS Ouest Gironde <onboarding@resend.dev>",
-      to: ["info@cpts-ouest-gironde.fr"],
-      subject: `Nouveau message de ${cleanFirstName} ${cleanLastName}`,
+      from: "CPTS Ouest Gironde <contact@cpts-ouest-gironde.fr>",
+      to: notificationRecipients,
+      subject: `Nouveau message de ${safeSubjectFirstName} ${safeSubjectLastName}`,
       html: `
 <!DOCTYPE html>
 <html>
@@ -137,17 +128,17 @@ export async function POST(request: Request) {
                       <tr>
                         <td width="50%" style="padding-bottom: 16px;">
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Prénom</p>
-                          <p style="margin: 0; font-size: 16px; color: #111827; font-weight: 600;">${cleanFirstName}</p>
+                          <p style="margin: 0; font-size: 16px; color: #111827; font-weight: 600;">${safeFirstName}</p>
                         </td>
                         <td width="50%" style="padding-bottom: 16px;">
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Nom</p>
-                          <p style="margin: 0; font-size: 16px; color: #111827; font-weight: 600;">${cleanLastName}</p>
+                          <p style="margin: 0; font-size: 16px; color: #111827; font-weight: 600;">${safeLastName}</p>
                         </td>
                       </tr>
                       <tr>
                         <td colspan="2">
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Email</p>
-                          <a href="mailto:${cleanEmail}" style="font-size: 16px; color: #16a34a; text-decoration: none; font-weight: 500;">${cleanEmail}</a>
+                          <a href="${replyToHref}" style="font-size: 16px; color: #16a34a; text-decoration: none; font-weight: 500;">${safeEmail}</a>
                         </td>
                       </tr>
                     </table>
@@ -159,7 +150,7 @@ export async function POST(request: Request) {
               <div>
                 <p style="margin: 0 0 12px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Message</p>
                 <div style="background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px;">
-                  <p style="margin: 0; font-size: 15px; color: #374151; line-height: 1.6; white-space: pre-wrap;">${cleanMessage}</p>
+                  <p style="margin: 0; font-size: 15px; color: #374151; line-height: 1.6; white-space: pre-wrap;">${safeMessage}</p>
                 </div>
               </div>
 
@@ -167,8 +158,8 @@ export async function POST(request: Request) {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 32px;">
                 <tr>
                   <td align="center">
-                    <a href="mailto:${cleanEmail}" style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 14px; font-weight: 600; padding: 14px 32px; border-radius: 50px; text-decoration: none;">
-                      Répondre à ${cleanFirstName}
+                    <a href="${replyToHref}" style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 14px; font-weight: 600; padding: 14px 32px; border-radius: 50px; text-decoration: none;">
+                      Repondre a ${safeFirstName}
                     </a>
                   </td>
                 </tr>
@@ -192,20 +183,22 @@ export async function POST(request: Request) {
 </body>
 </html>
       `,
-      replyTo: cleanEmail,
+      replyTo: email,
     })
 
     if (error) {
       console.error("Resend error:", error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json(
+        { error: "Erreur lors de l'envoi du message." },
+        { status: 502 }
+      )
     }
 
-    console.log("Email sent successfully:", data)
-    return NextResponse.json({ success: true, data })
+    return NextResponse.json({ success: true, id: data?.id ?? null })
   } catch (err) {
     console.error("Catch error:", err)
     return NextResponse.json(
-      { error: "Erreur lors de l'envoi du message" },
+      { error: "Erreur lors de l'envoi du message." },
       { status: 500 }
     )
   }

@@ -91,17 +91,6 @@
               "source": "email"
             },
             {
-              "name": "Hôpital de jour Halloran (CH Charles Perrens)",
-              "type": "Hôpital de jour",
-              "address": "33 avenue de Noès, 33600 Pessac",
-              "phone": "05 56 45 71 34",
-              "website": "non précisé",
-              "coverage": "locale",
-              "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
-            },
-            {
               "name": "Psychologues en libéral - Dispositif Mon Soutien Psy",
               "type": "Dispositif national",
               "address": "non précisé",

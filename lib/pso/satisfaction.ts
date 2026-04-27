@@ -1,0 +1,1 @@
+export const PATIENT_SATISFACTION_SUBMITTED_STORAGE_KEY = "pso_satisfaction_submitted"

@@ -371,7 +371,7 @@ export default function CoordonneesPage() {
             {coordonneesData.ressourcesSanteMentale.map((resource) => (
               <Card
                 key={resource.id}
-                className="flex flex-col hover:shadow-lg transition-shadow overflow-hidden"
+                className="flex flex-col overflow-hidden"
               >
                 {/* Image Section - Full visibility */}
                 <div className="relative aspect-[4/3] bg-muted">
@@ -411,6 +411,25 @@ export default function CoordonneesPage() {
                   {/* Buttons Section */}
                   {resource.buttons && resource.buttons.length > 0 && (
                     <div className="space-y-2 mt-auto">
+                      {(resource.id === "3114" || resource.id === "3919") && (
+                        <Link
+                          href={resource.id === "3114" ? "tel:3114" : "tel:3919"}
+                          className="block w-full"
+                        >
+                          <div
+                            className={`${
+                              resource.id === "3114"
+                                ? "bg-amber-200 hover:bg-amber-300 border-amber-300 text-amber-900"
+                                : "bg-rose-200 hover:bg-rose-300 border-rose-300 text-rose-900"
+                            } border rounded-lg px-4 py-3 text-center text-sm font-semibold transition-colors flex items-center justify-center gap-2`}
+                          >
+                            <Phone className="w-4 h-4" />
+                            {resource.id === "3114"
+                              ? "Appeler le 3114"
+                              : "Appeler le 39 19"}
+                          </div>
+                        </Link>
+                      )}
                       {resource.buttons?.map((button, index) => (
                         <Link
                           key={index}
@@ -453,7 +472,7 @@ export default function CoordonneesPage() {
               const IconComponent = iconMap[info.id] || FlaskConical;
 
               return (
-                <Card key={info.id} className="hover:shadow-md transition-shadow">
+                <Card key={info.id}>
                   <CardContent className="p-6">
                     <div className="flex gap-4">
                       <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">

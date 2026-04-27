@@ -1,28 +1,30 @@
-import { Facebook, Instagram, Linkedin, Mail } from "lucide-react";
-import Image from "next/image";
+import { Facebook, Instagram, Linkedin, Mail } from "lucide-react"
+import Image from "next/image"
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+
   return (
     <footer className="relative z-10 bg-gradient-to-br from-slate-50 to-gray-100 border-t border-gray-200 py-8 lg:py-12">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Logo */}
-          <div className="flex items-center bg-white rounded-2xl p-3 shadow-sm">
+          <div className="flex items-center bg-white rounded-xl p-2 shadow-sm">
             <Image
-              src="/logo-cpts.png"
+              src="/favicon.svg"
               alt="CPTS Ouest Gironde"
-              width={200}
-              height={64}
-              className="h-12 sm:h-14 lg:h-16 object-contain"
-              style={{ width: "auto" }}
+              width={130}
+              height={87}
+              className="w-[100px] sm:w-[115px] lg:w-[130px] h-auto object-contain"
+              style={{ height: "auto" }}
               loading="lazy"
-              quality={85}
+              sizes="(max-width: 640px) 100px, (max-width: 1024px) 115px, 130px"
             />
           </div>
 
           {/* Center - Copyright (hidden on mobile, shown on desktop between logo and social) */}
           <div className="hidden lg:block text-gray-600 text-sm">
-            <p>© 2025 CPTS Ouest Gironde. Tous droits réservés.</p>
+            <p>© {currentYear} CPTS Ouest Gironde. Tous droits réservés.</p>
           </div>
 
           {/* Social Icons */}
@@ -65,10 +67,10 @@ export function Footer() {
 
           {/* Copyright on mobile - centered below */}
           <div className="lg:hidden text-center text-gray-600 text-sm w-full">
-            <p>© 2025 CPTS Ouest Gironde. Tous droits réservés.</p>
+            <p>© {currentYear} CPTS Ouest Gironde. Tous droits réservés.</p>
           </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }

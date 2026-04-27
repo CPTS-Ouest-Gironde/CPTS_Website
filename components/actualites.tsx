@@ -12,25 +12,30 @@ import {
 
 const actualites = [
   {
-    title: "Besoin d'un medecin ? suivez le bon chemin.",
-    image: "/actu/acces-aux-soins/Acces-Aux-Soins-1.jpg",
-    link: "/actualites/acces-aux-soins",
+    title: "Escrime thérapeutique\u00A0: découverte du protocole ATVS33",
+    image: "/actu/affiche-escrime-therapeutique.webp",
+    link: "/actualites/escrime-therapeutique-atvs33",
   },
   {
-    title: "Rappel sur la bonne utilisation des certificats médicaux",
-    image: "/actu/Affiche-BESOIN-DUN-CERTIFICAT-MEDICAL-15-pdf.jpg",
-    link: "/actualites/certificats-medicaux",
+    title: "Vous souffrez d'une rhinite allergique ?",
+    image: "/actu/affiche-rhinite.webp",
+    link: "/actualites/rhinite-allergique",
+  },
+  {
+    title: "Dépistage diabète & hypertension — Pharmacie Arago, 28 et 29 avril 2026",
+    image: "/actu/affiche-pharma-ARAGO 28-29 avril _page-0001.webp",
+    link: "/actualites/pharma-arago-avril",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
-    image: "/actu/Affiche-divers-alimentaire-20.11.25-pdf.jpg",
+    image: "/actu/affiche-diversification-alimentaire.webp",
     link: "/actualites/diversification-alimentaire",
   },
 ];
 
 function ActuCard({ actu }: { actu: (typeof actualites)[0] }) {
   return (
-    <a href={actu.link} className="block w-full group">
+    <a href={actu.link} className="block w-full h-full group">
       <div className="rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-primary/50 flex flex-col h-full">
         <div className="p-4 lg:p-3 relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden">
           <Image
@@ -72,37 +77,30 @@ export function Actualites() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
 
-          {/* Mobile: Carousel */}
-          <div className="md:hidden">
-            <Carousel
-              opts={{
-                align: "center",
-                loop: true,
-              }}
-              className="w-full"
-            >
-              <CarouselContent className="-ml-2">
-                {actualites.map((actu, index) => (
-                  <CarouselItem key={index} className="pl-2 basis-[85%]">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {actualites.map((actu, index) => (
+                <CarouselItem
+                  key={index}
+                  className="pl-2 md:pl-4 basis-[85%] md:basis-[47%] lg:basis-[32%]"
+                >
+                  <div className="h-full flex">
                     <ActuCard actu={actu} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-center gap-4 mt-6">
-                <CarouselPrevious className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
-                <CarouselNext className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
-              </div>
-            </Carousel>
-          </div>
-
-          {/* Desktop: Grid */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6 lg:gap-6">
-            {actualites.map((actu, index) => (
-              <div key={index} className="flex">
-                <ActuCard actu={actu} />
-              </div>
-            ))}
-          </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-4 mt-6">
+              <CarouselPrevious className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
+              <CarouselNext className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
+            </div>
+          </Carousel>
         </div>
       </div>
     </section>

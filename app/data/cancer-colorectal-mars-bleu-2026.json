@@ -52,6 +52,12 @@
   "commentSeFaireDepister": {
     "title": "Vous avez plus de 50 ans, comment pouvez-vous vous faire dépister ?",
     "intro": "Désormais, si vous êtes éligibles au dépistage, que vous ayez reçu ou non l'invitation, le test peut vous être remis par :",
+    "resourceHub": {
+      "title": "Nos ressources pour vous aider",
+      "text": "Retrouvez tous les liens utiles et supports d'information liés à Mars Bleu.",
+      "url": "/prevention/sante-familiale/prevention-cancer-colorectal-mars-bleu-2026/ressources",
+      "urlLabel": "Consulter les ressources Mars Bleu"
+    },
     "sources": [
       {
         "label": "Votre médecin généraliste",
@@ -133,20 +139,22 @@
         ]
       },
       {
-        "label": "Clinique Bagatelle – Côlon Tour",
-        "text": "Les dates 2026 du Côlon Tour de la clinique Bagatelle seront communiquées dès qu'elles seront connues. En attendant, nous conservons le visuel de l'édition 2025.",
-        "image": "/prevention/sante-famille/cancer-colorectal/colon-tour-2025.jpeg",
-        "imageAlt": "Visuel Côlon Tour 2025 à la Fondation Bagatelle"
+        "label": "CPTS Polygone Rive Droite",
+        "title": "JOURNÉE DE PRÉVENTION MARS BLEU 2026 – SENSIBILISATION AU DÉPISTAGE DU CANCER COLORECTAL",
+        "textBold": "Retrouvez-nous le mercredi 25 mars de 10h00 à 18h00",
+        "text": "à la galerie Carrefour de Lormont pour une visite du Côlon Géant et des stands d'information animés par les professionnels de la Ligue contre le cancer Gironde et de la CPTS Polygone Rive Droite : présentation du kit de dépistage, remise du kit, expériences de réalité virtuelle autour des facteurs de risques de cancer…",
+        "link": "https://polygonerivedroite.fr/journee-de-prevention-mars-bleu-2026-sensibilisation-au-depistage-du-cancer-colorectal/",
+        "linkLabel": "En savoir plus",
+        "image": "/prevention/sante-famille/cancer-colorectal/prevention-mars-bleu-2026.png",
+        "imageAlt": "Journée de prévention Mars Bleu 2026 - CPTS Polygone Rive Droite",
+        "program": []
       }
     ]
   },
-  "instagram": {
-    "title": "Le dépistage vu par Danièle, créatrice de contenu",
-    "text": "Le dépistage du cancer colorectal vu par Danièle créatrice de contenu : faites comme elle, allez vous tester !",
-    "url": "https://www.instagram.com/reel/CpkFogwgVup/?utm_source=ig_embed",
-    "thumbnail": "/prevention/sante-famille/cancer-colorectal/migna-insta.jpg",
-    "thumbnailAlt": "Miniature du reel Instagram - Je suis Danielle, Studio Danielle",
-    "account": "crcdc.na",
-    "accountLocation": "Bordeaux, France"
+  "linkedin": {
+    "title": "Post LinkedIn : Ligue contre le cancer",
+    "text": "Post de sensibilisation Mars Bleu.",
+    "url": "https://www.linkedin.com/posts/ligue-contre-le-cancer_vachier-marsbleu-activity-7431697959311998976-HW6d",
+    "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:activity:7431697959311998976"
   }
 }

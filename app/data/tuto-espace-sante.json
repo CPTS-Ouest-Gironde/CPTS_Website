@@ -1,0 +1,116 @@
+{
+  "title": "Mon espace santé",
+  "subtitle": "TOUT SAVOIR, TOUT COMPRENDRE et S'EN SERVIR !",
+  "intro": {
+    "questions": [
+      {
+        "before": "",
+        "bold": "Voulez-vous être acteur de votre santé",
+        "after": " ?"
+      },
+      {
+        "before": "Pouvoir ",
+        "bold": "accéder à vos données",
+        "after": " médicales n'importe où et avec n'importe quel intervenant de santé ?"
+      },
+      {
+        "before": "",
+        "bold": "Favoriser votre suivi",
+        "after": " en cas d'hospitalisation ?"
+      }
+    ],
+    "callToAction": {
+      "before": "Vous pouvez ",
+      "bold": "créer votre espace de santé",
+      "after": " !"
+    },
+    "description": "Avec l'aide de votre médecin traitant, de votre infirmière, de votre pharmacienne vous pouvez créer un dossier médical complet résumant votre santé,  vos antécédents,  vos traitements ainsi que vos allergies et  vos vaccinations."
+  },
+  "tutorialSection": {
+    "title": "Comment créer votre carnet de santé numérique ?",
+    "description": "Nous vous proposons  des courtes vidéos faites par une de nos infirmières adhérente de la CPTS  pour vous accompagner.",
+    "motto": "2 mots d'ordre : simplicité et rapidité.",
+    "cardTitle": "Suivez nos vidéos tuto pour vous guider dans toutes les étapes",
+    "videos": [
+      { "id": "ip_QJFj8Rk8", "type": "short", "title": "Mon matériel pour créer mon espace santé" },
+      { "id": "C-maD8Kj8cg", "type": "embed", "title": "Je télécharge et j'active Mon Espace Santé" },
+      { "id": "D0jCqxuinb4", "type": "short", "title": "Des difficultés rencontrées pour l'activation ?" },
+      { "id": "UzqeJZEbOyM", "type": "short", "title": "Installer mon espace santé sur mon téléphone" },
+      { "id": "kJbtuCXcz4A", "type": "short", "title": "Mes indispensables pour Ouvrir mon espace santé" },
+      { "id": "cKosnW8oV6o", "type": "video", "title": "Ouvrir mon espace santé" }
+    ]
+  },
+  "pourquoiSection": {
+    "title": "POURQUOI  créer votre espace santé ?",
+    "cardTitle": "Découvrez pourquoi créer votre espace santé en vidéo",
+    "videos": [
+      { "id": "PZRoPZLHyQc", "type": "short", "title": "Compléter mon profil médical" },
+      { "id": "vjvSbCHHgBc", "type": "short", "title": "Corriger mon espace santé" },
+      { "id": "q_WEe906iag", "type": "short", "title": "Enregistrer ma synthèse médicale" },
+      { "id": "xqNrxeVRG_Q", "type": "video", "title": "Rajouter des documents dans mon espace santé" }
+    ],
+    "content": [
+      {
+        "type": "feature-grid",
+        "items": [
+          {
+            "iconName": "UserPen",
+            "text": "Vous pouvez renseigner vos propres informations de santé en complétant votre profil de santé."
+          },
+          {
+            "iconName": "FolderLock",
+            "text": "Dans votre espace santé, vous pouvez ranger vos documents de santé en toute sécurité."
+          },
+          {
+            "iconName": "Wifi",
+            "text": "Votre espace santé est dématérialisé et donc accessible par tous les professionnels de santé que vous consulterez  et ce même en cas d'urgence :"
+          }
+        ]
+      },
+      {
+        "type": "highlight",
+        "text": "Cela veut dire que les documents sont numériques.",
+        "strong": "Les documents ne sont pas en papier et ne se perdent plus !"
+      },
+      {
+        "type": "heading",
+        "text": "Quels sont les points fort de mon ESPACE SANTE ?"
+      },
+      {
+        "type": "security-grid",
+        "items": [
+          {
+            "iconName": "ShieldCheck",
+            "text": "Votre espace santé est sécurisé : Cela veut dire que personne ne peut voir vos documents sans votre autorisation."
+          },
+          {
+            "iconName": "BadgeCheck",
+            "text": "Vos documents sont protégés et seuls les professionnels qui sont porteurs d'une carte de professionnel de santé peuvent CONSULTER votre espace santé AVEC VOTRE ACCORD."
+          }
+        ]
+      },
+      {
+        "type": "enrichment",
+        "text": "Les professionnels de santé que vous consultez enrichissent votre ESPACE avec  :",
+        "items": [
+          "Vos courriers médicaux,",
+          "Des résultats d'examens,",
+          "Des résultats d'analyse,",
+          "Vos vaccinations qu'elles soient effectuées par votre médecin, vos infirmiers ou par le pharmacien."
+        ]
+      },
+      {
+        "type": "notification",
+        "text": "VOUS ETES SYSTEMATIQUEMENT AVERTI quand un nouveau document est déposé dans votre espace santé."
+      },
+      {
+        "type": "notification",
+        "text": "VOUS ETES SYSTEMATIQUEMENT AVERTI quand un professionnel de santé consulte votre espace santé."
+      },
+      {
+        "type": "alert",
+        "text": "Vos données sont hébergées en France et ne pourront pas être récupérées à l'étranger."
+      }
+    ]
+  }
+}

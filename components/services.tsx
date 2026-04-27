@@ -49,10 +49,10 @@ export function Services() {
           {services.map((service, index) => (
             <Card
               key={index}
-              className="border-border rounded-2xl overflow-hidden hover:shadow-lg hover:border-primary/30 transition-all duration-300 bg-card group"
+              className="border-border rounded-2xl overflow-hidden bg-card"
             >
               <CardContent className="p-4 lg:p-6">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3 lg:mb-4 group-hover:bg-primary/20 transition-colors">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3 lg:mb-4">
                   <service.icon className="w-5 h-5 lg:w-6 lg:h-6 text-primary" />
                 </div>
                 <h3 className="text-sm lg:text-lg font-bold text-card-foreground mb-1 lg:mb-2">{service.title}</h3>

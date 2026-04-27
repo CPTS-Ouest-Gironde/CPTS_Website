@@ -1,9 +1,9 @@
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
+import { BackToActualitesLink } from "@/components/back-to-actualites-link"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { AlertCircle, Stethoscope, Shield, ArrowLeft, Calendar } from "lucide-react"
-import Link from "next/link"
+import { AlertCircle, Stethoscope, Shield, Calendar } from "lucide-react"
 
 export default function RechercheMedecinTraitantPage() {
   return (
@@ -22,10 +22,10 @@ export default function RechercheMedecinTraitantPage() {
                   className="group hover:bg-primary/10"
                   asChild
                 >
-                  <Link href="/#actualites" className="inline-flex items-center gap-2">
-                    <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                    <span>Retour aux actualités</span>
-                  </Link>
+                  <BackToActualitesLink
+                    variant="button"
+                    iconClassName="group-hover:-translate-x-1 transition-transform"
+                  />
                 </Button>
               </div>
 
@@ -142,10 +142,11 @@ export default function RechercheMedecinTraitantPage() {
                   className="group hover:bg-primary hover:text-white hover:border-primary transition-all rounded-full"
                   asChild
                 >
-                  <Link href="/#actualites" className="inline-flex items-center gap-2">
-                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                    <span>Retour aux actualités</span>
-                  </Link>
+                  <BackToActualitesLink
+                    variant="button"
+                    withMobileTopOffset={false}
+                    iconClassName="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+                  />
                 </Button>
               </div>
             </div>

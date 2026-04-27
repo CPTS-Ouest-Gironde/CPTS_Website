@@ -1,28 +1,28 @@
 {
   "slides": [
     {
-      "image": "/colimaçon.jpg",
-      "title": "Santé mentale : comprendre et s'orienter",
-      "alt": "Santé mentale",
-      "link": "/sante-mental"
+      "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
+      "title": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
+      "alt": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
+      "link": "/sante-mentale-professionnels-et-approches"
     },
     {
-      "image": "/prevention/sante-famille/mars-bleu-2026.png",
-      "title": "Mars Bleu 2026 : prévention du cancer colorectal",
-      "alt": "Mars Bleu 2026",
-      "link": "/prevention/sante-familiale/prevention-cancer-colorectal-mars-bleu-2026"
-    },
-    {
-      "image": "/prevention/sante-famille/movember-2026.png",
-      "title": "Movember 2026 : santé masculine et prévention",
-      "alt": "Movember 2026",
-      "link": "/prevention/sante-familiale/movember-2026"
+      "image": "/insomnie.jpg",
+      "title": "L'insomnie : la comprendre et la traiter",
+      "alt": "Insomnie",
+      "link": "/l-insomnie-la-comprendre-et-la-traiter"
     },
     {
       "image": "/mon-espace-santé.png",
       "title": "Mon espace santé : TOUT SAVOIR, TOUT COMPRENDRE et S'EN SERVIR !",
       "alt": "Mon espace santé",
       "link": "/patients/mon-espace-sante"
+    },
+    {
+      "image": "/colimaçon.jpg",
+      "title": "Santé mentale : comprendre et s'orienter",
+      "alt": "Santé mentale",
+      "link": "/sante-mental"
     }
   ]
 }

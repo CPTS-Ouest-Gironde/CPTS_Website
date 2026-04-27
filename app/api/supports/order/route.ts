@@ -1,131 +1,76 @@
 import { Resend } from "resend"
 import { NextResponse } from "next/server"
+import {
+  applyRateLimit,
+  enforceTrustedOrigin,
+  escapeHtml,
+  getFormNotificationRecipients,
+  supportOrderSchema,
+  toMailtoHref,
+  toTelHref,
+} from "@/lib/api-security"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-interface OrderItem {
-  id: string
-  name: string
-  quantity: number
-  description: string
-}
-
-interface OrderRequest {
-  name: string
-  email: string
-  phone: string
-  address: string
-  supports: OrderItem[]
-}
+export const runtime = "nodejs"
 
 export async function POST(request: Request) {
+  const originResponse = enforceTrustedOrigin(request)
+  if (originResponse) {
+    return originResponse
+  }
+
+  const rateLimitResponse = applyRateLimit(request, "supports-order")
+  if (rateLimitResponse) {
+    return rateLimitResponse
+  }
+
   try {
-    const body: OrderRequest = await request.json()
-    const { name, email, phone, address, supports } = body
+    const body = await request.json()
+    const parsedBody = supportOrderSchema.safeParse(body)
 
-    // Validation: Champs requis
-    if (!name || !email || !phone || !address) {
+    if (!parsedBody.success) {
+      const firstIssue = parsedBody.error.issues[0]
       return NextResponse.json(
-        { error: "Tous les champs personnels sont requis" },
+        { error: firstIssue?.message || "Les donnees du formulaire sont invalides." },
         { status: 400 }
       )
     }
 
-    if (!supports || supports.length === 0) {
+    const { name, email, phone, address, supports } = parsedBody.data
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is not configured")
       return NextResponse.json(
-        { error: "Aucun support sélectionné" },
-        { status: 400 }
+        { error: "Le service est temporairement indisponible." },
+        { status: 503 }
       )
     }
 
-    // Validation: Types
-    if (
-      typeof name !== "string" ||
-      typeof email !== "string" ||
-      typeof phone !== "string" ||
-      typeof address !== "string"
-    ) {
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    const notificationRecipients = getFormNotificationRecipients()
+
+    if (!notificationRecipients) {
+      console.error("Form notification recipients are not configured")
       return NextResponse.json(
-        { error: "Format de données invalide" },
-        { status: 400 }
+        { error: "Le service est temporairement indisponible." },
+        { status: 503 }
       )
     }
 
-    // Validation: Longueurs
-    if (name.trim().length < 2 || name.trim().length > 100) {
-      return NextResponse.json(
-        { error: "Le nom doit contenir entre 2 et 100 caractères" },
-        { status: 400 }
-      )
-    }
+    const safeSubjectName = name.replace(/[\r\n]+/g, " ")
+    const safeName = escapeHtml(name)
+    const safeEmail = escapeHtml(email)
+    const safeAddress = escapeHtml(address)
+    const safeFirstName = escapeHtml(name.split(" ")[0] || name)
+    const mailtoHref = toMailtoHref(email)
+    const telHref = toTelHref(phone)
 
-    if (address.trim().length < 10 || address.trim().length > 200) {
-      return NextResponse.json(
-        { error: "L'adresse doit contenir entre 10 et 200 caractères" },
-        { status: 400 }
-      )
-    }
-
-    // Validation: Format email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email.trim())) {
-      return NextResponse.json(
-        { error: "Format d'email invalide" },
-        { status: 400 }
-      )
-    }
-
-    // Validation: Format téléphone (français)
-    const phoneRegex = /^(?:(?:\+|00)33|0)[1-9](?:[0-9]{8})$/
-    const cleanPhoneForValidation = phone.replace(/[\s.-]/g, "")
-    if (!phoneRegex.test(cleanPhoneForValidation)) {
-      return NextResponse.json(
-        { error: "Format de téléphone invalide" },
-        { status: 400 }
-      )
-    }
-
-    // Validation: Supports (max 50 items, quantités raisonnables)
-    if (supports.length > 50) {
-      return NextResponse.json(
-        { error: "Trop de supports dans la commande" },
-        { status: 400 }
-      )
-    }
-
-    for (const support of supports) {
-      if (!support.id || !support.name || !support.quantity) {
-        return NextResponse.json(
-          { error: "Données de support invalides" },
-          { status: 400 }
-        )
-      }
-
-      if (support.quantity < 1 || support.quantity > 1000) {
-        return NextResponse.json(
-          { error: "Quantité invalide pour un support" },
-          { status: 400 }
-        )
-      }
-    }
-
-    // Normalisation des données
-    const cleanName = name.trim()
-    const cleanEmail = email.trim().toLowerCase()
-    const cleanPhone = phone.trim()
-    const cleanAddress = address.trim()
-
-    console.log("Sending order email with Resend...")
-    console.log("API Key exists:", !!process.env.RESEND_API_KEY)
-
-    // Construire le tableau HTML des supports
     const supportsTableRows = supports
       .map(
         (support) => `
       <tr>
         <td style="padding: 16px; border-bottom: 1px solid #e5e7eb;">
-          <p style="margin: 0; font-size: 15px; color: #111827; font-weight: 600;">${support.name}</p>
-          <p style="margin: 4px 0 0 0; font-size: 13px; color: #6b7280;">${support.description}</p>
+          <p style="margin: 0; font-size: 15px; color: #111827; font-weight: 600;">${escapeHtml(support.name)}</p>
+          <p style="margin: 4px 0 0 0; font-size: 13px; color: #6b7280;">${escapeHtml(support.description)}</p>
         </td>
         <td style="padding: 16px; border-bottom: 1px solid #e5e7eb; text-align: center;">
           <span style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 14px; font-weight: 700; padding: 6px 16px; border-radius: 8px;">
@@ -140,9 +85,9 @@ export async function POST(request: Request) {
     const totalItems = supports.reduce((sum, s) => sum + s.quantity, 0)
 
     const { data, error } = await resend.emails.send({
-      from: "CPTS Ouest Gironde <onboarding@resend.dev>",
-      to: ["info@cpts-ouest-gironde.fr"],
-      subject: `Nouvelle commande de supports - ${cleanName}`,
+      from: "CPTS Ouest Gironde <contact@cpts-ouest-gironde.fr>",
+      to: notificationRecipients,
+      subject: `Nouvelle commande de supports - ${safeSubjectName}`,
       html: `
 <!DOCTYPE html>
 <html>
@@ -186,25 +131,25 @@ export async function POST(request: Request) {
                       <tr>
                         <td style="padding-bottom: 16px;">
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Nom complet</p>
-                          <p style="margin: 0; font-size: 16px; color: #111827; font-weight: 600;">${cleanName}</p>
+                          <p style="margin: 0; font-size: 16px; color: #111827; font-weight: 600;">${safeName}</p>
                         </td>
                       </tr>
                       <tr>
                         <td style="padding-bottom: 16px;">
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Email</p>
-                          <a href="mailto:${cleanEmail}" style="font-size: 16px; color: #16a34a; text-decoration: none; font-weight: 500;">${cleanEmail}</a>
+                          <a href="${mailtoHref}" style="font-size: 16px; color: #16a34a; text-decoration: none; font-weight: 500;">${safeEmail}</a>
                         </td>
                       </tr>
                       <tr>
                         <td style="padding-bottom: 16px;">
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Téléphone</p>
-                          <a href="tel:${cleanPhone}" style="font-size: 16px; color: #16a34a; text-decoration: none; font-weight: 500;">${cleanPhone}</a>
+                          <a href="${telHref}" style="font-size: 16px; color: #16a34a; text-decoration: none; font-weight: 500;">${escapeHtml(phone)}</a>
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <p style="margin: 0 0 4px 0; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px;">Adresse postale</p>
-                          <p style="margin: 0; font-size: 15px; color: #374151; line-height: 1.5;">${cleanAddress}</p>
+                          <p style="margin: 0; font-size: 15px; color: #374151; line-height: 1.5;">${safeAddress}</p>
                         </td>
                       </tr>
                     </table>
@@ -232,8 +177,8 @@ export async function POST(request: Request) {
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-top: 32px;">
                 <tr>
                   <td align="center">
-                    <a href="mailto:${cleanEmail}" style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 14px; font-weight: 600; padding: 14px 32px; border-radius: 50px; text-decoration: none;">
-                      Répondre à ${cleanName.split(" ")[0]}
+                    <a href="${mailtoHref}" style="display: inline-block; background-color: #16a34a; color: #ffffff; font-size: 14px; font-weight: 600; padding: 14px 32px; border-radius: 50px; text-decoration: none;">
+                      Repondre a ${safeFirstName}
                     </a>
                   </td>
                 </tr>
@@ -257,20 +202,22 @@ export async function POST(request: Request) {
 </body>
 </html>
       `,
-      replyTo: cleanEmail,
+      replyTo: email,
     })
 
     if (error) {
       console.error("Resend error:", error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+      return NextResponse.json(
+        { error: "Erreur lors de l'envoi de la commande." },
+        { status: 502 }
+      )
     }
 
-    console.log("Order email sent successfully:", data)
-    return NextResponse.json({ success: true, data })
+    return NextResponse.json({ success: true, id: data?.id ?? null })
   } catch (err) {
     console.error("Catch error:", err)
     return NextResponse.json(
-      { error: "Erreur lors de l'envoi de la commande" },
+      { error: "Erreur lors de l'envoi de la commande." },
       { status: 500 }
     )
   }
