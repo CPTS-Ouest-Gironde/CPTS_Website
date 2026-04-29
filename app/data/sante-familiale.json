@@ -6,6 +6,15 @@
   "articlesPerPage": 12,
   "articles": [
     {
+      "id": "endometriose-depistage-prise-en-charge",
+      "title": "L'endométriose\u00A0: qu'est-ce que c'est\u00A0? Quelle prise en charge\u00A0?",
+      "date": "2026-04-17",
+      "dateLabel": "17 avril 2026",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
+      "slug": "endometriose-depistage-prise-en-charge",
+      "href": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
+    },
+    {
       "id": "movember-2026",
       "title": "MOVEMBER 2026",
       "date": "2026-02-27",
