@@ -1,0 +1,153 @@
+{
+  "title": "LA VACCINATION CONTRE LE PAPILLOMAVIRUS DES 11 ANS : NOUVELLE CAMPAGNE SCOLAIRE 2025 !",
+  "date": "2 septembre 2024",
+  "image": "/prevention/sante-famille/papillomavirus.png",
+  "backLink": {
+    "href": "/prevention/sante-familiale",
+    "label": "Retour à Santé familiale"
+  },
+  "intro": {
+    "paragraphs": [
+      {
+        "text": "En cette **rentrée 2025, une vaccination contre les infections HPV sera de nouveau proposée à tous les élèves de collège de la classe de 5ème**. Elle sera proposée pour **les adolescents volontaires** avec **autorisation de leurs parents**.",
+        "highlight": []
+      },
+      {
+        "text": "En partenariat avec l'ARS, **le CHU de BORDEAUX** s'engage dans la campagne de vaccination scolaire.",
+        "highlight": []
+      }
+    ],
+    "banner": "1 année scolaire = 1 établissement = 2 doses, 1 schéma vaccinal complet",
+    "paragraphs2": [
+      "Ceci avait est décidé en 2023 pour renforcer la médecine préventive et la rendre accessible à tous : une 1ere dose sera proposée en octobre-décembre avec 2eme rappel au printemps-fin juin. Pour les élèves ayant reçu 1 dose, une dose de rattrapage est prévu en 4 ème ou auprès d'un professionnel de santé de ville.",
+      "**la Nouvelle-Aquitaine a été l'une des régions pilotes pour expérimenter la vaccination contre les infections à méningocoques** chez les collégiens, en même temps que la vaccination contre les HPV."
+    ],
+    "stats": {
+      "label": "Sur l'année scolaire 2024-2025 :",
+      "items": [
+        "**6 264 autorisations parentales** ont été recueillies,",
+        "**4 201 élèves ont bénéficié du vaccin** méningocoque"
+      ]
+    },
+    "conclusion": "Il sera donc proposé aux parents, cette année aussi, de faire conjointement la protection contre HPV et contre les MENINGOCOQUES"
+  },
+  "sections": [
+    {
+      "id": "pourquoi",
+      "title": "POURQUOI LUTTER CONTRE LE VIRUS HUMAIN PAPILLOMA (HPV) ?",
+      "color": "purple",
+      "content": [
+        "Ce virus est responsable de **l'infection sexuellement transmissible la plus fréquente** : 80% des personnes seront infectées au cours de leurs vies.",
+        "Les HPV dits à « hauts risques », au nombre de 12, peuvent être responsables de certains cancers et verrues condylomes.",
+        "En France, chaque année, plus de **6400 nouveaux cas de cancers sont attribués à HPV** et plus de 35000 lésions précancéreuses du col de l'utérus HPV induits sont dépistées chaque année .",
+        "**Le meilleur moyen de prévenir ces cancers reste la vaccination à plus de 90 % !**"
+      ]
+    },
+    {
+      "id": "transmission",
+      "title": "COMMENT HPV SE TRANSMET-IL ?",
+      "color": "blue",
+      "content": [
+        "**Le virus se transmet par contact des muqueuses ou de la peau**, presque exclusivement pendant les rapports sexuels avec ou sans pénétration.",
+        "Les préservatifs protègent imparfaitement contre cette infection."
+      ]
+    },
+    {
+      "id": "consequences",
+      "title": "QUELLES CONSEQUENCES SUITE A L'INFECTION HPV ?",
+      "color": "red",
+      "content": [
+        "Certains HPV sont responsables de lésions pouvant être **à l'origine de certains cancers (cancer du col de l'utérus, cancer anaux, cancer oro-pharyngés)** et de verrues ano-génitales (condylomes).",
+        "Le porteur de HPV devient contaminant pour ses partenaires sexuels."
+      ]
+    },
+    {
+      "id": "depuis-quand",
+      "title": "DEPUIS QUAND LA VACCINATION EST-ELLE PROPOSEE ?",
+      "color": "amber",
+      "content": [
+        "Depuis 2007, la prévention est proposée chez les filles de 11 à14 ans. **Cette prévention a été élargie aux garçons depuis janvier 2021**.",
+        "Cette prévention peut être proposée jusqu'à à l'âge de 26 ans révolu pour les garçons."
+      ],
+      "schemaVaccinal": {
+        "title": "Schéma vaccinal",
+        "vaccines": [
+          {
+            "name": "Vaccin nonavalent (Gardasil 9®) :",
+            "intro": "Vaccination initiée chez les filles et chez les garçons :",
+            "doses": [
+              "Entre 11 et 14 ans révolus : deux doses espacées de 5 à 13 mois.",
+              "Entre 15 ans et 19 ans révolus : trois doses administrées selon un schéma 0, 2 et 6 mois.",
+              "Pour les hommes ayant des relations sexuelles avec les hommes jusqu'à 26 ans révolus : trois doses administrées selon un schéma 0, 2 et 6 mois."
+            ],
+            "note": "Il n'y a pas de contre-indication à compléter un schéma vaccinal incomplet."
+          },
+          {
+            "name": "Vaccin bivalent : (Cervarix®) :",
+            "intro": "à utiliser uniquement chez les filles pour un schéma vaccinal initié avec ce vaccin",
+            "doses": [
+              "Entre 11 et 14 ans révolus : deux doses espacées de 6 mois.",
+              "Entre 15 et 19 ans révolus : trois doses administrées selon un schéma 0, 1 et 6 mois."
+            ]
+          }
+        ]
+      },
+      "encadreSecondaire": "Depuis la rentrée scolaire 2023-2024, la vaccination contre les HPV est proposée aux jeunes filles et jeunes garçons de 11 à 14 ans scolarisés dans les collèges publics et les collèges privés sous contrat volontaire. Cette vaccination est gratuite et nécessite l'autorisation des 2 parents."
+    },
+    {
+      "id": "objectifs",
+      "title": "QUELS OBJECTIFS POUR LA CAMPAGNE VACCINALE DES 5èmes ?",
+      "color": "green",
+      "content": [
+        "Pour la campagne 2024/2025, la Nouvelle Aquitaine a révélé une dynamique vaccinale régionale forte et s'est classée au **1 er rang national avec 16.6 % d' élèves de 5 ème vaccinés** !",
+        "**On note une progression notable du taux de couverture, avec un gain de 29 points chez les filles (69 %) et de 28 points chez les garçons (54 %).**"
+      ]
+    },
+    {
+      "id": "securite",
+      "title": "LA VACCINATION EST-ELLE SURE ?",
+      "color": "teal",
+      "content": [
+        "Cette vaccination **a fait ses preuves** dans plus de 80 pays : plus de 100 000 000 d'enfants et adolescents ont déjà été vaccinés. Le suivi effectué confirme la sécurité de ce vaccin **utilisé depuis plus de 16 ans**.",
+        "L'efficacité est aujourd'hui démontrée sur la réduction des lésions précancéreuses.",
+        "La vaccination protège à plus de 90% contre les HPV oncogènes ou responsables de condylomes."
+      ]
+    },
+    {
+      "id": "age",
+      "title": "A QUEL AGE PEUT-ON SE FAIRE VACCINER ?",
+      "color": "indigo",
+      "content": [
+        "La vaccination est recommandée pour tous les **jeunes de 11 ans à 14 ans révolus en schéma vaccinal de 2 doses** (M0 + M6).",
+        "Un rattrapage est possible **de 14 à 19 ans en schéma vaccinal de 3 doses** (M0 + M2 + M6).",
+        "La vaccination restera possible jusqu'à 26 ans pour les hommes qui ont des relations homosexuelles."
+      ]
+    },
+    {
+      "id": "pourquoi-11-ans",
+      "title": "POUQUOI DES L'AGE DE 11 ANS ?",
+      "color": "orange",
+      "content": [
+        "Il peut être associé au rdv vaccinal de DTPCOQ des 11 ans."
+      ],
+      "items": [
+        "Il permettra une **meilleure réponse immunitaire**.",
+        "**Seules 2 doses** suffiront pour assurer l'immunité."
+      ]
+    },
+    {
+      "id": "actions",
+      "title": "QUELLES ACTIONS SUR NOTRE TERRITOIRE ?",
+      "color": "sky",
+      "content": [
+        "L'ARS de Nouvelle Aquitaine et le CHU de BORDEAUX ont uni leur force pour lancer la campagne de vaccination scolaire ciblant ainsi 35 établissements de la métropole Bordelaise : soit 4635 élèves pour l'année scolaire 2024-2025."
+      ],
+      "media": {
+        "image": "https://old.cpts-ouest-gironde.fr/wp-content/uploads/2023/06/visuel-couverture-video-motion-hpv-vaccination-nouvelle-aquitaine-20231.png",
+        "alt": "Campagne de vaccination HPV au collège - ARS Nouvelle-Aquitaine",
+        "linkUrl": "https://www.nouvelle-aquitaine.ars.sante.fr/dossier-de-presse-du-lancement-de-la-campagne-de-vaccination-hpv-human-papillomavirus",
+        "linkLabel": "https://www.nouvelle-aquitaine.ars.sante.fr/dossier-de-presse-du-lancement-de-la-campagne-de-vaccination-hpv-human-papillomavirus"
+      }
+    }
+  ]
+}
