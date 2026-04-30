@@ -53,6 +53,7 @@ export const pmoEntrySchema = z.object({
   patientAge: z.enum(psoPatientAgeValues),
   patientMedecinTraitant: z.boolean(),
   orientation: z.enum(psoOrientationValues),
+  reorientationMedecinDelegant: z.boolean(),
   prescriptionAntiH1: z.boolean(),
   prescriptionCollyre: z.boolean(),
   prescriptionAntiallergiqueNasal: z.boolean(),

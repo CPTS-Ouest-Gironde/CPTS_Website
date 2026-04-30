@@ -105,6 +105,7 @@ export async function createPmoEntry(
     prescription_antiallergique_nasal: parsed.data.prescriptionAntiallergiqueNasal,
     prescription_collyre: parsed.data.prescriptionCollyre,
     prescription_corticoide_nasal: parsed.data.prescriptionCorticoideNasal,
+    reorientation_medecin_delegant: parsed.data.reorientationMedecinDelegant,
     renouvellement: parsed.data.renouvellement,
     user_id: user.id,
   })

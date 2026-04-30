@@ -66,6 +66,7 @@ export function parsePmoEntryFormData(formData: FormData) {
     prescriptionAntiallergiqueNasal: getBooleanValue(formData, "prescriptionAntiallergiqueNasal"),
     prescriptionCollyre: getBooleanValue(formData, "prescriptionCollyre"),
     prescriptionCorticoideNasal: getBooleanValue(formData, "prescriptionCorticoideNasal"),
+    reorientationMedecinDelegant: getBooleanValue(formData, "reorientationMedecinDelegant"),
     renouvellement: getBooleanValue(formData, "renouvellement"),
   })
 }
