@@ -67,7 +67,7 @@
       "color": "amber",
       "content": [
         "Depuis 2007, la prévention est proposée chez les filles de 11 à14 ans. **Cette prévention a été élargie aux garçons depuis janvier 2021**.",
-        "Cette prévention peut désormais être proposée jusqu'à l'âge de 26 ans révolu, pour les garçons comme pour les filles."
+        "Cette prévention est désormais proposée jusqu'à l'âge de 26 ans révolu pour tous."
       ],
       "schemaVaccinal": {
         "title": "Schéma vaccinal",
@@ -77,19 +77,10 @@
             "intro": "Vaccination initiée chez les filles et chez les garçons :",
             "doses": [
               "Entre 11 et 14 ans révolus : deux doses espacées de 5 à 13 mois.",
-              "Entre 15 ans et 19 ans révolus : trois doses administrées selon un schéma 0, 2 et 6 mois.",
-              "Pour les hommes ayant des relations sexuelles avec les hommes jusqu'à 26 ans révolus : trois doses administrées selon un schéma 0, 2 et 6 mois."
+              "Entre 15 ans et 26 ans révolus : trois doses administrées selon un schéma 0, 2 et 6 mois."
             ],
             "note": "Il n'y a pas de contre-indication à compléter un schéma vaccinal incomplet.",
             "nouveauNote": "L'extension du rattrapage vaccinal contre les HPV jusqu'à 26 ans, pour les femmes et pour les hommes, est effective depuis le 12 décembre 2025."
-          },
-          {
-            "name": "Vaccin bivalent : (Cervarix®) :",
-            "intro": "à utiliser uniquement chez les filles pour un schéma vaccinal initié avec ce vaccin",
-            "doses": [
-              "Entre 11 et 14 ans révolus : deux doses espacées de 6 mois.",
-              "Entre 15 et 19 ans révolus : trois doses administrées selon un schéma 0, 1 et 6 mois."
-            ]
           }
         ]
       },
@@ -120,7 +111,7 @@
       "color": "indigo",
       "content": [
         "La vaccination est recommandée pour tous les **jeunes de 11 ans à 14 ans révolus en schéma vaccinal de 2 doses** (M0 + M6).",
-        "Un rattrapage est possible **de 14 à 19 ans en schéma vaccinal de 3 doses** (M0 + M2 + M6).",
+        "Un rattrapage est possible **de 14 à 26 ans en schéma vaccinal de 3 doses** (M0 + M2 + M6).",
         "Depuis le 12 décembre 2025, le rattrapage vaccinal est possible jusqu'à 26 ans révolus pour les femmes et pour les hommes."
       ]
     },
