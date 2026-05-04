@@ -171,6 +171,16 @@ export default function VaccinationPapillomavirusPage() {
                                 {vaccine.note}
                               </p>
                             )}
+                            {(vaccine as { nouveauNote?: string }).nouveauNote && (
+                              <div className="flex items-start gap-3 mt-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
+                                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-bold bg-green-500 text-white flex-shrink-0 mt-0.5">
+                                  NOUVEAU
+                                </span>
+                                <p className="text-sm text-green-800 leading-relaxed">
+                                  {(vaccine as { nouveauNote?: string }).nouveauNote}
+                                </p>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
