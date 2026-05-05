@@ -22,9 +22,9 @@ const actualites = [
     link: "/actualites/rhinite-allergique",
   },
   {
-    title: "Dépistage diabète & hypertension — Pharmacie Arago, 28 et 29 avril 2026",
-    image: "/actu/affiche-pharma-ARAGO 28-29 avril _page-0001.webp",
-    link: "/actualites/pharma-arago-avril",
+    title: "Dépistage diabète & hypertension — Pharmacie Beutre, 4 et 7 mai 2026",
+    image: "/actu/affiche pharmacie beutre 4&7mai 26_page-0001.webp",
+    link: "/actualites/pharma-beutre-mai",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
