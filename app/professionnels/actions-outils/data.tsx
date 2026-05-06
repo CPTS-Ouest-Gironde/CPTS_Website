@@ -480,6 +480,11 @@ export const accordionItemsParcours: AccordionItem[] = [
 
           {/* RCP Psy */}
           <div className="mb-8">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide">
+                Dispositif N°1
+              </span>
+            </div>
             <div className="flex items-center gap-3 mb-4 flex-wrap">
               <span
                 className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500 text-white font-semibold text-xs rounded-md animate-badge-glow"
@@ -519,10 +524,24 @@ export const accordionItemsParcours: AccordionItem[] = [
           </div>
 
           {/* Demande d'orientation */}
+          <div className="mb-2 flex items-center gap-2">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide">
+              Dispositif N°2
+            </span>
+          </div>
           <div className="bg-primary/5 p-6 rounded-xl space-y-4">
-            <h4 className="text-xl font-bold text-foreground">
-              Demande d'orientation
-            </h4>
+            <div className="flex items-center gap-3 flex-wrap">
+              <h4 className="text-xl font-bold text-foreground">
+                Demande d'orientation
+              </h4>
+              <Link
+                href="/professionnels/actions-outils/les-dispositifs-du-territoire"
+                className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
+              >
+                Accéder aux ressources
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
             <p className="text-muted-foreground leading-relaxed">
               Vous êtes en difficulté avec une prise en charge en santé mentale
               ? Vous souhaitez un avis spécialisé pour une orientation.
@@ -781,10 +800,27 @@ export const accordionItemsPrevention: AccordionItem[] = [
           le 29 novembre 2024 (avec 3 Gynécologues, 1 sage femme, 1 médecin
           généraliste adhérentes de la CPTS)
         </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Prochaine action de dépistage au Foyer occupationnel Jenny Lepreux à
-          Mérignac le 16 avril 2026
-        </p>
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4 space-y-2">
+          <p className="text-sm font-semibold text-emerald-700">
+            Action du 16 avril 2026 — Foyer occupationnel Jenny Lepreux, Mérignac
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            Le 16 avril a eu lieu une action de dépistage du cancer du sein au
+            Foyer occupationnel Jenny Lepreux à Mérignac.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            10 résidentes ont été dépistées avec l&apos;intervention d&apos;une
+            sage-femme et d&apos;une gynécologue adhérentes de la CPTS.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            Les résidentes ont participé activement à la préparation de l&apos;action
+            en travaillant sur les documents de sensibilisation.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            Merci à l&apos;équipe du FO pour son accueil, à Isabelle Calafato pour
+            la coordination de la matinée et à TSA&amp;co pour leur accompagnement.
+          </p>
+        </div>
       </div>
     ),
   },
@@ -795,7 +831,7 @@ export const accordionItemsPrevention: AccordionItem[] = [
     customContent: (
       <ul className="list-disc pl-6 space-y-3 text-muted-foreground leading-relaxed">
         <li>
-          Le mardi 28 avril aura lieu la soirée annuelle sur le thème cette
+          Le mardi 28 avril 2026 aura lieu la soirée annuelle sur le thème cette
           année des vulnérabilités et santé mentale en périnatalité avec la
           participation de Pr Sutter du CH de Charles Perrens et en partenariat
           avec le RPNA et la PMI. Un dépliant à destination des professionnels
