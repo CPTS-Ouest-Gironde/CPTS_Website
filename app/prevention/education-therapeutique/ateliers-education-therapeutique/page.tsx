@@ -121,18 +121,6 @@ export default function AteliersEducationTherapeutiquePage() {
                     </div>
                   )}
 
-                  {/* Ateliers (Maison de la Nutrition) */}
-                  {structure.ateliers && (
-                    <div className="mb-6">
-                      <p className="font-medium text-amber-600 mb-3">{structure.ateliers.title}</p>
-                      <ul className="space-y-1">
-                        {structure.ateliers.dates.map((date, i) => (
-                          <li key={i} className="text-amber-600">{date}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
                   {/* Affiche (Maison de la Nutrition) */}
                   {structure.affiche && (
                     <div className="rounded-xl overflow-hidden mt-6">

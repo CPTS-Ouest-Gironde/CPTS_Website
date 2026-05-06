@@ -41,19 +41,11 @@
       "title": "La Maison de la Nutrition",
       "type": "secondary",
       "contact": {
-        "intro": "Pour <strong>vos patients atteints de diabète de type 2</strong>, Contactez l'équipe de la Maison de la Nutrition au",
+        "intro": "Vous souhaitez que votre patient soit accompagné : vous pouvez nous contacter ou votre patient peut nous contacter au",
         "phone": "05 56 92 34 83",
-        "suffix": "pour connaitre le planning des ateliers Diabète cœur"
+        "suffix": "Notre équipe vous tiendra informé du parcours de votre patient."
       },
-      "ateliers": {
-        "title": "Ateliers passé sur Pessac :",
-        "dates": [
-          "le 14/12/23 de 9H30 à 12H30",
-          "le 21/12/23 de 9H30 à 12H30",
-          "le 4/01/2024 de 9H30 à 16H30"
-        ]
-      },
-      "affiche": "/prevention/atelier/AFFICHE-ATELIERS-ETP.png"
+      "affiche": "/éducation-thérap/Flyer_ETP_Maison_de_la_nutrition_2026.webp"
     }
   ],
   "plateforme": {
