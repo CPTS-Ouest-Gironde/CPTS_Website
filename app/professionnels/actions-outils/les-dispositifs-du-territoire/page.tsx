@@ -21,7 +21,7 @@ const resources = [
     url: "https://drive.google.com/file/d/1ZT6Fs-2bdBW4Jog_3AVt-OfFUJuD-Gaw/view?usp=sharing",
   },
   {
-    title: "Dispositif CPTS d'adressage en Psychiatrie",
+    title: "Dispositif CPTS d'orientation en Psychiatrie",
     url: "https://drive.google.com/file/d/1GXIU-BjD5RATI_PDWO9h8a14bBT_aeXT/view?usp=sharing",
   },
   {
