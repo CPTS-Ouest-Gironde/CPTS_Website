@@ -14,26 +14,26 @@ export const metadata: Metadata = {
 const resources = [
   {
     title: "Approche thérapeutique - 20-25 ans et Adultes",
-    url: "https://drive.google.com/file/d/1eAaTZ-nzebCkaPySyX3HmImYdES2JhF1/view?usp=sharing",
+    url: "https://drive.google.com/file/d/16kFiLLw0WEFHSfabybW_D5Oeujil9D8T/view?usp=drive_link",
   },
   {
     title: "Parcours en santé mentale - adolescent et jeune adulte",
-    url: "https://drive.google.com/file/d/1ZT6Fs-2bdBW4Jog_3AVt-OfFUJuD-Gaw/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1fWCY1od1W0ndnMiL8ROoJGJqjiv5xJem/view?usp=drive_link",
   },
   {
     title: "Dispositif CPTS d'orientation en Psychiatrie",
-    url: "https://drive.google.com/file/d/1GXIU-BjD5RATI_PDWO9h8a14bBT_aeXT/view?usp=sharing",
+    url: "https://drive.google.com/file/d/19R4uX3I_-9zVoCr1dGO3TTeBQdBEtbao/view?usp=drive_link",
     associatedDoc: {
       title: "Formulaire de demande d'orientation",
-      url: "https://drive.google.com/file/d/1fzr_8eXxO0hHNvGL4U-u0GglSizZKRP6/view?usp=sharing",
+      url: "https://drive.google.com/file/d/1X7E7B_LKiPokHO1V5QWjp32LfB9LpFUa/view?usp=drive_link",
     },
   },
   {
     title: "Dispositif CPTS RCP Psy",
-    url: "https://drive.google.com/file/d/1iq3Lx5O0vm5RKdbQcd8Lvp0b4LWtWnDQ/view?usp=sharing",
+    url: "https://drive.google.com/file/d/13qCAHMzb-vZKm5ZFR_sKuxK0TtqlbsB5/view?usp=drive_link",
     associatedDoc: {
       title: "Questionnaires RCP Psy",
-      url: "https://drive.google.com/file/d/1QKbDXk3f2Y_zIQA82ox-QeLpVptBmBQN/view?usp=sharing",
+      url: "https://drive.google.com/file/d/1YCQvqQ3PVIhVuMA9qYjwkyXEN3IqVEGV/view?usp=drive_link",
     },
   },
 ];

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const resources = [
   {
     title: "Le Cancer, c'est quoi ?",
-    url: "https://drive.google.com/file/d/1u53tSr19dqiLoXF20Z6JJPEBTWqj7Ytn/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1YcvNSfllBq9-2WMuA1E-Zlu8QXbDxur4/view?usp=sharing",
   },
   {
     title: "Quiz : Le cancer colorectal",
