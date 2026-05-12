@@ -106,7 +106,7 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const isProd = process.env.NODE_ENV === "production";
+    const isProd = process.env.VERCEL_ENV === "production";
     const recipientEmail = isProd
       ? process.env.IDE_PSY_PROD_EMAIL
       : process.env.IDE_PSY_DEV_EMAIL;
