@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ["@react-pdf/renderer"],
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -55,6 +56,11 @@ const nextConfig = {
       {
         source: '/vos-numeros-utiles',
         destination: '/patients/coordonnees',
+        permanent: true,
+      },
+      {
+        source: '/demande-orientation-psy',
+        destination: '/espace-pro/demande-orientation-psy',
         permanent: true,
       },
     ]
