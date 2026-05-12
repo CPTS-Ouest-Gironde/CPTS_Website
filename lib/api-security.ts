@@ -7,7 +7,7 @@ import {
   isValidPostalAddress,
 } from "@/lib/message-content"
 
-type RateLimitKey = "contact" | "supports-order"
+type RateLimitKey = "contact" | "supports-order" | "orientation-psy" | "orientation-psy-pdf"
 
 type RateLimitBucket = {
   count: number
@@ -32,6 +32,18 @@ const RATE_LIMIT_RULES: Record<RateLimitKey, RateLimitRule> = {
     message:
       "Veuillez attendre le retour de la CPTS Ouest Gironde avant de renvoyer une commande.",
     windowMs: 12 * 60 * 60 * 1000,
+  },
+  "orientation-psy": {
+    limit: 5,
+    message:
+      "Veuillez patienter avant de renvoyer un nouveau formulaire d'orientation psy.",
+    windowMs: 60 * 60 * 1000,
+  },
+  "orientation-psy-pdf": {
+    limit: 10,
+    message:
+      "Vous avez généré trop de PDF. Veuillez patienter avant de réessayer.",
+    windowMs: 60 * 60 * 1000,
   },
 }
 
