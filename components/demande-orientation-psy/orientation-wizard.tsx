@@ -374,7 +374,7 @@ export function OrientationWizard() {
                 </Field>
 
                 <Field
-                  label="Heure de réveil et possibilité de rendormissement"
+                  label="Heure de réveil et rendormissement"
                   htmlFor="reveils-details"
                 >
                   <Input
