@@ -16,7 +16,7 @@ export const FIELD_LABELS: Record<string, string> = {
   tttActuel: "TTT (actuel)",
   contexte: "Contexte - Motif de la demande",
   ruminationThemes: "Sommeil - Thèmes de rumination",
-  reveilsDetails: "Sommeil - Heure et possibilité de rendormissement",
+  reveilsDetails: "Sommeil - Heure de réveil et rendormissement",
   humeur: "Humeur",
   suicidaireFrequences: "Idées suicidaires - Fréquences",
   suicidaireScenario: "Idées suicidaires - Scénario",

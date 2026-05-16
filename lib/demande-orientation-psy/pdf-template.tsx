@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 7,
-    paddingRight: 8,
+    paddingRight: 16,
     backgroundColor: "#f9fafb",
     fontFamily: "Helvetica-Bold",
     fontSize: 8,

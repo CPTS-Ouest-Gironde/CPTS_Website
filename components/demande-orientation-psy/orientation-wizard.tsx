@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import type { ReactNode } from "react";
 import Image from "next/image";
-import { FileDown, Loader2, Send, ShieldCheck } from "lucide-react";
+import { FileDown, Loader2, ShieldCheck } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -36,10 +36,6 @@ export function OrientationWizard() {
   const [toxiquesGlobal, setToxiquesGlobal] = useState("");
   const [toxiquesChecked, setToxiquesChecked] = useState<Record<string, boolean>>({});
   const [toxiquesDetail, setToxiquesDetail] = useState<Record<string, string>>({});
-  const [sendState, setSendState] = useState<"idle" | "sending" | "success" | "error">(
-    "idle",
-  );
-  const [sendMessage, setSendMessage] = useState("");
   const [pdfState, setPdfState] = useState<"idle" | "loading" | "error">("idle");
   const [pdfError, setPdfError] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
@@ -116,46 +112,6 @@ export function OrientationWizard() {
     }
   };
 
-  const handleSend = async () => {
-    const payload = buildPayload();
-    if (!payload) return;
-
-    setSendState("sending");
-    setSendMessage("");
-
-    try {
-      const response = await fetch("/api/demande-orientation-psy", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        const body = (await response.json().catch(() => null)) as
-          | { error?: string }
-          | null;
-        setSendState("error");
-        setSendMessage(
-          body?.error ||
-            "Envoi impossible pour le moment. Vous pouvez exporter le formulaire en PDF pour la trace.",
-        );
-        return;
-      }
-
-      setSendState("success");
-      setSendMessage(
-        "Formulaire envoyé automatiquement par email. Vous pouvez exporter une copie en PDF pour l'archivage du dossier.",
-      );
-    } catch {
-      setSendState("error");
-      setSendMessage(
-        "Envoi impossible pour le moment. Vous pouvez exporter le formulaire en PDF pour la trace.",
-      );
-    }
-  };
-
   const handleToxiquesGlobalChange = (val: string) => {
     setToxiquesGlobal(val);
     if (val === "Non") {
@@ -170,8 +126,6 @@ export function OrientationWizard() {
     setToxiquesGlobal("");
     setToxiquesChecked({});
     setToxiquesDetail({});
-    setSendState("idle");
-    setSendMessage("");
     setPdfState("idle");
     setPdfError("");
   };
@@ -420,7 +374,7 @@ export function OrientationWizard() {
                 </Field>
 
                 <Field
-                  label="Heure de réveil et possibilité de rendormissement"
+                  label="Heure de réveil et rendormissement"
                   htmlFor="reveils-details"
                 >
                   <Input
@@ -618,9 +572,13 @@ export function OrientationWizard() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  Les informations sont transmises automatiquement par email à
-                  l&apos;adresse indiquée. Le site ne stocke pas ces données dans une
-                  base de données applicative.
+                  Les données saisies ne sont pas stockées sur ce site. Une fois le
+                  formulaire complété, téléchargez le PDF et transmettez-le par votre
+                  messagerie sécurisée santé (MSSanté, Apicrypt ou équivalent) à{" "}
+                  <span className="font-medium text-foreground">
+                    elise.patenere@pro.mssante.fr
+                  </span>
+                  .
                 </p>
                 <label className="inline-flex items-start gap-3 text-sm text-foreground">
                   <Checkbox
@@ -636,16 +594,15 @@ export function OrientationWizard() {
               </CardContent>
             </Card>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 pt-2">
-              <Button type="button" variant="outline" onClick={handleReset}>
-                Réinitialiser
-              </Button>
-              <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col gap-3 pt-2">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <Button type="button" variant="outline" onClick={handleReset}>
+                  Réinitialiser
+                </Button>
                 <Button
                   type="button"
-                  variant="outline"
                   onClick={handleExportPdf}
-                  disabled={pdfState === "loading"}
+                  disabled={pdfState === "loading" || !rgpdConsent}
                 >
                   {pdfState === "loading" ? (
                     <>
@@ -655,47 +612,22 @@ export function OrientationWizard() {
                   ) : (
                     <>
                       <FileDown className="w-4 h-4" />
-                      Exporter en PDF (trace dossier)
-                    </>
-                  )}
-                </Button>
-                <Button
-                  type="button"
-                  onClick={handleSend}
-                  disabled={!rgpdConsent || sendState === "sending"}
-                >
-                  {sendState === "sending" ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Envoi en cours...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      Envoyer automatiquement par email
+                      Exporter en PDF
                     </>
                   )}
                 </Button>
               </div>
-            </div>
-
-            {pdfState === "error" && (
-              <p className="text-sm text-destructive">{pdfError}</p>
-            )}
-
-            {sendState !== "idle" && (
-              <p
-                className={`text-sm ${
-                  sendState === "success"
-                    ? "text-emerald-700"
-                    : sendState === "error"
-                      ? "text-destructive"
-                      : "text-muted-foreground"
-                }`}
-              >
-                {sendMessage}
+              <p className="text-xs text-muted-foreground text-right leading-relaxed">
+                Téléchargez le PDF, puis envoyez-le par votre messagerie sécurisée santé
+                (MSSanté ou équivalent) à&nbsp;:{" "}
+                <span className="font-medium text-foreground">
+                  elise.patenere@pro.mssante.fr
+                </span>
               </p>
-            )}
+              {pdfState === "error" && (
+                <p className="text-sm text-destructive">{pdfError}</p>
+              )}
+            </div>
           </form>
         </CardContent>
       </Card>
