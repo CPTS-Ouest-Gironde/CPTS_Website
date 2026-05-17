@@ -22,9 +22,9 @@ const actualites = [
     link: "/actualites/rhinite-allergique",
   },
   {
-    title: "Dépistage diabète & hypertension — Pharmacie Beutre, 4 et 7 mai 2026",
-    image: "/actu/affiche pharmacie beutre 4&7mai 26_page-0001.webp",
-    link: "/actualites/pharma-beutre-mai",
+    title: "Dépistage diabète & hypertension — Pharmacie Formanoir, 1er et 11 juin 2026",
+    image: "/actu/Pharmacie Formanoir 1&11 juin 26.webp",
+    link: "/actualites/pharma-formanoir-juin",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
