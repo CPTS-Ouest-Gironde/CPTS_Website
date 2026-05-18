@@ -67,6 +67,20 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
+        {/* GA4 Consent Mode v2 — doit s'exécuter avant gtag.js */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                wait_for_update: 500
+              });
+            `,
+          }}
+        />
       </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
         <Suspense fallback={<LoadingScreen />}>
