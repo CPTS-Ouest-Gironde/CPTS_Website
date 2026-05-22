@@ -3,6 +3,7 @@
 import { AccordionItem } from "./types";
 import { ImageCarousel } from "./components/ImageCarousel";
 import { RcpTeamCard } from "./components/RcpTeamCard";
+import { ZoomableImage } from "./components/ZoomableImage";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { DownloadButton } from "@/components/download-button";
@@ -605,6 +606,13 @@ export const accordionItemsParcours: AccordionItem[] = [
             <h3 className="text-2xl font-bold text-foreground">
               RCP cas complexes CPTS Ouest Gironde
             </h3>
+            <ZoomableImage
+              src="/actions-outils/RCP-cas-complexe.webp"
+              alt="Infographie du parcours RCP cas complexes CPTS Ouest Gironde en 5 étapes : situation initiale en impasse diagnostique, demande adressée à la CPTS, déroulement de la RCP, synthèse et plan d'action concertée, bénéfices pour le patient et le professionnel"
+              width={1536}
+              height={1024}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 800px"
+            />
             <RcpTeamCard
               label="Équipe RCP cas complexes :"
               members="Dr Ismahène Abed, Dr Christophe Adam, Dr Sophie Clément Perrin, Claire Laborde, Hugo Ledoux, Dr Monika Nguon"
