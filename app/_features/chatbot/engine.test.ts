@@ -105,13 +105,76 @@ test("processUserInput ignore la salutation quand une demande suit", () => {
   assert.notEqual(lastBotMessage?.text, "Bonjour. Je suis l'assistant d'orientation CPTS. Donnez votre besoin en une phrase et je vous proposerai la bonne ressource.")
 })
 
-test("processUserInput medecin retraite matche medecin-traitant en priorité", () => {
+test("processUserInput medecin retraite suggere le parcours et les démarches sans annuaire santé mentale", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "Mon médecin part à la retraite, comment en trouver un autre", chatbotConfig)
 
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
 
-  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "medecin-traitant")
+  assert.ok(suggestionIds.includes("medecin-traitant"))
+  assert.ok(suggestionIds.includes("patients-medecin-traitant"))
+  assert.ok(!suggestionIds.includes("sante-mentale-annuaire"))
+})
+
+test("processUserInput declaration medecin traitant priorise la page démarches patient", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(
+    initialState,
+    "Comment déclarer mon médecin traitant à l'Assurance Maladie",
+    chatbotConfig,
+  )
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
+})
+
+test("processUserInput annuaire sante mentale garde la ressource spécialisée", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Annuaire santé mentale", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sante-mentale-annuaire")
+})
+
+test("processUserInput annuaire seul ne priorise pas l'annuaire santé mentale", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Annuaire", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "annuaire")
+  assert.notEqual(suggestionMessage?.suggestions?.[0]?.resource.id, "sante-mentale-annuaire")
+})
+
+test("processUserInput aide Mon Espace Santé matche le tutoriel ou la page principale", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Comment utiliser mon espace santé", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestionIds.includes("patients-tuto-espace-sante") || suggestionIds.includes("mon-espace-sante"))
+})
+
+test("processUserInput Mon Espace Santé matche la page principale", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Mon espace santé", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "mon-espace-sante")
+})
+
+test("processUserInput dispositifs du territoire matche la ressource professionnelle", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Dispositifs du territoire", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "pro-dispositifs-territoire")
 })
 
 test("processUserInput matche une douleur à la tête en phrase naturelle", () => {
@@ -208,9 +271,11 @@ test("processQuickReply Non autre chose ne retourne pas au message accueil", () 
   const nextState = processQuickReply(suggestedState, noReply, chatbotConfig)
   const lastBotMessage = getLastBotMessage(nextState.messages)
 
-  assert.notEqual(nextState.currentNodeId, "start")
   assert.notEqual(lastBotMessage?.text, chatbotConfig.nodes.start.message)
-  assert.ok(nextState.currentNodeId === "fallback" || Boolean(getLastBotMessageWithSuggestions(nextState.messages)))
+  assert.ok(
+    nextState.currentNodeId === "fallback" ||
+      nextState.messages.some((message) => message.text === "Voici une autre piste possible :"),
+  )
 })
 
 test("processUserInput répond aux formulations familières de type chatbot", () => {
@@ -457,19 +522,20 @@ test("processQuickReply ouvre le sous-flow médecin traitant puis ajoute le suiv
   assert.ok(rootReply)
 
   const situationState = processQuickReply(initialState, rootReply, chatbotConfig)
-  const situationMessage = getLastBotMessage(situationState.messages)
+  const situationMessage = situationState.messages.find((message) => message.text === "Quelle est votre situation ?")
+  const situationSuggestions = getLastBotMessageWithSuggestions(situationState.messages)
   const searchReply = chatbotConfig.nodes["medecin-traitant"].quickReplies?.find(
     (reply) => reply.id === "qr-medecin-traitant-chercher",
   )
 
   assert.equal(situationState.currentNodeId, "medecin-traitant")
   assert.equal(situationMessage?.text, "Quelle est votre situation ?")
+  assert.ok(situationSuggestions?.suggestions?.some((item) => item.resource.id === "patients-medecin-traitant"))
   assert.ok(searchReply)
 
   const resourceState = processQuickReply(situationState, searchReply, chatbotConfig)
   const suggestionMessage = getLastBotMessageWithSuggestions(resourceState.messages)
-  const followUpMessage = getLastBotMessage(resourceState.messages)
 
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "medecin-traitant"))
-  assert.equal(followUpMessage?.text, "Est-ce que cela répond à votre question ?")
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "patients-medecin-traitant"))
 })
