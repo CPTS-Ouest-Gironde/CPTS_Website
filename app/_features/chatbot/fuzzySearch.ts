@@ -25,12 +25,14 @@ function buildFuzzyDocuments(config: ChatbotConfig): FuzzyResourceDocument[] {
     }
   }
 
-  return Object.values(config.resources).map((resource) => ({
-    resource,
-    title: resource.title,
-    description: resource.description ?? "",
-    allKeywords: normalizeText(keywordMap.get(resource.id)?.join(" ") ?? ""),
-  }))
+  return Object.values(config.resources)
+    .filter((resource) => !resource.isSensitive)
+    .map((resource) => ({
+      resource,
+      title: resource.title,
+      description: resource.description ?? "",
+      allKeywords: normalizeText(keywordMap.get(resource.id)?.join(" ") ?? ""),
+    }))
 }
 
 function getFuseIndex(config: ChatbotConfig): Fuse<FuzzyResourceDocument> {

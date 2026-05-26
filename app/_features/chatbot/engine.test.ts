@@ -3,6 +3,7 @@ import test from "node:test"
 
 import { chatbotConfig } from "./chatbot.config"
 import { createInitialState, processQuickReply, processUserInput, restartConversation } from "./engine"
+import { searchResourcesFuzzy } from "./fuzzySearch"
 import type { ChatbotConfig } from "./types"
 import { trackEvent } from "./useChatbotAnalytics"
 
@@ -130,6 +131,16 @@ test("processUserInput declaration medecin traitant priorise la page démarches 
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
 })
 
+test("processUserInput cherche medecin priorise la page démarches patient", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Je cherche un médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "medecin-traitant"))
+})
+
 test("processUserInput annuaire sante mentale garde la ressource spécialisée", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "Annuaire santé mentale", chatbotConfig)
@@ -204,6 +215,16 @@ test("processUserInput matche une douleur thoracique avec contexte temporel", ()
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "urgence-15")
 })
 
+test("processUserInput mention police non urgente ne propose pas urgence-17", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "J'ai vu la police hier soir", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestionIds.includes("urgence-17"))
+})
+
 test("processUserInput matche les violences conjugales formulées naturellement", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "je suis battue par mon mari", chatbotConfig)
@@ -246,6 +267,17 @@ test("processUserInput matche une demande de vaccination grippe naturelle", () =
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-vaccination-grippe-2025"))
 })
 
+test("processUserInput vaccination grippe exclut les symptômes en suggestion secondaire", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Je veux me faire vacciner contre la grippe", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.equal(suggestionIds[0], "sf-vaccination-grippe-2025")
+  assert.ok(!suggestionIds.includes("symptomes-douleur"))
+})
+
 test("processUserInput distingue vaccin grippe et grippe symptome", () => {
   const initialState = createInitialState(chatbotConfig)
   const vaccineState = processUserInput(initialState, "Je veux me faire vacciner contre la grippe", chatbotConfig)
@@ -276,6 +308,28 @@ test("processQuickReply Non autre chose ne retourne pas au message accueil", () 
     nextState.currentNodeId === "fallback" ||
       nextState.messages.some((message) => message.text === "Voici une autre piste possible :"),
   )
+})
+
+test("processQuickReply Non autre chose après médecin ne propose aucune ressource pro", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const suggestedState = processUserInput(initialState, "Je cherche un médecin", chatbotConfig)
+  const noReply = [...suggestedState.messages]
+    .reverse()
+    .find((message) => message.quickReplies?.some((reply) => reply.id === "qr-resource-follow-up-no"))
+    ?.quickReplies?.find((reply) => reply.id === "qr-resource-follow-up-no")
+
+  assert.ok(noReply)
+
+  const nextState = processQuickReply(suggestedState, noReply, chatbotConfig)
+  const suggestions = getLastBotMessageWithSuggestions(nextState.messages)?.suggestions ?? []
+
+  assert.ok(suggestions.every((item) => item.resource.audience !== "pro"))
+})
+
+test("searchResourcesFuzzy ne retourne jamais de ressource sensible", () => {
+  const fuzzyResults = searchResourcesFuzzy("police secours danger suicide samu urgence violence", chatbotConfig)
+
+  assert.ok(fuzzyResults.every((resource) => !resource.isSensitive))
 })
 
 test("processUserInput répond aux formulations familières de type chatbot", () => {
@@ -427,6 +481,42 @@ test("processUserInput utilise Fuse quand le matcher principal ne trouve rien", 
   assert.ok(suggestionMessage)
   assert.match(suggestionMessage.text, /peut-être cherchez-vous/i)
   assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sm-pro-approches"))
+})
+
+test("processUserInput enrichit une question sur l'endometriose avec un extrait d'article", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "endométriose c'est quoi", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(extractMessage)
+  assert.match(extractMessage.text, /endom.triose/i)
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-endometriose"))
+})
+
+test("processUserInput enrichit une question sur Mars Bleu avec un extrait d'article", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "qu'est-ce que mars bleu", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(extractMessage)
+  assert.match(extractMessage.text, /cancer colorectal/i)
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-mars-bleu-2026"))
+})
+
+test("processUserInput retourne un extrait pertinent sur le dépistage colorectal", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "comment ça se dépiste le cancer colorectal", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(extractMessage)
+  assert.match(extractMessage.text, /d.pist/i)
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-mars-bleu-2026"))
 })
 
 test("processUserInput affiche le fallback quand ni matcher ni Fuse ne trouvent rien", () => {

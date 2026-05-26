@@ -2,6 +2,7 @@ import { matchResources } from "./matcher"
 import { normalizeText, normalizeTextPreservingStopWords } from "./normalize"
 import { detectConversationalIntent, stripConversationalPrefix } from "./intents"
 import { searchResourcesFuzzy } from "./fuzzySearch"
+import { searchArticles } from "./articlesSearch"
 import type {
   ChatMessage,
   ChatResource,
@@ -16,6 +17,8 @@ import type {
 const ERROR_PAGE_START_NODE_ID = "start-error"
 const RECENTLY_SUGGESTED_LIMIT = 5
 const RESOURCE_FOLLOW_UP_NO_ID = "qr-resource-follow-up-no"
+const VACCINATION_RESOURCE_ID = "sf-vaccination-grippe-2025"
+const SYMPTOMS_RESOURCE_ID = "symptomes-douleur"
 const FALLBACK_ALTERNATIVE_MESSAGE =
   "Je n'ai pas d'autre suggestion pour cette demande. Souhaitez-vous reformuler votre question ou explorer une autre catégorie ?"
 
@@ -38,7 +41,7 @@ function resolveStartNodeId(config: ChatbotConfig, context: ChatbotPageContext =
 }
 
 export const CHATBOT_HISTORY_KEY = "cpts_chatbot_history"
-const CHATBOT_HISTORY_VERSION = 5
+const CHATBOT_HISTORY_VERSION = 6
 const RESOURCE_FOLLOW_UP_QUICK_REPLIES: QuickReply[] = [
   {
     id: "qr-resource-follow-up-yes",
@@ -126,6 +129,12 @@ function filterRecentlySuggested<T extends ResourceMatch>(matches: T[], recently
   return matches.filter((match) => !recentlySuggestedSet.has(match.resource.id))
 }
 
+function filterLowConfidenceSensitiveMatches<T extends ResourceMatch>(matches: T[], minScore: number): T[] {
+  const sensitiveMinScore = minScore * 2
+
+  return matches.filter((match) => !match.resource.isSensitive || match.score >= sensitiveMinScore)
+}
+
 function filterSensitiveMatches<T extends ResourceMatch>(matches: T[]): T[] {
   const sensitiveMatch = matches.find((match) => match.resource.isSensitive && match.resource.sensitivityCategory)
   if (!sensitiveMatch?.resource.sensitivityCategory) {
@@ -146,8 +155,55 @@ function filterSensitiveMatches<T extends ResourceMatch>(matches: T[]): T[] {
     : sameCategorySensitiveMatches
 }
 
+function hasDoctorIntent(matches: ResourceMatch[]): boolean {
+  return matches.some(
+    (match) => match.resource.id === "medecin-traitant" || match.resource.id === "patients-medecin-traitant",
+  )
+}
+
+function filterAudienceMatches<T extends ResourceMatch>(
+  matches: T[],
+  audienceContext: ChatbotState["audienceContext"],
+): T[] {
+  if (audienceContext === "pro") {
+    return matches
+  }
+
+  if (audienceContext === "patient") {
+    return matches.filter((match) => match.resource.audience !== "pro")
+  }
+
+  if (hasDoctorIntent(matches)) {
+    return matches.filter((match) => match.resource.audience !== "pro")
+  }
+
+  return matches
+}
+
+function hasVaccinationIntent(normalizedInput: string): boolean {
+  return /\b(vaccin|vacciner|vaccination|rappel|dose)\b/.test(normalizedInput)
+}
+
+function filterVaccinationFalsePositives<T extends ResourceMatch>(matches: T[], normalizedInput: string): T[] {
+  if (!hasVaccinationIntent(normalizedInput)) {
+    return matches
+  }
+
+  if (!matches.some((match) => match.resource.id === VACCINATION_RESOURCE_ID)) {
+    return matches
+  }
+
+  return matches.filter((match) => match.resource.id !== SYMPTOMS_RESOURCE_ID)
+}
+
 function hasSensitiveMatch(matches: ResourceMatch[]): boolean {
   return matches.some((match) => match.resource.isSensitive && match.resource.sensitivityCategory)
+}
+
+function hasArticleInfoIntent(normalizedInput: string): boolean {
+  return /\b(qu|quoi|comment|definition|definir|depiste|depistage|symptome|traitement|prise en charge|c est quoi|qu est ce)\b/.test(
+    normalizedInput,
+  )
 }
 
 function filterMissingRequiredNumbers<T extends ResourceMatch>(matches: T[], normalizedInput: string): T[] {
@@ -196,6 +252,7 @@ function buildFallbackState(
   messages: ChatMessage[],
   recentlySuggested: string[],
   messageOverride?: string,
+  audienceContext?: ChatbotState["audienceContext"],
 ): ChatbotState {
   const fallbackNode = messageOverride
     ? {
@@ -208,6 +265,7 @@ function buildFallbackState(
     currentNodeId: fallbackNode.id,
     messages: [...messages, ...buildNodeMessages(config, fallbackNode)],
     recentlySuggested,
+    audienceContext: audienceContext ?? null,
   }
 }
 
@@ -224,18 +282,27 @@ function buildAlternativeState(
   const suggestedBeforeReply = getLastSuggestedResourceIds(state.messages)
   const nextRecentlySuggested = appendRecentlySuggested(state.recentlySuggested, suggestedBeforeReply)
   const normalizedInput = normalizeText(stripConversationalPrefix(normalizeTextPreservingStopWords(state.lastUserInput)))
-  const matches = filterSensitiveMatches(
-    filterMissingRequiredNumbers(
-      matchResources({
-        input: normalizedInput,
-        keywordIndex: config.keywordIndex,
-        resources: config.resources,
-        maxSuggestions: 10,
-        minScore: config.rules.minScore,
-        fuzzyDistanceThreshold: config.rules.fuzzyDistanceThreshold,
-      }),
-      normalizedInput,
+  const matches = filterVaccinationFalsePositives(
+    filterAudienceMatches(
+      filterSensitiveMatches(
+        filterLowConfidenceSensitiveMatches(
+          filterMissingRequiredNumbers(
+            matchResources({
+              input: normalizedInput,
+              keywordIndex: config.keywordIndex,
+              resources: config.resources,
+              maxSuggestions: 10,
+              minScore: config.rules.minScore,
+              fuzzyDistanceThreshold: config.rules.fuzzyDistanceThreshold,
+            }),
+            normalizedInput,
+          ),
+          config.rules.minScore,
+        ),
+      ),
+      state.audienceContext ?? null,
     ),
+    normalizedInput,
   )
   const filteredMatches = filterRecentlySuggested(matches, nextRecentlySuggested)
 
@@ -245,10 +312,11 @@ function buildAlternativeState(
       messages: [...messagesWithUser, ...buildSuggestionMessages("Voici une autre piste possible :", filteredMatches)],
       recentlySuggested: appendRecentlySuggested(nextRecentlySuggested, getSuggestionResourceIds(filteredMatches)),
       lastUserInput: state.lastUserInput,
+      audienceContext: state.audienceContext ?? null,
     }
   }
 
-  return buildFallbackState(config, messagesWithUser, nextRecentlySuggested, FALLBACK_ALTERNATIVE_MESSAGE)
+  return buildFallbackState(config, messagesWithUser, nextRecentlySuggested, FALLBACK_ALTERNATIVE_MESSAGE, state.audienceContext)
 }
 
 function buildSuggestionMessages(message: string, suggestions: ResourceMatch[]): ChatMessage[] {
@@ -260,6 +328,61 @@ function buildSuggestionMessages(message: string, suggestions: ResourceMatch[]):
       quickReplies: RESOURCE_FOLLOW_UP_QUICK_REPLIES,
     }),
   ]
+}
+
+function buildArticleSearchState(
+  config: ChatbotConfig,
+  messages: ChatMessage[],
+  recentlySuggested: string[],
+  trimmedInput: string,
+  normalizedInput: string,
+  audienceContext: ChatbotState["audienceContext"],
+  allowedResourceIds?: Set<string>,
+): ChatbotState | undefined {
+  const articleResults = searchArticles(normalizedInput).filter(
+    (result) => !allowedResourceIds || allowedResourceIds.has(result.resourceId),
+  )
+  const articleSuggestions = filterRecentlySuggested(
+    filterAudienceMatches(
+      articleResults
+        .map((result): ResourceMatch | null => {
+          const resource = config.resources[result.resourceId]
+          if (!resource) {
+            return null
+          }
+
+          return {
+            resource,
+            score: Math.max(1, Math.round((1 - result.score) * 100)),
+            matchedKeyword: result.sectionTitle,
+          }
+        })
+        .filter((result): result is ResourceMatch => Boolean(result)),
+      audienceContext,
+    ),
+    recentlySuggested,
+  )
+
+  if (!articleSuggestions.length) {
+    return undefined
+  }
+
+  const firstMatch = articleResults.find((result) => result.resourceId === articleSuggestions[0]?.resource.id)
+  if (!firstMatch) {
+    return undefined
+  }
+
+  return {
+    currentNodeId: config.rules.fallbackNodeId,
+    messages: [
+      ...messages,
+      createMessage("bot", `Voici ce que j'ai trouvé : ${firstMatch.extract}`),
+      ...buildSuggestionMessages("Vous pouvez retrouver plus d'informations dans cet article.", articleSuggestions),
+    ],
+    recentlySuggested: appendRecentlySuggested(recentlySuggested, getSuggestionResourceIds(articleSuggestions)),
+    lastUserInput: trimmedInput,
+    audienceContext,
+  }
 }
 
 function buildNodeMessages(config: ChatbotConfig, node: ChatNode): ChatMessage[] {
@@ -369,6 +492,15 @@ function applyQuickReplyWithoutUserMessage(
     quickReply.id === RESOURCE_FOLLOW_UP_NO_ID ? getLastSuggestedResourceIds(state.messages) : []
   let nextRecentlySuggested = appendRecentlySuggested(state.recentlySuggested, suggestedBeforeReply)
   let nextNodeId = state.currentNodeId
+  let nextAudienceContext = state.audienceContext ?? null
+
+  if (quickReply.id === "qr-docs-pro-oui" || quickReply.nextNodeId === "documents-pro") {
+    nextAudienceContext = "pro"
+  }
+
+  if (quickReply.id === "qr-docs-pro-non" || quickReply.nextNodeId === "documents-patient") {
+    nextAudienceContext = "patient"
+  }
 
   if (quickReply.message) {
     nextMessages.push(createMessage("bot", quickReply.message))
@@ -376,7 +508,7 @@ function applyQuickReplyWithoutUserMessage(
 
   if (quickReply.actionResourceIds?.length) {
     const suggestions = filterRecentlySuggested(
-      suggestionsFromResourceIds(config, quickReply.actionResourceIds),
+      filterAudienceMatches(suggestionsFromResourceIds(config, quickReply.actionResourceIds), nextAudienceContext),
       nextRecentlySuggested,
     )
 
@@ -384,7 +516,7 @@ function applyQuickReplyWithoutUserMessage(
       nextRecentlySuggested = appendRecentlySuggested(nextRecentlySuggested, getSuggestionResourceIds(suggestions))
       nextMessages.push(...buildSuggestionMessages("Je vous conseille :", suggestions))
     } else {
-      return buildFallbackState(config, nextMessages, nextRecentlySuggested)
+      return buildFallbackState(config, nextMessages, nextRecentlySuggested, undefined, nextAudienceContext)
     }
   }
 
@@ -401,6 +533,7 @@ function applyQuickReplyWithoutUserMessage(
     messages: nextMessages,
     recentlySuggested: nextRecentlySuggested,
     lastUserInput: state.lastUserInput,
+    audienceContext: nextAudienceContext,
   }
 
   return nextState
@@ -418,7 +551,11 @@ function isPersistedState(value: unknown): value is ChatbotState {
     Array.isArray(candidate.messages) &&
     (candidate.recentlySuggested === undefined ||
       (Array.isArray(candidate.recentlySuggested) &&
-        candidate.recentlySuggested.every((resourceId) => typeof resourceId === "string")))
+        candidate.recentlySuggested.every((resourceId) => typeof resourceId === "string"))) &&
+    (candidate.audienceContext === undefined ||
+      candidate.audienceContext === null ||
+      candidate.audienceContext === "patient" ||
+      candidate.audienceContext === "pro")
   )
 }
 
@@ -445,6 +582,7 @@ export function createInitialState(config: ChatbotConfig, options: InitialStateO
     messages: buildNodeMessages(config, startNode),
     recentlySuggested: [],
     lastUserInput: undefined,
+    audienceContext: null,
   }
 }
 
@@ -468,6 +606,7 @@ export function hydrateState(config: ChatbotConfig, options: InitialStateOptions
       return {
         ...parsed.state,
         recentlySuggested: parsed.state.recentlySuggested ?? [],
+        audienceContext: parsed.state.audienceContext ?? null,
       }
     }
 
@@ -498,6 +637,7 @@ export function restartConversation(config: ChatbotConfig): ChatbotState {
     messages: buildNodeMessages(config, restartNode),
     recentlySuggested: [],
     lastUserInput: undefined,
+    audienceContext: null,
   }
 
   return nextState
@@ -512,6 +652,7 @@ export function processQuickReply(
     ...state,
     messages: appendUserMessage(state.messages, quickReply.label),
     recentlySuggested: state.recentlySuggested ?? [],
+    audienceContext: state.audienceContext ?? null,
   }
 
   return applyQuickReplyWithoutUserMessage(stateWithUserMessage, config, quickReply)
@@ -540,6 +681,7 @@ export function processUserInput(
         ...state,
         messages: messagesWithUser,
         recentlySuggested: state.recentlySuggested ?? [],
+        audienceContext: state.audienceContext ?? null,
       },
       config,
       matchedQuickReply,
@@ -552,7 +694,10 @@ export function processUserInput(
   if (conversationalIntent) {
     const suggestions = conversationalIntent.resourceIds
       ? filterRecentlySuggested(
-          suggestionsFromResourceIds(config, conversationalIntent.resourceIds),
+          filterAudienceMatches(
+            suggestionsFromResourceIds(config, conversationalIntent.resourceIds),
+            state.audienceContext ?? null,
+          ),
           state.recentlySuggested,
         )
       : undefined
@@ -580,6 +725,7 @@ export function processUserInput(
       messages: [...messagesWithUser, ...botMessages],
       recentlySuggested: nextRecentlySuggested,
       lastUserInput: trimmed,
+      audienceContext: state.audienceContext ?? null,
     }
   }
 
@@ -592,31 +738,81 @@ export function processUserInput(
     fuzzyDistanceThreshold: config.rules.fuzzyDistanceThreshold,
   })
 
-  const numericSafeMatches = filterSensitiveMatches(filterMissingRequiredNumbers(matches, normalizedInput))
+  const numericSafeMatches = filterVaccinationFalsePositives(
+    filterAudienceMatches(
+      filterSensitiveMatches(
+        filterLowConfidenceSensitiveMatches(
+          filterMissingRequiredNumbers(matches, normalizedInput),
+          config.rules.minScore,
+        ),
+      ),
+      state.audienceContext ?? null,
+    ),
+    normalizedInput,
+  )
 
   if (numericSafeMatches.length > 0) {
     const filteredMatches = filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
     if (!filteredMatches.length) {
-      return buildFallbackState(config, messagesWithUser, state.recentlySuggested)
+      return buildFallbackState(config, messagesWithUser, state.recentlySuggested, undefined, state.audienceContext)
     }
     const suggestions = hasSensitiveMatch(filteredMatches)
       ? filteredMatches
       : filteredMatches.slice(0, config.rules.maxSuggestions)
+    const articleSearchState =
+      !hasSensitiveMatch(suggestions) && hasArticleInfoIntent(normalizedInput)
+        ? buildArticleSearchState(
+            config,
+            messagesWithUser,
+            state.recentlySuggested,
+            trimmed,
+            normalizedInput,
+            state.audienceContext ?? null,
+            new Set(getSuggestionResourceIds(suggestions)),
+          )
+        : undefined
+
+    if (articleSearchState) {
+      return articleSearchState
+    }
 
     return {
       currentNodeId: state.currentNodeId,
       messages: [...messagesWithUser, ...buildSuggestionMessages("Je vous conseille :", suggestions)],
       recentlySuggested: appendRecentlySuggested(state.recentlySuggested, getSuggestionResourceIds(suggestions)),
       lastUserInput: trimmed,
+      audienceContext: state.audienceContext ?? null,
     }
   }
 
   const fuzzyMatches = filterRecentlySuggested(
-    filterSensitiveMatches(suggestionsFromResources(searchResourcesFuzzy(normalizedInput, config))),
+    filterAudienceMatches(
+      filterVaccinationFalsePositives(
+        suggestionsFromResources(searchResourcesFuzzy(normalizedInput, config)),
+        normalizedInput,
+      ),
+      state.audienceContext ?? null,
+    ),
     state.recentlySuggested,
   )
 
   if (fuzzyMatches.length > 0) {
+    const articleSearchState = hasArticleInfoIntent(normalizedInput)
+      ? buildArticleSearchState(
+          config,
+          messagesWithUser,
+          state.recentlySuggested,
+          trimmed,
+          normalizedInput,
+          state.audienceContext ?? null,
+          new Set(getSuggestionResourceIds(fuzzyMatches)),
+        )
+      : undefined
+
+    if (articleSearchState) {
+      return articleSearchState
+    }
+
     return {
       currentNodeId: state.currentNodeId,
       messages: [
@@ -625,11 +821,25 @@ export function processUserInput(
       ],
       recentlySuggested: appendRecentlySuggested(state.recentlySuggested, getSuggestionResourceIds(fuzzyMatches)),
       lastUserInput: trimmed,
+      audienceContext: state.audienceContext ?? null,
     }
   }
 
+  const articleSearchState = buildArticleSearchState(
+    config,
+    messagesWithUser,
+    state.recentlySuggested,
+    trimmed,
+    normalizedInput,
+    state.audienceContext ?? null,
+  )
+
+  if (articleSearchState) {
+    return articleSearchState
+  }
+
   return {
-    ...buildFallbackState(config, messagesWithUser, state.recentlySuggested),
+    ...buildFallbackState(config, messagesWithUser, state.recentlySuggested, undefined, state.audienceContext),
     lastUserInput: trimmed,
   }
 }

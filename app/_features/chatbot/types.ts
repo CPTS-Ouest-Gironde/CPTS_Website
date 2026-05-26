@@ -4,6 +4,7 @@ export interface BaseResource {
   id: string
   title: string
   description?: string
+  audience?: "patient" | "pro" | "any"
   isSensitive?: boolean
   sensitivityCategory?: "violence" | "suicide" | "danger-vital"
 }
@@ -101,6 +102,7 @@ export interface ChatbotState {
   messages: ChatMessage[]
   recentlySuggested: string[]
   lastUserInput?: string
+  audienceContext?: "patient" | "pro" | null
 }
 
 export type ChatbotPageContext = "default" | "error-page"

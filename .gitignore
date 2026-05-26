@@ -45,6 +45,7 @@ PROJECT_STRUCTURE.md
 # Local work files not tracked
 AGENTS.md
 docs/cpts/
-scripts/
+scripts/*
+!scripts/build-chatbot-articles-index.ts
 FINAL_REPORT.md
 polinrider-scanner.sh

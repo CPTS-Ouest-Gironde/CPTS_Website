@@ -131,6 +131,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Avez-vous un médecin traitant ?",
       description: "Parcours et informations pour trouver un médecin traitant.",
+      audience: "patient",
       href: "/patients/medecin-traitant",
     },
     "patients-medecin-traitant": {
@@ -139,6 +140,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Comment trouver et déclarer son médecin traitant",
       description:
         "Démarches, formulaire et lien vers l'annuaire santé Ameli pour déclarer votre médecin traitant.",
+      audience: "patient",
       href: "/patients/medecin-traitant",
     },
     annuaire: {
@@ -146,6 +148,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Annuaire des professionnels de santé",
       description: "Rechercher un professionnel selon votre besoin.",
+      audience: "patient",
       href: "/patients/annuaire",
     },
     presentation: {
@@ -160,6 +163,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Coordonnées utiles",
       description: "Tous les contacts essentiels pour urgences et soins non programmés.",
+      audience: "patient",
       href: "/patients/coordonnees",
     },
     "symptomes-douleur": {
@@ -167,6 +171,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Douleur ou symptôme physique",
       description: "Orientation vers médecin traitant, SAMU ou pharmacie de garde selon l'intensité.",
+      audience: "patient",
       href: "/patients/coordonnees",
     },
     "mon-espace-sante": {
@@ -175,6 +180,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Mon Espace de Santé",
       description:
         "Espace numérique personnel pour stocker, consulter et partager vos documents et données de santé en sécurité.",
+      audience: "patient",
       href: "/patients/mon-espace-sante",
     },
     "patients-tuto-espace-sante": {
@@ -183,6 +189,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Tutoriel Mon Espace Santé",
       description:
         "Vidéos pas à pas pour créer, activer et utiliser Mon Espace Santé depuis un ordinateur ou un téléphone.",
+      audience: "patient",
       href: "/patients/mon-espace-sante/tuto-espace-sante",
     },
     "sante-mentale": {
@@ -197,6 +204,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé mentale des jeunes",
       description: "Ressources spécifiques pour les jeunes et leurs proches.",
+      audience: "patient",
       href: "/prevention/sante-familiale/sante-mentale-des-jeunes",
     },
     "sm-face-aux-violences": {
@@ -205,6 +213,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Face aux violences, vous n'êtes pas seules",
       description: "Information et orientation pour les victimes de violences.",
       href: "/face-aux-violences-vous-n-etes-pas-seules",
+      audience: "patient",
       isSensitive: true,
       sensitivityCategory: "violence",
     },
@@ -220,6 +229,15 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Articles santé familiale",
       description: "Vaccination, dépistage, sommeil, prévention du quotidien.",
+      audience: "patient",
+      href: "/prevention/sante-familiale",
+    },
+    "prevention-vaccinations": {
+      id: "prevention-vaccinations",
+      type: "internal",
+      title: "Campagnes de vaccination",
+      description: "Informations et articles de prévention sur les vaccinations.",
+      audience: "patient",
       href: "/prevention/sante-familiale",
     },
     "memos-suivi": {
@@ -227,6 +245,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Fiches de suivi",
       description: "Ressources de suivi et prévention disponibles pour les patients.",
+      audience: "patient",
       href: "/prevention/memos-suivi",
     },
     "ms-diabete": {
@@ -234,6 +253,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Diabète",
       description: "Ouvrir le mémo de suivi dédié au diabète.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=diabete",
     },
     "ms-hypertension": {
@@ -241,6 +261,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Hypertension artérielle",
       description: "Ouvrir le mémo de suivi dédié à l'hypertension artérielle.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=hypertension",
     },
     "ms-insuffisance-cardiaque": {
@@ -248,6 +269,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Insuffisance cardiaque",
       description: "Article de suivi dédié à l'insuffisance cardiaque.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=insuffisance-cardiaque",
     },
     "ms-grossesse": {
@@ -255,6 +277,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Grossesse",
       description: "Ouvrir le mémo de suivi dédié à la grossesse.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=grossesse",
     },
     "ms-prevention-sexuelle": {
@@ -262,6 +285,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Prévention santé sexuelle",
       description: "Ouvrir le mémo prévention santé sexuelle.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=prevention-sexuelle",
     },
     "ms-bon-usage-systeme-sante": {
@@ -269,6 +293,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Bon usage du système de santé",
       description: "Ouvrir le mémo bon usage du système de santé.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=bon-usage",
     },
     "ms-parent-planner": {
@@ -276,6 +301,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Mémo suivi - Parent Planner",
       description: "Ouvrir le mémo Parent Planner.",
+      audience: "patient",
       href: "/prevention/memos-suivi?openMemo=parent-planner",
     },
     "sf-insomnie": {
@@ -283,13 +309,23 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé familiale - Insomnie",
       description: "Comprendre l'insomnie et les solutions de prise en charge.",
+      audience: "patient",
       href: "/prevention/sante-familiale/insomnie",
+    },
+    "sf-endometriose": {
+      id: "sf-endometriose",
+      type: "internal",
+      title: "Santé familiale - Endométriose",
+      description: "Comprendre les signes, le diagnostic et la prise en charge de l'endométriose.",
+      audience: "patient",
+      href: "/prevention/sante-familiale/endometriose-depistage-prise-en-charge",
     },
     "sf-mois-sans-tabac-2025": {
       id: "sf-mois-sans-tabac-2025",
       type: "internal",
       title: "Santé familiale - Mois sans tabac 2025",
       description: "Article de prévention et d'accompagnement à l'arrêt du tabac.",
+      audience: "patient",
       href: "/prevention/sante-familiale/mois-sans-tabac-novembre-2025",
     },
     "sf-movember-2026": {
@@ -297,6 +333,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé familiale - Movember 2026",
       description: "Campagne de prévention santé masculine.",
+      audience: "patient",
       href: "/prevention/sante-familiale/movember-2026",
     },
     "sf-octobre-rose-2025": {
@@ -304,6 +341,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé familiale - Octobre rose 2025",
       description: "Campagne de sensibilisation et dépistage du cancer du sein.",
+      audience: "patient",
       href: "/prevention/sante-familiale/octobre-rose-2025",
     },
     "sf-mars-bleu-2026": {
@@ -311,6 +349,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé familiale - Mars bleu 2026",
       description: "Prévention du cancer colorectal et dépistage organisé.",
+      audience: "patient",
       href: "/prevention/sante-familiale/prevention-cancer-colorectal-mars-bleu-2026",
     },
     "sf-vaccination-covid-2025": {
@@ -318,6 +357,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé familiale - Vaccination anti-COVID 2025",
       description: "Informations de prévention sur la vaccination anti-COVID.",
+      audience: "patient",
       href: "/prevention/sante-familiale/vaccination-anti-covid-2025",
     },
     "sf-vaccination-grippe-2025": {
@@ -325,7 +365,16 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Santé familiale - Vaccination antigrippale 2025",
       description: "Informations de prévention sur la vaccination contre la grippe.",
+      audience: "patient",
       href: "/prevention/sante-familiale/vaccination-anti-grippale-2025",
+    },
+    "sf-papillomavirus": {
+      id: "sf-papillomavirus",
+      type: "internal",
+      title: "Santé familiale - Vaccination papillomavirus",
+      description: "Informations sur la vaccination contre le papillomavirus et la campagne scolaire.",
+      audience: "patient",
+      href: "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025",
     },
     "etp-apnee-sommeil": {
       id: "etp-apnee-sommeil",
@@ -333,6 +382,13 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Éducation thérapeutique - Syndrome d'apnée du sommeil",
       description: "Ressource dédiée au syndrome d'apnée du sommeil.",
       href: "/prevention/education-therapeutique/syndrome-apnee-sommeil",
+    },
+    "etp-ateliers": {
+      id: "etp-ateliers",
+      type: "internal",
+      title: "Éducation thérapeutique - Ateliers du territoire",
+      description: "Structures et modalités d'accès aux ateliers d'éducation thérapeutique.",
+      href: "/prevention/education-therapeutique/ateliers-education-therapeutique",
     },
     "sante-mentale-annuaire": {
       id: "sante-mentale-annuaire",
@@ -346,6 +402,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Adhérer à la CPTS",
       description: "Page d'adhésion des professionnels à la CPTS.",
+      audience: "pro",
       href: "/professionnels/adhesion",
     },
     "espace-pro": {
@@ -353,6 +410,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Espace professionnels de santé",
       description: "Outils, supports et formations réservés aux professionnels",
+      audience: "pro",
       href: "/professionnels",
     },
     "pro-actions-outils": {
@@ -360,6 +418,7 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Nos actions & vos outils (professionnels)",
       description: "Toutes les ressources et outils destinés aux professionnels de santé.",
+      audience: "pro",
       href: "/professionnels/actions-outils",
     },
     "pro-dispositifs-territoire": {
@@ -368,6 +427,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Dispositifs du territoire CPTS",
       description:
         "Ressources santé mentale pour les professionnels : dispositifs du territoire, orientation psychiatrie et RCP psy.",
+      audience: "pro",
       href: "/professionnels/actions-outils/les-dispositifs-du-territoire",
     },
     "pro-supports": {
@@ -376,6 +436,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Commander des supports",
       description:
         "Page de commande des supports pour adhérents. La demande est envoyée par email à la coordinatrice CPTS, puis impression et livraison.",
+      audience: "pro",
       href: "/professionnels/supports",
     },
     "pro-formations": {
@@ -383,78 +444,91 @@ export const chatbotConfig: ChatbotConfig = {
       type: "internal",
       title: "Formations CPTS",
       description: "Formations à venir et passées, avec possibilité d'inscription.",
+      audience: "pro",
       href: "/professionnels/formations",
     },
     "ao-questionnaire-medecin": {
       id: "ao-questionnaire-medecin",
       type: "external",
       title: "Questionnaire MÉDECIN - Patient sans médecin traitant",
+      audience: "pro",
       href: "/actions-outils/medecin-traitan/Questionnaire-MEDECIN-Patient-sans-MT-A-TELECHARGER.pdf",
     },
     "ao-questionnaire-paramedical": {
       id: "ao-questionnaire-paramedical",
       type: "external",
       title: "Questionnaire PARAMÉDICAL - Patient sans médecin traitant",
+      audience: "pro",
       href: "/actions-outils/medecin-traitan/Patient-sans-MT-Questionnaire-PARAMED-nov-23.pdf",
     },
     "ao-formulaire-mas": {
       id: "ao-formulaire-mas",
       type: "external",
       title: "Formulaire MAS",
+      audience: "pro",
       href: "/actions-outils/Formulaire-MAS-a-telecharger.pdf",
     },
     "ao-affiche-pharmacies": {
       id: "ao-affiche-pharmacies",
       type: "external",
       title: "Pharmacies participantes (SNP)",
+      audience: "pro",
       href: "/actions-outils/Affiche-Pharmacies-CPTS-OG.pdf",
     },
     "ao-questions-psy": {
       id: "ao-questions-psy",
       type: "external",
       title: "Questions Psy",
+      audience: "pro",
       href: "/actions-outils/sante-mentale/Questions-Psy.pdf",
     },
     "ao-emsi2": {
       id: "ao-emsi2",
       type: "external",
       title: "emsi²",
+      audience: "pro",
       href: "/actions-outils/sante-mentale/emsi%C2%B2.pdf",
     },
     "ao-reponse-psy": {
       id: "ao-reponse-psy",
       type: "external",
       title: "Réponse Psy",
+      audience: "pro",
       href: "/actions-outils/sante-mentale/flyer-Reponse-Psy.pdf",
     },
     "ao-livret-mss": {
       id: "ao-livret-mss",
       type: "external",
       title: "Livret MSS",
+      audience: "pro",
       href: "/actions-outils/livret-MSS-.pdf",
     },
     "ao-poletp": {
       id: "ao-poletp",
       type: "external",
       title: "Pôle ETP",
+      audience: "pro",
       href: "https://www.poletpna.fr/",
     },
     "ao-maison-nutrition": {
       id: "ao-maison-nutrition",
       type: "external",
       title: "Maison Nutrition Diabète Coeur",
+      audience: "pro",
       href: "https://www.maisonnutrition33.com/",
     },
     "ao-medprev": {
       id: "ao-medprev",
       type: "external",
       title: "Campagne Medprev",
+      audience: "pro",
       href: "https://medprev.org/",
     },
     "ao-mots": {
       id: "ao-mots",
       type: "external",
       title: "Association MOTS",
+      audience: "pro",
       href: "https://www.association-mots.org/",
     },
     faq: {
@@ -570,6 +644,13 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "medecin traitant assurance maladie", resourceId: "patients-medecin-traitant", scoreBoost: 72 },
     { keyword: "medecin part retraite trouver autre", resourceId: "patients-medecin-traitant", scoreBoost: 30 },
     { keyword: "medecin prend retraite demarches", resourceId: "patients-medecin-traitant", scoreBoost: 24 },
+    { keyword: "je cherche un medecin", resourceId: "patients-medecin-traitant", scoreBoost: 34 },
+    { keyword: "je cherche medecin", resourceId: "patients-medecin-traitant", scoreBoost: 34 },
+    { keyword: "trouver medecin", resourceId: "patients-medecin-traitant", scoreBoost: 34 },
+    { keyword: "trouver docteur", resourceId: "patients-medecin-traitant", scoreBoost: 34 },
+    { keyword: "il me faut un medecin", resourceId: "patients-medecin-traitant", scoreBoost: 30 },
+    { keyword: "comment trouver medecin", resourceId: "patients-medecin-traitant", scoreBoost: 34 },
+    { keyword: "ou trouver un medecin", resourceId: "patients-medecin-traitant", scoreBoost: 30 },
     { keyword: "cpts", resourceId: "presentation", scoreBoost: 6 },
     { keyword: "presentation cpts", resourceId: "presentation", scoreBoost: 12 },
     { keyword: "communaute professionnelle territoriale de sante", resourceId: "presentation", scoreBoost: 12 },
@@ -737,6 +818,11 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "douleur intense", resourceId: "symptomes-douleur", scoreBoost: 16 },
     { keyword: "douleur soudaine", resourceId: "symptomes-douleur", scoreBoost: 18 },
     { keyword: "migraine", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "grosse migraine", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "migraine depuis", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "j ai mal a la tete depuis", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "tete depuis 2 jours", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "migraine 2 jours", resourceId: "symptomes-douleur", scoreBoost: 16 },
     { keyword: "cephalee", resourceId: "symptomes-douleur", scoreBoost: 14 },
     { keyword: "maux de tete", resourceId: "symptomes-douleur", scoreBoost: 16 },
     { keyword: "courbatures", resourceId: "symptomes-douleur", scoreBoost: 12 },
@@ -920,19 +1006,21 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "vaccin sars", resourceId: "sf-vaccination-covid-2025", scoreBoost: 10 },
     { keyword: "vaccin coronavirus", resourceId: "sf-vaccination-covid-2025", scoreBoost: 12 },
     { keyword: "vaccination anti grippale", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 14 },
-    { keyword: "vaccination grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
+    { keyword: "vaccination grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 25 },
     { keyword: "ou se faire vacciner", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
     { keyword: "comment se faire vacciner", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
     { keyword: "pharmacie qui vaccine", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 14 },
     { keyword: "se faire vacciner grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 16 },
-    { keyword: "vaccin contre la grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 16 },
+    { keyword: "vaccin contre la grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 25 },
+    { keyword: "vacciner contre la grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 25 },
     { keyword: "se faire piquer", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 10 },
     { keyword: "rappel vaccin", resourceId: "prevention-familiale", scoreBoost: 10 },
     { keyword: "carnet de vaccination", resourceId: "prevention-familiale", scoreBoost: 12 },
-    { keyword: "vaccin grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 14 },
+    { keyword: "vaccin grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 22 },
     { keyword: "injection grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
     { keyword: "pharmacien vaccinateur", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
     { keyword: "grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 8 },
+    { keyword: "se faire vacciner", resourceId: "prevention-vaccinations", scoreBoost: 20 },
 
     { keyword: "actions outils", resourceId: "pro-actions-outils", scoreBoost: 12 },
     { keyword: "ressources professionnels", resourceId: "pro-actions-outils", scoreBoost: 12 },
@@ -1013,7 +1101,7 @@ export const chatbotConfig: ChatbotConfig = {
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["medecin-traitant", "patients-medecin-traitant", "coordonnees"],
+          resourceIds: ["patients-medecin-traitant", "medecin-traitant", "coordonnees"],
         },
       ],
     },
@@ -1023,7 +1111,7 @@ export const chatbotConfig: ChatbotConfig = {
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["medecin-traitant", "patients-medecin-traitant", "coordonnees"],
+          resourceIds: ["patients-medecin-traitant", "medecin-traitant", "coordonnees"],
         },
       ],
     },
@@ -1033,7 +1121,7 @@ export const chatbotConfig: ChatbotConfig = {
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["medecin-traitant", "patients-medecin-traitant", "coordonnees"],
+          resourceIds: ["patients-medecin-traitant", "medecin-traitant", "coordonnees"],
         },
       ],
     },
@@ -1043,7 +1131,7 @@ export const chatbotConfig: ChatbotConfig = {
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["medecin-traitant", "patients-medecin-traitant", "coordonnees"],
+          resourceIds: ["patients-medecin-traitant", "medecin-traitant", "coordonnees"],
         },
       ],
     },
