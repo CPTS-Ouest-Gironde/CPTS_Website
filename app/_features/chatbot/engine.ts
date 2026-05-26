@@ -382,7 +382,7 @@ function buildArticleSearchState(
       audienceContext,
     ),
     recentlySuggested,
-  )
+  ).slice(0, 1)
 
   if (!articleSuggestions.length) {
     return undefined
@@ -781,13 +781,38 @@ export function processUserInput(
   const matcherHasExactMatch = numericSafeMatches.some((match) => match.score >= MATCHER_EXACT_SCORE)
   const matcherSensitive = hasSensitiveMatch(numericSafeMatches)
 
+  const articleTopResourceId = articleResults[0]?.resourceId
+  const matcherTopResourceId = numericSafeMatches[0]?.resource.id
+  const articleAgreesWithMatcherTop =
+    articleTopResourceId !== undefined &&
+    matcherTopResourceId !== undefined &&
+    articleTopResourceId === matcherTopResourceId
+  const articleHighConfidence =
+    articleResults.length > 0 && articleBestScore <= ARTICLE_HIGH_CONFIDENCE_FUSE_SCORE
+
   const articleShouldWin =
     !matcherSensitive &&
-    !matcherHasExactMatch &&
     articleResults.length > 0 &&
-    (exploratory || articleBestScore <= ARTICLE_HIGH_CONFIDENCE_FUSE_SCORE)
+    (
+      // Exploratoire + haute confiance : prioritaire même si le matcher a un match exact
+      (exploratory && articleHighConfidence) ||
+      // Exploratoire (toute confiance) : prioritaire sauf si le matcher a un match exact
+      (exploratory && !matcherHasExactMatch) ||
+      // Non-exploratoire + haute confiance : prioritaire sauf si le matcher a un match exact
+      (!exploratory && articleHighConfidence && !matcherHasExactMatch) ||
+      // Non-exploratoire : matcher TOP == article TOP → afficher l'extrait pour la ressource commune
+      (!exploratory && articleAgreesWithMatcherTop)
+    )
 
   if (articleShouldWin) {
+    // Agreement non-exploratoire : on contraint la recherche à la ressource du matcher pour
+    // éviter qu'un article secondaire (bruit Fuse) ne s'invite si la ressource principale
+    // est filtrée par recentlySuggested.
+    const allowedResourceIds =
+      !exploratory && articleAgreesWithMatcherTop && matcherTopResourceId !== undefined
+        ? new Set([matcherTopResourceId])
+        : undefined
+
     const priorityArticleState = buildArticleSearchState(
       config,
       messagesWithUser,
@@ -795,6 +820,7 @@ export function processUserInput(
       trimmed,
       state.audienceContext ?? null,
       articleResults,
+      allowedResourceIds,
     )
 
     if (priorityArticleState) {

@@ -4,6 +4,7 @@ import test from "node:test"
 import { chatbotConfig } from "./chatbot.config"
 import { createInitialState, processQuickReply, processUserInput, restartConversation } from "./engine"
 import { searchResourcesFuzzy } from "./fuzzySearch"
+import { cleanExtract } from "./articlesSearch"
 import type { ChatbotConfig } from "./types"
 import { trackEvent } from "./useChatbotAnalytics"
 
@@ -567,6 +568,38 @@ test("processUserInput non-régression: \"Je cherche un médecin\" priorise touj
 
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
   assert.equal(extractMessage, undefined, "pas d'extrait d'article attendu : matcher classique doit gagner sur cette requête")
+})
+
+test("processUserInput \"comment se passe le dépistage colorectal\" affiche un extrait + le CTA", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "comment se passe le dépistage colorectal", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const ctaMessage = nextState.messages.find((message) =>
+    message.text.includes("Vous pouvez retrouver plus d'informations dans cet article"),
+  )
+
+  assert.ok(extractMessage, "le message bot 'Voici ce que j'ai trouvé : …' doit exister")
+  assert.match(extractMessage.text, /d.pist|colorectal/i)
+  assert.ok(ctaMessage, "le CTA 'Vous pouvez retrouver…' doit suivre l'extrait")
+})
+
+test("processUserInput \"qu'est-ce que mars bleu\" affiche au maximum une ressource (sf-mars-bleu-2026)", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "qu'est-ce que mars bleu", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestions = suggestionMessage?.suggestions ?? []
+
+  assert.equal(suggestions.length, 1, "une seule ressource doit accompagner l'extrait")
+  assert.equal(suggestions[0]?.resource.id, "sf-mars-bleu-2026")
+})
+
+test("cleanExtract supprime les balises ** orphelines après troncature", () => {
+  assert.equal(
+    cleanExtract("**ovaires**, le **muscle de"),
+    "ovaires, le muscle de",
+  )
 })
 
 test("processUserInput affiche le fallback quand ni matcher ni Fuse ne trouvent rien", () => {
