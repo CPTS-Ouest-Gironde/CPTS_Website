@@ -1,19 +1,51 @@
 "use client"
 
-import { RotateCcw, Send, X } from "lucide-react"
+import { Info, RotateCcw, Send, X } from "lucide-react"
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { FormEvent } from "react"
 
-import { Button } from "@/components/ui/button"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import { Button, buttonVariants } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
 import { MessageBubble } from "./MessageBubble"
+import { PrivacyModal } from "./PrivacyModal"
 import { QuickReplies } from "./QuickReplies"
 import type { ChatMessage, QuickReply } from "./types"
+import { useChatbotAnalytics } from "./useChatbotAnalytics"
 
 const MAX_MESSAGE_LENGTH = 300
 const MESSAGE_TOO_LONG_ERROR = "Message trop long (300 caractères max)"
 export const QUICK_REPLIES_INITIAL_COUNT = 4
+
+function useReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setPrefersReducedMotion(mediaQuery.matches)
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches)
+    }
+
+    mediaQuery.addEventListener("change", handleChange)
+    return () => mediaQuery.removeEventListener("change", handleChange)
+  }, [])
+
+  return prefersReducedMotion
+}
 
 interface ChatWindowProps {
   currentNodeId: string
@@ -25,15 +57,21 @@ interface ChatWindowProps {
 }
 
 export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRestart, onClose }: ChatWindowProps) {
+  const { trackEvent } = useChatbotAnalytics()
   const [draft, setDraft] = useState("")
   const [inputError, setInputError] = useState<string | null>(null)
   const [isStartQuickRepliesExpanded, setIsStartQuickRepliesExpanded] = useState(false)
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
-  }, [messages])
+    bottomRef.current?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "end",
+    })
+  }, [messages, prefersReducedMotion])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -80,6 +118,20 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
     setInputError(null)
   }
 
+  const handleQuickReply = (reply: QuickReply) => {
+    trackEvent("chatbot_quick_reply", {
+      quick_reply_id: reply.id,
+      quick_reply_label: reply.label,
+      source_node_id: currentNodeId,
+    })
+    onQuickReply(reply)
+  }
+
+  const handleRestart = () => {
+    trackEvent("chatbot_restart", {})
+    onRestart()
+  }
+
   return (
     <div className="flex h-[min(72vh,36rem)] w-full flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-2xl">
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
@@ -90,14 +142,41 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
           <p className="text-xs text-muted-foreground">Orientation par mots-clés</p>
         </div>
         <div className="flex items-center gap-1">
+          <AlertDialog>
+            <AlertDialogTrigger
+              className={cn(
+                buttonVariants({ variant: "ghost", size: "icon-sm" }),
+              )}
+              aria-label="Recommencer la conversation"
+            >
+              <RotateCcw className="size-4" />
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Recommencer la conversation ?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Tout l&apos;historique de cette conversation sera effacé. Cette action est définitive.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Annuler</AlertDialogCancel>
+                <AlertDialogAction
+                  className={cn(buttonVariants({ variant: "destructive" }))}
+                  onClick={handleRestart}
+                >
+                  Recommencer
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <Button
             type="button"
             size="icon-sm"
             variant="ghost"
-            onClick={onRestart}
-            aria-label="Recommencer la conversation"
+            onClick={() => setIsPrivacyOpen(true)}
+            aria-label="Informations sur la confidentialité"
           >
-            <RotateCcw className="size-4" />
+            <Info className="size-4" />
           </Button>
           <Button type="button" size="icon-sm" variant="ghost" onClick={onClose} aria-label="Fermer la fenêtre chatbot">
             <X className="size-4" />
@@ -114,7 +193,7 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
 
       <QuickReplies
         replies={visibleQuickReplies}
-        onSelect={onQuickReply}
+        onSelect={handleQuickReply}
         trailingAction={
           shouldLimitStartQuickReplies
             ? {
@@ -155,6 +234,8 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
           </p>
         ) : null}
       </form>
+
+      <PrivacyModal open={isPrivacyOpen} onOpenChange={setIsPrivacyOpen} />
     </div>
   )
 }

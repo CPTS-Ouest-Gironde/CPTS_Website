@@ -1,6 +1,7 @@
 import Link from "next/link"
 
 import type { ChatMessage, ChatResource } from "./types"
+import { useChatbotAnalytics } from "./useChatbotAnalytics"
 
 interface MessageBubbleProps {
   message: ChatMessage
@@ -31,6 +32,7 @@ function resourceLabel(resource: ChatResource): string {
 }
 
 export function MessageBubble({ message }: MessageBubbleProps) {
+  const { trackEvent } = useChatbotAnalytics()
   const isUser = message.role === "user"
 
   return (
@@ -49,13 +51,20 @@ export function MessageBubble({ message }: MessageBubbleProps) {
             {message.suggestions.map((suggestion) => {
               const href = resourceHref(suggestion.resource)
               const isInternal = suggestion.resource.type === "internal"
+              const handleResourceClick = () => {
+                trackEvent("chatbot_resource_clicked", {
+                  resource_id: suggestion.resource.id,
+                  resource_type: suggestion.resource.type,
+                })
+              }
 
               return (
                 <li key={`${message.id}-${suggestion.resource.id}`}>
                   {isInternal ? (
                     <Link
                       href={href}
-                      className="block rounded-xl border border-border bg-background px-3 py-2 text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      onClick={handleResourceClick}
+                      className="block rounded-xl border border-border bg-background px-3 py-2 text-foreground motion-safe:transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <p className="font-medium">{suggestion.resource.title}</p>
                       {suggestion.resource.description ? (
@@ -66,7 +75,8 @@ export function MessageBubble({ message }: MessageBubbleProps) {
                   ) : (
                     <a
                       href={href}
-                      className="block rounded-xl border border-border bg-background px-3 py-2 text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                      onClick={handleResourceClick}
+                      className="block rounded-xl border border-border bg-background px-3 py-2 text-foreground motion-safe:transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       target={suggestion.resource.type === "external" ? "_blank" : undefined}
                       rel={suggestion.resource.type === "external" ? "noreferrer noopener" : undefined}
                     >

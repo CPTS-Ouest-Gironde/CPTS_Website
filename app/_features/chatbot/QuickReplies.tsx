@@ -22,7 +22,7 @@ export function QuickReplies({ replies, onSelect, trailingAction }: QuickReplies
             key={reply.id}
             type="button"
             onClick={() => onSelect(reply)}
-            className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="rounded-full border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground motion-safe:transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {reply.label}
           </button>
@@ -31,7 +31,7 @@ export function QuickReplies({ replies, onSelect, trailingAction }: QuickReplies
           <button
             type="button"
             onClick={trailingAction.onClick}
-            className="rounded-full border border-dashed border-muted-foreground/40 bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="rounded-full border border-dashed border-muted-foreground/40 bg-transparent px-3 py-1.5 text-xs font-medium text-muted-foreground motion-safe:transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {trailingAction.label}
           </button>
