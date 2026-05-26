@@ -105,9 +105,27 @@ test("processUserInput ignore la salutation quand une demande suit", () => {
   assert.notEqual(lastBotMessage?.text, "Bonjour. Je suis l'assistant d'orientation CPTS. Donnez votre besoin en une phrase et je vous proposerai la bonne ressource.")
 })
 
+test("processUserInput medecin retraite matche medecin-traitant en priorité", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Mon médecin part à la retraite, comment en trouver un autre", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "medecin-traitant")
+})
+
 test("processUserInput matche une douleur à la tête en phrase naturelle", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "j'ai mal à la tête", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "symptomes-douleur"))
+})
+
+test("processUserInput matche une migraine en symptomes-douleur", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "J'ai une grosse migraine depuis 2 jours", chatbotConfig)
 
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
 
@@ -134,6 +152,19 @@ test("processUserInput matche les violences conjugales formulées naturellement"
   assert.ok(suggestedIds.includes("urgence-3919"))
 })
 
+test("processUserInput violence conjugale garde uniquement les ressources violence", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Mon mari me frappe", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestions = suggestionMessage?.suggestions ?? []
+
+  assert.ok(suggestions.length > 0)
+  assert.ok(suggestions.every((item) => item.resource.sensitivityCategory === "violence"))
+  assert.ok(!suggestions.some((item) => item.resource.id === "sf-vaccination-grippe-2025"))
+  assert.ok(!suggestions.some((item) => item.resource.id === "prevention-familiale"))
+})
+
 test("processUserInput matche la déprime avec contexte temporel", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "je déprime depuis 3 mois", chatbotConfig)
@@ -150,6 +181,36 @@ test("processUserInput matche une demande de vaccination grippe naturelle", () =
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
 
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-vaccination-grippe-2025"))
+})
+
+test("processUserInput distingue vaccin grippe et grippe symptome", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const vaccineState = processUserInput(initialState, "Je veux me faire vacciner contre la grippe", chatbotConfig)
+  const symptomState = processUserInput(initialState, "J'ai la grippe", chatbotConfig)
+
+  const vaccineSuggestion = getLastBotMessageWithSuggestions(vaccineState.messages)
+  const symptomSuggestion = getLastBotMessageWithSuggestions(symptomState.messages)
+
+  assert.equal(vaccineSuggestion?.suggestions?.[0]?.resource.id, "sf-vaccination-grippe-2025")
+  assert.equal(symptomSuggestion?.suggestions?.[0]?.resource.id, "symptomes-douleur")
+})
+
+test("processQuickReply Non autre chose ne retourne pas au message accueil", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const suggestedState = processUserInput(initialState, "je cherche un médecin", chatbotConfig)
+  const noReply = [...suggestedState.messages]
+    .reverse()
+    .find((message) => message.quickReplies?.some((reply) => reply.id === "qr-resource-follow-up-no"))
+    ?.quickReplies?.find((reply) => reply.id === "qr-resource-follow-up-no")
+
+  assert.ok(noReply)
+
+  const nextState = processQuickReply(suggestedState, noReply, chatbotConfig)
+  const lastBotMessage = getLastBotMessage(nextState.messages)
+
+  assert.notEqual(nextState.currentNodeId, "start")
+  assert.notEqual(lastBotMessage?.text, chatbotConfig.nodes.start.message)
+  assert.ok(nextState.currentNodeId === "fallback" || Boolean(getLastBotMessageWithSuggestions(nextState.messages)))
 })
 
 test("processUserInput répond aux formulations familières de type chatbot", () => {

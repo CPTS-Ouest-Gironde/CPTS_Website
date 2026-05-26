@@ -4,6 +4,8 @@ export interface BaseResource {
   id: string
   title: string
   description?: string
+  isSensitive?: boolean
+  sensitivityCategory?: "violence" | "suicide" | "danger-vital"
 }
 
 export interface InternalResource extends BaseResource {
@@ -98,6 +100,7 @@ export interface ChatbotState {
   currentNodeId: string
   messages: ChatMessage[]
   recentlySuggested: string[]
+  lastUserInput?: string
 }
 
 export type ChatbotPageContext = "default" | "error-page"
