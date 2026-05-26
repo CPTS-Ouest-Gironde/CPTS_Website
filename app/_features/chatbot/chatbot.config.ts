@@ -1,3 +1,17 @@
+/**
+ * Configuration conversationnelle du chatbot CPTS Ouest Gironde.
+ *
+ * Dérogation à CLAUDE.md règle "données en JSON" :
+ * Ce fichier contient les ressources, mots-clés et nodes en TypeScript natif
+ * plutôt qu'en JSON externalisé dans app/data/. Choix conscient pour bénéficier
+ * du typage strict sur les références croisées (nextNodeId, actionResourceIds,
+ * resourceId) qui éviterait des erreurs runtime invisibles dans un JSON.
+ *
+ * Un refacto vers JSON + Zod est possible en V2 si :
+ * - La config grossit significativement
+ * - Un non-développeur (Kheira, équipe CPTS) doit éditer le contenu sans toucher
+ *   au code
+ */
 import type { ChatbotConfig, QuickReply } from "./types"
 
 const mainQuickReplies: QuickReply[] = [
@@ -76,8 +90,42 @@ const restartQuickReply: QuickReply = {
   nextNodeId: "start",
 }
 
+const errorPageQuickReplies: QuickReply[] = [
+  {
+    id: "qr-medecin-traitant",
+    label: "Trouver un médecin traitant",
+    value: "medecin traitant",
+    nextNodeId: "medecin-traitant",
+  },
+  {
+    id: "qr-annuaire",
+    label: "Voir l'annuaire",
+    value: "annuaire",
+    nextNodeId: "annuaire",
+  },
+  {
+    id: "qr-page-accueil",
+    label: "Page d'accueil",
+    value: "page d accueil",
+    actionResourceIds: ["accueil"],
+  },
+  {
+    id: "qr-contact-cpts",
+    label: "Contacter la CPTS",
+    value: "contacter la cpts",
+    actionResourceIds: ["contact-email", "coordonnees"],
+  },
+]
+
 export const chatbotConfig: ChatbotConfig = {
   resources: {
+    accueil: {
+      id: "accueil",
+      type: "internal",
+      title: "Page d'accueil",
+      description: "Retour à la page d'accueil du site CPTS Ouest Gironde.",
+      href: "/",
+    },
     "medecin-traitant": {
       id: "medecin-traitant",
       type: "internal",
@@ -126,6 +174,20 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Santé mentale des jeunes",
       description: "Ressources spécifiques pour les jeunes et leurs proches.",
       href: "/prevention/sante-familiale/sante-mentale-des-jeunes",
+    },
+    "sm-face-aux-violences": {
+      id: "sm-face-aux-violences",
+      type: "internal",
+      title: "Face aux violences, vous n'êtes pas seules",
+      description: "Information et orientation pour les victimes de violences.",
+      href: "/face-aux-violences-vous-n-etes-pas-seules",
+    },
+    "sm-pro-approches": {
+      id: "sm-pro-approches",
+      type: "internal",
+      title: "Professionnels et approches en santé mentale",
+      description: "Comprendre les différents professionnels et approches thérapeutiques.",
+      href: "/sante-mentale-professionnels-et-approches",
     },
     "prevention-familiale": {
       id: "prevention-familiale",
@@ -260,6 +322,13 @@ export const chatbotConfig: ChatbotConfig = {
       description: "Page d'adhésion des professionnels à la CPTS.",
       href: "/professionnels/adhesion",
     },
+    "espace-pro": {
+      id: "espace-pro",
+      type: "internal",
+      title: "Espace professionnels de santé",
+      description: "Outils, supports et formations réservés aux professionnels",
+      href: "/professionnels",
+    },
     "pro-actions-outils": {
       id: "pro-actions-outils",
       type: "internal",
@@ -375,6 +444,20 @@ export const chatbotConfig: ChatbotConfig = {
       description: "Numéro national 24h/24, 7j/7.",
       value: "3114",
     },
+    "urgence-3919": {
+      id: "urgence-3919",
+      type: "phone",
+      title: "Violences Femmes Info",
+      description: "Anonyme, gratuit, 24h/24.",
+      value: "3919",
+    },
+    "urgence-17": {
+      id: "urgence-17",
+      type: "phone",
+      title: "Police secours",
+      description: "En cas de danger immédiat.",
+      value: "17",
+    },
     "pharmacie-garde": {
       id: "pharmacie-garde",
       type: "external",
@@ -446,9 +529,46 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "suicide", resourceId: "urgence-3114", scoreBoost: 10 },
     { keyword: "sante mentale jeunes", resourceId: "sante-mentale-jeunes", scoreBoost: 12 },
     { keyword: "adolescent", resourceId: "sante-mentale-jeunes" },
+    { keyword: "enfant", resourceId: "sante-mentale-jeunes", scoreBoost: 12 },
+    { keyword: "lyceen", resourceId: "sante-mentale-jeunes", scoreBoost: 14 },
+    { keyword: "etudiant", resourceId: "sante-mentale-jeunes", scoreBoost: 12 },
+    { keyword: "mal etre adolescent", resourceId: "sante-mentale-jeunes", scoreBoost: 16 },
+    { keyword: "harcelement scolaire", resourceId: "sante-mentale-jeunes", scoreBoost: 16 },
     { keyword: "questions psy", resourceId: "ao-questions-psy", scoreBoost: 10 },
     { keyword: "reponse psy", resourceId: "ao-reponse-psy", scoreBoost: 10 },
     { keyword: "emsi", resourceId: "ao-emsi2", scoreBoost: 8 },
+
+    { keyword: "violence", resourceId: "sm-face-aux-violences", scoreBoost: 16 },
+    { keyword: "violences", resourceId: "sm-face-aux-violences", scoreBoost: 16 },
+    { keyword: "violences conjugales", resourceId: "sm-face-aux-violences", scoreBoost: 20 },
+    { keyword: "violences familiales", resourceId: "sm-face-aux-violences", scoreBoost: 18 },
+    { keyword: "victime", resourceId: "sm-face-aux-violences", scoreBoost: 14 },
+    { keyword: "agression", resourceId: "sm-face-aux-violences", scoreBoost: 14 },
+    { keyword: "viol", resourceId: "sm-face-aux-violences", scoreBoost: 16 },
+    { keyword: "harcelement", resourceId: "sm-face-aux-violences", scoreBoost: 14 },
+    { keyword: "maltraitance", resourceId: "sm-face-aux-violences", scoreBoost: 14 },
+    { keyword: "abus", resourceId: "sm-face-aux-violences", scoreBoost: 12 },
+    { keyword: "3919", resourceId: "sm-face-aux-violences", scoreBoost: 18 },
+
+    { keyword: "3919", resourceId: "urgence-3919", scoreBoost: 20 },
+    { keyword: "violence", resourceId: "urgence-3919", scoreBoost: 14 },
+    { keyword: "violences", resourceId: "urgence-3919", scoreBoost: 14 },
+    { keyword: "violences conjugales", resourceId: "urgence-3919", scoreBoost: 18 },
+    { keyword: "violences femmes", resourceId: "urgence-3919", scoreBoost: 18 },
+
+    { keyword: "police secours", resourceId: "urgence-17", scoreBoost: 16 },
+    { keyword: "danger immediat", resourceId: "urgence-17", scoreBoost: 16 },
+    { keyword: "appeler police", resourceId: "urgence-17", scoreBoost: 14 },
+
+    { keyword: "tcc", resourceId: "sm-pro-approches", scoreBoost: 14 },
+    { keyword: "psychotherapie", resourceId: "sm-pro-approches", scoreBoost: 16 },
+    { keyword: "psychanalyse", resourceId: "sm-pro-approches", scoreBoost: 14 },
+    { keyword: "emdr", resourceId: "sm-pro-approches", scoreBoost: 14 },
+    { keyword: "therapie", resourceId: "sm-pro-approches", scoreBoost: 12 },
+    { keyword: "approches therapeutiques", resourceId: "sm-pro-approches", scoreBoost: 16 },
+    { keyword: "professionnels sante mentale", resourceId: "sm-pro-approches", scoreBoost: 14 },
+    { keyword: "difference psy", resourceId: "sm-pro-approches", scoreBoost: 14 },
+    { keyword: "psychiatre ou psychologue", resourceId: "sm-pro-approches", scoreBoost: 16 },
 
     { keyword: "mon espace sante", resourceId: "mon-espace-sante", scoreBoost: 12 },
     { keyword: "mes", resourceId: "mon-espace-sante", scoreBoost: 8 },
@@ -486,6 +606,13 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "doudou liste", resourceId: "ms-parent-planner", scoreBoost: 12 },
     { keyword: "insomnie", resourceId: "sf-insomnie", scoreBoost: 12 },
     { keyword: "trouble du sommeil", resourceId: "sf-insomnie", scoreBoost: 10 },
+    { keyword: "dormir", resourceId: "sf-insomnie", scoreBoost: 12 },
+    { keyword: "nuit blanche", resourceId: "sf-insomnie", scoreBoost: 14 },
+    { keyword: "reveil nocturne", resourceId: "sf-insomnie", scoreBoost: 14 },
+    { keyword: "hygiene sommeil", resourceId: "sf-insomnie", scoreBoost: 14 },
+    { keyword: "melatonine", resourceId: "sf-insomnie", scoreBoost: 12 },
+    { keyword: "trouble sommeil", resourceId: "sf-insomnie", scoreBoost: 14 },
+    { keyword: "je dors mal", resourceId: "sf-insomnie", scoreBoost: 14 },
     { keyword: "sommeil", resourceId: "sf-insomnie", scoreBoost: 8 },
     { keyword: "apnee du sommeil", resourceId: "etp-apnee-sommeil", scoreBoost: 16 },
     { keyword: "syndrome apnee sommeil", resourceId: "etp-apnee-sommeil", scoreBoost: 14 },
@@ -493,19 +620,45 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "mois sans tabac", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 14 },
     { keyword: "tabac", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 10 },
     { keyword: "arret tabac", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 10 },
+    { keyword: "sevrage tabagique", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 16 },
+    { keyword: "nicotine", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 12 },
+    { keyword: "cigarette", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 12 },
+    { keyword: "vapote", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 10 },
+    { keyword: "vapotage", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 10 },
+    { keyword: "tabac info service", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 14 },
+    { keyword: "arret de fumer", resourceId: "sf-mois-sans-tabac-2025", scoreBoost: 14 },
     { keyword: "movember", resourceId: "sf-movember-2026", scoreBoost: 16 },
     { keyword: "sante masculine", resourceId: "sf-movember-2026", scoreBoost: 12 },
+    { keyword: "cancer prostate", resourceId: "sf-movember-2026", scoreBoost: 16 },
+    { keyword: "cancer testicule", resourceId: "sf-movember-2026", scoreBoost: 14 },
+    { keyword: "psa", resourceId: "sf-movember-2026", scoreBoost: 12 },
+    { keyword: "urologie", resourceId: "sf-movember-2026", scoreBoost: 12 },
     { keyword: "octobre rose", resourceId: "sf-octobre-rose-2025", scoreBoost: 16 },
     { keyword: "cancer du sein", resourceId: "sf-octobre-rose-2025", scoreBoost: 12 },
+    { keyword: "mammographie", resourceId: "sf-octobre-rose-2025", scoreBoost: 14 },
+    { keyword: "depistage sein", resourceId: "sf-octobre-rose-2025", scoreBoost: 16 },
+    { keyword: "auto-palpation", resourceId: "sf-octobre-rose-2025", scoreBoost: 12 },
+    { keyword: "cancer sein", resourceId: "sf-octobre-rose-2025", scoreBoost: 16 },
     { keyword: "mars bleu", resourceId: "sf-mars-bleu-2026", scoreBoost: 16 },
     { keyword: "cancer colorectal", resourceId: "sf-mars-bleu-2026", scoreBoost: 14 },
     { keyword: "colo rectal", resourceId: "sf-mars-bleu-2026", scoreBoost: 12 },
     { keyword: "depistage colorectal", resourceId: "sf-mars-bleu-2026", scoreBoost: 12 },
+    { keyword: "hemoccult", resourceId: "sf-mars-bleu-2026", scoreBoost: 14 },
+    { keyword: "kit depistage colorectal", resourceId: "sf-mars-bleu-2026", scoreBoost: 16 },
+    { keyword: "sang dans les selles", resourceId: "sf-mars-bleu-2026", scoreBoost: 16 },
+    { keyword: "coloscopie", resourceId: "sf-mars-bleu-2026", scoreBoost: 14 },
     { keyword: "vaccination anti covid", resourceId: "sf-vaccination-covid-2025", scoreBoost: 14 },
     { keyword: "anti covid", resourceId: "sf-vaccination-covid-2025", scoreBoost: 10 },
     { keyword: "covid", resourceId: "sf-vaccination-covid-2025", scoreBoost: 8 },
+    { keyword: "rappel covid", resourceId: "sf-vaccination-covid-2025", scoreBoost: 14 },
+    { keyword: "dose rappel", resourceId: "sf-vaccination-covid-2025", scoreBoost: 12 },
+    { keyword: "vaccin sars", resourceId: "sf-vaccination-covid-2025", scoreBoost: 10 },
+    { keyword: "vaccin coronavirus", resourceId: "sf-vaccination-covid-2025", scoreBoost: 12 },
     { keyword: "vaccination anti grippale", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 14 },
     { keyword: "vaccination grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
+    { keyword: "vaccin grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 14 },
+    { keyword: "injection grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
+    { keyword: "pharmacien vaccinateur", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 12 },
     { keyword: "grippe", resourceId: "sf-vaccination-grippe-2025", scoreBoost: 8 },
 
     { keyword: "actions outils", resourceId: "pro-actions-outils", scoreBoost: 12 },
@@ -546,6 +699,12 @@ export const chatbotConfig: ChatbotConfig = {
       message:
         "Bonjour, je peux vous aider à trouver la ressource CPTS adaptée. Choisissez une option ou écrivez votre demande.",
       quickReplies: mainQuickReplies,
+    },
+    "start-error": {
+      id: "start-error",
+      message:
+        "Vous semblez vous être perdu. Je peux vous aider à retrouver votre chemin. Que cherchez-vous ?",
+      quickReplies: errorPageQuickReplies,
     },
     "medecin-traitant": {
       id: "medecin-traitant",
@@ -679,6 +838,12 @@ export const chatbotConfig: ChatbotConfig = {
           value: "pour mon enfant adolescent",
           nextNodeId: "sante-mentale-enfant",
         },
+        {
+          id: "qr-sante-mentale-articles",
+          label: "Articles & ressources",
+          value: "articles et ressources",
+          nextNodeId: "sante-mentale-articles",
+        },
         restartQuickReply,
       ],
     },
@@ -695,11 +860,17 @@ export const chatbotConfig: ChatbotConfig = {
     "sante-mentale-difficile": {
       id: "sante-mentale-difficile",
       message:
-        "Je suis désolé que vous traversiez cela. Si vous êtes en danger immédiat, appelez le 15 ou le 112. Si vous avez des idées suicidaires ou besoin de parler rapidement, le 3114 est disponible 24h/24 et 7j/7.",
+        "Je suis désolé que vous traversiez cela. En cas de danger immédiat, appelez le 17 (police) ou le 15. Le 3919 (violences) et le 3114 (prévention suicide) sont disponibles 24h/24, 7j/7.",
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["sante-mentale", "urgence-3114", "sante-mentale-annuaire"],
+          message: "En urgence, vous pouvez joindre :",
+          resourceIds: ["urgence-3919", "urgence-17", "urgence-3114"],
+        },
+        {
+          type: "suggest_resources",
+          message: "Pour une écoute ou une orientation :",
+          resourceIds: ["sm-face-aux-violences", "sante-mentale", "sante-mentale-annuaire"],
         },
       ],
     },
@@ -710,6 +881,42 @@ export const chatbotConfig: ChatbotConfig = {
         {
           type: "suggest_resources",
           resourceIds: ["sante-mentale-jeunes", "sante-mentale", "sante-mentale-annuaire"],
+        },
+      ],
+    },
+    "sante-mentale-articles": {
+      id: "sante-mentale-articles",
+      message: "Voici les articles disponibles sur la santé mentale.",
+      quickReplies: [
+        {
+          id: "qr-sante-mentale-articles-jeunes",
+          label: "Santé mentale des jeunes",
+          value: "sante mentale des jeunes",
+          actionResourceIds: ["sante-mentale-jeunes"],
+        },
+        {
+          id: "qr-sante-mentale-articles-pro",
+          label: "Professionnels & approches",
+          value: "professionnels et approches",
+          actionResourceIds: ["sm-pro-approches"],
+        },
+        {
+          id: "qr-sante-mentale-articles-insomnie",
+          label: "Insomnie",
+          value: "insomnie",
+          actionResourceIds: ["sf-insomnie"],
+        },
+        {
+          id: "qr-sante-mentale-articles-apnee",
+          label: "Apnée du sommeil",
+          value: "apnee du sommeil",
+          actionResourceIds: ["etp-apnee-sommeil"],
+        },
+        {
+          id: "qr-sante-mentale-articles-retour",
+          label: "Retour menu santé mentale",
+          value: "retour sante mentale",
+          nextNodeId: "sante-mentale",
         },
       ],
     },
@@ -757,6 +964,128 @@ export const chatbotConfig: ChatbotConfig = {
         },
       ],
     },
+    "documents-role-check": {
+      id: "documents-role-check",
+      message: "Êtes-vous professionnel de santé ? Cela me permet de vous orienter vers les bons documents.",
+      quickReplies: [
+        {
+          id: "qr-docs-pro-oui",
+          label: "Oui, je suis professionnel",
+          value: "professionnel",
+          nextNodeId: "documents-pro",
+        },
+        {
+          id: "qr-docs-pro-non",
+          label: "Non, je suis patient",
+          value: "patient",
+          nextNodeId: "documents-patient",
+        },
+        {
+          id: "qr-docs-retour-fallback",
+          label: "Retour menu fallback",
+          value: "retour menu fallback",
+          nextNodeId: "fallback",
+        },
+      ],
+    },
+    "documents-pro": {
+      id: "documents-pro",
+      message:
+        "Voici les outils et documents pour les professionnels de santé. L'accès nécessite une connexion à votre compte professionnel.",
+      quickReplies: [
+        {
+          id: "qr-docs-pro-questionnaires",
+          label: "Questionnaires médecin traitant",
+          value: "questionnaires medecin traitant",
+          actionResourceIds: ["ao-questionnaire-medecin", "ao-questionnaire-paramedical"],
+        },
+        {
+          id: "qr-docs-pro-mas",
+          label: "Formulaire MAS",
+          value: "formulaire mas",
+          actionResourceIds: ["ao-formulaire-mas"],
+        },
+        {
+          id: "qr-docs-pro-supports",
+          label: "Supports CPTS pour pros",
+          value: "supports cpts pour pros",
+          actionResourceIds: ["pro-supports"],
+        },
+        {
+          id: "qr-docs-pro-espace",
+          label: "Voir l'espace professionnels",
+          value: "voir espace professionnels",
+          actionResourceIds: ["espace-pro"],
+        },
+        {
+          id: "qr-docs-pro-adhesion",
+          label: "Adhérer à la CPTS",
+          value: "adherer a la cpts",
+          actionResourceIds: ["pro-adhesion"],
+        },
+        {
+          id: "qr-docs-pro-formations",
+          label: "Formations",
+          value: "formations",
+          actionResourceIds: ["pro-formations"],
+        },
+        {
+          id: "qr-docs-pro-retour-fallback",
+          label: "Retour menu fallback",
+          value: "retour menu fallback",
+          nextNodeId: "fallback",
+        },
+      ],
+    },
+    "documents-patient": {
+      id: "documents-patient",
+      message:
+        "Les outils de coordination interne sont réservés aux professionnels et nécessitent une authentification. Voici les documents et ressources accessibles à tous :",
+      quickReplies: [
+        {
+          id: "qr-docs-patient-memos",
+          label: "Mémos suivi de maladies chroniques",
+          value: "memos suivi de maladies chroniques",
+          actionResourceIds: ["memos-suivi"],
+        },
+        {
+          id: "qr-docs-patient-annuaire-sm",
+          label: "Annuaire santé mentale",
+          value: "annuaire sante mentale",
+          actionResourceIds: ["sante-mentale-annuaire"],
+        },
+        {
+          id: "qr-docs-patient-prevention",
+          label: "Articles de prévention",
+          value: "articles de prevention",
+          actionResourceIds: ["prevention-familiale"],
+        },
+        {
+          id: "qr-docs-patient-faq",
+          label: "FAQ patients",
+          value: "faq patients",
+          actionResourceIds: ["faq"],
+        },
+        {
+          id: "qr-docs-patient-medecin",
+          label: "Trouver un médecin",
+          value: "trouver un medecin",
+          actionResourceIds: ["medecin-traitant"],
+        },
+        {
+          id: "qr-docs-patient-contact",
+          label: "Contacter la CPTS",
+          value: "contacter la cpts",
+          actionResourceIds: ["contact-email"],
+        },
+        {
+          id: "qr-docs-patient-retour-fallback",
+          label: "Retour menu fallback",
+          value: "retour menu fallback",
+          nextNodeId: "fallback",
+        },
+      ],
+    },
     supports: {
       id: "supports",
       message: "Pour commander des supports, utilisez cette page :",
@@ -781,12 +1110,116 @@ export const chatbotConfig: ChatbotConfig = {
     },
     prevention: {
       id: "prevention",
-      message: "Voici les contenus de prévention santé familiale :",
-      quickReplies: [restartQuickReply],
-      actions: [
+      message: "Quel sujet de prévention souhaitez-vous explorer ?",
+      quickReplies: [
         {
-          type: "suggest_resources",
-          resourceIds: ["prevention-familiale", "sf-mars-bleu-2026", "memos-suivi"],
+          id: "qr-prevention-vaccinations",
+          label: "Vaccinations",
+          value: "vaccinations",
+          nextNodeId: "prevention-vaccinations",
+        },
+        {
+          id: "qr-prevention-depistages",
+          label: "Dépistages cancers",
+          value: "depistages cancers",
+          nextNodeId: "prevention-depistages",
+        },
+        {
+          id: "qr-prevention-sommeil",
+          label: "Sommeil",
+          value: "sommeil",
+          nextNodeId: "prevention-sommeil",
+        },
+        {
+          id: "qr-prevention-chroniques",
+          label: "Suivi maladies chroniques",
+          value: "suivi maladies chroniques",
+          actionResourceIds: ["memos-suivi"],
+        },
+        {
+          id: "qr-prevention-hub",
+          label: "Voir tout le hub prévention",
+          value: "hub prevention",
+          actionResourceIds: ["prevention-familiale"],
+        },
+        restartQuickReply,
+      ],
+    },
+    "prevention-vaccinations": {
+      id: "prevention-vaccinations",
+      message: "Voici les campagnes de vaccination en cours sur notre territoire.",
+      quickReplies: [
+        {
+          id: "qr-prevention-vac-grippe",
+          label: "Vaccination antigrippale",
+          value: "vaccination antigrippale",
+          actionResourceIds: ["sf-vaccination-grippe-2025"],
+        },
+        {
+          id: "qr-prevention-vac-covid",
+          label: "Vaccination anti-COVID",
+          value: "vaccination anti covid",
+          actionResourceIds: ["sf-vaccination-covid-2025"],
+        },
+        {
+          id: "qr-prevention-vac-retour",
+          label: "Retour menu prévention",
+          value: "retour prevention",
+          nextNodeId: "prevention",
+        },
+      ],
+    },
+    "prevention-depistages": {
+      id: "prevention-depistages",
+      message: "Voici les campagnes de dépistage de cancers.",
+      quickReplies: [
+        {
+          id: "qr-prevention-dep-sein",
+          label: "Cancer du sein (Octobre Rose)",
+          value: "cancer du sein octobre rose",
+          actionResourceIds: ["sf-octobre-rose-2025"],
+        },
+        {
+          id: "qr-prevention-dep-colorectal",
+          label: "Cancer colorectal (Mars Bleu)",
+          value: "cancer colorectal mars bleu",
+          actionResourceIds: ["sf-mars-bleu-2026"],
+        },
+        {
+          id: "qr-prevention-dep-masculine",
+          label: "Santé masculine (Movember)",
+          value: "sante masculine movember",
+          actionResourceIds: ["sf-movember-2026"],
+        },
+        {
+          id: "qr-prevention-dep-retour",
+          label: "Retour menu prévention",
+          value: "retour prevention",
+          nextNodeId: "prevention",
+        },
+      ],
+    },
+    "prevention-sommeil": {
+      id: "prevention-sommeil",
+      message: "Voici nos ressources sur les troubles du sommeil.",
+      quickReplies: [
+        {
+          id: "qr-prevention-sommeil-insomnie",
+          label: "Insomnie",
+          value: "insomnie",
+          actionResourceIds: ["sf-insomnie"],
+        },
+        {
+          id: "qr-prevention-sommeil-apnee",
+          label: "Apnée du sommeil",
+          value: "apnee du sommeil",
+          actionResourceIds: ["etp-apnee-sommeil"],
+        },
+        {
+          id: "qr-prevention-sommeil-retour",
+          label: "Retour menu prévention",
+          value: "retour prevention",
+          nextNodeId: "prevention",
         },
       ],
     },
@@ -803,15 +1236,45 @@ export const chatbotConfig: ChatbotConfig = {
     },
     fallback: {
       id: "fallback",
-      message:
-        "Je n’ai pas trouvé de ressource précise. Vous pouvez reformuler votre question ou choisir une catégorie ci-dessous. Pour un besoin médical, contactez votre professionnel de santé. Pour une orientation générale, contactez la CPTS.",
-      quickReplies: mainQuickReplies,
-      actions: [
+      message: "Je n'ai pas bien compris votre demande. Voici quelques pistes pour vous aider à trouver ce que vous cherchez :",
+      quickReplies: [
         {
-          type: "suggest_resources",
-          resourceIds: ["contact-email", "coordonnees"],
-          message: "Vous pouvez aussi contacter directement :",
+          id: "qr-fallback-pro",
+          label: "Je cherche un professionnel de santé",
+          value: "professionnel sante",
+          nextNodeId: "medecin-traitant",
         },
+        {
+          id: "qr-fallback-sante-mentale",
+          label: "J'ai une question sur la santé mentale",
+          value: "question sante mentale",
+          nextNodeId: "sante-mentale",
+        },
+        {
+          id: "qr-fallback-prevention",
+          label: "Je veux une information de prévention",
+          value: "information prevention",
+          nextNodeId: "prevention",
+        },
+        {
+          id: "qr-fallback-document",
+          label: "Je cherche un document",
+          value: "chercher document",
+          nextNodeId: "documents-role-check",
+        },
+        {
+          id: "qr-fallback-urgence",
+          label: "J'ai une urgence",
+          value: "urgence",
+          nextNodeId: "urgences",
+        },
+        {
+          id: "qr-fallback-contact",
+          label: "Contacter la CPTS",
+          value: "contacter cpts",
+          actionResourceIds: ["contact-email", "coordonnees"],
+        },
+        restartQuickReply,
       ],
     },
   },
@@ -820,7 +1283,7 @@ export const chatbotConfig: ChatbotConfig = {
     fallbackNodeId: "fallback",
     restartNodeId: "start",
     maxSuggestions: 3,
-    minScore: 55,
+    minScore: 48,
     fuzzyDistanceThreshold: 1,
     decisionRules: [
       {
