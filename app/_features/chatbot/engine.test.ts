@@ -194,6 +194,46 @@ test("processUserInput mammographie matche sf-octobre-rose-2025", () => {
   assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-octobre-rose-2025"))
 })
 
+test("processUserInput oriente la douleur ovarienne sans matcher urgence-17", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "qui appeler si j'ai mal au ovaire", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("symptomes-douleur"))
+  assert.ok(!suggestedIds.includes("urgence-17"))
+})
+
+test("processUserInput filtre les ressources récemment proposées", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const firstState = processUserInput(initialState, "mammographie", chatbotConfig)
+  const secondState = processUserInput(firstState, "mammographie", chatbotConfig)
+  const lastBotMessage = getLastBotMessage(secondState.messages)
+
+  assert.ok(firstState.recentlySuggested.includes("sf-octobre-rose-2025"))
+  assert.equal(secondState.currentNodeId, "fallback")
+  assert.match(lastBotMessage?.text ?? "", /pas bien compris/i)
+})
+
+test("processUserInput douleur thoracique priorise urgence-15", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "douleur thoracique", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "urgence-15")
+})
+
+test("restartConversation reset recentlySuggested", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const suggestedState = processUserInput(initialState, "mammographie", chatbotConfig)
+  const restartState = restartConversation(chatbotConfig)
+
+  assert.ok(suggestedState.recentlySuggested.length > 0)
+  assert.deepEqual(restartState.recentlySuggested, [])
+})
+
 test("processUserInput utilise Fuse quand le matcher principal ne trouve rien", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "psicotherapye", chatbotConfig)

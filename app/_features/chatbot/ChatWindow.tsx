@@ -4,20 +4,8 @@ import { Info, RotateCcw, Send, X } from "lucide-react"
 import { useEffect, useMemo, useRef, useState } from "react"
 import type { FormEvent } from "react"
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
 
 import { MessageBubble } from "./MessageBubble"
 import { PrivacyModal } from "./PrivacyModal"
@@ -62,8 +50,10 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
   const [inputError, setInputError] = useState<string | null>(null)
   const [isStartQuickRepliesExpanded, setIsStartQuickRepliesExpanded] = useState(false)
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false)
+  const [isAwaitingRestartConfirm, setIsAwaitingRestartConfirm] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
+  const cancelRestartRef = useRef<HTMLButtonElement>(null)
   const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
@@ -71,7 +61,7 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
       behavior: prefersReducedMotion ? "auto" : "smooth",
       block: "end",
     })
-  }, [messages, prefersReducedMotion])
+  }, [isAwaitingRestartConfirm, messages, prefersReducedMotion])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -80,6 +70,12 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
   useEffect(() => {
     setIsStartQuickRepliesExpanded(false)
   }, [currentNodeId, messages.length])
+
+  useEffect(() => {
+    if (isAwaitingRestartConfirm) {
+      cancelRestartRef.current?.focus()
+    }
+  }, [isAwaitingRestartConfirm])
 
   const latestQuickReplies = useMemo(() => {
     const reversed = [...messages].reverse()
@@ -102,6 +98,10 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
+    if (isAwaitingRestartConfirm) {
+      return
+    }
+
     const value = draft.trim()
     if (!value) {
       setInputError(null)
@@ -119,6 +119,7 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
   }
 
   const handleQuickReply = (reply: QuickReply) => {
+    setIsAwaitingRestartConfirm(false)
     trackEvent("chatbot_quick_reply", {
       quick_reply_id: reply.id,
       quick_reply_label: reply.label,
@@ -127,9 +128,24 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
     onQuickReply(reply)
   }
 
-  const handleRestart = () => {
+  const handleRequestRestart = () => {
+    setInputError(null)
+    setIsAwaitingRestartConfirm(true)
+  }
+
+  const handleConfirmRestart = () => {
     trackEvent("chatbot_restart", {})
+    setIsAwaitingRestartConfirm(false)
     onRestart()
+  }
+
+  const handleCancelRestart = () => {
+    setIsAwaitingRestartConfirm(false)
+  }
+
+  const handleClose = () => {
+    setIsAwaitingRestartConfirm(false)
+    onClose()
   }
 
   return (
@@ -142,33 +158,16 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
           <p className="text-xs text-muted-foreground">Orientation par mots-clés</p>
         </div>
         <div className="flex items-center gap-1">
-          <AlertDialog>
-            <AlertDialogTrigger
-              className={cn(
-                buttonVariants({ variant: "ghost", size: "icon-sm" }),
-              )}
-              aria-label="Recommencer la conversation"
-            >
-              <RotateCcw className="size-4" />
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Recommencer la conversation ?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  Tout l&apos;historique de cette conversation sera effacé. Cette action est définitive.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Annuler</AlertDialogCancel>
-                <AlertDialogAction
-                  className={cn(buttonVariants({ variant: "destructive" }))}
-                  onClick={handleRestart}
-                >
-                  Recommencer
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+          <Button
+            type="button"
+            size="icon-sm"
+            variant="ghost"
+            onClick={handleRequestRestart}
+            aria-label="Recommencer la conversation"
+            aria-expanded={isAwaitingRestartConfirm}
+          >
+            <RotateCcw className="size-4" />
+          </Button>
           <Button
             type="button"
             size="icon-sm"
@@ -178,7 +177,7 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
           >
             <Info className="size-4" />
           </Button>
-          <Button type="button" size="icon-sm" variant="ghost" onClick={onClose} aria-label="Fermer la fenêtre chatbot">
+          <Button type="button" size="icon-sm" variant="ghost" onClick={handleClose} aria-label="Fermer la fenêtre chatbot">
             <X className="size-4" />
           </Button>
         </div>
@@ -188,21 +187,43 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
         {messages.map((message) => (
           <MessageBubble key={message.id} message={message} />
         ))}
+        {isAwaitingRestartConfirm ? (
+          <div className="flex justify-start">
+            <div className="max-w-[90%] rounded-2xl rounded-bl-sm border border-border bg-card px-4 py-3 text-sm leading-relaxed text-card-foreground shadow-sm">
+              <p className="whitespace-pre-line">
+                Voulez-vous vraiment recommencer la conversation ? Tout l&apos;historique sera effacé.
+              </p>
+            </div>
+          </div>
+        ) : null}
         <div ref={bottomRef} />
       </div>
 
-      <QuickReplies
-        replies={visibleQuickReplies}
-        onSelect={handleQuickReply}
-        trailingAction={
-          shouldLimitStartQuickReplies
-            ? {
-                label: "Voir plus de catégories",
-                onClick: () => setIsStartQuickRepliesExpanded(true),
-              }
-            : undefined
-        }
-      />
+      {isAwaitingRestartConfirm ? (
+        <div className="border-t border-border px-3 py-3" aria-label="Confirmation de redémarrage">
+          <div className="flex flex-wrap gap-2">
+            <Button type="button" size="sm" variant="destructive" onClick={handleConfirmRestart}>
+              Oui, recommencer
+            </Button>
+            <Button ref={cancelRestartRef} type="button" size="sm" variant="outline" onClick={handleCancelRestart}>
+              Non, annuler
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <QuickReplies
+          replies={visibleQuickReplies}
+          onSelect={handleQuickReply}
+          trailingAction={
+            shouldLimitStartQuickReplies
+              ? {
+                  label: "Voir plus de catégories",
+                  onClick: () => setIsStartQuickRepliesExpanded(true),
+                }
+              : undefined
+          }
+        />
+      )}
 
       <form className="border-t border-border p-3" onSubmit={handleSubmit}>
         <label htmlFor="chatbot-input" className="sr-only">
@@ -213,18 +234,19 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
             id="chatbot-input"
             ref={inputRef}
             value={draft}
+            disabled={isAwaitingRestartConfirm}
             onChange={(event) => {
               setDraft(event.target.value)
               if (inputError) {
                 setInputError(null)
               }
             }}
-            placeholder="Ex: Je cherche un médecin traitant"
+            placeholder={isAwaitingRestartConfirm ? "Confirmez votre choix ci-dessus..." : "Ex: Je cherche un médecin traitant"}
             autoComplete="off"
             aria-invalid={Boolean(inputError)}
             aria-describedby={inputError ? "chatbot-input-error" : undefined}
           />
-          <Button type="submit" size="icon" aria-label="Envoyer le message">
+          <Button type="submit" size="icon" disabled={isAwaitingRestartConfirm} aria-label="Envoyer le message">
             <Send className="size-4" />
           </Button>
         </div>

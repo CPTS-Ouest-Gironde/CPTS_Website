@@ -14,6 +14,8 @@ import type {
 } from "./types"
 
 const ERROR_PAGE_START_NODE_ID = "start-error"
+const RECENTLY_SUGGESTED_LIMIT = 5
+const RESOURCE_FOLLOW_UP_NO_ID = "qr-resource-follow-up-no"
 
 interface InitialStateOptions {
   context?: ChatbotPageContext
@@ -28,7 +30,7 @@ function resolveStartNodeId(config: ChatbotConfig, context: ChatbotPageContext =
 }
 
 export const CHATBOT_HISTORY_KEY = "cpts_chatbot_history"
-const CHATBOT_HISTORY_VERSION = 4
+const CHATBOT_HISTORY_VERSION = 5
 const RESOURCE_FOLLOW_UP_QUICK_REPLIES: QuickReply[] = [
   {
     id: "qr-resource-follow-up-yes",
@@ -110,6 +112,67 @@ function suggestionsFromResources(resources: ChatResource[]): ResourceMatch[] {
   }))
 }
 
+function filterRecentlySuggested<T extends ResourceMatch>(matches: T[], recentlySuggested: string[]): T[] {
+  const recentlySuggestedSet = new Set(recentlySuggested)
+
+  return matches.filter((match) => !recentlySuggestedSet.has(match.resource.id))
+}
+
+function filterMissingRequiredNumbers<T extends ResourceMatch>(matches: T[], normalizedInput: string): T[] {
+  return matches.filter((match) => {
+    const requiredNumbers = match.matchedKeyword.match(/\d+/g)
+    if (!requiredNumbers) {
+      return true
+    }
+
+    return requiredNumbers.every((number) => normalizedInput.includes(number))
+  })
+}
+
+function appendRecentlySuggested(current: string[], resourceIds: string[]): string[] {
+  if (!resourceIds.length) {
+    return current
+  }
+
+  const next = [...current]
+
+  for (const resourceId of resourceIds) {
+    const existingIndex = next.indexOf(resourceId)
+    if (existingIndex >= 0) {
+      next.splice(existingIndex, 1)
+    }
+    next.push(resourceId)
+  }
+
+  return next.slice(-RECENTLY_SUGGESTED_LIMIT)
+}
+
+function getSuggestionResourceIds(suggestions: ResourceMatch[]): string[] {
+  return suggestions.map((suggestion) => suggestion.resource.id)
+}
+
+function getLastSuggestedResourceIds(messages: ChatMessage[]): string[] {
+  const lastSuggestionMessage = [...messages]
+    .reverse()
+    .find((message) => (message.suggestions?.length ?? 0) > 0)
+
+  return lastSuggestionMessage?.suggestions?.map((suggestion) => suggestion.resource.id) ?? []
+}
+
+function buildFallbackState(
+  config: ChatbotConfig,
+  messages: ChatMessage[],
+  recentlySuggested: string[],
+): ChatbotState {
+  const fallbackNode = resolveNode(config, config.rules.fallbackNodeId)
+
+  return {
+    currentNodeId: fallbackNode.id,
+    messages: [...messages, ...buildNodeMessages(config, fallbackNode)],
+    recentlySuggested,
+  }
+}
+
 function buildSuggestionMessages(message: string, suggestions: ResourceMatch[]): ChatMessage[] {
   return [
     createMessage("bot", message, {
@@ -148,6 +211,42 @@ function buildNodeMessages(config: ChatbotConfig, node: ChatNode): ChatMessage[]
   return messages
 }
 
+function buildFilteredNodeMessages(
+  config: ChatbotConfig,
+  node: ChatNode,
+  recentlySuggested: string[],
+): { messages: ChatMessage[]; suggestedIds: string[] } {
+  const messages: ChatMessage[] = [
+    createMessage("bot", node.message, {
+      quickReplies: node.quickReplies,
+    }),
+  ]
+  const suggestedIds: string[] = []
+
+  if (!node.actions?.length) {
+    return { messages, suggestedIds }
+  }
+
+  for (const action of node.actions) {
+    if (action.type !== "suggest_resources") {
+      continue
+    }
+
+    const suggestions = filterRecentlySuggested(
+      suggestionsFromResourceIds(config, action.resourceIds),
+      appendRecentlySuggested(recentlySuggested, suggestedIds),
+    )
+    if (!suggestions.length) {
+      continue
+    }
+
+    suggestedIds.push(...getSuggestionResourceIds(suggestions))
+    messages.push(...buildSuggestionMessages(action.message ?? "Je vous conseille :", suggestions))
+  }
+
+  return { messages, suggestedIds }
+}
+
 function getQuickReplyLookup(quickReplies: QuickReply[] = []): Map<string, QuickReply> {
   if (!quickReplies.length) {
     return new Map<string, QuickReply>()
@@ -183,6 +282,9 @@ function applyQuickReplyWithoutUserMessage(
   quickReply: QuickReply,
 ): ChatbotState {
   const nextMessages = [...state.messages]
+  const suggestedBeforeReply =
+    quickReply.id === RESOURCE_FOLLOW_UP_NO_ID ? getLastSuggestedResourceIds(state.messages) : []
+  let nextRecentlySuggested = appendRecentlySuggested(state.recentlySuggested, suggestedBeforeReply)
   let nextNodeId = state.currentNodeId
 
   if (quickReply.message) {
@@ -190,22 +292,31 @@ function applyQuickReplyWithoutUserMessage(
   }
 
   if (quickReply.actionResourceIds?.length) {
-    const suggestions = suggestionsFromResourceIds(config, quickReply.actionResourceIds)
+    const suggestions = filterRecentlySuggested(
+      suggestionsFromResourceIds(config, quickReply.actionResourceIds),
+      nextRecentlySuggested,
+    )
 
     if (suggestions.length) {
+      nextRecentlySuggested = appendRecentlySuggested(nextRecentlySuggested, getSuggestionResourceIds(suggestions))
       nextMessages.push(...buildSuggestionMessages("Je vous conseille :", suggestions))
+    } else {
+      return buildFallbackState(config, nextMessages, nextRecentlySuggested)
     }
   }
 
   if (quickReply.nextNodeId) {
     const nextNode = resolveNode(config, quickReply.nextNodeId)
-    nextMessages.push(...buildNodeMessages(config, nextNode))
+    const nextNodeResult = buildFilteredNodeMessages(config, nextNode, nextRecentlySuggested)
+    nextRecentlySuggested = appendRecentlySuggested(nextRecentlySuggested, nextNodeResult.suggestedIds)
+    nextMessages.push(...nextNodeResult.messages)
     nextNodeId = nextNode.id
   }
 
   const nextState = {
     currentNodeId: nextNodeId,
     messages: nextMessages,
+    recentlySuggested: nextRecentlySuggested,
   }
 
   return nextState
@@ -218,7 +329,13 @@ function isPersistedState(value: unknown): value is ChatbotState {
 
   const candidate = value as ChatbotState
 
-  return typeof candidate.currentNodeId === "string" && Array.isArray(candidate.messages)
+  return (
+    typeof candidate.currentNodeId === "string" &&
+    Array.isArray(candidate.messages) &&
+    (candidate.recentlySuggested === undefined ||
+      (Array.isArray(candidate.recentlySuggested) &&
+        candidate.recentlySuggested.every((resourceId) => typeof resourceId === "string")))
+  )
 }
 
 interface PersistedHistory {
@@ -242,6 +359,7 @@ export function createInitialState(config: ChatbotConfig, options: InitialStateO
   return {
     currentNodeId: startNode.id,
     messages: buildNodeMessages(config, startNode),
+    recentlySuggested: [],
   }
 }
 
@@ -262,7 +380,10 @@ export function hydrateState(config: ChatbotConfig, options: InitialStateOptions
         return createInitialState(config, options)
       }
 
-      return parsed.state
+      return {
+        ...parsed.state,
+        recentlySuggested: parsed.state.recentlySuggested ?? [],
+      }
     }
 
     return createInitialState(config, options)
@@ -290,6 +411,7 @@ export function restartConversation(config: ChatbotConfig): ChatbotState {
   const nextState = {
     currentNodeId: restartNode.id,
     messages: buildNodeMessages(config, restartNode),
+    recentlySuggested: [],
   }
 
   return nextState
@@ -303,6 +425,7 @@ export function processQuickReply(
   const stateWithUserMessage: ChatbotState = {
     ...state,
     messages: appendUserMessage(state.messages, quickReply.label),
+    recentlySuggested: state.recentlySuggested ?? [],
   }
 
   return applyQuickReplyWithoutUserMessage(stateWithUserMessage, config, quickReply)
@@ -329,6 +452,7 @@ export function processUserInput(
       {
         ...state,
         messages: messagesWithUser,
+        recentlySuggested: state.recentlySuggested ?? [],
       },
       config,
       matchedQuickReply,
@@ -340,8 +464,14 @@ export function processUserInput(
 
   if (conversationalIntent) {
     const suggestions = conversationalIntent.resourceIds
-      ? suggestionsFromResourceIds(config, conversationalIntent.resourceIds)
+      ? filterRecentlySuggested(
+          suggestionsFromResourceIds(config, conversationalIntent.resourceIds),
+          state.recentlySuggested,
+        )
       : undefined
+    const nextRecentlySuggested = suggestions?.length
+      ? appendRecentlySuggested(state.recentlySuggested, getSuggestionResourceIds(suggestions))
+      : state.recentlySuggested
     const botMessages = suggestions?.length
       ? [
           createMessage("bot", conversationalIntent.message, {
@@ -361,6 +491,7 @@ export function processUserInput(
     return {
       currentNodeId: state.currentNodeId,
       messages: [...messagesWithUser, ...botMessages],
+      recentlySuggested: nextRecentlySuggested,
     }
   }
 
@@ -373,14 +504,25 @@ export function processUserInput(
     fuzzyDistanceThreshold: config.rules.fuzzyDistanceThreshold,
   })
 
-  if (matches.length > 0) {
+  const numericSafeMatches = filterMissingRequiredNumbers(matches, normalizedInput)
+
+  if (numericSafeMatches.length > 0) {
+    const filteredMatches = filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
+    if (!filteredMatches.length) {
+      return buildFallbackState(config, messagesWithUser, state.recentlySuggested)
+    }
+
     return {
       currentNodeId: state.currentNodeId,
-      messages: [...messagesWithUser, ...buildSuggestionMessages("Je vous conseille :", matches)],
+      messages: [...messagesWithUser, ...buildSuggestionMessages("Je vous conseille :", filteredMatches)],
+      recentlySuggested: appendRecentlySuggested(state.recentlySuggested, getSuggestionResourceIds(filteredMatches)),
     }
   }
 
-  const fuzzyMatches = suggestionsFromResources(searchResourcesFuzzy(normalizedInput, config))
+  const fuzzyMatches = filterRecentlySuggested(
+    suggestionsFromResources(searchResourcesFuzzy(normalizedInput, config)),
+    state.recentlySuggested,
+  )
 
   if (fuzzyMatches.length > 0) {
     return {
@@ -389,13 +531,9 @@ export function processUserInput(
         ...messagesWithUser,
         ...buildSuggestionMessages("Je ne suis pas sûr d'avoir bien compris, peut-être cherchez-vous :", fuzzyMatches),
       ],
+      recentlySuggested: appendRecentlySuggested(state.recentlySuggested, getSuggestionResourceIds(fuzzyMatches)),
     }
   }
 
-  const fallbackNode = resolveNode(config, config.rules.fallbackNodeId)
-
-  return {
-    currentNodeId: fallbackNode.id,
-    messages: [...messagesWithUser, ...buildNodeMessages(config, fallbackNode)],
-  }
+  return buildFallbackState(config, messagesWithUser, state.recentlySuggested)
 }

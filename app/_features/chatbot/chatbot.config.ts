@@ -154,6 +154,13 @@ export const chatbotConfig: ChatbotConfig = {
       description: "Tous les contacts essentiels pour urgences et soins non programmés.",
       href: "/patients/coordonnees",
     },
+    "symptomes-douleur": {
+      id: "symptomes-douleur",
+      type: "internal",
+      title: "Douleur ou symptôme physique",
+      description: "Orientation vers médecin traitant, SAMU ou pharmacie de garde selon l'intensité.",
+      href: "/patients/coordonnees",
+    },
     "mon-espace-sante": {
       id: "mon-espace-sante",
       type: "internal",
@@ -458,6 +465,13 @@ export const chatbotConfig: ChatbotConfig = {
       description: "En cas de danger immédiat.",
       value: "17",
     },
+    "urgence-15": {
+      id: "urgence-15",
+      type: "phone",
+      value: "15",
+      title: "SAMU",
+      description: "Urgences médicales 24h/24",
+    },
     "pharmacie-garde": {
       id: "pharmacie-garde",
       type: "external",
@@ -558,7 +572,45 @@ export const chatbotConfig: ChatbotConfig = {
 
     { keyword: "police secours", resourceId: "urgence-17", scoreBoost: 16 },
     { keyword: "danger immediat", resourceId: "urgence-17", scoreBoost: 16 },
-    { keyword: "appeler police", resourceId: "urgence-17", scoreBoost: 14 },
+    { keyword: "appeler 17", resourceId: "urgence-17", scoreBoost: 18 },
+    { keyword: "police urgence", resourceId: "urgence-17", scoreBoost: 16 },
+    { keyword: "intervention police", resourceId: "urgence-17", scoreBoost: 14 },
+
+    { keyword: "ovaire", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "ovaires", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "ventre", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "abdomen", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "tete", resourceId: "symptomes-douleur", scoreBoost: 10 },
+    { keyword: "dos", resourceId: "symptomes-douleur", scoreBoost: 10 },
+    { keyword: "poitrine", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "jambe", resourceId: "symptomes-douleur", scoreBoost: 10 },
+    { keyword: "bras", resourceId: "symptomes-douleur", scoreBoost: 10 },
+    { keyword: "gorge", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "oreille", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "oeil", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "yeux", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "dent", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "articulation", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "genou", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "douleur", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "j'ai mal", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "ca fait mal", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "souffrance", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "fievre", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "vomissement", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "nausee", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "vertige", resourceId: "symptomes-douleur", scoreBoost: 12 },
+    { keyword: "malaise", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "essoufflement", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "palpitations", resourceId: "symptomes-douleur", scoreBoost: 14 },
+    { keyword: "qui appeler douleur", resourceId: "symptomes-douleur", scoreBoost: 18 },
+    { keyword: "mal au ventre", resourceId: "symptomes-douleur", scoreBoost: 18 },
+    { keyword: "mal a la tete", resourceId: "symptomes-douleur", scoreBoost: 18 },
+    { keyword: "douleur intense", resourceId: "symptomes-douleur", scoreBoost: 16 },
+    { keyword: "douleur soudaine", resourceId: "symptomes-douleur", scoreBoost: 18 },
+    { keyword: "douleur poitrine", resourceId: "urgence-15", scoreBoost: 20 },
+    { keyword: "douleur thoracique", resourceId: "urgence-15", scoreBoost: 20 },
+    { keyword: "douleur thorax", resourceId: "urgence-15", scoreBoost: 20 },
 
     { keyword: "tcc", resourceId: "sm-pro-approches", scoreBoost: 14 },
     { keyword: "psychotherapie", resourceId: "sm-pro-approches", scoreBoost: 16 },
@@ -792,7 +844,43 @@ export const chatbotConfig: ChatbotConfig = {
       actions: [
         {
           type: "suggest_resources",
-          resourceIds: ["coordonnees", "urgence-3114"],
+          resourceIds: ["urgence-15", "coordonnees", "urgence-3114"],
+        },
+      ],
+    },
+    "symptomes-douleur": {
+      id: "symptomes-douleur",
+      message:
+        "Pour toute douleur ou symptôme physique, votre médecin traitant est le bon interlocuteur. Si la douleur est intense, soudaine ou inquiétante, contactez le 15 (SAMU). En cas de doute, vous pouvez aussi consulter une pharmacie de garde.",
+      quickReplies: [
+        {
+          id: "qr-symptomes-douleur-sans-medecin",
+          label: "Je n'ai pas de médecin traitant",
+          value: "je n ai pas de medecin traitant",
+          nextNodeId: "medecin-traitant",
+        },
+        {
+          id: "qr-symptomes-douleur-retour",
+          label: "Retour menu",
+          value: "retour menu",
+          nextNodeId: "start",
+        },
+      ],
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["medecin-traitant", "urgence-15", "pharmacie-garde"],
+        },
+      ],
+    },
+    "urgence-medicale-suspecte": {
+      id: "urgence-medicale-suspecte",
+      message:
+        "Une douleur thoracique peut nécessiter une prise en charge urgente. Appelez le 15 (SAMU) sans attendre. En cas de doute, contactez aussi votre médecin traitant.",
+      actions: [
+        {
+          type: "suggest_resources",
+          resourceIds: ["urgence-15", "medecin-traitant"],
         },
       ],
     },
