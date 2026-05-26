@@ -98,6 +98,10 @@ export default async function PmoDetailPage({ params }: PmoDetailPageProps) {
                 <CardContent className="grid gap-4 p-6 sm:grid-cols-2">
                   <DetailField label="Date de réalisation" value={formatPmoDate(entry.date_realisation)} />
                   <DetailField label="Prise en charge" value={getPmoOrientationLabel(entry.orientation)} />
+                  <DetailField
+                    label="Réorientation médecin délégant a posteriori"
+                    value={getYesNoLabel(entry.reorientation_medecin_delegant)}
+                  />
                   <DetailField label="Nom médecin délégant" value={entry.medecin_delegant_nom} />
                   <DetailField label="RPPS médecin délégant" value={entry.medecin_delegant_rpps} />
                   <DetailField label="Sexe" value={getPmoPatientSexeLabel(entry.patient_sexe)} />

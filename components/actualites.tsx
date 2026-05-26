@@ -22,9 +22,9 @@ const actualites = [
     link: "/actualites/rhinite-allergique",
   },
   {
-    title: "Dépistage diabète & hypertension — Pharmacie Arago, 28 et 29 avril 2026",
-    image: "/actu/affiche-pharma-ARAGO 28-29 avril _page-0001.webp",
-    link: "/actualites/pharma-arago-avril",
+    title: "Dépistage diabète & hypertension — Pharmacie Formanoir, 1er et 11 juin 2026",
+    image: "/actu/Pharmacie Formanoir 1&11 juin 26.webp",
+    link: "/actualites/pharma-formanoir-juin",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",

@@ -190,7 +190,8 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Route `/espace-pro/pmo/nouveau`
 - [x] Récupération des infos du profil connecté pour l'en-tête pré-rempli
   - Nom CPTS, nom de l'officine, FINESS officine, nom et prénom du pharmacien, RPPS
-- [x] Formulaire avec les 15 champs
+- [x] Formulaire avec les champs validés
+- [x] Champ "Réorientation médecin délégant a posteriori" en radio oui/non après la prise en charge
 - [x] Server Action `createPmoEntry` validée par Zod
 - [x] Insertion dans `pmo_entries` avec user_id et pharmacie_id
 - [x] `revalidatePath('/espace-pro/pmo')` après insertion
@@ -342,6 +343,7 @@ Périmètre : 3 briques fonctionnelles (questionnaires de satisfaction, tableau 
 - [x] Export CSV agrégé enrichi avec FINESS, pharmacien titulaire et RPPS par pharmacie
 - [x] Nouvel export CSV détaillé global : 1 ligne par saisie PMO avec toutes les colonnes (pharmacie, FINESS, pharmacien, RPPS pharmacien, date, données patient, prescriptions, médecin délégant, RPPS médecin délégant)
 - [x] Export CSV ciblé sur la page d'audit par officine
+- [x] Champ "Réorientation médecin délégant a posteriori" intégré au dashboard, à l'audit pharmacie et aux exports CSV
 - [x] Bouton "Année complète" dans la barre de filtres pour basculer rapidement sur Janvier-Décembre (utile pour la facturation annuelle ARS)
 
 ---

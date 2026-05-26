@@ -18,6 +18,7 @@ type LastPmoEntryRow = Pick<
   | "prescription_antiallergique_nasal"
   | "prescription_collyre"
   | "prescription_corticoide_nasal"
+  | "reorientation_medecin_delegant"
   | "renouvellement"
 >
 
@@ -35,6 +36,7 @@ export type PmoDuplicateCheckCandidate = {
   prescriptionAntiallergiqueNasal: boolean
   prescriptionCollyre: boolean
   prescriptionCorticoideNasal: boolean
+  reorientationMedecinDelegant: boolean
   renouvellement: boolean
 }
 
@@ -44,6 +46,7 @@ const duplicateCheckFields = [
   "patient_age",
   "patient_medecin_traitant",
   "orientation",
+  "reorientation_medecin_delegant",
   "renouvellement",
   "prescription_anti_h1",
   "prescription_collyre",
@@ -73,6 +76,7 @@ export function buildPmoDuplicateCheckCandidate(
     prescriptionAntiallergiqueNasal: input.prescriptionAntiallergiqueNasal,
     prescriptionCollyre: input.prescriptionCollyre,
     prescriptionCorticoideNasal: input.prescriptionCorticoideNasal,
+    reorientationMedecinDelegant: input.reorientationMedecinDelegant,
     renouvellement: input.renouvellement,
   }
 }
@@ -103,6 +107,7 @@ export async function isDuplicateOfLastPmoEntry(
     lastEntry.patient_age === candidate.patientAge &&
     lastEntry.patient_medecin_traitant === candidate.patientMedecinTraitant &&
     lastEntry.orientation === candidate.orientation &&
+    lastEntry.reorientation_medecin_delegant === candidate.reorientationMedecinDelegant &&
     lastEntry.renouvellement === candidate.renouvellement &&
     lastEntry.prescription_anti_h1 === candidate.prescriptionAntiH1 &&
     lastEntry.prescription_collyre === candidate.prescriptionCollyre &&

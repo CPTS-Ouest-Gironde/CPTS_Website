@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Link2 } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
@@ -14,27 +14,27 @@ export const metadata: Metadata = {
 const resources = [
   {
     title: "Approche thérapeutique - 20-25 ans et Adultes",
-    url: "https://drive.google.com/file/d/1eAaTZ-nzebCkaPySyX3HmImYdES2JhF1/view?usp=sharing",
+    url: "https://drive.google.com/file/d/16kFiLLw0WEFHSfabybW_D5Oeujil9D8T/view?usp=drive_link",
   },
   {
     title: "Parcours en santé mentale - adolescent et jeune adulte",
-    url: "https://drive.google.com/file/d/1ZT6Fs-2bdBW4Jog_3AVt-OfFUJuD-Gaw/view?usp=sharing",
+    url: "https://drive.google.com/file/d/1fWCY1od1W0ndnMiL8ROoJGJqjiv5xJem/view?usp=drive_link",
   },
   {
-    title: "Dispositif CPTS d'adressage en Psychiatrie",
-    url: "https://drive.google.com/file/d/1GXIU-BjD5RATI_PDWO9h8a14bBT_aeXT/view?usp=sharing",
-  },
-  {
-    title: "Formulaire de demande d'orientation",
-    url: "https://drive.google.com/file/d/1fzr_8eXxO0hHNvGL4U-u0GglSizZKRP6/view?usp=sharing",
+    title: "Dispositif CPTS d'orientation en Psychiatrie",
+    url: "https://drive.google.com/file/d/19R4uX3I_-9zVoCr1dGO3TTeBQdBEtbao/view?usp=drive_link",
+    associatedDoc: {
+      title: "Formulaire de demande d'orientation",
+      url: "https://drive.google.com/file/d/1X7E7B_LKiPokHO1V5QWjp32LfB9LpFUa/view?usp=drive_link",
+    },
   },
   {
     title: "Dispositif CPTS RCP Psy",
-    url: "https://drive.google.com/file/d/1iq3Lx5O0vm5RKdbQcd8Lvp0b4LWtWnDQ/view?usp=sharing",
-  },
-  {
-    title: "Questionnaires RCP Psy",
-    url: "https://drive.google.com/file/d/1QKbDXk3f2Y_zIQA82ox-QeLpVptBmBQN/view?usp=sharing",
+    url: "https://drive.google.com/file/d/13qCAHMzb-vZKm5ZFR_sKuxK0TtqlbsB5/view?usp=drive_link",
+    associatedDoc: {
+      title: "Questionnaires RCP Psy",
+      url: "https://drive.google.com/file/d/1YCQvqQ3PVIhVuMA9qYjwkyXEN3IqVEGV/view?usp=drive_link",
+    },
   },
 ];
 
@@ -92,12 +92,9 @@ export default function DispositifsTerritoireProfessionnelsPage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-5">
             {resources.map((resource) => (
-              <a
+              <div
                 key={resource.title}
-                href={resource.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group h-full min-h-[172px] rounded-2xl border border-[#dbe6db] bg-[#fcfffb] p-5 lg:p-6 shadow-sm hover:shadow-md hover:border-primary/35 transition-all duration-200 flex flex-col justify-between focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="h-full min-h-[172px] rounded-2xl border border-[#dbe6db] bg-[#fcfffb] p-5 lg:p-6 shadow-sm flex flex-col justify-between"
               >
                 <div>
                   <div className="h-1.5 w-16 rounded-full bg-emerald-500/70 mb-4" />
@@ -106,13 +103,33 @@ export default function DispositifsTerritoireProfessionnelsPage() {
                   </h2>
                 </div>
 
-                <div className="mt-4">
-                  <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 text-emerald-700 px-3 py-1.5 text-sm font-semibold border border-emerald-200/80">
+                <div className="mt-4 flex flex-col gap-2">
+                  <a
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/main inline-flex items-center gap-2 rounded-full bg-emerald-50 text-emerald-700 px-3 py-1.5 text-sm font-semibold border border-emerald-200/80 hover:bg-emerald-100 transition-colors w-fit"
+                  >
                     Ouvrir le document
-                    <ExternalLink className="w-4 h-4 flex-shrink-0 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </span>
+                    <ExternalLink className="w-4 h-4 flex-shrink-0 group-hover/main:translate-x-0.5 group-hover/main:-translate-y-0.5 transition-transform" />
+                  </a>
+                  {resource.associatedDoc && (
+                    <div className="pt-2 border-t border-[#dbe6db] mt-1">
+                      <p className="text-xs text-muted-foreground mb-1.5 font-medium">Document associé</p>
+                      <a
+                        href={resource.associatedDoc.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/doc inline-flex items-center gap-2 rounded-full bg-slate-50 text-slate-600 px-3 py-1.5 text-sm font-medium border border-slate-200 hover:bg-slate-100 transition-colors w-fit"
+                      >
+                        <Link2 className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" />
+                        {resource.associatedDoc.title}
+                        <ExternalLink className="w-3.5 h-3.5 flex-shrink-0 group-hover/doc:translate-x-0.5 group-hover/doc:-translate-y-0.5 transition-transform" />
+                      </a>
+                    </div>
+                  )}
                 </div>
-              </a>
+              </div>
             ))}
           </div>
 

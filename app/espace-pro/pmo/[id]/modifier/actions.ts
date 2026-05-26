@@ -87,6 +87,7 @@ export async function updatePmoEntry(
       prescription_antiallergique_nasal: parsed.data.prescriptionAntiallergiqueNasal,
       prescription_collyre: parsed.data.prescriptionCollyre,
       prescription_corticoide_nasal: parsed.data.prescriptionCorticoideNasal,
+      reorientation_medecin_delegant: parsed.data.reorientationMedecinDelegant,
       renouvellement: parsed.data.renouvellement,
     })
     .eq("id", parsedEntryId)

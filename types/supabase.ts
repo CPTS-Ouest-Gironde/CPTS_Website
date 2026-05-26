@@ -116,6 +116,7 @@ export type Database = {
           prescription_antiallergique_nasal: boolean
           prescription_collyre: boolean
           prescription_corticoide_nasal: boolean
+          reorientation_medecin_delegant: boolean
           renouvellement: boolean
           updated_at: string
           user_id: string
@@ -139,6 +140,7 @@ export type Database = {
           prescription_antiallergique_nasal: boolean
           prescription_collyre: boolean
           prescription_corticoide_nasal: boolean
+          reorientation_medecin_delegant?: boolean
           renouvellement?: boolean
           updated_at?: string
           user_id: string
@@ -162,6 +164,7 @@ export type Database = {
           prescription_antiallergique_nasal?: boolean
           prescription_collyre?: boolean
           prescription_corticoide_nasal?: boolean
+          reorientation_medecin_delegant?: boolean
           renouvellement?: boolean
           updated_at?: string
           user_id?: string
