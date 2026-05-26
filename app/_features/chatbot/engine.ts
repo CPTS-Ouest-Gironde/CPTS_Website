@@ -2,7 +2,7 @@ import { matchResources } from "./matcher"
 import { normalizeText, normalizeTextPreservingStopWords } from "./normalize"
 import { detectConversationalIntent, stripConversationalPrefix } from "./intents"
 import { searchResourcesFuzzy } from "./fuzzySearch"
-import { searchArticles } from "./articlesSearch"
+import { searchArticles, type ArticleSearchResult } from "./articlesSearch"
 import type {
   ChatMessage,
   ChatResource,
@@ -19,8 +19,29 @@ const RECENTLY_SUGGESTED_LIMIT = 5
 const RESOURCE_FOLLOW_UP_NO_ID = "qr-resource-follow-up-no"
 const VACCINATION_RESOURCE_ID = "sf-vaccination-grippe-2025"
 const SYMPTOMS_RESOURCE_ID = "symptomes-douleur"
+const MATCHER_EXACT_SCORE = 120
+const ARTICLE_HIGH_CONFIDENCE_FUSE_SCORE = 0.4
 const FALLBACK_ALTERNATIVE_MESSAGE =
   "Je n'ai pas d'autre suggestion pour cette demande. Souhaitez-vous reformuler votre question ou explorer une autre catégorie ?"
+
+const EXPLORATORY_MARKERS = [
+  "c est quoi",
+  "qu est ce que",
+  "qu est ce",
+  "comment ca",
+  "comment se passe",
+  "je veux comprendre",
+  "explique moi",
+  "j ai des questions sur",
+  "je voudrais savoir",
+  "dis moi",
+  "info sur",
+  "infos sur",
+]
+
+function hasExploratoryMarker(intentInput: string): boolean {
+  return EXPLORATORY_MARKERS.some((marker) => intentInput.includes(marker))
+}
 
 const SENSITIVE_ALLOWED_RESOURCE_IDS = {
   violence: new Set(["sm-face-aux-violences", "urgence-3919", "urgence-17", "sante-mentale-annuaire"]),
@@ -335,16 +356,16 @@ function buildArticleSearchState(
   messages: ChatMessage[],
   recentlySuggested: string[],
   trimmedInput: string,
-  normalizedInput: string,
   audienceContext: ChatbotState["audienceContext"],
+  articleResults: ArticleSearchResult[],
   allowedResourceIds?: Set<string>,
 ): ChatbotState | undefined {
-  const articleResults = searchArticles(normalizedInput).filter(
+  const filteredResults = articleResults.filter(
     (result) => !allowedResourceIds || allowedResourceIds.has(result.resourceId),
   )
   const articleSuggestions = filterRecentlySuggested(
     filterAudienceMatches(
-      articleResults
+      filteredResults
         .map((result): ResourceMatch | null => {
           const resource = config.resources[result.resourceId]
           if (!resource) {
@@ -367,7 +388,9 @@ function buildArticleSearchState(
     return undefined
   }
 
-  const firstMatch = articleResults.find((result) => result.resourceId === articleSuggestions[0]?.resource.id)
+  const firstMatch = filteredResults.find(
+    (result) => result.resourceId === articleSuggestions[0]?.resource.id,
+  )
   if (!firstMatch) {
     return undefined
   }
@@ -729,6 +752,10 @@ export function processUserInput(
     }
   }
 
+  const exploratory = hasExploratoryMarker(intentInput)
+  const articleResults = searchArticles(normalizedInput, { exploratory })
+  const articleBestScore = articleResults[0]?.score ?? 1
+
   const matches = matchResources({
     input: normalizedInput,
     keywordIndex: config.keywordIndex,
@@ -751,6 +778,30 @@ export function processUserInput(
     normalizedInput,
   )
 
+  const matcherHasExactMatch = numericSafeMatches.some((match) => match.score >= MATCHER_EXACT_SCORE)
+  const matcherSensitive = hasSensitiveMatch(numericSafeMatches)
+
+  const articleShouldWin =
+    !matcherSensitive &&
+    !matcherHasExactMatch &&
+    articleResults.length > 0 &&
+    (exploratory || articleBestScore <= ARTICLE_HIGH_CONFIDENCE_FUSE_SCORE)
+
+  if (articleShouldWin) {
+    const priorityArticleState = buildArticleSearchState(
+      config,
+      messagesWithUser,
+      state.recentlySuggested,
+      trimmed,
+      state.audienceContext ?? null,
+      articleResults,
+    )
+
+    if (priorityArticleState) {
+      return priorityArticleState
+    }
+  }
+
   if (numericSafeMatches.length > 0) {
     const filteredMatches = filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
     if (!filteredMatches.length) {
@@ -766,8 +817,8 @@ export function processUserInput(
             messagesWithUser,
             state.recentlySuggested,
             trimmed,
-            normalizedInput,
             state.audienceContext ?? null,
+            articleResults,
             new Set(getSuggestionResourceIds(suggestions)),
           )
         : undefined
@@ -803,8 +854,8 @@ export function processUserInput(
           messagesWithUser,
           state.recentlySuggested,
           trimmed,
-          normalizedInput,
           state.audienceContext ?? null,
+          articleResults,
           new Set(getSuggestionResourceIds(fuzzyMatches)),
         )
       : undefined
@@ -830,8 +881,8 @@ export function processUserInput(
     messagesWithUser,
     state.recentlySuggested,
     trimmed,
-    normalizedInput,
     state.audienceContext ?? null,
+    articleResults,
   )
 
   if (articleSearchState) {

@@ -519,6 +519,56 @@ test("processUserInput retourne un extrait pertinent sur le dépistage colorecta
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-mars-bleu-2026"))
 })
 
+test("processUserInput marqueur exploratoire \"qu'est-ce que mars bleu\" priorise sf-mars-bleu-2026 avec extrait", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "qu'est-ce que mars bleu", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait Mars Bleu attendu pour une question exploratoire")
+  assert.ok(suggestionIds.includes("sf-mars-bleu-2026"))
+})
+
+test("processUserInput marqueur exploratoire \"comment se passe le dépistage colorectal\" cible Mars Bleu pas Octobre Rose", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "comment se passe le dépistage colorectal", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait Mars Bleu attendu sur dépistage colorectal")
+  assert.ok(suggestionIds.includes("sf-mars-bleu-2026"), "sf-mars-bleu-2026 attendu en suggestion")
+  assert.ok(!suggestionIds.includes("sf-octobre-rose-2025"), "sf-octobre-rose-2025 (cancer du sein) ne doit pas remonter sur dépistage colorectal")
+})
+
+test("processUserInput marqueur exploratoire \"j'ai des questions sur l'endométriose\" cible l'article endométriose pas Questions Psy", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'ai des questions sur l'endométriose", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait endométriose attendu")
+  assert.match(extractMessage.text, /endom.triose/i)
+  assert.ok(suggestionIds.includes("sf-endometriose"))
+  assert.ok(!suggestionIds.includes("ao-questions-psy"), "ao-questions-psy ne doit pas remonter")
+})
+
+test("processUserInput non-régression: \"Je cherche un médecin\" priorise toujours patients-medecin-traitant", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Je cherche un médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
+  assert.equal(extractMessage, undefined, "pas d'extrait d'article attendu : matcher classique doit gagner sur cette requête")
+})
+
 test("processUserInput affiche le fallback quand ni matcher ni Fuse ne trouvent rien", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "zzqxwv blorf snargle", chatbotConfig)

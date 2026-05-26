@@ -38,8 +38,19 @@ export interface ArticleSearchResult {
   score: number
 }
 
+export interface SearchArticlesOptions {
+  exploratory?: boolean
+}
+
 const FUSE_THRESHOLD = 0.4
+const FUSE_THRESHOLD_EXPLORATORY = 0.5
 const MAX_ARTICLE_RESULTS = 3
+const EXTRACT_MAX_LENGTH = 300
+const FUSE_KEYS = [
+  { name: "title", weight: 0.4 },
+  { name: "sectionTitle", weight: 0.3 },
+  { name: "text", weight: 0.3 },
+] as const
 
 const typedArticlesIndex = articlesIndex as ArticlesIndex
 
@@ -61,11 +72,15 @@ const articlesFuse = new Fuse(articleDocuments, {
   includeScore: true,
   ignoreLocation: true,
   ignoreDiacritics: true,
-  keys: [
-    { name: "title", weight: 0.4 },
-    { name: "sectionTitle", weight: 0.3 },
-    { name: "text", weight: 0.3 },
-  ],
+  keys: [...FUSE_KEYS],
+})
+
+const articlesFuseExploratory = new Fuse(articleDocuments, {
+  threshold: FUSE_THRESHOLD_EXPLORATORY,
+  includeScore: true,
+  ignoreLocation: true,
+  ignoreDiacritics: true,
+  keys: [...FUSE_KEYS],
 })
 
 const STOP_WORDS = new Set([
@@ -107,7 +122,46 @@ function getLexicalScore(document: ArticleSearchDocument, queryTerms: string[]):
   }, 0)
 }
 
-export function searchArticles(query: string): ArticleSearchResult[] {
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/\s*\n+\s*/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+}
+
+function truncateExtract(text: string, maxLength = EXTRACT_MAX_LENGTH): string {
+  if (text.length <= maxLength) {
+    return text
+  }
+
+  const window = text.slice(0, maxLength)
+  let cutPoint = -1
+  for (const terminator of [". ", "! ", "? "]) {
+    const index = window.lastIndexOf(terminator)
+    if (index > cutPoint) {
+      cutPoint = index + 1
+    }
+  }
+
+  if (cutPoint > 0) {
+    return text.slice(0, cutPoint).trim()
+  }
+
+  const lastSpace = window.lastIndexOf(" ")
+  if (lastSpace > 0) {
+    return `${text.slice(0, lastSpace).trim()}…`
+  }
+
+  return `${text.slice(0, maxLength)}…`
+}
+
+export function cleanExtract(text: string): string {
+  return truncateExtract(stripMarkdown(text))
+}
+
+export function searchArticles(query: string, options: SearchArticlesOptions = {}): ArticleSearchResult[] {
   const normalizedQuery = normalizeText(query)
   if (!normalizedQuery) {
     return []
@@ -115,8 +169,9 @@ export function searchArticles(query: string): ArticleSearchResult[] {
 
   const seenResources = new Set<string>()
   const queryTerms = getQueryTerms(normalizedQuery)
+  const fuse = options.exploratory ? articlesFuseExploratory : articlesFuse
 
-  return articlesFuse
+  return fuse
     .search(normalizedQuery, { limit: 20 })
     .map((result) => ({
       resourceId: result.item.resourceId,
@@ -131,11 +186,11 @@ export function searchArticles(query: string): ArticleSearchResult[] {
         return right.lexicalScore - left.lexicalScore
       }
 
-      if (left.score !== right.score) {
-        return left.score - right.score
+      if (left.sectionIndex !== right.sectionIndex) {
+        return left.sectionIndex - right.sectionIndex
       }
 
-      return left.sectionIndex - right.sectionIndex
+      return left.score - right.score
     })
     .filter((result) => {
       if (seenResources.has(result.resourceId)) {
@@ -148,7 +203,7 @@ export function searchArticles(query: string): ArticleSearchResult[] {
     .map((result) => ({
       resourceId: result.resourceId,
       sectionTitle: result.sectionTitle,
-      extract: result.extract,
+      extract: cleanExtract(result.extract),
       score: result.score,
     }))
     .slice(0, MAX_ARTICLE_RESULTS)
