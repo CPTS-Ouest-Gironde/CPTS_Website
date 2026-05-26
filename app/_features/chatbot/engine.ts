@@ -1,18 +1,33 @@
 import { matchResources } from "./matcher"
 import { normalizeText } from "./normalize"
 import { detectConversationalIntent } from "./intents"
+import { searchResourcesFuzzy } from "./fuzzySearch"
 import type {
   ChatMessage,
+  ChatResource,
   ChatNode,
   ChatbotConfig,
+  ChatbotPageContext,
   ChatbotState,
   QuickReply,
   ResourceMatch,
 } from "./types"
 
+const ERROR_PAGE_START_NODE_ID = "start-error"
+
+interface InitialStateOptions {
+  context?: ChatbotPageContext
+}
+
+function resolveStartNodeId(config: ChatbotConfig, context: ChatbotPageContext = "default"): string {
+  if (context === "error-page" && config.nodes[ERROR_PAGE_START_NODE_ID]) {
+    return ERROR_PAGE_START_NODE_ID
+  }
+
+  return config.rules.startNodeId
+}
+
 export const CHATBOT_HISTORY_KEY = "cpts_chatbot_history"
-const CHATBOT_PRIVACY_NOTICE =
-  "Cet échange n'est pas enregistré sur nos serveurs. L'historique est conservé localement sur votre navigateur et supprimé à la fermeture."
 const CHATBOT_HISTORY_VERSION = 4
 const RESOURCE_FOLLOW_UP_QUICK_REPLIES: QuickReply[] = [
   {
@@ -61,15 +76,8 @@ function createMessage(
   }
 }
 
-function appendUserMessageWithPrivacyNotice(messages: ChatMessage[], text: string): ChatMessage[] {
-  const nextMessages = [...messages, createMessage("user", text)]
-  const hasPreviousUserMessage = messages.some((message) => message.role === "user")
-
-  if (hasPreviousUserMessage) {
-    return nextMessages
-  }
-
-  return [...nextMessages, createMessage("bot", CHATBOT_PRIVACY_NOTICE)]
+function appendUserMessage(messages: ChatMessage[], text: string): ChatMessage[] {
+  return [...messages, createMessage("user", text)]
 }
 
 function resolveNode(config: ChatbotConfig, nodeId: string): ChatNode {
@@ -92,6 +100,14 @@ function suggestionsFromResourceIds(config: ChatbotConfig, resourceIds: string[]
     })
     .filter((item): item is ResourceMatch => Boolean(item))
     .slice(0, config.rules.maxSuggestions)
+}
+
+function suggestionsFromResources(resources: ChatResource[]): ResourceMatch[] {
+  return resources.map((resource, index) => ({
+    resource,
+    score: 48 - index * 5,
+    matchedKeyword: "fuse",
+  }))
 }
 
 function buildSuggestionMessages(message: string, suggestions: ResourceMatch[]): ChatMessage[] {
@@ -220,8 +236,8 @@ function isPersistedHistory(value: unknown): value is PersistedHistory {
   return typeof candidate.version === "number" && isPersistedState(candidate.state)
 }
 
-export function createInitialState(config: ChatbotConfig): ChatbotState {
-  const startNode = resolveNode(config, config.rules.startNodeId)
+export function createInitialState(config: ChatbotConfig, options: InitialStateOptions = {}): ChatbotState {
+  const startNode = resolveNode(config, resolveStartNodeId(config, options.context))
 
   return {
     currentNodeId: startNode.id,
@@ -229,29 +245,29 @@ export function createInitialState(config: ChatbotConfig): ChatbotState {
   }
 }
 
-export function hydrateState(config: ChatbotConfig): ChatbotState {
+export function hydrateState(config: ChatbotConfig, options: InitialStateOptions = {}): ChatbotState {
   if (!isBrowser()) {
-    return createInitialState(config)
+    return createInitialState(config, options)
   }
 
   try {
     const raw = window.sessionStorage.getItem(CHATBOT_HISTORY_KEY)
     if (!raw) {
-      return createInitialState(config)
+      return createInitialState(config, options)
     }
 
     const parsed: unknown = JSON.parse(raw)
     if (isPersistedHistory(parsed)) {
       if (parsed.version !== CHATBOT_HISTORY_VERSION) {
-        return createInitialState(config)
+        return createInitialState(config, options)
       }
 
       return parsed.state
     }
 
-    return createInitialState(config)
+    return createInitialState(config, options)
   } catch {
-    return createInitialState(config)
+    return createInitialState(config, options)
   }
 }
 
@@ -286,7 +302,7 @@ export function processQuickReply(
 ): ChatbotState {
   const stateWithUserMessage: ChatbotState = {
     ...state,
-    messages: appendUserMessageWithPrivacyNotice(state.messages, quickReply.label),
+    messages: appendUserMessage(state.messages, quickReply.label),
   }
 
   return applyQuickReplyWithoutUserMessage(stateWithUserMessage, config, quickReply)
@@ -303,7 +319,7 @@ export function processUserInput(
     return state
   }
 
-  const messagesWithUser = appendUserMessageWithPrivacyNotice(state.messages, trimmed)
+  const messagesWithUser = appendUserMessage(state.messages, trimmed)
   const normalizedInput = normalizeText(trimmed)
   const currentNode = resolveNode(config, state.currentNodeId)
   const matchedQuickReply = findTextQuickReply(currentNode, normalizedInput)
@@ -361,6 +377,18 @@ export function processUserInput(
     return {
       currentNodeId: state.currentNodeId,
       messages: [...messagesWithUser, ...buildSuggestionMessages("Je vous conseille :", matches)],
+    }
+  }
+
+  const fuzzyMatches = suggestionsFromResources(searchResourcesFuzzy(normalizedInput, config))
+
+  if (fuzzyMatches.length > 0) {
+    return {
+      currentNodeId: state.currentNodeId,
+      messages: [
+        ...messagesWithUser,
+        ...buildSuggestionMessages("Je ne suis pas sûr d'avoir bien compris, peut-être cherchez-vous :", fuzzyMatches),
+      ],
     }
   }
 

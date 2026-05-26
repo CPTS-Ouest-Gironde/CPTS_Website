@@ -98,3 +98,5 @@ export interface ChatbotState {
   currentNodeId: string
   messages: ChatMessage[]
 }
+
+export type ChatbotPageContext = "default" | "error-page"

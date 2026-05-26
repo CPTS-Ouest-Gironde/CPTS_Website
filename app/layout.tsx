@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Suspense } from "react"
+import { ChatbotProvider } from "@/app/_features/chatbot/ChatbotContext"
 import { ChatbotWidget } from "@/app/_features/chatbot/ChatbotWidget"
 import { LoadingScreen } from "@/components/loading-screen"
 import { GoogleAnalytics } from "@/components/google-analytics"
@@ -71,8 +72,10 @@ export default function RootLayout({
       </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
         <Suspense fallback={<LoadingScreen />}>
-          {children}
-          <ChatbotWidget />
+          <ChatbotProvider>
+            {children}
+            <ChatbotWidget />
+          </ChatbotProvider>
           <Analytics />
           <GoogleAnalytics />
           <CookieConsentBanner />

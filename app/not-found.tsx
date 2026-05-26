@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Home, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChatbotErrorContext } from "@/app/_features/chatbot/ChatbotErrorContext";
 
 export default function NotFound() {
   return (
     <main className="min-h-screen flex flex-col">
+      <ChatbotErrorContext />
       <Header />
 
       <section className="flex-1 flex items-center justify-center py-32 lg:py-40 px-4">
