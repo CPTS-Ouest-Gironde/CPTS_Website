@@ -94,6 +94,64 @@ test("processUserInput matche les synonymes docteur et psy", () => {
   assert.ok(psySuggestions?.suggestions?.some((item) => item.resource.id === "sante-mentale-annuaire"))
 })
 
+test("processUserInput ignore la salutation quand une demande suit", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "Bonjour je cherche un médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const lastBotMessage = getLastBotMessage(nextState.messages)
+
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "medecin-traitant"))
+  assert.notEqual(lastBotMessage?.text, "Bonjour. Je suis l'assistant d'orientation CPTS. Donnez votre besoin en une phrase et je vous proposerai la bonne ressource.")
+})
+
+test("processUserInput matche une douleur à la tête en phrase naturelle", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'ai mal à la tête", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "symptomes-douleur"))
+})
+
+test("processUserInput matche une douleur thoracique avec contexte temporel", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "J'ai des douleur thoracique depuis ce matin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "urgence-15")
+})
+
+test("processUserInput matche les violences conjugales formulées naturellement", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je suis battue par mon mari", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("sm-face-aux-violences"))
+  assert.ok(suggestedIds.includes("urgence-3919"))
+})
+
+test("processUserInput matche la déprime avec contexte temporel", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je déprime depuis 3 mois", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sante-mentale"))
+})
+
+test("processUserInput matche une demande de vaccination grippe naturelle", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je veux me faire vacciner contre la grippe", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-vaccination-grippe-2025"))
+})
+
 test("processUserInput répond aux formulations familières de type chatbot", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "comment tu peux m'aider", chatbotConfig)
@@ -247,7 +305,7 @@ test("processUserInput utilise Fuse quand le matcher principal ne trouve rien", 
 
 test("processUserInput affiche le fallback quand ni matcher ni Fuse ne trouvent rien", () => {
   const initialState = createInitialState(chatbotConfig)
-  const nextState = processUserInput(initialState, "zzqxwv nombre sans aucun lien territorial", chatbotConfig)
+  const nextState = processUserInput(initialState, "zzqxwv blorf snargle", chatbotConfig)
   const lastBotMessage = getLastBotMessage(nextState.messages)
 
   assert.equal(nextState.currentNodeId, "fallback")

@@ -6,6 +6,9 @@ export interface ConversationalIntentResult {
   resourceIds?: string[]
 }
 
+const CONVERSATIONAL_PREFIXES = ["bonjour", "bonsoir", "salut", "coucou", "hello", "merci"]
+const CLOSING_PREFIXES = ["au revoir", "a bientot"]
+
 function hasToken(input: string, token: string): boolean {
   const parts = input.split(" ").filter(Boolean)
   return parts.includes(token)
@@ -19,6 +22,29 @@ function hasAnyPhrase(input: string, phrases: string[]): boolean {
   return phrases.some((phrase) => hasPhrase(input, phrase))
 }
 
+function removePrefix(input: string, prefix: string): string | undefined {
+  if (input === prefix) {
+    return ""
+  }
+
+  if (input.startsWith(`${prefix} `)) {
+    return input.slice(prefix.length).trim()
+  }
+
+  return undefined
+}
+
+export function stripConversationalPrefix(normalizedInput: string): string {
+  for (const prefix of [...CONVERSATIONAL_PREFIXES, ...CLOSING_PREFIXES]) {
+    const rest = removePrefix(normalizedInput, prefix)
+    if (rest !== undefined) {
+      return rest
+    }
+  }
+
+  return normalizedInput
+}
+
 export function detectConversationalIntent(
   normalizedInput: string,
   defaultQuickReplies: QuickReply[] = [],
@@ -27,12 +53,7 @@ export function detectConversationalIntent(
     return undefined
   }
 
-  const isGreeting =
-    hasToken(normalizedInput, "bonjour") ||
-    hasToken(normalizedInput, "bonsoir") ||
-    hasToken(normalizedInput, "salut") ||
-    hasToken(normalizedInput, "coucou") ||
-    hasToken(normalizedInput, "hello")
+  const isGreeting = ["bonjour", "bonsoir", "salut", "coucou", "hello"].includes(normalizedInput)
 
   if (isGreeting) {
     return {
@@ -135,7 +156,7 @@ export function detectConversationalIntent(
   }
 
   const isThanks =
-    hasToken(normalizedInput, "merci") ||
+    normalizedInput === "merci" ||
     hasPhrase(normalizedInput, "je vous remercie") ||
     hasPhrase(normalizedInput, "merci beaucoup")
 
@@ -180,7 +201,7 @@ export function detectConversationalIntent(
     }
   }
 
-  const isClosing = hasAnyPhrase(normalizedInput, ["au revoir", "a bientot", "bonne journee", "bonne soiree"])
+  const isClosing = ["au revoir", "a bientot", "bonne journee", "bonne soiree"].includes(normalizedInput)
 
   if (isClosing) {
     return {

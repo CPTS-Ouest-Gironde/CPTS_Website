@@ -1,6 +1,6 @@
 import { matchResources } from "./matcher"
-import { normalizeText } from "./normalize"
-import { detectConversationalIntent } from "./intents"
+import { normalizeText, normalizeTextPreservingStopWords } from "./normalize"
+import { detectConversationalIntent, stripConversationalPrefix } from "./intents"
 import { searchResourcesFuzzy } from "./fuzzySearch"
 import type {
   ChatMessage,
@@ -443,7 +443,8 @@ export function processUserInput(
   }
 
   const messagesWithUser = appendUserMessage(state.messages, trimmed)
-  const normalizedInput = normalizeText(trimmed)
+  const intentInput = normalizeTextPreservingStopWords(trimmed)
+  const normalizedInput = normalizeText(stripConversationalPrefix(intentInput))
   const currentNode = resolveNode(config, state.currentNodeId)
   const matchedQuickReply = findTextQuickReply(currentNode, normalizedInput)
 
@@ -460,7 +461,7 @@ export function processUserInput(
   }
 
   const startNodeQuickReplies = resolveNode(config, config.rules.startNodeId).quickReplies ?? []
-  const conversationalIntent = detectConversationalIntent(normalizedInput, startNodeQuickReplies)
+  const conversationalIntent = detectConversationalIntent(intentInput, startNodeQuickReplies)
 
   if (conversationalIntent) {
     const suggestions = conversationalIntent.resourceIds

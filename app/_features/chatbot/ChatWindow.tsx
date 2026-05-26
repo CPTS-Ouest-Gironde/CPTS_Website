@@ -38,13 +38,22 @@ function useReducedMotion() {
 interface ChatWindowProps {
   currentNodeId: string
   messages: ChatMessage[]
+  panelHeight?: number
   onSend: (input: string) => void
   onQuickReply: (reply: QuickReply) => void
   onRestart: () => void
   onClose: () => void
 }
 
-export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRestart, onClose }: ChatWindowProps) {
+export function ChatWindow({
+  currentNodeId,
+  messages,
+  panelHeight,
+  onSend,
+  onQuickReply,
+  onRestart,
+  onClose,
+}: ChatWindowProps) {
   const { trackEvent } = useChatbotAnalytics()
   const [draft, setDraft] = useState("")
   const [inputError, setInputError] = useState<string | null>(null)
@@ -149,7 +158,10 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
   }
 
   return (
-    <div className="flex h-[min(72vh,36rem)] w-full flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-2xl">
+    <div
+      className="flex h-[min(72vh,36rem)] w-full flex-col overflow-hidden rounded-3xl border border-border bg-background shadow-2xl"
+      style={panelHeight ? { height: panelHeight } : undefined}
+    >
       <div className="flex items-center justify-between border-b border-border px-4 py-3">
         <div>
           <p id="chatbot-title" className="text-sm font-semibold text-foreground">

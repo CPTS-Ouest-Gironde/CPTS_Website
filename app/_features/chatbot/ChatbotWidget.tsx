@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic"
 import { BotMessageSquare, X } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
+import type { CSSProperties } from "react"
 
 import { chatbotConfig } from "./chatbot.config"
 import { useChatbotContext } from "./ChatbotContext"
@@ -30,6 +31,50 @@ const ChatWindow = dynamic(() => import("./ChatWindow").then((module) => module.
   ssr: false,
 })
 
+function getViewportPanelMetrics(): { height?: number; bottom?: number } {
+  if (typeof window === "undefined" || !window.visualViewport) {
+    return {}
+  }
+
+  const viewport = window.visualViewport
+  const keyboardOverlap = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop)
+  const isKeyboardOpen = keyboardOverlap > 80
+  const verticalMargin = isKeyboardOpen ? 16 : 96
+  const maxHeight = window.matchMedia("(min-width: 640px)").matches ? 576 : 520
+  const height = Math.max(280, Math.min(maxHeight, viewport.height - verticalMargin))
+
+  return {
+    height,
+    bottom: isKeyboardOpen ? keyboardOverlap + 8 : undefined,
+  }
+}
+
+function useVisualViewportPanelMetrics(isEnabled: boolean): { height?: number; bottom?: number } {
+  const [metrics, setMetrics] = useState<{ height?: number; bottom?: number }>({})
+
+  useEffect(() => {
+    if (!isEnabled || typeof window === "undefined" || !window.visualViewport) {
+      setMetrics({})
+      return
+    }
+
+    const updateMetrics = () => setMetrics(getViewportPanelMetrics())
+
+    updateMetrics()
+    window.visualViewport.addEventListener("resize", updateMetrics)
+    window.visualViewport.addEventListener("scroll", updateMetrics)
+    window.addEventListener("orientationchange", updateMetrics)
+
+    return () => {
+      window.visualViewport?.removeEventListener("resize", updateMetrics)
+      window.visualViewport?.removeEventListener("scroll", updateMetrics)
+      window.removeEventListener("orientationchange", updateMetrics)
+    }
+  }, [isEnabled])
+
+  return metrics
+}
+
 export function ChatbotWidget() {
   const { context } = useChatbotContext()
   const { trackEvent } = useChatbotAnalytics()
@@ -43,6 +88,9 @@ export function ChatbotWidget() {
   const openedAtRef = useRef<number | null>(null)
   const previousNodeIdRef = useRef(state.currentNodeId)
   const lastUserInputLengthRef = useRef(0)
+  const panelMetrics = useVisualViewportPanelMetrics(isOpen)
+  const panelStyle: CSSProperties | undefined =
+    panelMetrics.bottom === undefined ? undefined : { bottom: panelMetrics.bottom }
 
   const closeChatbot = useCallback(() => {
     const openedAt = openedAtRef.current
@@ -243,10 +291,12 @@ export function ChatbotWidget() {
           aria-modal="false"
           aria-labelledby="chatbot-title"
           className="fixed bottom-20 left-3 right-3 z-[70] sm:bottom-24 sm:left-auto sm:right-4 sm:w-[26rem]"
+          style={panelStyle}
         >
           <ChatWindow
             currentNodeId={state.currentNodeId}
             messages={state.messages}
+            panelHeight={panelMetrics.height}
             onSend={handleSend}
             onQuickReply={handleQuickReply}
             onRestart={handleRestart}
