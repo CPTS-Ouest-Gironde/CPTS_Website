@@ -624,6 +624,17 @@ export function OrientationWizard() {
                   elise.patenere@pro.mssante.fr
                 </span>
               </p>
+              <p className="text-xs text-muted-foreground text-right leading-relaxed">
+                Une{" "}
+                <span className="font-medium text-foreground">
+                  infirmière en psychiatrie
+                </span>{" "}
+                (Maison de Santé Les Pins – Pessac) vous propose un{" "}
+                <span className="font-medium text-foreground">
+                  échange téléphonique le vendredi après-midi
+                </span>
+                .
+              </p>
               {pdfState === "error" && (
                 <p className="text-sm text-destructive">{pdfError}</p>
               )}
