@@ -2,7 +2,7 @@ import assert from "node:assert/strict"
 import test from "node:test"
 
 import { chatbotConfig } from "./chatbot.config"
-import { createInitialState, processQuickReply, processUserInput, restartConversation } from "./engine"
+import { createInitialState, hydrateState, processQuickReply, processUserInput, restartConversation } from "./engine"
 import { searchResourcesFuzzy } from "./fuzzySearch"
 import { cleanExtract } from "./articlesSearch"
 import type { ChatbotConfig } from "./types"
@@ -180,8 +180,10 @@ test("processUserInput Mon Espace Santé matche la page principale", () => {
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "mon-espace-sante")
 })
 
-test("processUserInput dispositifs du territoire matche la ressource professionnelle", () => {
-  const initialState = createInitialState(chatbotConfig)
+test("processUserInput dispositifs du territoire matche la ressource professionnelle quand audienceContext est pro", () => {
+  // Strict patient default: a pro must declare via documents-role-check (or any quick reply
+  // that sets audienceContext = "pro") before free-text input can surface pro-only resources.
+  const initialState = { ...createInitialState(chatbotConfig), audienceContext: "pro" as const }
   const nextState = processUserInput(initialState, "Dispositifs du territoire", chatbotConfig)
 
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
@@ -711,4 +713,366 @@ test("processQuickReply ouvre le sous-flow médecin traitant puis ajoute le suiv
 
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "medecin-traitant"))
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "patients-medecin-traitant"))
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION 1 — Détresse suicidaire : verrouille la sortie urgence-3114
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("ACTION 1 — processUserInput 'je veux mourir' propose urgence-3114", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je veux mourir", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-3114"), "urgence-3114 attendu sur 'je veux mourir'")
+})
+
+test("ACTION 1 — processUserInput 'pensées suicidaires' propose urgence-3114", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'ai des pensées suicidaires depuis plusieurs jours", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-3114"), "urgence-3114 attendu sur 'pensées suicidaires'")
+})
+
+test("ACTION 1 — processUserInput 'je veux en finir' propose urgence-3114", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je veux en finir", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-3114"), "urgence-3114 attendu sur 'je veux en finir'")
+})
+
+test("ACTION 1 — processUserInput 'je ne veux plus vivre' propose urgence-3114", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je ne veux plus vivre", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-3114"), "urgence-3114 attendu sur 'je ne veux plus vivre'")
+})
+
+test("ACTION 1 — processUserInput 'je vais me suicider' propose urgence-3114", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je vais me suicider", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-3114"), "urgence-3114 attendu sur 'je vais me suicider'")
+})
+
+test("ACTION 1 — processUserInput 'mettre fin à mes jours' propose urgence-3114", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je veux mettre fin à mes jours", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-3114"), "urgence-3114 attendu sur 'mettre fin à mes jours'")
+})
+
+test("ACTION 1 — processUserInput 'suicide' seul propose urgence-3114 (régression sur boost 20)", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je pense au suicide", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(
+    suggestedIds.includes("urgence-3114"),
+    "urgence-3114 attendu sur 'je pense au suicide' avec le nouveau boost à 20",
+  )
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION 2 — Faux positifs viol / abus : verrouille l'absence de match
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("ACTION 2 — processUserInput 'j'aime le violet' ne propose PAS sm-face-aux-violences", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'aime le violet", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("sm-face-aux-violences"), "faux positif 'violet' éliminé")
+})
+
+test("ACTION 2 — processUserInput 'abuser de l'alcool' ne propose PAS sm-face-aux-violences", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "ne pas abuser de l'alcool", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("sm-face-aux-violences"), "faux positif 'abuser' éliminé")
+})
+
+test("ACTION 2 — processUserInput 'j'ai été violée' propose sm-face-aux-violences (couverture maintenue)", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'ai été violée hier soir", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("sm-face-aux-violences"), "sm-face-aux-violences attendu sur 'violée'")
+})
+
+test("ACTION 2 — processUserInput 'agression sexuelle' propose sm-face-aux-violences", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "agression sexuelle", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("sm-face-aux-violences"))
+})
+
+test("ACTION 2 — processUserInput 'viol' seul propose sm-face-aux-violences via exact match (boost 10)", () => {
+  // Avec boost 10, CONTAINS = 95 (filtré sur substring "violet") mais EXACT = 130 → la
+  // ressource sensible reste accessible si l'utilisateur tape simplement "viol".
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "viol", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("sm-face-aux-violences"), "exact-match 'viol' doit toujours fonctionner")
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION 3 — audienceContext strict : patient anonyme jamais exposé aux pros
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("ACTION 3 — audienceContext null + 'questionnaire médecin' ne propose PAS ao-questionnaire-medecin", () => {
+  const initialState = createInitialState(chatbotConfig)
+  assert.equal(initialState.audienceContext, null, "état initial = null")
+
+  const nextState = processUserInput(initialState, "questionnaire médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("ao-questionnaire-medecin"), "ressource pro filtrée en mode anonyme")
+})
+
+test("ACTION 3 — audienceContext null + 'formulaire MAS' ne propose PAS ao-formulaire-mas", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "formulaire MAS", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("ao-formulaire-mas"), "ressource pro filtrée en mode anonyme")
+})
+
+test("ACTION 3 — audienceContext null + 'supports cpts' ne propose PAS pro-supports", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "supports cpts", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("pro-supports"), "ressource pro filtrée en mode anonyme")
+})
+
+test("ACTION 3 — audienceContext 'pro' + 'questionnaire médecin' propose ao-questionnaire-medecin", () => {
+  const initialState = { ...createInitialState(chatbotConfig), audienceContext: "pro" as const }
+  const nextState = processUserInput(initialState, "questionnaire médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("ao-questionnaire-medecin"), "ressource pro visible pour un pro déclaré")
+})
+
+test("ACTION 3 — audienceContext null + 'actions outils' ne propose PAS pro-actions-outils", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "actions outils", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("pro-actions-outils"))
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION 4 — Urgence vitale : étouffement / respiration / conscience
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("ACTION 4 — processUserInput 'j'étouffe je vais mourir' propose urgence-15", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'étouffe je vais mourir", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-15"), "urgence-15 attendu sur étouffement aigu")
+})
+
+test("ACTION 4 — processUserInput 'je n'arrive plus à respirer' propose urgence-15", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je n'arrive plus à respirer", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-15"))
+})
+
+test("ACTION 4 — processUserInput 'je perds connaissance' propose urgence-15", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je perds connaissance", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("urgence-15"))
+})
+
+test("ACTION 4 — distinction 'je veux mourir' (3114) vs 'je vais mourir' (urgence-15)", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const wantsToDie = processUserInput(initialState, "je veux mourir", chatbotConfig)
+  const isGoingToDie = processUserInput(initialState, "j'étouffe je vais mourir", chatbotConfig)
+
+  const wantsIds = getLastBotMessageWithSuggestions(wantsToDie.messages)?.suggestions?.map((s) => s.resource.id) ?? []
+  const isGoingIds = getLastBotMessageWithSuggestions(isGoingToDie.messages)?.suggestions?.map((s) => s.resource.id) ?? []
+
+  assert.ok(wantsIds.includes("urgence-3114"), "'je veux mourir' → 3114 (idéation)")
+  assert.ok(isGoingIds.includes("urgence-15"), "'je vais mourir' avec étouffement → 15 (urgence physique)")
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION 5 — Ameli / formulaire / déclaration médecin traitant
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("ACTION 5 — processUserInput 'formulaire ameli médecin' priorise patients-medecin-traitant", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "formulaire ameli médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
+})
+
+test("ACTION 5 — processUserInput 'comment déclarer mon médecin' priorise patients-medecin-traitant", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "comment déclarer mon médecin", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "patients-medecin-traitant")
+})
+
+test("ACTION 5 — processUserInput 'démarche ameli' propose patients-medecin-traitant", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "démarche ameli", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("patients-medecin-traitant"))
+})
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ACTION 6 — Tests de couverture supplémentaires (gap audit)
+// ─────────────────────────────────────────────────────────────────────────────
+
+test("ACTION 6 — restartConversation reset audienceContext à null", () => {
+  const customState = {
+    ...createInitialState(chatbotConfig),
+    audienceContext: "pro" as const,
+    lastUserInput: "un input précédent",
+  }
+  assert.equal(customState.audienceContext, "pro")
+  assert.equal(customState.lastUserInput, "un input précédent")
+
+  const restartedState = restartConversation(chatbotConfig)
+
+  assert.equal(restartedState.audienceContext, null, "audienceContext doit être null après restart")
+  assert.equal(restartedState.lastUserInput, undefined, "lastUserInput doit être undefined après restart")
+})
+
+test("ACTION 6 — processUserInput input vide retourne l'état inchangé", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const emptyState = processUserInput(initialState, "", chatbotConfig)
+  const whitespaceState = processUserInput(initialState, "   \n  \t  ", chatbotConfig)
+
+  assert.equal(emptyState, initialState, "input vide → état inchangé (référentiel)")
+  assert.equal(whitespaceState, initialState, "whitespace seul → état inchangé")
+})
+
+test("ACTION 6 — processUserInput input long (≥ 200 chars) reste traité sans crash", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const longInput = "je cherche un médecin traitant ".repeat(10).trim() // ~310 chars before trim
+  const nextState = processUserInput(initialState, longInput, chatbotConfig)
+
+  // Pas de crash, et un message bot a été ajouté.
+  assert.ok(nextState.messages.length > initialState.messages.length)
+})
+
+test("ACTION 6 — hydrateState fallback createInitialState si sessionStorage JSON invalide", () => {
+  const previousWindow = globalThis.window
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: {
+      sessionStorage: {
+        getItem: () => "this is not valid JSON {{{",
+        setItem: () => undefined,
+      },
+    },
+  })
+
+  try {
+    const state = hydrateState(chatbotConfig)
+    assert.equal(state.currentNodeId, chatbotConfig.rules.startNodeId)
+    assert.deepEqual(state.recentlySuggested, [])
+    assert.equal(state.audienceContext, null)
+  } finally {
+    Object.defineProperty(globalThis, "window", {
+      configurable: true,
+      value: previousWindow,
+    })
+  }
+})
+
+test("ACTION 6 — hydrateState fallback si version persistée obsolète", () => {
+  const previousWindow = globalThis.window
+  const obsoleteState = {
+    version: 1,
+    state: {
+      currentNodeId: "start",
+      messages: [],
+      recentlySuggested: ["sf-octobre-rose-2025"],
+      audienceContext: "patient",
+    },
+  }
+  Object.defineProperty(globalThis, "window", {
+    configurable: true,
+    value: {
+      sessionStorage: {
+        getItem: () => JSON.stringify(obsoleteState),
+        setItem: () => undefined,
+      },
+    },
+  })
+
+  try {
+    const state = hydrateState(chatbotConfig)
+    assert.equal(state.currentNodeId, chatbotConfig.rules.startNodeId)
+    assert.deepEqual(state.recentlySuggested, [], "version obsolète doit reset recentlySuggested")
+  } finally {
+    Object.defineProperty(globalThis, "window", {
+      configurable: true,
+      value: previousWindow,
+    })
+  }
 })

@@ -176,12 +176,6 @@ function filterSensitiveMatches<T extends ResourceMatch>(matches: T[]): T[] {
     : sameCategorySensitiveMatches
 }
 
-function hasDoctorIntent(matches: ResourceMatch[]): boolean {
-  return matches.some(
-    (match) => match.resource.id === "medecin-traitant" || match.resource.id === "patients-medecin-traitant",
-  )
-}
-
 function filterAudienceMatches<T extends ResourceMatch>(
   matches: T[],
   audienceContext: ChatbotState["audienceContext"],
@@ -190,15 +184,11 @@ function filterAudienceMatches<T extends ResourceMatch>(
     return matches
   }
 
-  if (audienceContext === "patient") {
-    return matches.filter((match) => match.resource.audience !== "pro")
-  }
-
-  if (hasDoctorIntent(matches)) {
-    return matches.filter((match) => match.resource.audience !== "pro")
-  }
-
-  return matches
+  // Strict patient default: any user who hasn't explicitly declared as "pro" via the
+  // documents-role-check flow is treated as a patient and never sees pro-only resources.
+  // A pro reaches their resources via the "Ressources professionnels" quick reply or
+  // by going through documents-role-check.
+  return matches.filter((match) => match.resource.audience !== "pro")
 }
 
 function hasVaccinationIntent(normalizedInput: string): boolean {
