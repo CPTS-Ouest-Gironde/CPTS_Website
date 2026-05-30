@@ -1,6 +1,5 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useMemo, useState, type MouseEvent } from "react"
@@ -15,13 +14,9 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { SocialModal } from "./social-modal"
 import { createClient } from "@/lib/supabase/client"
 import { isFullyAuthenticatedForProAccess } from "@/lib/supabase/pro-auth"
-
-const SocialModal = dynamic(
-  () => import("./social-modal").then((mod) => mod.SocialModal),
-  { ssr: false },
-)
 
 const PROTECTED_PRO_LINKS = [
   "/professionnels/supports",
