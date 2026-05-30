@@ -3,8 +3,6 @@ import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
-import { Suspense } from "react"
-import { LoadingScreen } from "@/components/loading-screen"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { CookieConsentBanner } from "@/components/cookie-consent-banner"
 import "./globals.css"
@@ -83,12 +81,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
-        <Suspense fallback={<LoadingScreen />}>
-          {children}
-          <Analytics />
-          <GoogleAnalytics />
-          <CookieConsentBanner />
-        </Suspense>
+        {children}
+        <Analytics />
+        <GoogleAnalytics />
+        <CookieConsentBanner />
       </body>
     </html>
   )
