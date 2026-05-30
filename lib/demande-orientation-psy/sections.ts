@@ -23,6 +23,9 @@ const SECTION_ORDER: SectionDef[] = [
         "patientTelephone",
         "aidantTelephone",
         "professionnelSante",
+        "enfantsACharge",
+        "enfantsNombre",
+        "enfantsAges",
       ].includes(k),
   },
   {
@@ -47,8 +50,7 @@ const SECTION_ORDER: SectionDef[] = [
   {
     title: "SOMMEIL",
     matches: (k) =>
-      k.startsWith("sommeil-") ||
-      ["ruminationThemes", "reveilsDetails"].includes(k),
+      k.startsWith("sommeil-") || k === "ruminationThemes",
   },
   {
     title: "ALIMENTATION",
