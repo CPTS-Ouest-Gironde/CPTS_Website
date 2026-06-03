@@ -1,0 +1,79 @@
+{
+  "title": "JUIN VERT 2026",
+  "date": "1 juin 2026",
+  "image": "/juin-vert/juin-vert-2026.webp",
+  "backLink": {
+    "label": "Retour à Santé familiale",
+    "href": "/prevention/sante-familiale"
+  },
+  "intro": {
+    "text": "3 100 nouveaux cas de cancers du col de l'utérus apparaissent en France chaque année.",
+    "paragraphs": [
+      "Ces cancers sont principalement **provoqués par le Virus Papilloma Humain (HPV)**. Le **HPV peut aussi être responsable d'autres cancers** (vagin, anal et ORL) : 6 400 nouveaux cas par an en France.",
+      "**JUIN VERT est le mois dédié à la promotion du dépistage du cancer du col de l'utérus.**",
+      "80 % des femmes sont infectées par un virus HPV au moins une fois dans leur vie : le virus HPV évolue favorablement dans 9 cas sur 10, mais 1 000 femmes par an décèderont du cancer provoqué par le HPV.",
+      "**Dépister tôt** les HPV permet d'augmenter vos chances de survie si vous êtes porteuse d'un virus HPV cancérigène."
+    ]
+  },
+  "chiffres": {
+    "title": "LE CANCER DU COL DE L'UTÉRUS EN CHIFFRES",
+    "stats": [
+      { "value": "3 100", "label": "nouveaux cas de cancer du col de l'utérus chaque année en France" },
+      { "value": "80 %", "label": "des femmes sont infectées par un virus HPV au moins une fois dans leur vie" },
+      { "value": "1 000", "label": "femmes décèdent chaque année d'un cancer provoqué par le HPV" }
+    ],
+    "note": "Le HPV est aussi responsable d'environ 6 400 nouveaux cas par an d'autres cancers (vagin, anal et ORL). Détecté tôt, le cancer du col de l'utérus se traite et se guérit dans la grande majorité des cas."
+  },
+  "faq": [
+    {
+      "id": "depistage",
+      "title": "En quoi consiste le dépistage ?",
+      "lead": "**Le frottis cervical**, qui consiste à faire un prélèvement au niveau du col de l'utérus, **est le seul moyen de dépister l'HPV** en recherchant des anomalies de vos cellules :",
+      "bullets": [
+        "Il permet de dépister les lésions précancéreuses et donc de les traiter.",
+        "Il permet de dépister un cancer **dès son apparition** et favorise ainsi plus de chances de guérison."
+      ],
+      "paragraphs": [
+        "Cet examen n'est pas long et quasiment indolore. Il peut se faire chez le médecin formé, chez votre gynécologue, votre sage-femme, au laboratoire, dans les cliniques ou dans les hôpitaux."
+      ]
+    },
+    {
+      "id": "concernee",
+      "title": "Je n'ai plus de rapports sexuels, suis-je concernée par le dépistage ?",
+      "paragraphs": [
+        "Le dépistage concerne **toutes les femmes de 25 à 65 ans**, même après l'arrêt de l'activité sexuelle.",
+        "La CPAM vous invite au dépistage **gratuit et sans rendez-vous** via un message sur votre **compte AMELI** ou via un courrier postal."
+      ]
+    },
+    {
+      "id": "frequence",
+      "title": "À quelle fréquence dois-je me faire dépister ?",
+      "lead": "Le dépistage est régulier et se fait selon le schéma suivant :",
+      "bullets": [
+        "2 dépistages à 1 an d'intervalle, puis à 3 ans d'intervalle pour les 25 à 29 ans.",
+        "1 dépistage tous les 5 ans pour les 30 à 65 ans."
+      ]
+    },
+    {
+      "id": "vaccinee",
+      "title": "Je suis vaccinée, dois-je faire mon dépistage ?",
+      "paragraphs": [
+        "**Oui, toutes** les femmes doivent se faire dépister : la vaccination offre une protection jusqu'à 90 % contre les cancers HPV-dépendants (col et anal) et jusqu'à 70-85 % contre les lésions précancéreuses.",
+        "Le taux de couverture vaccinale reste médiocre en France, avec moins de 50 % de couverture des femmes de 15 à 23 ans."
+      ]
+    },
+    {
+      "id": "preservatifs",
+      "title": "J'utilise des préservatifs, suis-je protégée ?",
+      "paragraphs": [
+        "**Non**, les préservatifs ne protègent pas totalement contre cette maladie qui s'attrape par contact **peau à peau et qui est très contagieuse** lors des relations sexuelles, et ce même sans pénétration !"
+      ]
+    }
+  ],
+  "video": {
+    "title": "Cancer du col de l'utérus : pourquoi c'est important de se faire dépister ?",
+    "source": "Institut national du cancer (INCa)",
+    "embedUrl": "https://www.youtube.com/embed/N8lNxXqT8PI",
+    "url": "https://youtu.be/N8lNxXqT8PI"
+  }
+}
