@@ -2,20 +2,16 @@
 
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
+// Carrousel conservé pour plus tard (à réactiver quand il y aura plus d'actualités) :
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+//   CarouselPrevious,
+//   CarouselNext,
+// } from "@/components/ui/carousel";
 
 const actualites = [
-  {
-    title: "Escrime thérapeutique\u00A0: découverte du protocole ATVS33",
-    image: "/actu/affiche-escrime-therapeutique.webp",
-    link: "/actualites/escrime-therapeutique-atvs33",
-  },
   {
     title: "Vous souffrez d'une rhinite allergique ?",
     image: "/actu/affiche-rhinite.webp",
@@ -77,6 +73,17 @@ export function Actualites() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
 
+          {/* Grille statique : avec 3 actualités le carrousel n'est pas nécessaire.
+              Réactiver le carrousel (code ci-dessous) quand il y aura plus d'actualités. */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            {actualites.map((actu, index) => (
+              <div key={index} className="h-full flex">
+                <ActuCard actu={actu} />
+              </div>
+            ))}
+          </div>
+
+          {/* Carrousel conservé pour plus tard :
           <Carousel
             opts={{
               align: "start",
@@ -101,6 +108,7 @@ export function Actualites() {
               <CarouselNext className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
             </div>
           </Carousel>
+          */}
         </div>
       </div>
     </section>
