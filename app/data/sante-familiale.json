@@ -6,6 +6,34 @@
   "articlesPerPage": 12,
   "articles": [
     {
+      "id": "canicule",
+      "title": "CONSEILS CANICULE",
+      "date": "2026-06-03",
+      "dateLabel": "3 juin 2026",
+      "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
+      "slug": "canicule",
+      "href": "/prevention/sante-familiale/canicule"
+    },
+    {
+      "id": "chute-personne-agee",
+      "title": "CHUTE DE LA PERSONNE ÂGÉE: comment la prévenir ?",
+      "date": "2026-06-02",
+      "dateLabel": "2 juin 2026",
+      "image": "/prevention/sante-famille/chute-personne-agee.webp",
+      "slug": "chute-personne-agee",
+      "href": "/prevention/sante-familiale/chute-personne-agee"
+    },
+    {
+      "id": "juin-vert-2026",
+      "title": "JUIN VERT 2026 : DÉPISTAGE DU CANCER DU COL DE L'UTÉRUS",
+      "date": "2026-06-01",
+      "dateLabel": "1 juin 2026",
+      "image": "/juin-vert/juin-vert-2026.webp",
+      "imagePosition": "center 25%",
+      "slug": "juin-vert-2026",
+      "href": "/prevention/sante-familiale/juin-vert-2026"
+    },
+    {
       "id": "endometriose-depistage-prise-en-charge",
       "title": "L'endométriose\u00A0: qu'est-ce que c'est\u00A0? Quelle prise en charge\u00A0?",
       "date": "2026-04-17",
@@ -128,14 +156,6 @@
       "dateLabel": "26 juillet 2024",
       "image": "/prevention/sante-famille/healthy.jpg",
       "slug": "sante-et-prevention"
-    },
-    {
-      "id": "chute-personne-agee",
-      "title": "CHUTE DE LA PERSONNE ÂGÉE: comment la prévenir ?",
-      "date": "2024-05-02",
-      "dateLabel": "2 mai 2024",
-      "image": "/prevention/sante-famille/chute-personne-agee.jpg",
-      "slug": "chute-personne-agee"
     },
     {
       "id": "insuffisance-cardiaque",
