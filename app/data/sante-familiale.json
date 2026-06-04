@@ -176,10 +176,11 @@
     {
       "id": "face-aux-violences",
       "title": "FACE AUX VIOLENCES, VOUS N'ETES PAS SEULES !",
-      "date": "2023-12-01",
-      "dateLabel": "1 décembre 2023",
+      "date": "2026-06-04",
+      "dateLabel": "4 juin 2026",
       "image": "/femme-floue-face-anxiete-vue-f.png",
-      "slug": "face-aux-violences"
+      "slug": "face-aux-violences",
+      "href": "/prevention/sante-familiale/face-aux-violences"
     },
     {
       "id": "avc-reconnaitre",
