@@ -48,6 +48,33 @@ function renderInline(text: string) {
   );
 }
 
+// Détecte les numéros de téléphone français (0X XX XX XX XX) dans un texte
+// et les rend cliquables (tel:) pour appeler directement.
+const PHONE_RE = /(?<!\d)0\d(?:[ .]?\d{2}){4}(?!\d)/g;
+function linkifyPhones(text: string) {
+  const out: (string | JSX.Element)[] = [];
+  let last = 0;
+  let key = 0;
+  let m: RegExpExecArray | null;
+  PHONE_RE.lastIndex = 0;
+  while ((m = PHONE_RE.exec(text)) !== null) {
+    if (m.index > last) out.push(text.slice(last, m.index));
+    const display = m[0];
+    out.push(
+      <a
+        key={`tel-${key++}`}
+        href={`tel:${display.replace(/[ .]/g, "")}`}
+        className="font-medium text-purple-700 hover:text-purple-800 hover:underline transition-colors whitespace-nowrap"
+      >
+        {display}
+      </a>
+    );
+    last = m.index + display.length;
+  }
+  if (last < text.length) out.push(text.slice(last));
+  return out;
+}
+
 // Palette par zone du violentomètre.
 const TONE = {
   saine: { dot: "bg-emerald-500", chip: "bg-emerald-100 text-emerald-800", card: "border-emerald-200 bg-emerald-50/50" },
@@ -176,9 +203,13 @@ export default function FaceAuxViolencesPage() {
                     <ul className="rounded-xl border border-purple-100 overflow-hidden divide-y divide-purple-100">
                       {data.aides.national.items.map((it, i) => (
                         <li key={i} className="grid grid-cols-[8.5rem_1fr] items-stretch">
-                          <span className="flex items-center justify-center px-3 py-3 bg-purple-50 border-r border-purple-100 font-bold text-purple-700 text-base tabular-nums whitespace-nowrap text-center">
+                          <a
+                            href={`tel:${it.num.replace(/\s/g, "")}`}
+                            aria-label={`Appeler le ${it.num}`}
+                            className="flex items-center justify-center px-3 py-3 bg-purple-50 hover:bg-purple-100 border-r border-purple-100 font-bold text-purple-700 text-base tabular-nums whitespace-nowrap text-center transition-colors"
+                          >
                             {it.num}
-                          </span>
+                          </a>
                           <span className="px-4 py-3 text-sm text-muted-foreground leading-relaxed">
                             {it.text}
                           </span>
@@ -213,7 +244,7 @@ export default function FaceAuxViolencesPage() {
                         <li key={i} className="flex items-start gap-2.5">
                           <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
                           <span className="text-sm text-muted-foreground leading-relaxed">
-                            <strong className="font-semibold text-foreground">{it.name}</strong> — {it.text}
+                            <strong className="font-semibold text-foreground">{it.name}</strong> — {linkifyPhones(it.text)}
                             {it.link && (
                               <>
                                 {" "}
@@ -443,7 +474,7 @@ export default function FaceAuxViolencesPage() {
                   {data.lieux.items.map((it, i) => (
                     <li key={i} className="rounded-xl border border-purple-100 bg-purple-50/30 p-4">
                       <p className="font-bold text-purple-700 text-sm">{it.name}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed mt-1">{it.text}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed mt-1">{linkifyPhones(it.text)}</p>
                     </li>
                   ))}
                 </ul>
