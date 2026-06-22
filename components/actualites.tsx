@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 // Carrousel conservé pour plus tard (à réactiver quand il y aura plus d'actualités) :
 // import {
 //   Carousel,
@@ -18,9 +19,12 @@ const actualites = [
     link: "/actualites/rhinite-allergique",
   },
   {
-    title: "Dépistage diabète & hypertension — Pharmacie Formanoir, 1er et 11 juin 2026",
-    image: "/actu/Pharmacie Formanoir 1&11 juin 26.webp",
-    link: "/actualites/pharma-formanoir-juin",
+    title: "Les urgences, ce n'est pas une évidence",
+    image: "/actu/urgence-pas-une-evidence.webp",
+    link: "/actualites/urgences-pas-une-evidence",
+    // Cette image a le même ratio 4:5 que la carte : on ajoute du padding
+    // pour qu'elle "flotte" comme les deux autres affiches (plus étroites).
+    imageClassName: "p-7 lg:p-8",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
@@ -33,7 +37,12 @@ function ActuCard({ actu }: { actu: (typeof actualites)[0] }) {
   return (
     <a href={actu.link} className="block w-full h-full group">
       <div className="rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-primary/50 flex flex-col h-full">
-        <div className="p-4 lg:p-3 relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden">
+        <div
+          className={cn(
+            "p-4 lg:p-3 relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden",
+            actu.imageClassName
+          )}
+        >
           <Image
             src={actu.image}
             alt={actu.title}
