@@ -3,16 +3,20 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-// Carrousel conservé pour plus tard (à réactiver quand il y aura plus d'actualités) :
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-//   CarouselPrevious,
-//   CarouselNext,
-// } from "@/components/ui/carousel";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 
 const actualites = [
+  {
+    title: "Registre canicule : protégeons les personnes fragiles",
+    image: "/actu/registre-canicule-merignac.webp",
+    link: "/actualites/registre-canicule",
+  },
   {
     title: "Vous souffrez d'une rhinite allergique ?",
     image: "/actu/affiche-rhinite.webp",
@@ -74,7 +78,7 @@ export function Actualites() {
       className="py-12 lg:py-16 bg-gradient-to-b from-secondary/5 to-background"
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 lg:mb-10">
             <h2 className="text-2xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
               Actualités Santé du territoire de la CPTS
@@ -82,9 +86,7 @@ export function Actualites() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
 
-          {/* Grille statique : avec 3 actualités le carrousel n'est pas nécessaire.
-              Réactiver le carrousel (code ci-dessous) quand il y aura plus d'actualités. */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="hidden lg:grid lg:grid-cols-4 gap-6">
             {actualites.map((actu, index) => (
               <div key={index} className="h-full flex">
                 <ActuCard actu={actu} />
@@ -92,13 +94,12 @@ export function Actualites() {
             ))}
           </div>
 
-          {/* Carrousel conservé pour plus tard :
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full"
+            className="w-full lg:hidden"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {actualites.map((actu, index) => (
@@ -117,7 +118,6 @@ export function Actualites() {
               <CarouselNext className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
             </div>
           </Carousel>
-          */}
         </div>
       </div>
     </section>
