@@ -4,11 +4,50 @@ import type { ChatMessage, ChatResource } from "./types"
 
 interface MessageBubbleProps {
   message: ChatMessage
+  onResourceNavigate?: () => void
+}
+
+// Défense en profondeur : on n'autorise que des liens internes (chemins
+// racine `/...`) ou des URLs externes https explicites. Tout le reste
+// (javascript:, data:, //hôte, etc.) retombe sur "#" et ne peut rien exécuter.
+const UNSAFE_HREF_FALLBACK = "#"
+
+// Refuse les caractères de contrôle (tab, retours ligne, NUL, DEL...) : ils
+// n'apparaissent jamais dans un lien légitime et servent à masquer un protocole.
+function hasControlChars(value: string): boolean {
+  for (let index = 0; index < value.length; index += 1) {
+    const code = value.charCodeAt(index)
+    if (code < 32 || code === 127) {
+      return true
+    }
+  }
+
+  return false
+}
+
+function sanitizeLinkHref(href: string, allowAbsolute: boolean): string {
+  if (hasControlChars(href)) {
+    return UNSAFE_HREF_FALLBACK
+  }
+
+  if (href.startsWith("/") && !href.startsWith("//")) {
+    return href
+  }
+
+  if (allowAbsolute && /^https:\/\//i.test(href)) {
+    return href
+  }
+
+  return UNSAFE_HREF_FALLBACK
 }
 
 function resourceHref(resource: ChatResource): string {
-  if (resource.type === "internal" || resource.type === "external") {
-    return resource.href
+  if (resource.type === "internal") {
+    return sanitizeLinkHref(resource.href, false)
+  }
+
+  if (resource.type === "external") {
+    return sanitizeLinkHref(resource.href, true)
   }
 
   if (resource.type === "email") {
@@ -30,8 +69,11 @@ function resourceLabel(resource: ChatResource): string {
   return "Ouvrir la ressource"
 }
 
-export function MessageBubble({ message }: MessageBubbleProps) {
+export function MessageBubble({ message, onResourceNavigate }: MessageBubbleProps) {
   const isUser = message.role === "user"
+  // Défense en profondeur : l'historique peut être hydraté depuis sessionStorage
+  // (forgeable côté client). On ne rend la liste que si c'est réellement un tableau.
+  const suggestions = Array.isArray(message.suggestions) ? message.suggestions : []
 
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
@@ -44,9 +86,9 @@ export function MessageBubble({ message }: MessageBubbleProps) {
       >
         <p className="whitespace-pre-line">{message.text}</p>
 
-        {message.suggestions?.length ? (
+        {suggestions.length ? (
           <ul className="mt-3 space-y-2" aria-label="Ressources proposées">
-            {message.suggestions.map((suggestion) => {
+            {suggestions.map((suggestion) => {
               const href = resourceHref(suggestion.resource)
               const isInternal = suggestion.resource.type === "internal"
 
@@ -55,6 +97,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
                   {isInternal ? (
                     <Link
                       href={href}
+                      onClick={onResourceNavigate}
                       className="block rounded-xl border border-border bg-background px-3 py-2 text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <p className="font-medium">{suggestion.resource.title}</p>

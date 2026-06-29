@@ -2,7 +2,14 @@ import assert from "node:assert/strict"
 import test from "node:test"
 
 import { chatbotConfig } from "./chatbot.config"
-import { createInitialState, processQuickReply, processUserInput, restartConversation } from "./engine"
+import {
+  createInitialState,
+  hydrateState,
+  persistState,
+  processQuickReply,
+  processUserInput,
+  restartConversation,
+} from "./engine"
 import type { ChatbotConfig } from "./types"
 
 function getLastBotMessage(stateMessages: ReturnType<typeof createInitialState>["messages"]) {
@@ -136,4 +143,77 @@ test("processQuickReply ouvre le sous-flow médecin traitant puis ajoute le suiv
 
   assert.ok(suggestionMessage?.suggestions?.some((item) => item.resource.id === "medecin-traitant"))
   assert.equal(followUpMessage?.text, "Est-ce que cela répond à votre question ?")
+})
+
+interface FakeSessionStorage {
+  getItem: (key: string) => string | null
+  setItem: (key: string, value: string) => void
+  removeItem: (key: string) => void
+}
+
+function installFakeWindow(initialValue: string | null) {
+  let stored = initialValue
+  let removed = false
+
+  const sessionStorage: FakeSessionStorage = {
+    getItem: () => stored,
+    setItem: (_key, value) => {
+      stored = value
+    },
+    removeItem: () => {
+      stored = null
+      removed = true
+    },
+  }
+
+  ;(globalThis as Record<string, unknown>).window = { sessionStorage }
+
+  return {
+    wasRemoved: () => removed,
+    cleanup: () => {
+      delete (globalThis as Record<string, unknown>).window
+    },
+  }
+}
+
+test("hydrateState purge un historique forgé et repart d'un état initial", () => {
+  const forged = JSON.stringify({
+    version: 4,
+    state: {
+      currentNodeId: "start",
+      // suggestions n'est pas un tableau : payload forgé via sessionStorage.
+      messages: [{ id: "x", role: "bot", text: "ok", timestamp: 0, suggestions: { length: 1 } }],
+    },
+  })
+  const fake = installFakeWindow(forged)
+
+  try {
+    const hydrated = hydrateState(chatbotConfig)
+    const initial = createInitialState(chatbotConfig)
+
+    assert.equal(hydrated.currentNodeId, initial.currentNodeId)
+    assert.ok(
+      hydrated.messages.every((message) => message.suggestions === undefined || Array.isArray(message.suggestions)),
+    )
+    assert.ok(fake.wasRemoved(), "le sessionStorage corrompu doit être purgé")
+  } finally {
+    fake.cleanup()
+  }
+})
+
+test("hydrateState restaure un historique valide persisté", () => {
+  const fake = installFakeWindow(null)
+
+  try {
+    const initial = createInitialState(chatbotConfig)
+    persistState(initial)
+
+    const hydrated = hydrateState(chatbotConfig)
+
+    assert.equal(hydrated.currentNodeId, initial.currentNodeId)
+    assert.equal(hydrated.messages.length, initial.messages.length)
+    assert.equal(fake.wasRemoved(), false)
+  } finally {
+    fake.cleanup()
+  }
 })

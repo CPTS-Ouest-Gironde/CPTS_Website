@@ -24,7 +24,14 @@ interface ChatWindowProps {
   onClose: () => void
 }
 
-export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRestart, onClose }: ChatWindowProps) {
+export function ChatWindow({
+  currentNodeId,
+  messages,
+  onSend,
+  onQuickReply,
+  onRestart,
+  onClose,
+}: ChatWindowProps) {
   const [draft, setDraft] = useState("")
   const [inputError, setInputError] = useState<string | null>(null)
   const [isStartQuickRepliesExpanded, setIsStartQuickRepliesExpanded] = useState(false)
@@ -107,7 +114,7 @@ export function ChatWindow({ currentNodeId, messages, onSend, onQuickReply, onRe
 
       <div className="flex-1 space-y-3 overflow-y-auto px-3 py-3" aria-live="polite" aria-label="Historique des messages">
         {messages.map((message) => (
-          <MessageBubble key={message.id} message={message} />
+          <MessageBubble key={message.id} message={message} onResourceNavigate={onClose} />
         ))}
         <div ref={bottomRef} />
       </div>

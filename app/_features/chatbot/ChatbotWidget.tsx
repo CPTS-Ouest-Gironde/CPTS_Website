@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic"
 import { MessageCircle, X } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import { chatbotConfig } from "./chatbot.config"
 import {
@@ -24,6 +24,13 @@ export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [isHydratedFromStorage, setIsHydratedFromStorage] = useState(false)
   const [state, setState] = useState(() => createInitialState(chatbotConfig))
+  const triggerRef = useRef<HTMLButtonElement>(null)
+
+  const closeChatbot = () => {
+    setIsOpen(false)
+    // Rend le focus au bouton déclencheur (clavier / lecteur d'écran).
+    triggerRef.current?.focus()
+  }
 
   useEffect(() => {
     if (!isHydratedFromStorage) {
@@ -44,7 +51,7 @@ export function ChatbotWidget() {
 
     const onEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsOpen(false)
+        closeChatbot()
       }
     }
 
@@ -89,12 +96,13 @@ export function ChatbotWidget() {
             onSend={handleSend}
             onQuickReply={handleQuickReply}
             onRestart={handleRestart}
-            onClose={() => setIsOpen(false)}
+            onClose={closeChatbot}
           />
         </div>
       ) : null}
 
       <button
+        ref={triggerRef}
         type="button"
         className="fixed bottom-4 right-4 z-[70] inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-xl transition-all hover:scale-[1.02] hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         onClick={handleToggleOpen}

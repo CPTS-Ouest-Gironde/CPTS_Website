@@ -4,6 +4,7 @@ import { detectConversationalIntent } from "./intents"
 import type {
   ChatMessage,
   ChatNode,
+  ChatResource,
   ChatbotConfig,
   ChatbotState,
   QuickReply,
@@ -11,6 +12,7 @@ import type {
 } from "./types"
 
 export const CHATBOT_HISTORY_KEY = "cpts_chatbot_history"
+const MAX_USER_INPUT_LENGTH = 300
 const CHATBOT_PRIVACY_NOTICE =
   "Cet échange n'est pas enregistré sur nos serveurs. L'historique est conservé localement sur votre navigateur et supprimé à la fermeture."
 const CHATBOT_HISTORY_VERSION = 4
@@ -195,14 +197,84 @@ function applyQuickReplyWithoutUserMessage(
   return nextState
 }
 
-function isPersistedState(value: unknown): value is ChatbotState {
-  if (!value || typeof value !== "object") {
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return Boolean(value) && typeof value === "object"
+}
+
+function isQuickReply(value: unknown): value is QuickReply {
+  if (!isRecord(value)) {
     return false
   }
 
-  const candidate = value as ChatbotState
+  return typeof value.id === "string" && typeof value.label === "string" && typeof value.value === "string"
+}
 
-  return typeof candidate.currentNodeId === "string" && Array.isArray(candidate.messages)
+function isChatResource(value: unknown): value is ChatResource {
+  if (!isRecord(value)) {
+    return false
+  }
+
+  if (typeof value.id !== "string" || typeof value.title !== "string") {
+    return false
+  }
+
+  if (value.type === "internal" || value.type === "external") {
+    return typeof value.href === "string"
+  }
+
+  if (value.type === "email" || value.type === "phone") {
+    return typeof value.value === "string"
+  }
+
+  return false
+}
+
+function isResourceMatch(value: unknown): value is ResourceMatch {
+  if (!isRecord(value)) {
+    return false
+  }
+
+  return (
+    typeof value.score === "number" &&
+    typeof value.matchedKeyword === "string" &&
+    isChatResource(value.resource)
+  )
+}
+
+function isChatMessage(value: unknown): value is ChatMessage {
+  if (!isRecord(value)) {
+    return false
+  }
+
+  if (typeof value.id !== "string" || (value.role !== "user" && value.role !== "bot")) {
+    return false
+  }
+
+  if (typeof value.text !== "string" || typeof value.timestamp !== "number") {
+    return false
+  }
+
+  if (value.quickReplies !== undefined && !(Array.isArray(value.quickReplies) && value.quickReplies.every(isQuickReply))) {
+    return false
+  }
+
+  if (value.suggestions !== undefined && !(Array.isArray(value.suggestions) && value.suggestions.every(isResourceMatch))) {
+    return false
+  }
+
+  return true
+}
+
+function isPersistedState(value: unknown): value is ChatbotState {
+  if (!isRecord(value)) {
+    return false
+  }
+
+  return (
+    typeof value.currentNodeId === "string" &&
+    Array.isArray(value.messages) &&
+    value.messages.every(isChatMessage)
+  )
 }
 
 interface PersistedHistory {
@@ -229,6 +301,18 @@ export function createInitialState(config: ChatbotConfig): ChatbotState {
   }
 }
 
+function clearPersistedState(): void {
+  if (!isBrowser()) {
+    return
+  }
+
+  try {
+    window.sessionStorage.removeItem(CHATBOT_HISTORY_KEY)
+  } catch {
+    // sessionStorage indisponible (mode privé strict, quota) : on ignore.
+  }
+}
+
 export function hydrateState(config: ChatbotConfig): ChatbotState {
   if (!isBrowser()) {
     return createInitialState(config)
@@ -241,16 +325,15 @@ export function hydrateState(config: ChatbotConfig): ChatbotState {
     }
 
     const parsed: unknown = JSON.parse(raw)
-    if (isPersistedHistory(parsed)) {
-      if (parsed.version !== CHATBOT_HISTORY_VERSION) {
-        return createInitialState(config)
-      }
-
+    if (isPersistedHistory(parsed) && parsed.version === CHATBOT_HISTORY_VERSION) {
       return parsed.state
     }
 
+    // Historique forgé, corrompu ou d'une version obsolète : on le purge.
+    clearPersistedState()
     return createInitialState(config)
   } catch {
+    clearPersistedState()
     return createInitialState(config)
   }
 }
@@ -297,7 +380,7 @@ export function processUserInput(
   input: string,
   config: ChatbotConfig,
 ): ChatbotState {
-  const trimmed = input.trim()
+  const trimmed = input.trim().slice(0, MAX_USER_INPUT_LENGTH)
 
   if (!trimmed) {
     return state
