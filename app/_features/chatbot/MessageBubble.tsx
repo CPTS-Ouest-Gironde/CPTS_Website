@@ -1,44 +1,11 @@
 import Link from "next/link"
 
+import { sanitizeLinkHref } from "./links"
 import type { ChatMessage, ChatResource } from "./types"
 
 interface MessageBubbleProps {
   message: ChatMessage
   onResourceNavigate?: () => void
-}
-
-// Défense en profondeur : on n'autorise que des liens internes (chemins
-// racine `/...`) ou des URLs externes https explicites. Tout le reste
-// (javascript:, data:, //hôte, etc.) retombe sur "#" et ne peut rien exécuter.
-const UNSAFE_HREF_FALLBACK = "#"
-
-// Refuse les caractères de contrôle (tab, retours ligne, NUL, DEL...) : ils
-// n'apparaissent jamais dans un lien légitime et servent à masquer un protocole.
-function hasControlChars(value: string): boolean {
-  for (let index = 0; index < value.length; index += 1) {
-    const code = value.charCodeAt(index)
-    if (code < 32 || code === 127) {
-      return true
-    }
-  }
-
-  return false
-}
-
-function sanitizeLinkHref(href: string, allowAbsolute: boolean): string {
-  if (hasControlChars(href)) {
-    return UNSAFE_HREF_FALLBACK
-  }
-
-  if (href.startsWith("/") && !href.startsWith("//")) {
-    return href
-  }
-
-  if (allowAbsolute && /^https:\/\//i.test(href)) {
-    return href
-  }
-
-  return UNSAFE_HREF_FALLBACK
 }
 
 function resourceHref(resource: ChatResource): string {

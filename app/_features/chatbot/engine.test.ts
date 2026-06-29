@@ -217,3 +217,67 @@ test("hydrateState restaure un historique valide persisté", () => {
     fake.cleanup()
   }
 })
+
+test("hydrateState purge un historique dont une ressource a un href dangereux", () => {
+  const forged = JSON.stringify({
+    version: 4,
+    state: {
+      currentNodeId: "start",
+      messages: [
+        {
+          id: "x",
+          role: "bot",
+          text: "ok",
+          timestamp: 0,
+          suggestions: [
+            {
+              score: 100,
+              matchedKeyword: "k",
+              resource: { id: "r", title: "t", type: "external", href: "javascript:alert(1)" },
+            },
+          ],
+        },
+      ],
+    },
+  })
+  const fake = installFakeWindow(forged)
+
+  try {
+    const hydrated = hydrateState(chatbotConfig)
+    const initial = createInitialState(chatbotConfig)
+
+    assert.equal(hydrated.currentNodeId, initial.currentNodeId)
+    assert.ok(fake.wasRemoved(), "un href javascript: doit invalider et purger l'historique")
+  } finally {
+    fake.cleanup()
+  }
+})
+
+test("hydrateState reconstruit un état propre en supprimant les clés superflues", () => {
+  const forged = JSON.stringify({
+    version: 4,
+    evilTopLevel: "x",
+    state: {
+      currentNodeId: "start",
+      injected: "x",
+      messages: [
+        { id: "m1", role: "bot", text: "bonjour", timestamp: 1, evil: "x", __proto__: { polluted: true } },
+      ],
+    },
+  })
+  const fake = installFakeWindow(forged)
+
+  try {
+    const hydrated = hydrateState(chatbotConfig)
+
+    assert.equal(fake.wasRemoved(), false, "un payload par ailleurs valide ne doit pas être purgé")
+    assert.deepEqual(Object.keys(hydrated).sort(), ["currentNodeId", "messages"])
+    const [message] = hydrated.messages
+    assert.ok(message)
+    assert.equal(Object.prototype.hasOwnProperty.call(message, "evil"), false)
+    assert.deepEqual(Object.keys(message).sort(), ["id", "quickReplies", "role", "suggestions", "text", "timestamp"])
+    assert.equal((Object.prototype as Record<string, unknown>).polluted, undefined)
+  } finally {
+    fake.cleanup()
+  }
+})

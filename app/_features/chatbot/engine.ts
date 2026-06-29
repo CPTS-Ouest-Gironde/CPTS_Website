@@ -1,6 +1,7 @@
 import { matchResources } from "./matcher"
 import { normalizeText } from "./normalize"
 import { detectConversationalIntent } from "./intents"
+import { isSafeExternalHref, isSafeInternalHref } from "./links"
 import type {
   ChatMessage,
   ChatNode,
@@ -197,99 +198,137 @@ function applyQuickReplyWithoutUserMessage(
   return nextState
 }
 
+// Hydratation sessionStorage : le contenu est forgeable côté client. On ne fait
+// donc JAMAIS confiance à `parsed.state`. On valide chaque entrée ET on
+// reconstruit un objet propre, en ne recopiant que les champs whitelistés et en
+// rejetant tout lien qui n'est pas sûr (même politique que le rendu). Au moindre
+// champ invalide, on renvoie null → l'historique est purgé et on repart à zéro.
+
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object"
 }
 
-function isQuickReply(value: unknown): value is QuickReply {
-  if (!isRecord(value)) {
-    return false
-  }
-
-  return typeof value.id === "string" && typeof value.label === "string" && typeof value.value === "string"
+function optionalString(value: unknown): string | undefined {
+  return typeof value === "string" ? value : undefined
 }
 
-function isChatResource(value: unknown): value is ChatResource {
-  if (!isRecord(value)) {
-    return false
+function normalizeResource(value: unknown): ChatResource | null {
+  if (!isRecord(value) || typeof value.id !== "string" || typeof value.title !== "string") {
+    return null
   }
 
-  if (typeof value.id !== "string" || typeof value.title !== "string") {
-    return false
+  const base = { id: value.id, title: value.title, description: optionalString(value.description) }
+
+  if (value.type === "internal" && typeof value.href === "string" && isSafeInternalHref(value.href)) {
+    return { ...base, type: "internal", href: value.href }
   }
 
-  if (value.type === "internal" || value.type === "external") {
-    return typeof value.href === "string"
+  if (
+    value.type === "external" &&
+    typeof value.href === "string" &&
+    (isSafeInternalHref(value.href) || isSafeExternalHref(value.href))
+  ) {
+    return { ...base, type: "external", href: value.href }
   }
 
-  if (value.type === "email" || value.type === "phone") {
-    return typeof value.value === "string"
+  if (value.type === "email" && typeof value.value === "string") {
+    return { ...base, type: "email", value: value.value }
   }
 
-  return false
+  if (value.type === "phone" && typeof value.value === "string") {
+    return { ...base, type: "phone", value: value.value }
+  }
+
+  return null
 }
 
-function isResourceMatch(value: unknown): value is ResourceMatch {
-  if (!isRecord(value)) {
-    return false
+function normalizeQuickReply(value: unknown): QuickReply | null {
+  if (!isRecord(value) || typeof value.id !== "string" || typeof value.label !== "string" || typeof value.value !== "string") {
+    return null
   }
 
-  return (
-    typeof value.score === "number" &&
-    typeof value.matchedKeyword === "string" &&
-    isChatResource(value.resource)
-  )
+  const actionResourceIds =
+    Array.isArray(value.actionResourceIds) && value.actionResourceIds.every((id) => typeof id === "string")
+      ? (value.actionResourceIds as string[])
+      : undefined
+
+  return {
+    id: value.id,
+    label: value.label,
+    value: value.value,
+    message: optionalString(value.message),
+    nextNodeId: optionalString(value.nextNodeId),
+    actionResourceIds,
+  }
 }
 
-function isChatMessage(value: unknown): value is ChatMessage {
-  if (!isRecord(value)) {
-    return false
+function normalizeResourceMatch(value: unknown): ResourceMatch | null {
+  if (!isRecord(value) || typeof value.score !== "number" || typeof value.matchedKeyword !== "string") {
+    return null
   }
 
-  if (typeof value.id !== "string" || (value.role !== "user" && value.role !== "bot")) {
-    return false
+  const resource = normalizeResource(value.resource)
+  if (!resource) {
+    return null
+  }
+
+  return { resource, score: value.score, matchedKeyword: value.matchedKeyword }
+}
+
+function normalizeArray<T>(value: unknown, normalizeItem: (item: unknown) => T | null): T[] | null | undefined {
+  if (value === undefined) {
+    return undefined
+  }
+
+  if (!Array.isArray(value)) {
+    return null
+  }
+
+  const normalized: T[] = []
+  for (const item of value) {
+    const normalizedItem = normalizeItem(item)
+    if (!normalizedItem) {
+      return null
+    }
+    normalized.push(normalizedItem)
+  }
+
+  return normalized
+}
+
+function normalizeMessage(value: unknown): ChatMessage | null {
+  if (!isRecord(value) || typeof value.id !== "string" || (value.role !== "user" && value.role !== "bot")) {
+    return null
   }
 
   if (typeof value.text !== "string" || typeof value.timestamp !== "number") {
-    return false
+    return null
   }
 
-  if (value.quickReplies !== undefined && !(Array.isArray(value.quickReplies) && value.quickReplies.every(isQuickReply))) {
-    return false
+  const quickReplies = normalizeArray(value.quickReplies, normalizeQuickReply)
+  if (quickReplies === null) {
+    return null
   }
 
-  if (value.suggestions !== undefined && !(Array.isArray(value.suggestions) && value.suggestions.every(isResourceMatch))) {
-    return false
+  const suggestions = normalizeArray(value.suggestions, normalizeResourceMatch)
+  if (suggestions === null) {
+    return null
   }
 
-  return true
+  return { id: value.id, role: value.role, text: value.text, timestamp: value.timestamp, quickReplies, suggestions }
 }
 
-function isPersistedState(value: unknown): value is ChatbotState {
-  if (!isRecord(value)) {
-    return false
+function normalizePersistedState(value: unknown): ChatbotState | null {
+  if (!isRecord(value) || typeof value.currentNodeId !== "string" || !Array.isArray(value.messages)) {
+    return null
   }
 
-  return (
-    typeof value.currentNodeId === "string" &&
-    Array.isArray(value.messages) &&
-    value.messages.every(isChatMessage)
-  )
-}
-
-interface PersistedHistory {
-  version: number
-  state: ChatbotState
-}
-
-function isPersistedHistory(value: unknown): value is PersistedHistory {
-  if (!value || typeof value !== "object") {
-    return false
+  const messages = normalizeArray(value.messages, normalizeMessage)
+  if (!messages) {
+    return null
   }
 
-  const candidate = value as PersistedHistory
-
-  return typeof candidate.version === "number" && isPersistedState(candidate.state)
+  return { currentNodeId: value.currentNodeId, messages }
 }
 
 export function createInitialState(config: ChatbotConfig): ChatbotState {
@@ -325,8 +364,11 @@ export function hydrateState(config: ChatbotConfig): ChatbotState {
     }
 
     const parsed: unknown = JSON.parse(raw)
-    if (isPersistedHistory(parsed) && parsed.version === CHATBOT_HISTORY_VERSION) {
-      return parsed.state
+    if (isRecord(parsed) && parsed.version === CHATBOT_HISTORY_VERSION) {
+      const normalizedState = normalizePersistedState(parsed.state)
+      if (normalizedState) {
+        return normalizedState
+      }
     }
 
     // Historique forgé, corrompu ou d'une version obsolète : on le purge.
