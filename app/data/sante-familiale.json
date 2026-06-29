@@ -6,6 +6,43 @@
   "articlesPerPage": 12,
   "articles": [
     {
+      "id": "canicule",
+      "title": "CONSEILS CANICULE",
+      "date": "2026-06-03",
+      "dateLabel": "3 juin 2026",
+      "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
+      "slug": "canicule",
+      "href": "/prevention/sante-familiale/canicule"
+    },
+    {
+      "id": "chute-personne-agee",
+      "title": "CHUTE DE LA PERSONNE ÂGÉE: comment la prévenir ?",
+      "date": "2026-06-02",
+      "dateLabel": "2 juin 2026",
+      "image": "/prevention/sante-famille/chute-personne-agee.webp",
+      "slug": "chute-personne-agee",
+      "href": "/prevention/sante-familiale/chute-personne-agee"
+    },
+    {
+      "id": "juin-vert-2026",
+      "title": "JUIN VERT 2026 : DÉPISTAGE DU CANCER DU COL DE L'UTÉRUS",
+      "date": "2026-06-01",
+      "dateLabel": "1 juin 2026",
+      "image": "/juin-vert/juin-vert-2026.webp",
+      "imagePosition": "center 25%",
+      "slug": "juin-vert-2026",
+      "href": "/prevention/sante-familiale/juin-vert-2026"
+    },
+    {
+      "id": "endometriose-depistage-prise-en-charge",
+      "title": "L'endométriose\u00A0: qu'est-ce que c'est\u00A0? Quelle prise en charge\u00A0?",
+      "date": "2026-04-17",
+      "dateLabel": "17 avril 2026",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
+      "slug": "endometriose-depistage-prise-en-charge",
+      "href": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
+    },
+    {
       "id": "movember-2026",
       "title": "MOVEMBER 2026",
       "date": "2026-02-27",
@@ -106,10 +143,11 @@
     {
       "id": "vaccination-papillomavirus",
       "title": "LA VACCINATION CONTRE LE PAPILLOMAVIRUS DES 11 ANS : NOUVELLE CAMPAGNE SCOLAIRE 2025 !",
-      "date": "2024-09-02",
-      "dateLabel": "2 septembre 2024",
+      "date": "2026-06-21",
+      "dateLabel": "21 juin 2026",
       "image": "/prevention/sante-famille/papillomavirus.png",
-      "slug": "vaccination-papillomavirus-campagne-scolaire-2025"
+      "slug": "vaccination-papillomavirus-campagne-scolaire-2025",
+      "href": "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025"
     },
     {
       "id": "sante-et-prevention",
@@ -118,14 +156,6 @@
       "dateLabel": "26 juillet 2024",
       "image": "/prevention/sante-famille/healthy.jpg",
       "slug": "sante-et-prevention"
-    },
-    {
-      "id": "chute-personne-agee",
-      "title": "CHUTE DE LA PERSONNE ÂGÉE: comment la prévenir ?",
-      "date": "2024-05-02",
-      "dateLabel": "2 mai 2024",
-      "image": "/prevention/sante-famille/chute-personne-agee.jpg",
-      "slug": "chute-personne-agee"
     },
     {
       "id": "insuffisance-cardiaque",
@@ -146,10 +176,11 @@
     {
       "id": "face-aux-violences",
       "title": "FACE AUX VIOLENCES, VOUS N'ETES PAS SEULES !",
-      "date": "2023-12-01",
-      "dateLabel": "1 décembre 2023",
+      "date": "2026-06-04",
+      "dateLabel": "4 juin 2026",
       "image": "/femme-floue-face-anxiete-vue-f.png",
-      "slug": "face-aux-violences"
+      "slug": "face-aux-violences",
+      "href": "/prevention/sante-familiale/face-aux-violences"
     },
     {
       "id": "avc-reconnaitre",

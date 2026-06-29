@@ -4,6 +4,7 @@ import {
   BookOpenCheck,
   BriefcaseMedical,
   ChartColumnBig,
+  ClipboardCheck,
   Megaphone,
   type LucideIcon,
 } from "lucide-react"
@@ -11,6 +12,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { hasSubmittedSatisfactionPsForYear } from "@/lib/satisfaction-ps/submission-status"
 import { hasRole, readUserAccessContext } from "@/lib/supabase/roles"
 import { createClient } from "@/lib/supabase/server"
 
@@ -58,8 +60,10 @@ export default async function ProfessionnelsHubPage() {
   } = await supabase.auth.getUser()
 
   let profile: ProfileRecord | null = null
+  let hasMembreCaRole = false
   let hasPharmacienPsoRole = false
   let hasReportingPsoRole = false
+  let hasSubmittedSatisfactionPs = false
 
   if (user) {
     const [profileResult, accessContext] = await Promise.all([
@@ -72,11 +76,24 @@ export default async function ProfessionnelsHubPage() {
     }
 
     hasPharmacienPsoRole = hasRole(accessContext.roles, "pharmacien_pso")
+    hasMembreCaRole = hasRole(accessContext.roles, "membre_ca")
     hasReportingPsoRole = hasRole(accessContext.roles, "reporting_pso")
+    hasSubmittedSatisfactionPs = await hasSubmittedSatisfactionPsForYear(supabase, user.id)
   }
 
   const fullName = [profile?.first_name, profile?.last_name].filter(Boolean).join(" ").trim()
   const greetingName = fullName || "Professionnel"
+  const authenticatedShortcuts: ShortcutItem[] = hasSubmittedSatisfactionPs
+    ? []
+    : [
+        {
+          title: "Répondre au questionnaire de satisfaction",
+          description: "Partagez votre retour sur les dispositifs et outils de la CPTS Ouest Gironde.",
+          href: "/espace-pro/satisfaction-ps",
+          ctaLabel: "Répondre",
+          icon: ClipboardCheck,
+        },
+      ]
   const privilegedShortcuts: ShortcutItem[] = []
 
   if (hasPharmacienPsoRole) {
@@ -99,7 +116,17 @@ export default async function ProfessionnelsHubPage() {
     })
   }
 
-  const shortcuts = privilegedShortcuts.length > 0 ? [...privilegedShortcuts, ...PROFESSIONAL_SHORTCUTS] : PROFESSIONAL_SHORTCUTS
+  if (hasMembreCaRole) {
+    privilegedShortcuts.push({
+      title: "Tableau de bord satisfaction PS",
+      description: "Consultez les retours du questionnaire de satisfaction des professionnels de santé.",
+      href: "/espace-pro/satisfaction-ps/dashboard",
+      ctaLabel: "Accéder",
+      icon: ChartColumnBig,
+    })
+  }
+
+  const shortcuts = [...authenticatedShortcuts, ...privilegedShortcuts, ...PROFESSIONAL_SHORTCUTS]
 
   return (
     <div className="min-h-screen bg-background flex flex-col">

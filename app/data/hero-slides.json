@@ -1,6 +1,30 @@
 {
   "slides": [
     {
+      "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
+      "title": "Conseils canicule : les bons gestes face aux fortes chaleurs",
+      "alt": "Conseils canicule : les bons gestes face aux fortes chaleurs",
+      "link": "/prevention/sante-familiale/canicule"
+    },
+    {
+      "image": "/prevention/sante-famille/chute-personne-agee.webp",
+      "title": "Chute de la personne âgée : comment la prévenir ?",
+      "alt": "Chute de la personne âgée : comment la prévenir ?",
+      "link": "/prevention/sante-familiale/chute-personne-agee"
+    },
+    {
+      "image": "/juin-vert/juin-vert-2026.webp",
+      "title": "Juin Vert : le dépistage du cancer du col de l'utérus",
+      "alt": "Juin Vert 2026 — dépistage du cancer du col de l'utérus",
+      "link": "/prevention/sante-familiale/juin-vert-2026"
+    },
+    {
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
+      "title": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
+      "alt": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
+      "link": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
+    },
+    {
       "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
       "title": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",
       "alt": "Santé mentale : comprendre les professionnels et les approches en psychothérapie",

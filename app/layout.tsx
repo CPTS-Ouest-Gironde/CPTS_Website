@@ -3,9 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
-import { Suspense } from "react"
 import { ChatbotWidget } from "@/app/_features/chatbot/ChatbotWidget"
-import { LoadingScreen } from "@/components/loading-screen"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { CookieConsentBanner } from "@/components/cookie-consent-banner"
 import "./globals.css"
@@ -68,15 +66,27 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
         <link rel="dns-prefetch" href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com" />
+        {/* GA4 Consent Mode v2 — doit s'exécuter avant gtag.js */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('consent', 'default', {
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                wait_for_update: 500
+              });
+            `,
+          }}
+        />
       </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
-        <Suspense fallback={<LoadingScreen />}>
-          {children}
-          <ChatbotWidget />
-          <Analytics />
-          <GoogleAnalytics />
-          <CookieConsentBanner />
-        </Suspense>
+        {children}
+        <ChatbotWidget />
+        <Analytics />
+        <GoogleAnalytics />
+        <CookieConsentBanner />
       </body>
     </html>
   )

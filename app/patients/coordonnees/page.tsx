@@ -191,14 +191,6 @@ export default function CoordonneesPage() {
                                 {contact.number}
                               </a>
                             )}
-                            {contact.phone2 && (
-                              <a
-                                href={`tel:${contact.phone2.replace(/\s/g, "")}`}
-                                className="text-sm text-muted-foreground hover:underline block mt-1"
-                              >
-                                {contact.phone2}
-                              </a>
-                            )}
                             {contact.description && (
                               <p className="text-xs text-muted-foreground mt-2 leading-relaxed">
                                 {contact.description}
@@ -249,9 +241,9 @@ export default function CoordonneesPage() {
         </div>
       </section>
 
-      {/* Consultations Non Programmées Section */}
+      {/* Consultations Non Programmées + Urgences Non Vitales Section */}
       <section className="py-16 bg-secondary/10">
-        <div className="container mx-auto px-4 max-w-6xl">
+        <div className="container mx-auto px-4 max-w-6xl space-y-8">
           <Card className="overflow-hidden">
             <CardContent className="p-0">
               <div className="grid lg:grid-cols-[55%_45%] gap-0">
@@ -293,73 +285,72 @@ export default function CoordonneesPage() {
               </div>
             </CardContent>
           </Card>
-        </div>
-      </section>
 
-      {/* Urgences Non Vitales Section */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 text-destructive">
-            {coordonneesData.urgencesNonVitales.title}
-          </h2>
-          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {coordonneesData.urgencesNonVitales.items.map((item, index) => {
-              const phonesFromDescription =
-                item.description?.match(/\b0\d(?:[\s.]\d{2}){4}\b/g) ?? [];
-              const phoneNumbers = Array.from(
-                new Set([item.phone, ...phonesFromDescription].filter(Boolean))
-              ) as string[];
+          <div>
+            <h3 className="text-2xl font-bold text-center mb-6 text-destructive">
+              {coordonneesData.urgencesNonVitales.title}
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              {coordonneesData.urgencesNonVitales.items.map((item, index) => {
+                const phonesFromDescription =
+                  item.description?.match(/\b0\d(?:[\s.]\d{2}){4}\b/g) ?? [];
+                const phoneNumbers = Array.from(
+                  new Set([item.phone, ...phonesFromDescription].filter(Boolean))
+                ) as string[];
 
-              return (
-                <Card key={index} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-6 space-y-3">
-                    <h3 className="font-bold text-foreground">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {item.description}
-                    </p>
-                    {item.details && (
+                return (
+                  <Card key={index} className="hover:shadow-md transition-shadow">
+                    <CardContent className="p-6 space-y-3">
+                      <h3 className="font-bold text-foreground">{item.title}</h3>
                       <p className="text-sm text-muted-foreground">
-                        {item.details}
+                        {item.description}
                       </p>
-                    )}
-                    {phoneNumbers.length > 0 && (
-                      <div className="space-y-2">
-                        {phoneNumbers.map((phone) => (
-                          <div key={phone} className="flex items-center gap-2">
-                            <a
-                              href={`tel:${phone.replace(/[\s.]/g, "")}`}
-                              className="text-primary hover:underline font-semibold block"
-                            >
-                              {phone}
-                            </a>
-                            <button
-                              type="button"
-                              onClick={() => copyPhone(phone)}
-                              className="inline-flex items-center justify-center rounded-md border border-primary/30 p-1.5 text-primary hover:bg-primary/10 transition-colors"
-                              aria-label={`Copier le numéro ${phone}`}
-                              title="Copier le numéro"
-                            >
-                              <Copy className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {item.link && (
-                      <Link
-                        href={item.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline flex items-center gap-2 text-sm"
-                      >
-                        Accéder au service
-                        <ExternalLink className="w-4 h-4" />
-                      </Link>
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })}
+                      {item.details && (
+                        <p className="text-sm text-muted-foreground">
+                          {item.details}
+                        </p>
+                      )}
+                      {phoneNumbers.length > 0 && (
+                        <div className="space-y-2">
+                          {phoneNumbers.map((phone) => (
+                            <div key={phone} className="flex items-center gap-2">
+                              <a
+                                href={`tel:${phone.replace(/[\s.]/g, "")}`}
+                                className="text-primary hover:underline font-semibold block"
+                              >
+                                {phone}
+                              </a>
+                              <button
+                                type="button"
+                                onClick={() => copyPhone(phone)}
+                                className="inline-flex items-center justify-center rounded-md border border-primary/30 p-1.5 text-primary hover:bg-primary/10 transition-colors"
+                                aria-label={`Copier le numéro ${phone}`}
+                                title="Copier le numéro"
+                              >
+                                <Copy className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {item.link && (
+                        <Link
+                          href={item.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline flex items-center gap-2 text-sm"
+                        >
+                          {"linkLabel" in item && item.linkLabel
+                            ? item.linkLabel
+                            : "Accéder au service"}
+                          <ExternalLink className="w-4 h-4" />
+                        </Link>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>

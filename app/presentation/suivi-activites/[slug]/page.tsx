@@ -8,6 +8,14 @@ import { Footer } from "@/components/footer";
 import { suiviArticles } from "../articles-data";
 import { ArticleMediaCarousel } from "@/components/suivi-activite/article-media-carousel";
 
+const SOIREE_PERINATALITE_AVRIL_2026_SLUG =
+  "soiree-formation-perinatalite-vulnerabilites-sante-mentale-28-avril-2026";
+const DEPISTAGE_DIABETE_ARAGO_AVRIL_2026_SLUG =
+  "depistage-diabete-pharmacie-arago-28-29-avril-2026";
+const SOIREE_VILLE_HOPITAL_AVRIL_2026_SLUG =
+  "soiree-ville-hopital-cpts-bonom-booste-avril-2026";
+const DEPISTAGE_CANCER_SEIN_AVRIL_2026_SLUG =
+  "depistage-cancer-sein-fo-jenny-lepreux-avril-2026";
 const SOIREE_CARDIO_MARS_2026_SLUG = "soiree-scientifique-cardio-ess-mars-2026";
 const SIMAIRLEC_MARS_2026_SLUG =
   "simulation-pluriprofessionnelle-simairlec-mars-2026";
@@ -42,6 +50,61 @@ function renderParagraphWithBold(text: string) {
 }
 
 const articleDetails = {
+  [SOIREE_PERINATALITE_AVRIL_2026_SLUG]: {
+    paragraphs: [
+      "Ce 28 avril s'est tenue notre soirée de formation en lien avec le plan santé de la femme en périnatalité (05 février 2026) : « Les vulnérabilités et la santé mentale en périnatalité » était le thème.",
+      "Leur prise en charge ne peut se faire qu'en pluridisciplinarité : différents acteurs du territoire nous ont sensibilisés. Les acteurs du RPNA (Laure Mouton) ont présenté l'outil questionnaire Bien Naître. Les PMI (Karine Le Bourgeois-Dehail, Stéphanie Petit Carrié) ont abordé le risque des dérives sectaires liées aux coachs en santé mentale.",
+      "Le Pr Sutter-Dallay Anne-Laure (équipe de psychiatrie périnatale de Charles Perrens) nous a rappelé les bases de la prise en charge ainsi que les modalités et lieux d'adressage. Un cas clinique a permis de valoriser la plus-value de l'exercice coordonné avec la psychiatrie libérale de la MAISON DE SANTE LES PINS (Didier Delhaye).",
+      "Cette soirée informative a intégré l'association de pairaidance MAMAN BLUES (Mme Mercande), grâce à laquelle la parole de la maman peut être accueillie.",
+      "Un grand merci à l'association MARIE CURRY (association d'intérêt général qui valorise le matrimoine culinaire) qui nous a régalé avec son cocktail raffiné !",
+      "Merci à Paul BRANGE (sage-femme) et au Dr Kheira Meliani (médecin généraliste) d'avoir organisé et modéré la soirée.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/28-avril-2026/soiree-28-avril-1.webp",
+      "/suivi-activite/articles/28-avril-2026/soiree-28-avril-2.webp",
+      "/suivi-activite/articles/28-avril-2026/soiree-28-avril-3.webp",
+      "/suivi-activite/articles/28-avril-2026/soiree-28-avril-4.webp",
+      "/suivi-activite/articles/28-avril-2026/soiree-28-avril-5.webp",
+    ],
+  },
+  [DEPISTAGE_DIABETE_ARAGO_AVRIL_2026_SLUG]: {
+    paragraphs: [
+      "Plus de 30 usagers accompagnés par nos 2 infirmières.",
+      "Des entretiens de 30 minutes pour échanger, informer, réaliser des dépistages et orienter vers des ateliers d'éducation thérapeutique (ETP) à Pessac.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/28-29-avril-2026/diabete-28-29-avril.webp",
+      "/actu/affiche-pharma-ARAGO%2028-29%20avril%20_page-0001.webp",
+    ],
+  },
+  [SOIREE_VILLE_HOPITAL_AVRIL_2026_SLUG]: {
+    paragraphs: [
+      "Le 23 avril, la soirée Ville-Hôpital a réuni de nombreux professionnels du CHU et les CPTS BONOM, BOOSTE et Ouest Gironde.",
+      "Les CPTS ont présenté certains de leurs parcours coordonnés ainsi que plusieurs missions menées pour la prise en charge et l'accès aux soins des patients de leur territoire.",
+      "Après une présentation de ce qu'implique l'exercice coordonné, plusieurs parcours ont été abordés, notamment l'habituation aux soins pour les patients en situation de handicap, les boucles IDEL pour faciliter la recherche d'infirmiers en sortie d'hospitalisation, ainsi que la prise en charge des fausses couches spontanées non symptomatiques en ville.",
+      "La CPTS Ouest Gironde était représentée par les équipes RCP cas complexes et RCP santé mentale, qui ont présenté les modalités de ces parcours : échanges sécurisés, expertise pluri-professionnelle, ressources hospitalières sollicitées, approche globale du patient (symptômes, contexte médico-social) et écoute de l'ensemble des professionnels impliqués.",
+      "Merci au CHU et aux organisateurs de Ville-Hôpital d'avoir rendu cette rencontre possible et de favoriser le rapprochement entre les pratiques coordonnées en ville et l'hôpital.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/ville-hop-23-avril/ville-hop-1.webp",
+      "/suivi-activite/articles/ville-hop-23-avril/ville-hop-2.webp",
+      "/suivi-activite/articles/ville-hop-23-avril/ville-hop-3.webp",
+      "/suivi-activite/articles/ville-hop-23-avril/ville-hop-4.webp",
+      "/suivi-activite/articles/ville-hop-23-avril/ville-hop-5.webp",
+    ],
+  },
+  [DEPISTAGE_CANCER_SEIN_AVRIL_2026_SLUG]: {
+    paragraphs: [
+      "Le 16 avril a eu lieu une action de dépistage du cancer du sein au Foyer occupationnel Jenny Lepreux à Mérignac.",
+      "10 résidentes ont été dépistées avec l'intervention d'une sage-femme et d'une gynécologue adhérentes de la CPTS.",
+      "Les résidentes ont participé activement à la préparation de l'action en travaillant sur les documents de sensibilisation.",
+      "Merci à l'équipe du FO pour son accueil, à Isabelle Calafato pour la coordination de la matinée et à TSA&co pour leur accompagnement.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/16-avril-cancer-sein/16-avril-1.webp",
+      "/suivi-activite/articles/16-avril-cancer-sein/16-avril-2.webp",
+    ],
+  },
   [SOIREE_CARDIO_MARS_2026_SLUG]: {
     paragraphs: [
       "Le 19 mars 2026, la CPTS Ouest Gironde et l'ESS Cardiologie Nouvelle-Aquitaine se sont réunies pour une soirée scientifique autour de la téléexpertise, de l'insuffisance cardiaque, de la pédiatrie et de l'exercice coordonné.",

@@ -88,6 +88,7 @@ function createDefaultFormValues(): PmoEntryInput {
     prescriptionAntiallergiqueNasal: false,
     prescriptionCollyre: false,
     prescriptionCorticoideNasal: false,
+    reorientationMedecinDelegant: false,
     renouvellement: false,
   }
 }
@@ -194,6 +195,7 @@ export function PmoEntryForm({
     formData.set("patientAge", values.patientAge)
     formData.set("patientMedecinTraitant", String(values.patientMedecinTraitant))
     formData.set("orientation", values.orientation)
+    formData.set("reorientationMedecinDelegant", String(values.reorientationMedecinDelegant))
     formData.set("prescriptionAntiH1", String(values.prescriptionAntiH1))
     formData.set("prescriptionCollyre", String(values.prescriptionCollyre))
     formData.set("prescriptionAntiallergiqueNasal", String(values.prescriptionAntiallergiqueNasal))
@@ -268,6 +270,13 @@ export function PmoEntryForm({
                   name="orientation"
                   options={orientationOptions}
                   placeholder="Sélectionnez une prise en charge"
+                />
+                <RadioYesNo
+                  className="md:col-span-1 xl:col-span-2"
+                  control={form.control}
+                  label="Réorientation médecin délégant a posteriori"
+                  layout="inline"
+                  name="reorientationMedecinDelegant"
                 />
                 <FormField
                   control={form.control}

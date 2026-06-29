@@ -14,6 +14,14 @@ export default function DiversificationAlimentairePage() {
           <p className="text-base lg:text-lg font-semibold text-foreground">
             Atelier proposé tous les deux mois. Places limitées à 15.
           </p>
+          <div className="space-y-2">
+            <p className="font-semibold text-foreground">Prochains ateliers :</p>
+            <ul className="space-y-1 text-muted-foreground">
+              <li>Jeudi 9 juillet 2026</li>
+              <li>Jeudi 10 septembre 2026</li>
+              <li>Jeudi 19 novembre 2026</li>
+            </ul>
+          </div>
           <p className="text-muted-foreground">
             Inscriptions en scannant le QR code sur l&apos;affiche ou
             directement sur Doctolib.

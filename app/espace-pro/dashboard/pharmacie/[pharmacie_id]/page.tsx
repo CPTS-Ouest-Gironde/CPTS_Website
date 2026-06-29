@@ -172,6 +172,7 @@ export default async function DashboardPharmacyAuditPage({
                           <TableHead>Tranche d&apos;âge</TableHead>
                           <TableHead>Médecin traitant</TableHead>
                           <TableHead>Prise en charge</TableHead>
+                          <TableHead>Réorientation médecin délégant a posteriori</TableHead>
                           <TableHead>anti-H1</TableHead>
                           <TableHead>collyre</TableHead>
                           <TableHead>antiallergique nasal</TableHead>
@@ -192,6 +193,7 @@ export default async function DashboardPharmacyAuditPage({
                             <TableCell>{entry.patientAge}</TableCell>
                             <TableCell>{getYesNoLabel(entry.patientMedecinTraitant)}</TableCell>
                             <TableCell>{getPmoOrientationLabel(entry.orientation)}</TableCell>
+                            <TableCell>{getYesNoLabel(entry.reorientationMedecinDelegant)}</TableCell>
                             <TableCell>{getYesNoLabel(entry.prescriptionAntiH1)}</TableCell>
                             <TableCell>{getYesNoLabel(entry.prescriptionCollyre)}</TableCell>
                             <TableCell>{getYesNoLabel(entry.prescriptionAntiallergiqueNasal)}</TableCell>

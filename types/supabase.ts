@@ -116,6 +116,7 @@ export type Database = {
           prescription_antiallergique_nasal: boolean
           prescription_collyre: boolean
           prescription_corticoide_nasal: boolean
+          reorientation_medecin_delegant: boolean
           renouvellement: boolean
           updated_at: string
           user_id: string
@@ -139,6 +140,7 @@ export type Database = {
           prescription_antiallergique_nasal: boolean
           prescription_collyre: boolean
           prescription_corticoide_nasal: boolean
+          reorientation_medecin_delegant?: boolean
           renouvellement?: boolean
           updated_at?: string
           user_id: string
@@ -162,6 +164,7 @@ export type Database = {
           prescription_antiallergique_nasal?: boolean
           prescription_collyre?: boolean
           prescription_corticoide_nasal?: boolean
+          reorientation_medecin_delegant?: boolean
           renouvellement?: boolean
           updated_at?: string
           user_id?: string
@@ -265,6 +268,105 @@ export type Database = {
           satisfaction_prise_en_charge?: number
           souhait_renouvellement?: boolean
           updated_at?: string
+        }
+        Relationships: []
+      }
+      satisfaction_ps: {
+        Row: {
+          acces_distinct_pertinent: boolean
+          annee_reference: number
+          chartes_connaissance: boolean
+          chartes_dispositifs_utilises: boolean
+          chartes_satisfaction: boolean
+          chartes_souhait_reception: boolean
+          chartes_suggestions: boolean
+          chartes_suggestions_texte: string | null
+          id: string
+          outils_connaissance: boolean
+          outils_utilisation: boolean
+          site_connaissance: boolean
+          site_consultation: boolean
+          site_outil_prevention: boolean
+          site_rubriques_utiles: string | null
+          site_suggestions_texte: string | null
+          site_utilite: boolean
+          submitted_date: string
+          vmv_connaissance: boolean
+          vmv_suggestions: boolean
+          vmv_suggestions_texte: string | null
+          vmv_utilise: boolean
+          vmv_utilite_texte: string | null
+        }
+        Insert: {
+          acces_distinct_pertinent: boolean
+          annee_reference?: number
+          chartes_connaissance: boolean
+          chartes_dispositifs_utilises: boolean
+          chartes_satisfaction: boolean
+          chartes_souhait_reception: boolean
+          chartes_suggestions: boolean
+          chartes_suggestions_texte?: string | null
+          id?: string
+          outils_connaissance: boolean
+          outils_utilisation: boolean
+          site_connaissance: boolean
+          site_consultation: boolean
+          site_outil_prevention: boolean
+          site_rubriques_utiles?: string | null
+          site_suggestions_texte?: string | null
+          site_utilite: boolean
+          submitted_date?: string
+          vmv_connaissance: boolean
+          vmv_suggestions: boolean
+          vmv_suggestions_texte?: string | null
+          vmv_utilise: boolean
+          vmv_utilite_texte?: string | null
+        }
+        Update: {
+          acces_distinct_pertinent?: boolean
+          annee_reference?: number
+          chartes_connaissance?: boolean
+          chartes_dispositifs_utilises?: boolean
+          chartes_satisfaction?: boolean
+          chartes_souhait_reception?: boolean
+          chartes_suggestions?: boolean
+          chartes_suggestions_texte?: string | null
+          id?: string
+          outils_connaissance?: boolean
+          outils_utilisation?: boolean
+          site_connaissance?: boolean
+          site_consultation?: boolean
+          site_outil_prevention?: boolean
+          site_rubriques_utiles?: string | null
+          site_suggestions_texte?: string | null
+          site_utilite?: boolean
+          submitted_date?: string
+          vmv_connaissance?: boolean
+          vmv_suggestions?: boolean
+          vmv_suggestions_texte?: string | null
+          vmv_utilise?: boolean
+          vmv_utilite_texte?: string | null
+        }
+        Relationships: []
+      }
+      satisfaction_ps_submissions: {
+        Row: {
+          annee_reference: number
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          annee_reference?: number
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          annee_reference?: number
+          created_at?: string
+          id?: string
+          user_id?: string
         }
         Relationships: []
       }
@@ -387,6 +489,14 @@ export type Database = {
     }
     Functions: {
       has_role: { Args: { role_name: string }; Returns: boolean }
+      submit_satisfaction_ps: {
+        Args: {
+          p_annee_reference: number
+          p_response: Json
+          p_user_id: string
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       [_ in never]: never

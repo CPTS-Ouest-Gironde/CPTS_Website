@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ["@react-pdf/renderer"],
   typescript: {
     ignoreBuildErrors: false,
   },
@@ -7,7 +8,7 @@ const nextConfig = {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    qualities: [70, 75, 85, 90],
+    qualities: [62, 68, 70, 72, 75, 85, 90],
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
@@ -55,6 +56,11 @@ const nextConfig = {
       {
         source: '/vos-numeros-utiles',
         destination: '/patients/coordonnees',
+        permanent: true,
+      },
+      {
+        source: '/demande-orientation-psy',
+        destination: '/espace-pro/demande-orientation-psy',
         permanent: true,
       },
     ]

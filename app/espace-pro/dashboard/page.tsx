@@ -215,7 +215,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                       />
                       <DashboardMetricCard
                         eyebrow="Dispensation"
-                        helper="Produits PSO et conseil confondus."
+                        helper="Produits PMO et conseil confondus."
                         label="Produits par patient"
                         value={formatDecimal(pmoStats.totalProduitsParPatient)}
                       />
@@ -230,13 +230,18 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
                         value={formatBreakdown(pmoStats.renouvellements)}
                       />
                       <DashboardMetricCard
+                        helper="Part des saisies avec réorientation médecin délégant a posteriori."
+                        label="Réorientation médecin délégant"
+                        value={formatBreakdown(pmoStats.reorientationMedecinDelegant)}
+                      />
+                      <DashboardMetricCard
                         helper="Pourcentage de saisies avec dispensation conseil."
                         label="Taux de dispensation conseil"
                         value={formatBreakdown(pmoStats.dispensationConseil)}
                       />
                       <DashboardMetricCard
-                        helper="Moyenne des produits délivrés dans le cadre PSO."
-                        label="Moyenne produits PSO"
+                        helper="Moyenne des produits délivrés dans le cadre PMO."
+                        label="Moyenne produits PMO"
                         value={formatDecimal(pmoStats.moyenneProduitsPmo)}
                       />
                       <DashboardMetricCard

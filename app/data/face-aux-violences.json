@@ -1,0 +1,171 @@
+{
+  "title": "FACE AUX VIOLENCES, VOUS N'ÊTES PAS SEULES !",
+  "date": "4 juin 2026",
+  "image": "/femme-floue-face-anxiete-vue-f.png",
+  "backLink": {
+    "label": "Retour à Santé familiale",
+    "href": "/prevention/sante-familiale"
+  },
+  "intro": {
+    "text": "Est considérée comme violence toute action qui nuit à **l'intégrité physique, psychique et morale** de la personne.",
+    "paragraphs": [
+      "Ainsi, une femme peut être victime d'un harcèlement physique, psychique, moral et économique (quand elle se retrouve complètement dépendante financièrement de son conjoint et réduite à la contrainte morale).",
+      "En Gironde en 2024, la gendarmerie a enregistré **1 cas d'homicide avec circonstance aggravante de conjugalité** (0 % de femmes) ainsi que **6 tentatives d'homicide avec circonstance aggravante de conjugalité** (dont 66,7 % de femmes).",
+      "Le nombre de victimes de **violences conjugales** enregistrées en Gironde par la police est passé de **2 749 en 2023** à **2 562 en 2024**, soit une **diminution de 6,8 %** en un an.",
+      "Le nombre de victimes de **violences intrafamiliales (hors violences conjugales)** enregistrées en Gironde par la police est passé de **846 en 2023** à **769 en 2024**, soit une **diminution de 9,1 %** en un an."
+    ]
+  },
+  "saviezVous": {
+    "title": "Le saviez-vous ?",
+    "items": [
+      {
+        "label": "Sur le plan juridique",
+        "text": "Si les violences sont réalisées par le conjoint ou l'ex, cela entraîne une circonstance aggravante. Quel que soit l'ITT de la victime, les violences conjugales relèvent du Tribunal correctionnel."
+      },
+      {
+        "label": "Le consentement",
+        "text": "Vous êtes consentante si vous donnez votre accord de manière consciente, libre et explicite, à un moment donné, pour une situation précise."
+      }
+    ],
+    "cycle": {
+      "title": "Le cycle des violences conjugales",
+      "intro": "4 phases qui s'enchaînent et se répètent :",
+      "phases": [
+        {
+          "name": "Tension",
+          "text": "violence psychologique, physique, etc., avec hyper-vigilance de la victime."
+        },
+        {
+          "name": "Crise",
+          "text": "les violences sont exercées avec humiliation, tristesse, honte et culpabilité, induisant l'isolement de la victime."
+        },
+        {
+          "name": "Justification des actes",
+          "text": "l'auteur des violences les justifie, persuade la victime de leur bien-fondé et génère leur banalisation (perte des repères de la normalité par la victime)."
+        },
+        {
+          "name": "Lune de miel",
+          "text": "l'agresseur demande pardon (chantage au suicide, engagement à se prendre en charge, cadeaux, etc.). La victime lui donne une nouvelle chance."
+        }
+      ],
+      "note": "Le cycle se répète INDÉFINIMENT…"
+    }
+  },
+  "aides": {
+    "title": "Quelles sont les aides possibles à votre disposition ?",
+    "national": {
+      "title": "Numéros nationaux",
+      "items": [
+        { "num": "17", "text": "en cas de danger IMMÉDIAT." },
+        { "num": "3919", "text": "ANONYME ET GRATUIT, 24h/24, en partenariat avec les associations mobilisées contre les violences faites aux femmes." },
+        { "num": "114", "text": "24h/24 : SMS pour les personnes sourdes et malentendantes." },
+        { "num": "119", "text": "ENFANCE en danger." },
+        { "num": "0 800 05 95 95", "text": "du lundi au vendredi 10h-19h : Viols Femmes Informations." }
+      ],
+      "links": [
+        { "label": "App-Elles — application solidaire des femmes victimes de violence", "url": "https://www.app-elles.fr/" },
+        { "label": "arretonslesviolences.gouv.fr — signalement en ligne 24h/24", "url": "https://arretonslesviolences.gouv.fr/" }
+      ]
+    },
+    "gironde": {
+      "title": "Numéros Gironde",
+      "items": [
+        { "name": "VICT'AID", "text": "05 56 01 28 69." },
+        { "name": "La Maison des Femmes", "text": "à la Maison des Associations de Mérignac, qui accueille depuis le 25 novembre 2023." },
+        { "name": "ACV2F", "text": "06 70 72 30 51 : accueil, écoute, accompagnement, informations et confidentialité.", "link": { "label": "violencesfemmesmedoc.fr", "url": "https://violencesfemmesmedoc.fr" } },
+        { "name": "Écoute départementale de la Gironde", "text": "05 56 40 93 66 : accueil GRATUIT et ANONYME." }
+      ],
+      "angela": {
+        "title": "Dispositif ANGELA",
+        "text": "Certains établissements affichent une vignette indiquant qu'ils sont engagés à apporter leur aide aux victimes de violence (harcèlement, violences physiques, etc.). Il suffit de demander « Où est Angela ? » et la personne comprend le besoin d'aide immédiat.",
+        "image": "/prevention/sante-famille/face-aux-violences/angela.webp"
+      }
+    }
+  },
+  "outils": {
+    "title": "Quels sont les outils à votre disposition ?",
+    "violentometre": {
+      "name": "Le Violentomètre",
+      "text": "Un outil d'auto-évaluation composé de 23 questions rapides permettant de repérer les comportements violents et de mesurer si la relation de couple est saine ou, au contraire, violente.",
+      "image": "/prevention/sante-famille/face-aux-violences/violentometre.webp",
+      "legend": [
+        {
+          "level": "Profite",
+          "range": "1 → 5",
+          "tone": "saine",
+          "subtitle": "Ta relation est saine quand il…",
+          "text": "respecte tes décisions et tes goûts, accepte tes ami·e·s et ta famille, a confiance en toi, est content quand tu te sens épanouie et s'assure de ton accord pour ce que vous faites ensemble."
+        },
+        {
+          "level": "Vigilance, dis stop !",
+          "range": "6 → 15",
+          "tone": "vigilance",
+          "subtitle": "Il y a violence quand il…",
+          "text": "t'ignore des jours quand il est en colère, te fait du chantage si tu refuses quelque chose, rabaisse tes opinions et tes projets, se moque de toi en public, te manipule, est jaloux en permanence, contrôle tes sorties, tes habits et ton maquillage, fouille tes textos, mails et applis, insiste pour que tu envoies des photos intimes et t'isole de ta famille et de tes ami·e·s."
+        },
+        {
+          "level": "Protège-toi, demande de l'aide",
+          "range": "16 → 23",
+          "tone": "danger",
+          "subtitle": "Tu es en danger quand il…",
+          "text": "te traite de folle quand tu lui fais des reproches, « pète les plombs » lorsque quelque chose lui déplaît, te pousse, te tire, te gifle, te secoue ou te frappe, menace de se suicider à cause de toi, te touche les parties intimes sans ton consentement, menace de diffuser des photos intimes de toi, t'oblige à regarder des films pornos ou à avoir des relations sexuelles."
+        }
+      ]
+    },
+    "grille": {
+      "name": "La grille d'évaluation du danger",
+      "text": "23 questions vous sont posées afin d'apprécier le danger encouru. Pour les intervenants, elle permet de juger de la nécessité de mettre en place des mesures d'accompagnement et de protection, et d'en apprécier l'urgence.",
+      "images": [
+        { "src": "/prevention/sante-famille/face-aux-violences/grille-evalutation-1.webp", "alt": "Grille d'évaluation du danger : identité de la victime et les 23 questions" },
+        { "src": "/prevention/sante-famille/face-aux-violences/grille-evaluation-2.webp", "alt": "Présentation de la grille d'évaluation du danger et préconisations" }
+      ]
+    },
+    "memoDeVie": {
+      "name": "Mémo de Vie",
+      "intro": "Outil digital sécurisé et personnel pour :",
+      "items": [
+        "**Raconter son vécu** dans un journal (garde la mémoire et les dates des événements à des fins juridiques).",
+        "**Sécuriser en discrétion** les données sensibles (documents administratifs, SMS, vidéos, certificats, etc.).",
+        "**Accéder à des contacts aidants** (droit, santé, social, etc.).",
+        "**Un guide disponible en plusieurs langues.**"
+      ],
+      "note": "Ce site dispose du bouton « VITE JE QUITTE » pour votre protection.",
+      "link": { "label": "memo-de-vie.org", "url": "https://memo-de-vie.org" },
+      "image": "/prevention/sante-famille/face-aux-violences/memo-de-vie.webp"
+    },
+    "monsherif": {
+      "name": "Le Bouton MONSHERIF©",
+      "paragraphs": [
+        "Depuis 2018, le Bouton MONSHERIF© est utilisé comme outil d'aide aux victimes de violences intrafamiliales.",
+        "Peu onéreux et disponible hors procédure (contrairement au Téléphone Grave Danger et au Bracelet Anti-Rapprochement), le dispositif MONSHERIF© permet d'agir en toute confiance dès les premiers signaux d'insécurité. C'est un outil efficace, recommandé par le guide de l'ordonnance de protection édité par la CNB (P78).",
+        "Devenu incontournable par ses caractéristiques uniques et sa légitimité issue des retours terrain, le Bouton MONSHERIF© est aussi déployé par des collectivités et des Présidents de Région auprès des associations de leurs territoires."
+      ],
+      "image": "/prevention/sante-famille/face-aux-violences/monsherif.webp"
+    }
+  },
+  "lieux": {
+    "title": "Quels lieux pour vous accueillir sur la métropole bordelaise ?",
+    "items": [
+      { "name": "APAFED", "text": "association pour l'accueil des femmes en difficultés. 05 56 40 93 66, 7j/7 et 24h/24." },
+      { "name": "CAUVA", "text": "centre d'accueil en urgence des victimes, avec prise en charge médicale, psychologique et sociale (accueil après dépôt de plainte). CHU de Pellegrin, place Amélie Raba-Léon, 33000 Bordeaux — 05 56 79 87 77, du lundi au vendredi 9h-19h, cauva@chu-bordeaux.fr." },
+      { "name": "La Maison de Simone 33", "text": "1 rue de l'Horloge, 33600 Pessac : écoute, informations, accompagnements et hébergements temporaires (via le 115). 05 56 15 25 60 / 06 59 39 13 27, maison.de.simone@numericable.fr." },
+      { "name": "La Maison des Femmes de Mérignac", "text": "ouverte depuis le 25 novembre 2023 : un accueil par des travailleurs sociaux, une aide et une orientation sont apportées à la femme en demande d'aide." },
+      { "name": "La Maison d'Ella", "text": "381 bd Président Wilson, Bordeaux — 05 57 09 25 77 / 06 31 05 85 78, maisondella33@gmail.com (Maison d'Ella – CACIS)." }
+    ],
+    "image": "/prevention/sante-famille/face-aux-violences/stop-violence.webp"
+  },
+  "temoignages": {
+    "title": "Quelques extraits & ressources",
+    "videos": [
+      { "label": "« Touchées » — Alexandra Lamy a un message à vous transmettre", "desc": "Film réalisé par Alexandra Lamy sur la thématique de l'aide apportée aux femmes maltraitées.", "url": "https://www.tf1.fr/tf1/touchees/videos/touchees-alexandra-lamy-a-un-message-a-vous-transmettre-71864950.html" },
+      { "label": "Reportage vidéo : la prise en charge thérapeutique des hommes maltraitants", "desc": "À voir sur YouTube.", "url": "https://youtu.be/ufv5W3lZwAk" },
+      { "label": "Reportage audio : la prise en charge thérapeutique des hommes maltraitants", "desc": "À écouter sur Spotify.", "url": "https://open.spotify.com/episode/1iNxoIxkrHufqDfcvzja3z?si=OB0XeL8lQ_2YbtSnmKWcSw&context=spotify%3Ashow%3A2v0aWpQH9ZJtNHMkokrjmh" }
+    ],
+    "culture": [
+      "**« Jusqu'à la garde »** : film de Xavier Legrand (2017).",
+      "**Série danoise « Cry Wolf »** (ARTE) : 8 épisodes retraçant la banalisation par la victime de ses violences et la banalité du profil de l'agresseur.",
+      "**« Pucelle : Confirmée »** (tome 2) : BD drôle et féroce dénonçant les violences faites aux femmes, par Florence Dupré La Tour.",
+      "**« Les violences faites aux femmes : aspects juridiques et judiciaires »** : livre d'Erick Maurel."
+    ]
+  }
+}

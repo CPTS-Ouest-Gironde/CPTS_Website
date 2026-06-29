@@ -54,22 +54,6 @@
       "description": ""
     },
     {
-      "id": "violences-femmes-3919",
-      "category": "urgences-non-vitales",
-      "label": "Violences femmes info",
-      "number": "39 19",
-      "iconName": "Phone",
-      "description": "Numéro national d'écoute, d'information et d'orientation."
-    },
-    {
-      "id": "prevention-suicide-3114",
-      "category": "urgences-non-vitales",
-      "label": "Prévention du suicide",
-      "number": "31 14",
-      "iconName": "Phone",
-      "description": "Numéro national de prévention du suicide (24h/24, 7j/7)."
-    },
-    {
       "id": "adultes-pellegrin",
       "category": "urgences-medicales",
       "label": "Adultes Pellegrin",
@@ -158,25 +142,6 @@
       "description": ""
     },
     {
-      "id": "sos-medecin",
-      "category": "urgences-non-vitales",
-      "label": "SOS Médecin",
-      "number": "05 56 44 74 74",
-      "iconName": "Stethoscope",
-      "description": "RDV en ligne sur sosmedecins.com/patient/login. Cabinet Des Palanques à Saint Jean d'Illac : 955 Av. de Bordeaux",
-      "link": "https://www.sosmedecins.com/patient/login",
-      "phone2": "05 56 48 75 59"
-    },
-    {
-      "id": "cnp-pessac",
-      "category": "urgences-non-vitales",
-      "label": "CNP Hôpital privé Saint Martin à Pessac",
-      "number": "",
-      "iconName": "Hospital",
-      "description": "Consultations non programmées - RDV du lundi au vendredi, allée des tulipes à Pessac",
-      "link": "https://www.doctolib.fr/cabinet-medical/pessac/cnp-saint-martin"
-    },
-    {
       "id": "espace-sante-etudiant",
       "category": "services-territoire",
       "label": "Espace santé étudiant – Université de Bordeaux",
@@ -196,7 +161,7 @@
     "image": "/coordonnees/consultation-non-programmées.png"
   },
   "urgencesNonVitales": {
-    "title": "Pour les urgences non vitales, pensez aussi à",
+    "title": "Pour les urgences non vitales, pensez à",
     "items": [
       {
         "title": "Votre médecin traitant",
@@ -213,6 +178,12 @@
         "title": "CNP (consultations non programmées) Hôpital privé Saint Martin à Pessac",
         "description": "sur rdv du lundi au vendredi : allée des tulipes à Pessac. Prise de rdv sur :",
         "link": "https://www.doctolib.fr/cabinet-medical/pessac/cnp-saint-martin"
+      },
+      {
+        "title": "CNP (consultations non programmées) à Mérignac",
+        "description": "346 Avenue d'Arès, 33700 Mérignac — sans rendez-vous ou sur Doctolib.fr",
+        "link": "https://www.doctolib.fr/centre-de-sante/merignac/centre-de-soins-non-programmes-et-medecine-generale-dr-benyelloul-wahid",
+        "linkLabel": "Prendre RDV"
       },
       {
         "title": "Espace santé étudiant – Université de Bordeaux 22 av de Pey Berland 33600 Pessac",
@@ -327,7 +298,6 @@
     { "id": "tous", "label": "Tous" },
     { "id": "urgences-vitales", "label": "Urgences vitales" },
     { "id": "urgences-medicales", "label": "Urgences médicales" },
-    { "id": "urgences-non-vitales", "label": "Urgences non vitales" },
     { "id": "sante-mentale", "label": "Santé mentale" },
     { "id": "services-territoire", "label": "Services du territoire" }
   ]

@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 import {
   Carousel,
   CarouselContent,
@@ -12,9 +13,9 @@ import {
 
 const actualites = [
   {
-    title: "Escrime thérapeutique\u00A0: découverte du protocole ATVS33",
-    image: "/actu/affiche-escrime-therapeutique.webp",
-    link: "/actualites/escrime-therapeutique-atvs33",
+    title: "Registre canicule : protégeons les personnes fragiles",
+    image: "/actu/registre-canicule-merignac.webp",
+    link: "/actualites/registre-canicule",
   },
   {
     title: "Vous souffrez d'une rhinite allergique ?",
@@ -22,9 +23,12 @@ const actualites = [
     link: "/actualites/rhinite-allergique",
   },
   {
-    title: "Dépistage diabète & hypertension — Pharmacie Arago, 28 et 29 avril 2026",
-    image: "/actu/affiche-pharma-ARAGO 28-29 avril _page-0001.webp",
-    link: "/actualites/pharma-arago-avril",
+    title: "Les urgences, ce n'est pas une évidence",
+    image: "/actu/urgence-pas-une-evidence.webp",
+    link: "/actualites/urgences-pas-une-evidence",
+    // Cette image a le même ratio 4:5 que la carte : on ajoute du padding
+    // pour qu'elle "flotte" comme les deux autres affiches (plus étroites).
+    imageClassName: "p-7 lg:p-8",
   },
   {
     title: "Jeunes parents? Inscrivez vous ",
@@ -37,7 +41,12 @@ function ActuCard({ actu }: { actu: (typeof actualites)[0] }) {
   return (
     <a href={actu.link} className="block w-full h-full group">
       <div className="rounded-2xl bg-white shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-200 hover:border-primary/50 flex flex-col h-full">
-        <div className="p-4 lg:p-3 relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden">
+        <div
+          className={cn(
+            "p-4 lg:p-3 relative aspect-[3/4] lg:aspect-[4/5] overflow-hidden",
+            actu.imageClassName
+          )}
+        >
           <Image
             src={actu.image}
             alt={actu.title}
@@ -69,7 +78,7 @@ export function Actualites() {
       className="py-12 lg:py-16 bg-gradient-to-b from-secondary/5 to-background"
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 lg:mb-10">
             <h2 className="text-2xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
               Actualités Santé du territoire de la CPTS
@@ -77,12 +86,20 @@ export function Actualites() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
 
+          <div className="hidden lg:grid lg:grid-cols-4 gap-6">
+            {actualites.map((actu, index) => (
+              <div key={index} className="h-full flex">
+                <ActuCard actu={actu} />
+              </div>
+            ))}
+          </div>
+
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full"
+            className="w-full lg:hidden"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {actualites.map((actu, index) => (

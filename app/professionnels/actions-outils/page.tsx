@@ -20,8 +20,23 @@ export default function ActionsOutilsPage() {
   const [sseImage, setSseImage] = useState<{ src: string; alt: string } | null>(null);
 
   const toggleAccordion = (id: string) => {
-    setOpenAccordion(openAccordion === id ? null : id);
+    const next = openAccordion === id ? null : id;
+    setOpenAccordion(next);
+    const url = next
+      ? `${window.location.pathname}#${next}`
+      : window.location.pathname;
+    window.history.replaceState(null, "", url);
   };
+
+  useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return;
+    setOpenAccordion(hash);
+    requestAnimationFrame(() => {
+      const el = document.getElementById(hash);
+      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, []);
 
   useEffect(() => {
     const handleOpenModal = () => {

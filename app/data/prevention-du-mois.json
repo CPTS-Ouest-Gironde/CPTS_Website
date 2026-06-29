@@ -28,25 +28,25 @@
   ],
   "articles": [
     {
-      "id": "mars-bleu-2026",
-      "title": "Mars Bleu 2026 : prévention du cancer colorectal",
-      "image": "/prevention/sante-famille/mars-bleu-2026.png",
+      "id": "canicule",
+      "title": "Conseils canicule : les bons gestes face aux fortes chaleurs",
+      "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
       "category": "Santé familiale",
-      "link": "/prevention/sante-familiale/prevention-cancer-colorectal-mars-bleu-2026"
+      "link": "/prevention/sante-familiale/canicule"
     },
     {
-      "id": "insomnie",
-      "title": "L'insomnie : la comprendre et la traiter",
-      "image": "/insomnie.jpg",
-      "category": "Education thérapeutique",
-      "link": "/l-insomnie-la-comprendre-et-la-traiter"
+      "id": "chute-personne-agee",
+      "title": "Chute de la personne âgée : comment la prévenir ?",
+      "image": "/prevention/sante-famille/chute-personne-agee.webp",
+      "category": "Santé familiale",
+      "link": "/prevention/sante-familiale/chute-personne-agee"
     },
     {
-      "id": "sante-mentale",
-      "title": "Santé mentale : comprendre et s'orienter",
-      "image": "/colimaçon.jpg",
-      "category": "Santé mentale",
-      "link": "/sante-mental"
+      "id": "juin-vert-2026",
+      "title": "Juin Vert : dépistage du cancer du col de l'utérus",
+      "image": "/juin-vert/juin-vert-2026.webp",
+      "category": "Santé familiale",
+      "link": "/prevention/sante-familiale/juin-vert-2026"
     }
   ]
 }

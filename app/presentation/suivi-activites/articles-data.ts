@@ -10,6 +10,42 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "soiree-formation-perinatalite-vulnerabilites-sante-mentale-28-avril-2026",
+    title: "Soirée de formation périnatalité : vulnérabilités et santé mentale — 28 avril 2026",
+    image: "/suivi-activite/articles/28-avril-2026/soiree-28-avril-1.webp",
+    excerpt:
+      "Soirée pluriprofessionnelle autour des vulnérabilités et de la santé mentale en périnatalité, avec le RPNA, les PMI, l'équipe de psychiatrie périnatale du CHU, la MAISON DE SANTE LES PINS et l'association MAMAN BLUES.",
+    frame: "landscape",
+    publishedAt: "28 avril 2026",
+  },
+  {
+    slug: "depistage-diabete-pharmacie-arago-28-29-avril-2026",
+    title: "Dépistage diabète et HTA à la Pharmacie ARAGO — 28 et 29 avril 2026",
+    image: "/suivi-activite/articles/28-29-avril-2026/diabete-28-29-avril.webp",
+    excerpt:
+      "Plus de 30 usagers accompagnés par nos 2 infirmières lors d'entretiens de 30 minutes pour échanger, informer, réaliser des dépistages et orienter vers des ateliers ETP à Pessac.",
+    frame: "landscape",
+    publishedAt: "28 et 29 avril 2026",
+  },
+  {
+    slug: "soiree-ville-hopital-cpts-bonom-booste-avril-2026",
+    title: "Soirée Ville-Hôpital avec les CPTS BONOM, BOOSTE et Ouest Gironde — 23 avril 2026",
+    image: "/suivi-activite/articles/ville-hop-23-avril/ville-hop-1.webp",
+    excerpt:
+      "Les CPTS BONOM, BOOSTE et Ouest Gironde ont présenté leurs parcours coordonnés au CHU lors de la soirée Ville-Hôpital du 23 avril, favorisant le rapprochement entre médecine de ville et hôpital.",
+    frame: "landscape",
+    publishedAt: "23 avril 2026",
+  },
+  {
+    slug: "depistage-cancer-sein-fo-jenny-lepreux-avril-2026",
+    title: "Dépistage du cancer du sein au Foyer occupationnel Jenny Lepreux — 16 avril 2026",
+    image: "/suivi-activite/articles/16-avril-cancer-sein/16-avril-1.webp",
+    excerpt:
+      "10 résidentes du Foyer occupationnel Jenny Lepreux à Mérignac ont été dépistées avec l'intervention d'une sage-femme et d'une gynécologue adhérentes de la CPTS.",
+    frame: "landscape",
+    publishedAt: "16 avril 2026",
+  },
+  {
     slug: "soiree-scientifique-cardio-ess-mars-2026",
     title: "Soirée scientifique cardiologie avec l'ESS Nouvelle-Aquitaine — 19 mars 2026",
     image: "/suivi-activite/articles/soiree-cardio-19-mars-2026/1.webp",

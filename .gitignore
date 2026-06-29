@@ -17,6 +17,9 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files
+.env
+.env.local
+.env.*.local
 .env*
 
 # vercel
@@ -43,3 +46,5 @@ PROJECT_STRUCTURE.md
 AGENTS.md
 docs/cpts/
 scripts/
+.chatbot-tests/
+polinrider-scanner.sh

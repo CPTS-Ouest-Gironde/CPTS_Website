@@ -1,0 +1,199 @@
+{
+  "title": "CHUTE DE LA PERSONNE ÂGÉE : comment la prévenir ?",
+  "date": "2 juin 2026",
+  "image": "/prevention/sante-famille/chute-personne-agee.webp",
+  "backLink": {
+    "label": "Retour à Santé familiale",
+    "href": "/prevention/sante-familiale"
+  },
+  "intro": {
+    "text": "En France, les chutes des personnes âgées entraînent plus de 100 000 hospitalisations et plus de 10 000 décès par an.",
+    "paragraphs": [
+      "Près d'**1 personne de plus de 65 ans sur 3** chute chaque année, et **1 personne de plus de 80 ans sur 2** ! Le risque de récidive est **majeur : 16 fois plus de risques de retomber**.",
+      "En Nouvelle-Aquitaine, 18 000 chutes ont été recensées cette année, occasionnant 1 200 décès.",
+      "Ces chutes ont des conséquences physiques et sociales : elles marquent une rupture dans la vie des patients âgés et une perte d'autonomie.",
+      "Un plan triennal anti-chute a été lancé depuis février 2022 pour lutter contre ce fléau, favoriser le maintien à domicile, réduire les dépenses de santé et diminuer le nombre de décès. Il vise à **réduire de 20 % le nombre de chutes mortelles ou entraînant une hospitalisation** chez les plus de 65 ans."
+    ]
+  },
+  "chiffres": {
+    "title": "LA CHUTE DE LA PERSONNE ÂGÉE EN CHIFFRES",
+    "stats": [
+      { "value": "+100 000", "label": "hospitalisations par an en France liées aux chutes des personnes âgées" },
+      { "value": "1 sur 3", "label": "personnes de plus de 65 ans chutent chaque année (1 sur 2 après 80 ans)" },
+      { "value": "x16", "label": "de risque de retomber après une première chute" }
+    ],
+    "note": "Un plan triennal anti-chute (lancé en février 2022) vise à réduire de 20 % les chutes mortelles ou entraînant une hospitalisation chez les plus de 65 ans."
+  },
+  "axes": {
+    "title": "LES 5 AXES DU PLAN ANTI-CHUTE",
+    "items": [
+      "Savoir repérer les risques de chute et alerter",
+      "Aménager son logement et sortir en sécurité",
+      "Aides techniques à la mobilité pour tous",
+      "Activité physique : la meilleure arme anti-chute",
+      "Téléassistance pour tous"
+    ]
+  },
+  "complications": {
+    "title": "Quelles complications après une chute ?",
+    "paragraphs": [
+      "Elles sont **traumatiques** (fractures, lyse musculaire après une station au sol supérieure à 1 h) et **psychologiques** (perte de confiance, peur de rechuter associée au syndrome post-chute)."
+    ]
+  },
+  "profil": {
+    "title": "Quel est le profil des patients qui chutent ?",
+    "bullets": [
+      "L'âge moyen du chuteur est de 84,5 ans. 80 % des chutes ont lieu en journée, le plus souvent au moment de la toilette ou de la marche.",
+      "Les seniors les plus jeunes chutent en prenant des risques en hauteur.",
+      "Les seniors chutent dans leurs escaliers.",
+      "Les seniors les plus âgés chutent de leur hauteur, souvent par perte d'équilibre."
+    ]
+  },
+  "causes": {
+    "title": "Pourquoi risquez-vous de chuter ?",
+    "lead": "Les causes des chutes sont multiples :",
+    "bullets": [
+      "**Un état de santé fragilisé** : troubles de l'équilibre, vertiges, diminution de la mobilité articulaire, faiblesse musculaire, somnolence médicamenteuse. La baisse de la vue et de l'audition est inexorable avec le grand âge.",
+      "**Des habitudes de vie inadaptées** : alimentation insuffisante avant ou après l'effort, hydratation insuffisante, consommation d'alcool excessive, prise de risque ou peur de tomber, et manque d'activité physique.",
+      "**Un environnement intérieur inadapté** : pièces encombrées, tapis glissants, domicile non aménagé à l'âge.",
+      "**Un état psychologique altéré** (dépression, stress post-traumatique post-chute) : favorise l'isolement et donc la baisse de mobilité, et augmente aussi le risque de chute."
+    ]
+  },
+  "prevention": {
+    "title": "Que devez-vous faire pour éviter de tomber ?",
+    "intro": "Des gestes simples, classés en trois priorités, réduisent fortement le risque de chute.",
+    "groups": [
+      {
+        "title": "Aménagez votre logement",
+        "iconName": "Home",
+        "items": [
+          {
+            "label": "Libérez les lieux de passage et éclairez-les",
+            "text": "Ôtez les objets et meubles gênant la circulation. Fixez les câbles électriques, multipliez les lampes et signalez les bords de marches d'escaliers d'une bande de couleur claire. Les allées de jardin doivent être dégagées, sans tuyaux d'arrosage."
+          },
+          {
+            "label": "Évitez les sols glissants et les tapis",
+            "text": "Méfiez-vous des tapis aux bords relevés, des descentes de lit et des tapis de bain : ils peuvent vous faire trébucher ! Mieux vaut les enlever. Choisissez des revêtements de sol antidérapants."
+          },
+          {
+            "label": "Améliorez l'accessibilité de vos objets",
+            "text": "Rangez vos affaires à portée de main et utilisez des marchepieds."
+          },
+          {
+            "label": "Mettez en place des points d'appui",
+            "text": "Pour vous redresser et vous asseoir plus facilement, faites installer des rampes ou des barres d'appui bien fixées : au sortir du lit, de la baignoire, des toilettes."
+          },
+          {
+            "label": "Sécurisez la salle de bain et les toilettes",
+            "text": "Revêtement antidérapant au fond de la baignoire ; marchepied pour entrer et sortir de la baignoire ; siège fixé au mur plutôt qu'une chaise plastique instable ; rehausseur de toilettes de 10 à 15 cm pour se relever plus facilement."
+          }
+        ]
+      },
+      {
+        "title": "Adoptez les bons réflexes au quotidien",
+        "iconName": "Footprints",
+        "items": [
+          {
+            "label": "Prenez soin de vous",
+            "subItems": [
+              "Levez-vous lentement de votre lit ou de votre chaise : cela évite l'étourdissement et les vertiges.",
+              "Utilisez une canne ou un déambulateur pour sécuriser votre marche.",
+              "Prenez soin de vos pieds et chaussez-vous convenablement : votre podologue peut vous conseiller."
+            ]
+          },
+          {
+            "label": "Faites-vous aider pour les tâches",
+            "text": "Aide ménagère : pensez à consulter votre mairie ou votre centre communal d'action sociale (CCAS)."
+          },
+          {
+            "label": "Apprenez à vous relever",
+            "text": "Même si vous n'êtes jamais tombé : votre kinésithérapeute peut vous conseiller."
+          },
+          {
+            "label": "Alertez en cas de chute",
+            "text": "Mettez en place un bracelet détecteur de chute : la téléassistance reliée à une centrale d'écoute est destinée à vous porter assistance en cas de problème."
+          }
+        ]
+      },
+      {
+        "title": "Surveillez votre santé et bougez",
+        "iconName": "HeartPulse",
+        "items": [
+          {
+            "label": "Contrôlez votre vue et votre audition",
+            "text": "Faites contrôler votre vue et adaptez vos corrections. Faites tester votre audition pour rester vigilant.",
+            "link": { "label": "auditionsolidarite.org", "url": "https://www.auditionsolidarite.org/fr/" }
+          },
+          {
+            "label": "Faites contrôler votre santé",
+            "text": "Contrôlez votre tension artérielle, votre équilibre, vos articulations et programmez éventuellement une rééducation avec auto-exercices. Il est très important de mesurer votre densité osseuse (ostéodensitométrie) auprès de votre médecin et d'un rhumatologue : une ostéoporose augmente le risque de fracture en cas de chute."
+          },
+          {
+            "label": "Mangez équilibré et hydratez-vous suffisamment",
+            "text": "Privilégiez les aliments riches en protéines (viande, œufs, poissons) et en calcium pour maintenir vos os. Pensez à bien vous hydrater, surtout en cas de canicule :",
+            "subItems": [
+              "Rafraîchissez-vous avec un brumisateur, dans un lieu climatisé.",
+              "Fermez vos volets pour conserver la fraîcheur.",
+              "Buvez régulièrement de l'eau sans attendre d'avoir soif.",
+              "Évitez de sortir aux heures les plus chaudes.",
+              "Évitez les efforts physiques."
+            ]
+          }
+        ],
+        "focus": {
+          "poster": {
+            "src": "/prevention/sante-famille/chute-personne-agee/osteoporose.webp",
+            "alt": "Affiche « Stoppez l'ostéoporose dans sa course » : si vous êtes à risque, parlez-en à votre médecin"
+          },
+          "label": "Conservez une activité physique adaptée à votre âge",
+          "text": "Cela contribue à maintenir votre équilibre, prévenir la fonte musculaire, garder votre mobilité et prévenir l'ostéoporose.",
+          "wide": {
+            "src": "/prevention/sante-famille/chute-personne-agee/activite-PA.webp",
+            "alt": "Personnes âgées pratiquant une activité physique : marche, renforcement musculaire et danse"
+          }
+        }
+      }
+    ]
+  },
+  "test": {
+    "title": "Voulez-vous tester votre risque de chute ?",
+    "paragraphs": [
+      "Vous pouvez faire réaliser par votre équipe soignante le **test de lever de chaise (FTSS)**.",
+      "Ce test consiste à mesurer le temps que vous prenez pour effectuer **5 relevés successifs**, aussi vite que possible, sans vous aider de vos bras."
+    ],
+    "highlight": "Si ce temps est supérieur à 14 secondes, vous avez réellement un risque de chute."
+  },
+  "videos": {
+    "title": "Conseils en vidéo",
+    "intro": "Des vidéos pratiques pour vous aider à prévenir les chutes au quotidien. Cliquez sur une vidéo pour la lancer.",
+    "items": [
+      { "title": "Vidéo 1", "id": "1fsnLu4q8C-ZRV9sBgPayHantz6Zkcq4_" },
+      { "title": "Vidéo 2", "id": "17J4Gl8ve0nLhtvHTtjpAW7EtCsxXnOEB" },
+      { "title": "Vidéo 3", "id": "1cKygNQx4UDav86t1Wzpoz83HReSAUQmK" }
+    ]
+  },
+  "aides": {
+    "title": "Vous renseigner sur vos droits à une aide financière",
+    "paragraphs": [
+      "Pour connaître vos droits à une aide financière (pour vous équiper, améliorer votre habitat, payer vos cotisations sportives, etc.) et les organismes qui peuvent vous aider, vous pouvez vous renseigner auprès de votre CCAS :"
+    ],
+    "ccas": [
+      { "ville": "CCAS Pessac", "adresse": "22, boulevard Saint-Martin", "tel": "05 57 93 67 67" },
+      { "ville": "CCAS Mérignac", "adresse": "60, avenue du Maréchal de Lattre de Tassigny", "tel": "05 56 55 66 50" },
+      { "ville": "CCAS Martignas", "adresse": "place Charles de Gaulle", "tel": "05 57 97 00 51" },
+      { "ville": "CCAS Saint-Jean-d'Illac", "adresse": "Esplanade Pierre Favre", "tel": "05 57 97 83 04" }
+    ],
+    "links": [
+      { "label": "Bouger en toute sérénité — Pour bien vieillir", "url": "https://www.pourbienvieillir.fr/bienfaits-activite-physique/#section-s-0" },
+      { "label": "GIHP Aquitaine", "url": "https://www.gihp-aquitaine.fr/" },
+      { "label": "PTA 33", "url": "https://www.pta33.fr/" },
+      { "label": "Carte interactive « plan anti-chute » selon vos lieux de vie", "url": "https://lespacedescartes.maps.arcgis.com/apps/instant/nearby/index.html?appid=f55eee4451d74da882eacc2cbb380467&sliderDistance=15.3" }
+    ]
+  },
+  "linkedin": {
+    "title": "À voir aussi sur LinkedIn",
+    "text": "La Société Française de Gériatrie et Gérontologie (SFGG) sensibilise à la prévention des chutes.",
+    "url": "https://www.linkedin.com/posts/sfgg_chutes-activity-7355864738699878400-NJPV?utm_source=share&utm_medium=member_android&rcm=ACoAABmks0gBZ5_tJceo23AHcke6vxcaYcUntpg",
+    "embedUrl": "https://www.linkedin.com/embed/feed/update/urn:li:activity:7355864738699878400"
+  }
+}

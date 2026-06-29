@@ -39,6 +39,7 @@ type PmoEntryStatsRow = Pick<
   | "prescription_antiallergique_nasal"
   | "prescription_collyre"
   | "prescription_corticoide_nasal"
+  | "reorientation_medecin_delegant"
   | "renouvellement"
 >
 type PmoEntryDetailRow = Pick<
@@ -61,6 +62,7 @@ type PmoEntryDetailRow = Pick<
   | "prescription_antiallergique_nasal"
   | "prescription_collyre"
   | "prescription_corticoide_nasal"
+  | "reorientation_medecin_delegant"
   | "renouvellement"
   | "user_id"
 >
@@ -81,6 +83,7 @@ type MutablePharmacyDetail = {
   pharmacienRpps: string | null
   pharmacienTitulaire: string | null
   pharmacieId: string
+  reorientationMedecinDelegantCount: number
   renouvellementCount: number
   totalPatients: number
   urgencesCount: number
@@ -111,6 +114,7 @@ export type DashboardPharmacyDetail = {
   pharmacieFiness: string
   pharmacieId: string
   pharmacieNom: string
+  reorientationMedecinDelegant: DashboardBreakdown
   tauxRenouvellements: number
   tauxDispensationConseil: number
   totalPatients: number
@@ -144,6 +148,7 @@ export type DashboardPmoDetailRow = {
   prescriptionAntiallergiqueNasal: boolean
   prescriptionCollyre: boolean
   prescriptionCorticoideNasal: boolean
+  reorientationMedecinDelegant: boolean
   renouvellement: boolean
 }
 
@@ -169,6 +174,7 @@ export type DashboardStats = {
     collyre: DashboardBreakdown
     corticoideNasal: DashboardBreakdown
   }
+  reorientationMedecinDelegant: DashboardBreakdown
   repartitionAge: DashboardAgeBreakdown
   repartitionSexe: {
     femmes: DashboardBreakdown
@@ -190,6 +196,7 @@ const dashboardPmoStatsFields = [
   "patient_age",
   "patient_medecin_traitant",
   "orientation",
+  "reorientation_medecin_delegant",
   "prescription_anti_h1",
   "prescription_collyre",
   "prescription_antiallergique_nasal",
@@ -210,6 +217,7 @@ const dashboardPmoDetailFields = [
   "patient_age",
   "patient_medecin_traitant",
   "orientation",
+  "reorientation_medecin_delegant",
   "prescription_anti_h1",
   "prescription_collyre",
   "prescription_antiallergique_nasal",
@@ -260,6 +268,7 @@ function createEmptyStats(): DashboardStats {
       collyre: { n: 0, pct: 0 },
       corticoideNasal: { n: 0, pct: 0 },
     },
+    reorientationMedecinDelegant: { n: 0, pct: 0 },
     repartitionAge: createAgeBreakdown(),
     repartitionSexe: {
       femmes: { n: 0, pct: 0 },
@@ -331,6 +340,7 @@ function createMutablePharmacyDetail(pharmacy: DashboardPharmacyOption): Mutable
     pharmacienRpps: pharmacy.pharmacienRpps,
     pharmacienTitulaire: pharmacy.pharmacienTitulaire,
     pharmacieId: pharmacy.id,
+    reorientationMedecinDelegantCount: 0,
     renouvellementCount: 0,
     totalPatients: 0,
     urgencesCount: 0,
@@ -470,6 +480,7 @@ function mapDashboardPmoEntries(
       prescriptionAntiallergiqueNasal: entry.prescription_antiallergique_nasal,
       prescriptionCollyre: entry.prescription_collyre,
       prescriptionCorticoideNasal: entry.prescription_corticoide_nasal,
+      reorientationMedecinDelegant: entry.reorientation_medecin_delegant,
       renouvellement: entry.renouvellement,
     }
   })
@@ -566,6 +577,7 @@ export async function getDashboardStats(
   let dispensationConseilCount = 0
   let produitsPmoTotal = 0
   let produitsConseilTotal = 0
+  let reorientationMedecinDelegantCount = 0
   let renouvellementCount = 0
 
   for (const entry of entries) {
@@ -584,6 +596,11 @@ export async function getDashboardStats(
     pharmacyDetail.totalPatients += 1
     pharmacyDetail.moyenneProduitsPmoTotal += produitsPmo
     pharmacyDetail.moyenneProduitsConseilTotal += produitsConseil
+
+    if (entry.reorientation_medecin_delegant) {
+      reorientationMedecinDelegantCount += 1
+      pharmacyDetail.reorientationMedecinDelegantCount += 1
+    }
 
     if (entry.renouvellement) {
       renouvellementCount += 1
@@ -669,6 +686,10 @@ export async function getDashboardStats(
       pharmacieFiness: detail.finess,
       pharmacieId: detail.pharmacieId,
       pharmacieNom: detail.nom,
+      reorientationMedecinDelegant: {
+        n: detail.reorientationMedecinDelegantCount,
+        pct: toRoundedNumber(toPercentage(detail.reorientationMedecinDelegantCount, detail.totalPatients)),
+      },
       tauxRenouvellements: toRoundedNumber(toPercentage(detail.renouvellementCount, detail.totalPatients)),
       tauxDispensationConseil: toRoundedNumber(toPercentage(detail.dispensationConseilCount, detail.totalPatients)),
       totalPatients: detail.totalPatients,
@@ -716,6 +737,10 @@ export async function getDashboardStats(
         n: corticoideNasalCount,
         pct: toRoundedNumber(toPercentage(corticoideNasalCount, totalPatients)),
       },
+    },
+    reorientationMedecinDelegant: {
+      n: reorientationMedecinDelegantCount,
+      pct: toRoundedNumber(toPercentage(reorientationMedecinDelegantCount, totalPatients)),
     },
     repartitionAge,
     repartitionSexe: {
@@ -838,6 +863,10 @@ export function createDashboardCsv(
       "Taux de renouvellements",
       `${stats.renouvellements.n} (${toCsvValue(stats.renouvellements.pct)} %)`,
     ]),
+    buildCsvRow([
+      "Réorientation médecin délégant a posteriori",
+      `${stats.reorientationMedecinDelegant.n} (${toCsvValue(stats.reorientationMedecinDelegant.pct)} %)`,
+    ]),
     buildCsvRow(["Prise en charge urgences", stats.reorientations.urgences]),
     buildCsvRow(["Prise en charge médecin délégant", stats.reorientations.medecinDelegant]),
     buildCsvRow(["Prise en charge médecin traitant", stats.reorientations.medecinTraitant]),
@@ -877,6 +906,8 @@ export function createDashboardCsv(
       "Patients sans MT",
       "% sans MT",
       "Renouvellement",
+      "Réorientation médecin délégant a posteriori",
+      "% réorientation médecin délégant a posteriori",
       "Prise en charge urgences",
       "Prise en charge medecin delegant",
       "Prise en charge medecin traitant",
@@ -903,6 +934,8 @@ export function createDashboardCsv(
         "0 %",
         "0 %",
         0,
+        "0 %",
+        0,
         0,
         0,
         "0 %",
@@ -927,6 +960,8 @@ export function createDashboardCsv(
           detail.patientsSansMedecinTraitant.n,
           `${toCsvValue(detail.patientsSansMedecinTraitant.pct)} %`,
           `${toCsvValue(detail.tauxRenouvellements)} %`,
+          detail.reorientationMedecinDelegant.n,
+          `${toCsvValue(detail.reorientationMedecinDelegant.pct)} %`,
           detail.reorientations.urgences,
           detail.reorientations.medecinDelegant,
           detail.reorientations.medecinTraitant,
@@ -962,6 +997,7 @@ export function createDashboardDetailedCsv(entries: readonly DashboardPmoDetailR
       "Tranche d'âge",
       "Médecin traitant",
       "Prise en charge",
+      "Réorientation médecin délégant a posteriori",
       "Renouvellement",
       "Prescription anti-H1",
       "Prescription collyre",
@@ -985,6 +1021,7 @@ export function createDashboardDetailedCsv(entries: readonly DashboardPmoDetailR
         entry.patientAge,
         getYesNoLabel(entry.patientMedecinTraitant),
         getPmoOrientationLabel(entry.orientation),
+        getYesNoLabel(entry.reorientationMedecinDelegant),
         getYesNoLabel(entry.renouvellement),
         getYesNoLabel(entry.prescriptionAntiH1),
         getYesNoLabel(entry.prescriptionCollyre),

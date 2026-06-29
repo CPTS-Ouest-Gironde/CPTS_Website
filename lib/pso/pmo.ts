@@ -149,6 +149,7 @@ export async function getPmoEntryRecord(supabase: AppSupabaseClient, entryId: st
         prescription_antiallergique_nasal,
         prescription_collyre,
         prescription_corticoide_nasal,
+        reorientation_medecin_delegant,
         renouvellement,
         updated_at,
         user_id
@@ -183,6 +184,7 @@ export function toPmoEntryInput(entry: PmoEntryRow, medecinDelegantId = ""): Pmo
     prescriptionAntiallergiqueNasal: entry.prescription_antiallergique_nasal,
     prescriptionCollyre: entry.prescription_collyre,
     prescriptionCorticoideNasal: entry.prescription_corticoide_nasal,
+    reorientationMedecinDelegant: entry.reorientation_medecin_delegant,
     renouvellement: entry.renouvellement,
   }
 }

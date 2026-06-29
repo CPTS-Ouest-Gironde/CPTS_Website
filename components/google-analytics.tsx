@@ -1,41 +1,36 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import Script from "next/script"
 import { usePathname } from "next/navigation"
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
 
+function applyConsentUpdate() {
+  if (typeof window.gtag !== "function") return
+  const consent = localStorage.getItem("cookie-consent")
+  window.gtag("consent", "update", {
+    analytics_storage: consent === "accepted" ? "granted" : "denied",
+  })
+}
+
 export function GoogleAnalytics() {
-  const [consentGiven, setConsentGiven] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
-    const consent = localStorage.getItem("cookie-consent")
-    setConsentGiven(consent === "accepted")
+    applyConsentUpdate()
 
-    function handleConsentUpdate() {
-      const updated = localStorage.getItem("cookie-consent")
-      setConsentGiven(updated === "accepted")
-    }
-
-    window.addEventListener("cookie-consent-update", handleConsentUpdate)
-    return () => {
-      window.removeEventListener("cookie-consent-update", handleConsentUpdate)
-    }
+    window.addEventListener("cookie-consent-update", applyConsentUpdate)
+    return () => window.removeEventListener("cookie-consent-update", applyConsentUpdate)
   }, [])
 
   useEffect(() => {
-    if (consentGiven && GA_MEASUREMENT_ID && typeof window.gtag === "function") {
-      window.gtag("config", GA_MEASUREMENT_ID, {
-        page_path: pathname,
-      })
+    if (GA_MEASUREMENT_ID && typeof window.gtag === "function") {
+      window.gtag("config", GA_MEASUREMENT_ID, { page_path: pathname })
     }
-  }, [pathname, consentGiven])
+  }, [pathname])
 
-  if (!consentGiven || !GA_MEASUREMENT_ID) {
-    return null
-  }
+  if (!GA_MEASUREMENT_ID) return null
 
   return (
     <>
@@ -48,9 +43,7 @@ export function GoogleAnalytics() {
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${GA_MEASUREMENT_ID}', {
-            page_path: window.location.pathname,
-          });
+          gtag('config', '${GA_MEASUREMENT_ID}', { page_path: window.location.pathname });
         `}
       </Script>
     </>

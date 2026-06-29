@@ -2,6 +2,8 @@
 
 import { AccordionItem } from "./types";
 import { ImageCarousel } from "./components/ImageCarousel";
+import { RcpTeamCard } from "./components/RcpTeamCard";
+import { ZoomableImage } from "./components/ZoomableImage";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { DownloadButton } from "@/components/download-button";
@@ -460,102 +462,91 @@ export const accordionItemsParcours: AccordionItem[] = [
           </div>
         </div>
 
-        {/* Section 3: Organisation de soirées pluriprofessionnelles */}
+        {/* Section 2: Dispositifs proposés par la CPTS */}
         <div>
           <h3 className="text-2xl font-bold text-foreground mb-6">
-            2/ Organisation de soirées pluriprofessionnelles
-          </h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Des soirées pluriprofessionnelles sont organisées régulièrement pour
-            favoriser les échanges entre professionnels de santé du territoire.
-          </p>
-        </div>
-
-        {/* Section 4: Nouveaux dispositifs */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-6">
-            3/ Des nouveaux dispositifs proposés par la CPTS avec les acteurs du
+            2/ Des dispositifs proposés par la CPTS avec les acteurs du
             territoire
           </h3>
 
-          {/* RCP Psy */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <span
-                className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500 text-white font-semibold text-xs rounded-md animate-badge-glow"
-                role="status"
-                aria-label="Nouveauté"
-              >
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+          <div className="space-y-6">
+            {/* RCP Psy */}
+            <div className="bg-primary/5 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+                  Dispositif N°1
+                </span>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h4 className="text-xl font-bold text-foreground">
+                  Les RCP Psy de la CPTS
+                </h4>
+                <Link
+                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-rcp-psy"
+                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-                Nouveauté
-              </span>
-              <h4 className="text-xl font-bold text-primary">
-                Les RCP Psy de la CPTS
-              </h4>
-              <Link
-                href="/professionnels/actions-outils/les-dispositifs-du-territoire"
-                className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
-              >
-                Accéder aux ressources
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </Link>
+                  Accéder aux ressources
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                cf onglet Réunion de Concertation Pluriprofessionnelle
+              </p>
             </div>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              cf onglet Réunion de Concertation Pluriprofessionnelle
-            </p>
-          </div>
 
-          {/* Demande d'orientation */}
-          <div className="bg-primary/5 p-6 rounded-xl space-y-4">
-            <h4 className="text-xl font-bold text-foreground">
-              Demande d'orientation
-            </h4>
-            <p className="text-muted-foreground leading-relaxed">
-              Vous êtes en difficulté avec une prise en charge en santé mentale
-              ? Vous souhaitez un avis spécialisé pour une orientation.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Une infirmière en psychiatrie de la Maison de santé les Pins
-              (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
-              un temps dédié pour vous répondre
-            </p>
+            {/* Demande d'orientation */}
+            <div className="bg-secondary/60 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+                  Dispositif N°2
+                </span>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h4 className="text-xl font-bold text-foreground">
+                  Dispositif CPTS d'orientation en Psychiatrie
+                </h4>
+                <Link
+                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-orientation-psychiatrie"
+                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+                >
+                  Accéder aux ressources
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                Vous êtes en difficulté avec une prise en charge en santé mentale
+                ? Vous souhaitez un avis spécialisé pour une orientation.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Une infirmière en psychiatrie de la Maison de santé les Pins
+                (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
+                un temps dédié pour vous répondre
+              </p>
 
-            <div className="space-y-3">
-              <p className="font-semibold text-foreground">Comment ?</p>
-              <ul className="space-y-2 text-muted-foreground leading-relaxed">
-                <li>
-                  • Remplir le formulaire de demande d'orientation disponible
-                  sur Plexus Santé
-                </li>
-                <li>
-                  • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
-                  <a
-                    href="mailto:elise.patenere@pro.mssante.fr"
-                    className="text-primary hover:underline font-semibold"
-                  >
-                    elise.patenere@pro.mssante.fr
-                  </a>
-                </li>
-                <li>
-                  • L'IDE Psy (Elise Patenere) répond par un mail au
-                  Professionnel de Santé proposant une orientation possible
-                  ( et/ou rdv téléphonique si besoin pour expliciter
-                  l'orientation).
-                </li>
-              </ul>
+              <div className="space-y-3">
+                <p className="font-semibold text-foreground">Comment ?</p>
+                <ul className="space-y-2 text-muted-foreground leading-relaxed">
+                  <li>
+                    • Remplir le formulaire de demande d'orientation disponible
+                    sur Plexus Santé
+                  </li>
+                  <li>
+                    • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
+                    <a
+                      href="mailto:elise.patenere@pro.mssante.fr"
+                      className="text-primary hover:underline font-semibold"
+                    >
+                      elise.patenere@pro.mssante.fr
+                    </a>
+                  </li>
+                  <li>
+                    • L'IDE Psy (Elise Patenere) répond par un mail au
+                    Professionnel de Santé proposant une orientation possible
+                    ( et/ou rdv téléphonique si besoin pour expliciter
+                    l'orientation).
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -569,101 +560,102 @@ export const accordionItemsParcours: AccordionItem[] = [
     files: [],
     customContent: (
       <div className="space-y-8">
-        {/* Introduction */}
+        {/* Bandeau intro */}
         <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
-          <p className="text-foreground leading-relaxed text-lg mb-4">
-            Si la prise en charge d'un de vos patients vous paraît complexe,
-            difficile, insatisfaisante... car il reste douloureux, essoufflé,
-            symptomatique...
-          </p>
           <p className="text-foreground leading-relaxed text-lg">
-            Professionnels de santé, si vous êtes préoccupés, en manque de
-            réseau ou de solutions pratiques
+            La CPTS Ouest Gironde propose deux dispositifs de Concertation
+            Pluriprofessionnelle complémentaires, selon la nature de la
+            situation rencontrée par votre patient.
           </p>
         </div>
 
-        {/* RCP Cas complexes */}
-        <div className="space-y-6">
-          <h3 className="text-2xl font-bold text-foreground">
-            Sollicitez la team RCP 'cas complexes' de la CPTS Ouest Gironde
-          </h3>
-          <div className="bg-primary/5 p-6 rounded-xl">
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              <span className="font-semibold text-foreground">Équipe :</span> Dr
-              Ismahène Abed, Dr Christophe Adam, Dr Sophie Clément Perrin,
-              Claire Laborde, Hugo Ledoux, Dr Monika Nguon
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              <span className="font-semibold text-foreground">
-                C'est simple :
-              </span>{" "}
-              1 questionnaire requérant et 1 questionnaire patient disponibles
-              sur Plexus Santé Projet RCP 'boite à outils'
-            </p>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              La CPTS vous propose d'organiser à partir du parcours de soins du
-              patient un temps d'échanges avec des avis des professionnels
-              impliqués (médecin généraliste, spécialiste, infirmier,
-              kinésithérapeute, podologue, psychologue, sage femme,...), avec
-              des propositions de résolutions de problèmes.
-            </p>
+        {/* Empilé : chaque RCP contient une liste numérotée + un bloc "Pourquoi", qui respirent mieux pleine largeur. La distinction visuelle se fait par les deux nuances de vert. */}
+        <div className="space-y-8">
+          {/* RCP Cas complexes */}
+          <div className="bg-primary/5 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
+            <h3 className="text-2xl font-bold text-foreground">
+              RCP cas complexes CPTS Ouest Gironde
+            </h3>
+            <ZoomableImage
+              src="/actions-outils/RCP-cas-complexe.webp"
+              alt="Infographie du parcours RCP cas complexes CPTS Ouest Gironde en 5 étapes : situation initiale en impasse diagnostique, demande adressée à la CPTS, déroulement de la RCP, synthèse et plan d'action concertée, bénéfices pour le patient et le professionnel"
+              width={1536}
+              height={1024}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 800px"
+            />
+            <RcpTeamCard
+              label="Équipe RCP cas complexes :"
+              members="Dr Ismahène Abed, Dr Christophe Adam, Dr Sophie Clément Perrin, Claire Laborde, Hugo Ledoux, Dr Monika Nguon"
+              variant="complex"
+            />
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Pourquoi solliciter une RCP cas complexes ?
+              </h4>
+              <div className="space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Si la prise en charge d'un de vos patients vous paraît
+                  complexe, difficile, insatisfaisante... car il reste
+                  douloureux, essoufflé, symptomatique...
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Professionnels de santé, si vous êtes préoccupés, en manque
+                  de réseau ou de solutions pratiques
+                </p>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Comment ?
+              </h4>
+              <ol className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    1
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Remplir le questionnaire requérant (disponible sur Plexus
+                    Santé - Projet RCP 'boite à outils')
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    2
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Proposer le questionnaire patient à votre patient (même
+                    espace Plexus)
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    3
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    La CPTS organise un temps d'échanges pluriprofessionnel à
+                    partir du parcours de soins du patient (avis de médecin
+                    généraliste, spécialiste, infirmier, kinésithérapeute,
+                    podologue, psychologue, sage-femme…) avec propositions de
+                    résolutions de problèmes
+                  </p>
+                </li>
+              </ol>
+            </div>
             <p className="text-primary font-semibold">
               40 minutes d'échanges par dossier maximum
             </p>
           </div>
 
-          {/* Calendrier */}
-          <div className="bg-white p-6 rounded-xl border-2 border-primary/20">
-            <h4 className="text-xl font-bold text-foreground mb-4">
-              Prochaines réunions 2026:
-            </h4>
-            <p className="text-muted-foreground">
-              27 janvier 2026, 24 février 2026 – Autour d'un buffet
-            </p>
-          </div>
-        </div>
-
-        {/* RCP Psy */}
-        <div className="pt-6 border-t-2 border-gray-200">
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
-            <span
-              className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500 text-white font-semibold text-xs rounded-md animate-badge-glow"
-              role="status"
-              aria-label="Nouveauté"
-            >
-              <svg
-                className="w-3.5 h-3.5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              Nouveauté
-            </span>
+          {/* RCP Psy */}
+          <div className="bg-secondary/60 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
             <h3 className="text-2xl font-bold text-foreground">
-              Les RCP Psy de la CPTS
+              RCP Psy CPTS Ouest Gironde
             </h3>
-          </div>
-
-          <div className="space-y-6">
-            <div className="bg-primary/5 p-6 rounded-xl">
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                <span className="font-semibold text-foreground">
-                  Équipe RCP Psy :
-                </span>{" "}
-                Dr Comby Viallard, Dr Piat, Dr Ledieu, Dr Meliani Nedjari,
-                Tifanie Akiki, Morgane Sini, Elise Patenere
-              </p>
-            </div>
-
-            {/* Pourquoi solliciter */}
+            <RcpTeamCard
+              label="Équipe RCP Psy :"
+              members="Dr Comby Viallard, Dr Piat, Dr Ledieu, Dr Meliani Nedjari, Tifanie Akiki, Morgane Sini, Elise Patenere"
+              variant="psy"
+            />
             <div>
               <h4 className="text-xl font-bold text-foreground mb-4">
                 Pourquoi solliciter une RCP Psy ?
@@ -701,8 +693,6 @@ export const accordionItemsParcours: AccordionItem[] = [
                 </li>
               </ul>
             </div>
-
-            {/* Comment */}
             <div>
               <h4 className="text-xl font-bold text-foreground mb-4">
                 Comment ?
@@ -739,6 +729,16 @@ export const accordionItemsParcours: AccordionItem[] = [
               </ol>
             </div>
           </div>
+        </div>
+
+        {/* Calendrier commun aux deux RCP */}
+        <div className="bg-white p-6 rounded-xl border-2 border-primary/20">
+          <h4 className="text-xl font-bold text-foreground mb-4">
+            Prochaines réunions 2026&nbsp;:
+          </h4>
+          <p className="text-muted-foreground">
+            15 septembre 2026 – Autour d'un buffet
+          </p>
         </div>
       </div>
     ),
@@ -781,10 +781,27 @@ export const accordionItemsPrevention: AccordionItem[] = [
           le 29 novembre 2024 (avec 3 Gynécologues, 1 sage femme, 1 médecin
           généraliste adhérentes de la CPTS)
         </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Prochaine action de dépistage au Foyer occupationnel Jenny Lepreux à
-          Mérignac le 16 avril 2026
-        </p>
+        <div className="rounded-xl border border-emerald-200 bg-emerald-50/60 p-4 space-y-2">
+          <p className="text-sm font-semibold text-emerald-700">
+            Action du 16 avril 2026 — Foyer occupationnel Jenny Lepreux, Mérignac
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            Le 16 avril a eu lieu une action de dépistage du cancer du sein au
+            Foyer occupationnel Jenny Lepreux à Mérignac.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            10 résidentes ont été dépistées avec l&apos;intervention d&apos;une
+            sage-femme et d&apos;une gynécologue adhérentes de la CPTS.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            Les résidentes ont participé activement à la préparation de l&apos;action
+            en travaillant sur les documents de sensibilisation.
+          </p>
+          <p className="text-muted-foreground leading-relaxed text-sm">
+            Merci à l&apos;équipe du FO pour son accueil, à Isabelle Calafato pour
+            la coordination de la matinée et à TSA&amp;co pour leur accompagnement.
+          </p>
+        </div>
       </div>
     ),
   },
@@ -795,7 +812,7 @@ export const accordionItemsPrevention: AccordionItem[] = [
     customContent: (
       <ul className="list-disc pl-6 space-y-3 text-muted-foreground leading-relaxed">
         <li>
-          Le mardi 28 avril aura lieu la soirée annuelle sur le thème cette
+          Le mardi 28 avril 2026 aura lieu la soirée annuelle sur le thème cette
           année des vulnérabilités et santé mentale en périnatalité avec la
           participation de Pr Sutter du CH de Charles Perrens et en partenariat
           avec le RPNA et la PMI. Un dépliant à destination des professionnels
