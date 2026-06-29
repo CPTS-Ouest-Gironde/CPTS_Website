@@ -37,7 +37,14 @@ export default defineConfig([
       "react-hooks/rules-of-hooks": "off",
     },
   },
+  {
+    files: ["scripts/**/*.js"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
+    },
+  },
   globalIgnores([
+    ".chatbot-tests/**",
     ".next/**",
     "out/**",
     "build/**",

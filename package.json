@@ -6,6 +6,7 @@
     "build": "next build",
     "dev": "next dev -p 3001",
     "lint": "eslint .",
+    "test:chatbot": "tsc -p tsconfig.chatbot-tests.json && node --test .chatbot-tests/normalize.test.js .chatbot-tests/matcher.test.js .chatbot-tests/engine.test.js",
     "start": "next start"
   },
   "dependencies": {

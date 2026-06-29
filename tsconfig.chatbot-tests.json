@@ -1,0 +1,20 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": ".chatbot-tests",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "incremental": false,
+    "isolatedModules": false,
+    "declaration": false,
+    "sourceMap": false
+  },
+  "include": [
+    "app/_features/chatbot/**/*.ts"
+  ],
+  "exclude": [
+    "app/_features/chatbot/**/*.tsx"
+  ]
+}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { HandHeart, BookOpen, Users, Video, ArrowLeft } from "lucide-react";
 import { AnnuaireModal } from "./annuaire-modal";
 import { ArticlesView } from "./articles-view";
@@ -14,6 +15,7 @@ export function ColimaconNavigation() {
   const [isAnnuaireOpen, setIsAnnuaireOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.location.hash === "#annuaire") {
@@ -39,6 +41,12 @@ export function ColimaconNavigation() {
 
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (searchParams.get("open") === "annuaire") {
+      setIsAnnuaireOpen(true);
+    }
+  }, [searchParams]);
 
   const handleBack = () => setCurrentView("navigation");
 

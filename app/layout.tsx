@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
+import { ChatbotWidget } from "@/app/_features/chatbot/ChatbotWidget"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { CookieConsentBanner } from "@/components/cookie-consent-banner"
 import "./globals.css"
@@ -82,6 +83,7 @@ export default function RootLayout({
       </head>
       <body className={`font-sans ${inter.variable} ${GeistMono.variable} antialiased`}>
         {children}
+        <ChatbotWidget />
         <Analytics />
         <GoogleAnalytics />
         <CookieConsentBanner />

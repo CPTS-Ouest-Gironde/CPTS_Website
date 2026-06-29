@@ -1,11 +1,12 @@
 // @ts-nocheck
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { X } from "lucide-react";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import memosData from "@/app/data/memos-suivi.json";
 
 const colorVariants: Record<
@@ -572,6 +573,23 @@ function MemoModal({
 export default function MemosSuiviPage() {
   const [selectedMemo, setSelectedMemo] = useState<Memo | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const openMemoId = searchParams.get("openMemo");
+
+  useEffect(() => {
+    if (!openMemoId) {
+      return;
+    }
+
+    const memo = (memosData.memos as Memo[]).find((entry) => entry.id === openMemoId);
+
+    if (!memo) {
+      return;
+    }
+
+    setSelectedMemo(memo);
+    setIsModalOpen(true);
+  }, [openMemoId]);
 
   const handleCardClick = (memo: Memo) => {
     setSelectedMemo(memo);
