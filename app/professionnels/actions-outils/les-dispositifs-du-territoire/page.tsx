@@ -13,22 +13,26 @@ export const metadata: Metadata = {
 
 const resources = [
   {
+    id: "approche-therapeutique-adultes",
     title: "Approche thérapeutique - 20-25 ans et Adultes",
     url: "https://drive.google.com/file/d/16kFiLLw0WEFHSfabybW_D5Oeujil9D8T/view?usp=drive_link",
   },
   {
+    id: "parcours-sante-mentale-jeunes",
     title: "Parcours en santé mentale - adolescent et jeune adulte",
     url: "https://drive.google.com/file/d/1fWCY1od1W0ndnMiL8ROoJGJqjiv5xJem/view?usp=drive_link",
   },
   {
+    id: "dispositif-orientation-psychiatrie",
     title: "Dispositif CPTS d'orientation en Psychiatrie",
-    url: "https://drive.google.com/file/d/19R4uX3I_-9zVoCr1dGO3TTeBQdBEtbao/view?usp=drive_link",
+    url: "/Flyer%20Orientation%20PSY-VF_page-0001.webp",
     associatedDoc: {
       title: "Formulaire de demande d'orientation",
-      url: "https://drive.google.com/file/d/1X7E7B_LKiPokHO1V5QWjp32LfB9LpFUa/view?usp=drive_link",
+      url: "/espace-pro/demande-orientation-psy",
     },
   },
   {
+    id: "dispositif-rcp-psy",
     title: "Dispositif CPTS RCP Psy",
     url: "https://drive.google.com/file/d/13qCAHMzb-vZKm5ZFR_sKuxK0TtqlbsB5/view?usp=drive_link",
     associatedDoc: {
@@ -47,7 +51,7 @@ export default function DispositifsTerritoireProfessionnelsPage() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <Link
-              href="/professionnels/actions-outils"
+              href="/professionnels/actions-outils#sante-mentale"
               className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6"
             >
               <ArrowLeft className="w-4 h-4" />
@@ -93,8 +97,9 @@ export default function DispositifsTerritoireProfessionnelsPage() {
           <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 md:auto-rows-fr gap-5">
             {resources.map((resource) => (
               <div
-                key={resource.title}
-                className="h-full min-h-[172px] rounded-2xl border border-[#dbe6db] bg-[#fcfffb] p-5 lg:p-6 shadow-sm flex flex-col justify-between"
+                key={resource.id}
+                id={resource.id}
+                className="h-full min-h-[172px] rounded-2xl border border-[#dbe6db] bg-[#fcfffb] p-5 lg:p-6 shadow-sm flex flex-col justify-between scroll-mt-24 target:ring-2 target:ring-primary/40 target:border-primary/40 transition-shadow"
               >
                 <div>
                   <div className="h-1.5 w-16 rounded-full bg-emerald-500/70 mb-4" />

@@ -47,5 +47,6 @@ AGENTS.md
 docs/cpts/
 scripts/*
 !scripts/build-chatbot-articles-index.ts
+.chatbot-tests/
 FINAL_REPORT.md
 polinrider-scanner.sh

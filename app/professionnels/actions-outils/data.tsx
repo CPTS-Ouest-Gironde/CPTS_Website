@@ -462,121 +462,91 @@ export const accordionItemsParcours: AccordionItem[] = [
           </div>
         </div>
 
-        {/* Section 3: Organisation de soirées pluriprofessionnelles */}
+        {/* Section 2: Dispositifs proposés par la CPTS */}
         <div>
           <h3 className="text-2xl font-bold text-foreground mb-6">
-            2/ Organisation de soirées pluriprofessionnelles
-          </h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Des soirées pluriprofessionnelles sont organisées régulièrement pour
-            favoriser les échanges entre professionnels de santé du territoire.
-          </p>
-        </div>
-
-        {/* Section 4: Nouveaux dispositifs */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-6">
-            3/ Des nouveaux dispositifs proposés par la CPTS avec les acteurs du
+            2/ Des dispositifs proposés par la CPTS avec les acteurs du
             territoire
           </h3>
 
-          {/* RCP Psy */}
-          <div className="mb-8">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide">
-                Dispositif N°1
-              </span>
-            </div>
-            <div className="flex items-center gap-3 mb-4 flex-wrap">
-              <span
-                className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500 text-white font-semibold text-xs rounded-md animate-badge-glow"
-                role="status"
-                aria-label="Nouveauté"
-              >
-                <svg
-                  className="w-3.5 h-3.5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
+          <div className="space-y-6">
+            {/* RCP Psy */}
+            <div className="bg-primary/5 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+                  Dispositif N°1
+                </span>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h4 className="text-xl font-bold text-foreground">
+                  Les RCP Psy de la CPTS
+                </h4>
+                <Link
+                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-rcp-psy"
+                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M13 10V3L4 14h7v7l9-11h-7z"
-                  />
-                </svg>
-                Nouveauté
-              </span>
-              <h4 className="text-xl font-bold text-primary">
-                Les RCP Psy de la CPTS
-              </h4>
-              <Link
-                href="/professionnels/actions-outils/les-dispositifs-du-territoire"
-                className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
-              >
-                Accéder aux ressources
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </Link>
+                  Accéder aux ressources
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                cf onglet Réunion de Concertation Pluriprofessionnelle
+              </p>
             </div>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              cf onglet Réunion de Concertation Pluriprofessionnelle
-            </p>
-          </div>
 
-          {/* Demande d'orientation */}
-          <div className="mb-2 flex items-center gap-2">
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wide">
-              Dispositif N°2
-            </span>
-          </div>
-          <div className="bg-primary/5 p-6 rounded-xl space-y-4">
-            <div className="flex items-center gap-3 flex-wrap">
-              <h4 className="text-xl font-bold text-foreground">
-                Demande d'orientation
-              </h4>
-              <Link
-                href="/professionnels/actions-outils/les-dispositifs-du-territoire"
-                className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/20"
-              >
-                Accéder aux ressources
-                <ExternalLink className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-            <p className="text-muted-foreground leading-relaxed">
-              Vous êtes en difficulté avec une prise en charge en santé mentale
-              ? Vous souhaitez un avis spécialisé pour une orientation.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Une infirmière en psychiatrie de la Maison de santé les Pins
-              (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
-              un temps dédié pour vous répondre
-            </p>
+            {/* Demande d'orientation */}
+            <div className="bg-secondary/60 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+                  Dispositif N°2
+                </span>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h4 className="text-xl font-bold text-foreground">
+                  Dispositif CPTS d'orientation en Psychiatrie
+                </h4>
+                <Link
+                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-orientation-psychiatrie"
+                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+                >
+                  Accéder aux ressources
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                Vous êtes en difficulté avec une prise en charge en santé mentale
+                ? Vous souhaitez un avis spécialisé pour une orientation.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Une infirmière en psychiatrie de la Maison de santé les Pins
+                (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
+                un temps dédié pour vous répondre
+              </p>
 
-            <div className="space-y-3">
-              <p className="font-semibold text-foreground">Comment ?</p>
-              <ul className="space-y-2 text-muted-foreground leading-relaxed">
-                <li>
-                  • Remplir le formulaire de demande d'orientation disponible
-                  sur Plexus Santé
-                </li>
-                <li>
-                  • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
-                  <a
-                    href="mailto:elise.patenere@pro.mssante.fr"
-                    className="text-primary hover:underline font-semibold"
-                  >
-                    elise.patenere@pro.mssante.fr
-                  </a>
-                </li>
-                <li>
-                  • L'IDE Psy (Elise Patenere) répond par un mail au
-                  Professionnel de Santé proposant une orientation possible
-                  ( et/ou rdv téléphonique si besoin pour expliciter
-                  l'orientation).
-                </li>
-              </ul>
+              <div className="space-y-3">
+                <p className="font-semibold text-foreground">Comment ?</p>
+                <ul className="space-y-2 text-muted-foreground leading-relaxed">
+                  <li>
+                    • Remplir le formulaire de demande d'orientation disponible
+                    sur Plexus Santé
+                  </li>
+                  <li>
+                    • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
+                    <a
+                      href="mailto:elise.patenere@pro.mssante.fr"
+                      className="text-primary hover:underline font-semibold"
+                    >
+                      elise.patenere@pro.mssante.fr
+                    </a>
+                  </li>
+                  <li>
+                    • L'IDE Psy (Elise Patenere) répond par un mail au
+                    Professionnel de Santé proposant une orientation possible
+                    ( et/ou rdv téléphonique si besoin pour expliciter
+                    l'orientation).
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

@@ -38,6 +38,10 @@ const ROLE_PROTECTED_ROUTES = [
     route: "/espace-pro/dashboard",
   },
   {
+    roles: ["membre_ca"] as const,
+    route: "/espace-pro/satisfaction-ps/dashboard",
+  },
+  {
     roles: ["reporting_pso"] as const,
     route: "/espace-pro/qr-codes",
   },

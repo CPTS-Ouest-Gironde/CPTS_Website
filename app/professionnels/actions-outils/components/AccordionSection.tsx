@@ -34,7 +34,8 @@ export function AccordionSection({
       {items.map((item) => (
         <div
           key={item.id}
-          className="border-2 border-gray-200 rounded-2xl overflow-hidden"
+          id={item.id}
+          className="border-2 border-gray-200 rounded-2xl overflow-hidden scroll-mt-24"
         >
           {/* Accordion Button */}
           <button

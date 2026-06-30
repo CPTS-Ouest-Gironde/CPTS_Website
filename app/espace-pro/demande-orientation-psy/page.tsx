@@ -26,14 +26,13 @@ export default function DemandeOrientationPsyPage() {
               Demande d&apos;orientation psy
             </h1>
             <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">
-              Formulaire d&apos;adressage IDE Psy à envoyer à{" "}
+              Formulaire d&apos;adressage IDE Psy à télécharger en{" "}
+              <span className="font-semibold text-foreground">PDF</span>, puis à
+              envoyer à{" "}
               <span className="font-semibold text-foreground">
                 elise.patenere@pro.mssante.fr
-              </span>
-              . Le formulaire envoie automatiquement les informations par email
-              et permet d&apos;exporter une copie en{" "}
-              <span className="font-semibold text-foreground">PDF</span> pour
-              conserver une trace dans le dossier.
+              </span>{" "}
+              pour conserver une trace dans le dossier.
             </p>
           </div>
         </div>

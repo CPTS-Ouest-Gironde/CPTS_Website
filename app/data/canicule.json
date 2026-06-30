@@ -1,0 +1,56 @@
+{
+  "title": "CONSEILS CANICULE",
+  "date": "3 juin 2026",
+  "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
+  "backLink": {
+    "label": "Retour à Santé familiale",
+    "href": "/prevention/sante-familiale"
+  },
+  "intro": {
+    "text": "Vous avez plus de 65 ans, êtes handicapé ou malade, dépendant, enceinte ou jeune enfant ? Avec les fortes chaleurs, vous êtes considéré comme possiblement **fragile**.",
+    "paragraphs": [
+      "Avec les fortes chaleurs, vous risquez un **coup de chaud, une déshydratation, des crampes, des maux de tête ou des vertiges**.",
+      "Si vous êtes fragile, observez attentivement les conseils suivants."
+    ]
+  },
+  "conseils": {
+    "title": "PENDANT LES FORTES CHALEURS, PROTÉGEZ-VOUS",
+    "image": {
+      "src": "/prevention/sante-famille/canicule/pendant-les-fortes-chaleurs.webp",
+      "alt": "Affiche Santé publique France « Pendant les fortes chaleurs, protégez-vous » : restez au frais, buvez de l'eau, mouillez votre corps, fermez les volets, évitez l'alcool, prenez des nouvelles des plus fragiles"
+    },
+    "items": [
+      "**Protégez-vous** pendant les heures les plus chaudes.",
+      "**Hydratez-vous régulièrement** en buvant de l'eau et **brumisez-vous** la peau.",
+      "**Évitez l'alcool.**",
+      "**Évitez** de faire du sport et tout effort physique.",
+      "**Fermez** les fenêtres et les volets le jour, **aérez** le soir.",
+      "Passez la journée dans des **endroits climatisés**."
+    ],
+    "emergency": "En cas de malaise, appelez le 15."
+  },
+  "proches": {
+    "title": "Pensez aux plus fragiles",
+    "text": "Pensez à prendre régulièrement des nouvelles de vos parents et proches fragiles."
+  },
+  "registre": {
+    "title": "Pensez à vous inscrire sur le registre canicule",
+    "paragraphs": [
+      "Ce service est **gratuit et confidentiel**. Il permet de recenser les personnes fragiles et isolées : elles seront contactées par les services du **CCAS** pendant les canicules pour leur rappeler les bons gestes. Sans réponse, la police municipale se déplace à leur domicile."
+    ],
+    "condition": "Le registre canicule est déclenché lorsque la chaleur est intense : plus de **34° le jour** et **20° la nuit**, pendant **plus de 3 jours**.",
+    "cta": {
+      "label": "S'inscrire sur le registre canicule (Pessac)",
+      "url": "https://www.pessac.fr/fileadmin/medias/Rubriques/Au_quotidien/famille/seniors/canicule/inscription-registre-canicule-pessac.pdf"
+    }
+  },
+  "ressource": {
+    "title": "Document à consulter",
+    "text": "Retrouvez l'ensemble des recommandations et des bons gestes à adopter en cas de fortes chaleurs.",
+    "embedUrl": "https://drive.google.com/file/d/1dxrLnvOJXxS0tGbsNxWDVcQRI662lJVB/preview",
+    "cta": {
+      "label": "Ouvrir en plein écran",
+      "url": "https://drive.google.com/file/d/1dxrLnvOJXxS0tGbsNxWDVcQRI662lJVB/view"
+    }
+  }
+}

@@ -33,6 +33,9 @@ function Field({
 
 export function OrientationWizard() {
   const [rgpdConsent, setRgpdConsent] = useState(false);
+  const [enfantsACharge, setEnfantsACharge] = useState("");
+  const [enfantsNombre, setEnfantsNombre] = useState("");
+  const [enfantsAges, setEnfantsAges] = useState("");
   const [toxiquesGlobal, setToxiquesGlobal] = useState("");
   const [toxiquesChecked, setToxiquesChecked] = useState<Record<string, boolean>>({});
   const [toxiquesDetail, setToxiquesDetail] = useState<Record<string, string>>({});
@@ -120,9 +123,20 @@ export function OrientationWizard() {
     }
   };
 
+  const handleEnfantsAChargeChange = (val: string) => {
+    setEnfantsACharge(val);
+    if (val === "Non") {
+      setEnfantsNombre("");
+      setEnfantsAges("");
+    }
+  };
+
   const handleReset = () => {
     formRef.current?.reset();
     setRgpdConsent(false);
+    setEnfantsACharge("");
+    setEnfantsNombre("");
+    setEnfantsAges("");
     setToxiquesGlobal("");
     setToxiquesChecked({});
     setToxiquesDetail({});
@@ -234,6 +248,52 @@ export function OrientationWizard() {
                     placeholder="Ex : Dr Martin (MG), Dr Lemaire (cardio)"
                   />
                 </Field>
+
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-foreground">
+                    Enfant(s) à charge
+                  </p>
+                  <RadioGroup
+                    name="enfantsACharge"
+                    value={enfantsACharge}
+                    onValueChange={handleEnfantsAChargeChange}
+                    className="flex flex-row gap-6"
+                  >
+                    {["Oui", "Non"].map((item) => (
+                      <label
+                        key={item}
+                        className="inline-flex items-center gap-2 text-sm text-muted-foreground"
+                      >
+                        <RadioGroupItem value={item} />
+                        <span>{item}</span>
+                      </label>
+                    ))}
+                  </RadioGroup>
+                  {enfantsACharge === "Oui" && (
+                    <div className="grid gap-4 md:grid-cols-2 pt-1">
+                      <Field label="Nombre d'enfants à charge" htmlFor="enfants-nombre">
+                        <Input
+                          id="enfants-nombre"
+                          name="enfantsNombre"
+                          type="number"
+                          min={1}
+                          placeholder="Ex : 2"
+                          value={enfantsNombre}
+                          onChange={(e) => setEnfantsNombre(e.target.value)}
+                        />
+                      </Field>
+                      <Field label="Âge(s) des enfants" htmlFor="enfants-ages">
+                        <Input
+                          id="enfants-ages"
+                          name="enfantsAges"
+                          placeholder="Ex : 7 ans, 12 ans"
+                          value={enfantsAges}
+                          onChange={(e) => setEnfantsAges(e.target.value)}
+                        />
+                      </Field>
+                    </div>
+                  )}
+                </div>
 
               </CardContent>
             </Card>
@@ -370,17 +430,6 @@ export function OrientationWizard() {
                     name="ruminationThemes"
                     className="min-h-20"
                     placeholder="Ex : ruminations professionnelles, conflits familiaux..."
-                  />
-                </Field>
-
-                <Field
-                  label="Heure de réveil et rendormissement"
-                  htmlFor="reveils-details"
-                >
-                  <Input
-                    id="reveils-details"
-                    name="reveilsDetails"
-                    placeholder="Ex : réveil vers 4h, impossible de se rendormir"
                   />
                 </Field>
               </CardContent>
@@ -534,7 +583,7 @@ export function OrientationWizard() {
                       "Ajustement TTT (traitement)",
                       "Demande d'hospitalisation",
                       "Urgence (SECOP / 3114 / 15)",
-                      "Non urgente",
+                      "Évaluation globale de la situation",
                     ].map((item) => (
                       <label
                         key={item}
@@ -551,7 +600,7 @@ export function OrientationWizard() {
                   id="orientation-proposition"
                   name="orientationProposition"
                   className="min-h-20 bg-background"
-                  placeholder="Ex : orientation vers consultation psychiatrique sous 7 jours..."
+                  placeholder="Ex : orientation vers consultation psychiatrique, ajustement du traitement, accompagnement IDE psy…"
                 />
 
                 <p className="text-sm text-muted-foreground">
@@ -623,6 +672,17 @@ export function OrientationWizard() {
                 <span className="font-medium text-foreground">
                   elise.patenere@pro.mssante.fr
                 </span>
+              </p>
+              <p className="text-xs text-muted-foreground text-right leading-relaxed">
+                Une{" "}
+                <span className="font-medium text-foreground">
+                  infirmière en psychiatrie
+                </span>{" "}
+                (Maison de Santé Les Pins – Pessac) vous propose un{" "}
+                <span className="font-medium text-foreground">
+                  échange téléphonique le vendredi après-midi
+                </span>
+                .
               </p>
               {pdfState === "error" && (
                 <p className="text-sm text-destructive">{pdfError}</p>
