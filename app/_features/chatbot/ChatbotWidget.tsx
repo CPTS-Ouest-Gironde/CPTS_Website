@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import dynamic from "next/dynamic"
-import { MessageCircle, X } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import dynamic from "next/dynamic";
+import { Bot, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-import { chatbotConfig } from "./chatbot.config"
+import { chatbotConfig } from "./chatbot.config";
 import {
   createInitialState,
   hydrateState,
@@ -12,73 +12,80 @@ import {
   processQuickReply,
   processUserInput,
   restartConversation,
-} from "./engine"
-import type { QuickReply } from "./types"
+} from "./engine";
+import type { QuickReply } from "./types";
 
-const PANEL_ID = "cpts-chatbot-panel"
-const ChatWindow = dynamic(() => import("./ChatWindow").then((module) => module.ChatWindow), {
-  ssr: false,
-})
+const PANEL_ID = "cpts-chatbot-panel";
+const ChatWindow = dynamic(
+  () => import("./ChatWindow").then((module) => module.ChatWindow),
+  {
+    ssr: false,
+  },
+);
 
 export function ChatbotWidget() {
-  const [isOpen, setIsOpen] = useState(false)
-  const [isHydratedFromStorage, setIsHydratedFromStorage] = useState(false)
-  const [state, setState] = useState(() => createInitialState(chatbotConfig))
-  const triggerRef = useRef<HTMLButtonElement>(null)
+  const [isOpen, setIsOpen] = useState(false);
+  const [isHydratedFromStorage, setIsHydratedFromStorage] = useState(false);
+  const [state, setState] = useState(() => createInitialState(chatbotConfig));
+  const triggerRef = useRef<HTMLButtonElement>(null);
 
   const closeChatbot = () => {
-    setIsOpen(false)
+    setIsOpen(false);
     // Rend le focus au bouton déclencheur (clavier / lecteur d'écran).
-    triggerRef.current?.focus()
-  }
+    triggerRef.current?.focus();
+  };
 
   useEffect(() => {
     if (!isHydratedFromStorage) {
-      return
+      return;
     }
 
     const timeoutId = window.setTimeout(() => {
-      persistState(state)
-    }, 120)
+      persistState(state);
+    }, 120);
 
-    return () => window.clearTimeout(timeoutId)
-  }, [isHydratedFromStorage, state])
+    return () => window.clearTimeout(timeoutId);
+  }, [isHydratedFromStorage, state]);
 
   useEffect(() => {
     if (!isOpen) {
-      return
+      return;
     }
 
     const onEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        closeChatbot()
+        closeChatbot();
       }
-    }
+    };
 
-    window.addEventListener("keydown", onEscape)
-    return () => window.removeEventListener("keydown", onEscape)
-  }, [isOpen])
+    window.addEventListener("keydown", onEscape);
+    return () => window.removeEventListener("keydown", onEscape);
+  }, [isOpen]);
 
   const handleSend = (input: string) => {
-    setState((previousState) => processUserInput(previousState, input, chatbotConfig))
-  }
+    setState((previousState) =>
+      processUserInput(previousState, input, chatbotConfig),
+    );
+  };
 
   const handleQuickReply = (quickReply: QuickReply) => {
-    setState((previousState) => processQuickReply(previousState, quickReply, chatbotConfig))
-  }
+    setState((previousState) =>
+      processQuickReply(previousState, quickReply, chatbotConfig),
+    );
+  };
 
   const handleRestart = () => {
-    setState(restartConversation(chatbotConfig))
-  }
+    setState(restartConversation(chatbotConfig));
+  };
 
   const handleToggleOpen = () => {
     if (!isOpen && !isHydratedFromStorage) {
-      setState(hydrateState(chatbotConfig))
-      setIsHydratedFromStorage(true)
+      setState(hydrateState(chatbotConfig));
+      setIsHydratedFromStorage(true);
     }
 
-    setIsOpen((currentValue) => !currentValue)
-  }
+    setIsOpen((currentValue) => !currentValue);
+  };
 
   return (
     <>
@@ -111,8 +118,8 @@ export function ChatbotWidget() {
         aria-controls={PANEL_ID}
         aria-label={isOpen ? "Fermer le chatbot" : "Ouvrir le chatbot"}
       >
-        {isOpen ? <X className="size-6" /> : <MessageCircle className="size-6" />}
+        {isOpen ? <X className="size-6" /> : <Bot className="size-9" />}
       </button>
     </>
-  )
+  );
 }
