@@ -1076,3 +1076,100 @@ test("ACTION 6 — hydrateState fallback si version persistée obsolète", () =>
     })
   }
 })
+
+test("processUserInput canicule matche sf-canicule", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "canicule", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-canicule"))
+})
+
+test("processUserInput coup de chaleur matche sf-canicule", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "coup de chaleur", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-canicule"))
+})
+
+test("processUserInput prevenir les chutes matche sf-chute-personne-agee", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "prevenir les chutes", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-chute-personne-agee"))
+})
+
+test("processUserInput chute personne agee matche sf-chute-personne-agee", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "chute personne agee", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-chute-personne-agee"))
+})
+
+test("processUserInput vaccin hpv matche sf-papillomavirus", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "vaccin hpv", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-papillomavirus"))
+})
+
+test("processUserInput vaccination papillomavirus matche sf-papillomavirus", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "vaccination papillomavirus", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-papillomavirus"))
+})
+
+test("le node prevention-quotidien expose les ressources canicule et chute", () => {
+  const node = chatbotConfig.nodes["prevention-quotidien"]
+  assert.ok(node, "le node prevention-quotidien doit exister")
+
+  const canicule = node.quickReplies?.find((reply) => reply.id === "qr-prevention-quotidien-canicule")
+  const chute = node.quickReplies?.find((reply) => reply.id === "qr-prevention-quotidien-chute")
+
+  assert.deepEqual(canicule?.actionResourceIds, ["sf-canicule"])
+  assert.deepEqual(chute?.actionResourceIds, ["sf-chute-personne-agee"])
+})
+
+test("le menu prevention reference le node prevention-quotidien", () => {
+  const node = chatbotConfig.nodes["prevention"]
+  const quotidien = node.quickReplies?.find((reply) => reply.id === "qr-prevention-quotidien")
+
+  assert.equal(quotidien?.nextNodeId, "prevention-quotidien")
+})
+
+test("le node prevention-vaccinations expose la vaccination papillomavirus", () => {
+  const node = chatbotConfig.nodes["prevention-vaccinations"]
+  const hpv = node.quickReplies?.find((reply) => reply.id === "qr-prevention-vac-hpv")
+
+  assert.deepEqual(hpv?.actionResourceIds, ["sf-papillomavirus"])
+})
+
+test("la ressource sm-face-aux-violences pointe vers la route prevention", () => {
+  const resource = chatbotConfig.resources["sm-face-aux-violences"]
+
+  assert.equal(resource.type, "internal")
+  assert.equal(
+    "href" in resource ? resource.href : undefined,
+    "/prevention/sante-familiale/face-aux-violences",
+  )
+  assert.equal(resource.isSensitive, true)
+  assert.equal(resource.sensitivityCategory, "violence")
+})

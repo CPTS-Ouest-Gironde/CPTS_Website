@@ -618,6 +618,132 @@
           "sectionIndex": 3
         }
       ]
+    },
+    {
+      "articleId": "canicule",
+      "resourceId": "sf-canicule",
+      "title": "CONSEILS CANICULE",
+      "chunks": [
+        {
+          "sectionTitle": "Introduction",
+          "text": "Introduction Vous avez plus de 65 ans, êtes handicapé ou malade, dépendant, enceinte ou jeune enfant ? Avec les fortes chaleurs, vous êtes considéré comme possiblement **fragile**. Avec les fortes chaleurs, vous risquez un **coup de chaud, une déshydratation, des crampes, des maux de tête ou des…",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "conseils",
+          "text": "conseils PENDANT LES FORTES CHALEURS, PROTÉGEZ-VOUS **Protégez-vous** pendant les heures les plus chaudes. **Hydratez-vous régulièrement** en buvant de l'eau et **brumisez-vous** la peau. **Évitez l'alcool.** **Évitez** de faire du sport et tout effort physique. **Fermez** les fenêtres et les…",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "proches",
+          "text": "proches Pensez aux plus fragiles Pensez à prendre régulièrement des nouvelles de vos parents et proches fragiles.",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "registre",
+          "text": "registre Pensez à vous inscrire sur le registre canicule Ce service est **gratuit et confidentiel**. Il permet de recenser les personnes fragiles et isolées : elles seront contactées par les services du **CCAS** pendant les canicules pour leur rappeler les bons gestes. Sans réponse, la police…",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "ressource",
+          "text": "ressource Document à consulter Retrouvez l'ensemble des recommandations et des bons gestes à adopter en cas de fortes chaleurs. Ouvrir en plein écran",
+          "sectionIndex": 4
+        }
+      ]
+    },
+    {
+      "articleId": "chute-personne-agee",
+      "resourceId": "sf-chute-personne-agee",
+      "title": "CHUTE DE LA PERSONNE ÂGÉE : comment la prévenir ?",
+      "chunks": [
+        {
+          "sectionTitle": "Introduction",
+          "text": "Introduction En France, les chutes des personnes âgées entraînent plus de 100 000 hospitalisations et plus de 10 000 décès par an. Près d'**1 personne de plus de 65 ans sur 3** chute chaque année, et **1 personne de plus de 80 ans sur 2** ! Le risque de récidive est **majeur : 16 fois plus de…",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "chiffres",
+          "text": "chiffres LA CHUTE DE LA PERSONNE ÂGÉE EN CHIFFRES +100 000 hospitalisations par an en France liées aux chutes des personnes âgées 1 sur 3 personnes de plus de 65 ans chutent chaque année (1 sur 2 après 80 ans) x16 de risque de retomber après une première chute Un plan triennal anti-chute (lancé en…",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "axes",
+          "text": "axes LES 5 AXES DU PLAN ANTI-CHUTE Savoir repérer les risques de chute et alerter Aménager son logement et sortir en sécurité Aides techniques à la mobilité pour tous Activité physique : la meilleure arme anti-chute Téléassistance pour tous",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "complications",
+          "text": "complications Quelles complications après une chute ? Elles sont **traumatiques** (fractures, lyse musculaire après une station au sol supérieure à 1 h) et **psychologiques** (perte de confiance, peur de rechuter associée au syndrome post-chute).",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "profil",
+          "text": "profil Quel est le profil des patients qui chutent ? L'âge moyen du chuteur est de 84,5 ans. 80 % des chutes ont lieu en journée, le plus souvent au moment de la toilette ou de la marche. Les seniors les plus jeunes chutent en prenant des risques en hauteur. Les seniors chutent dans leurs…",
+          "sectionIndex": 4
+        },
+        {
+          "sectionTitle": "causes",
+          "text": "causes Pourquoi risquez-vous de chuter ? Les causes des chutes sont multiples : **Un état de santé fragilisé** : troubles de l'équilibre, vertiges, diminution de la mobilité articulaire, faiblesse musculaire, somnolence médicamenteuse. La baisse de la vue et de l'audition est inexorable avec le…",
+          "sectionIndex": 5
+        },
+        {
+          "sectionTitle": "prevention",
+          "text": "prevention Que devez-vous faire pour éviter de tomber ? Des gestes simples, classés en trois priorités, réduisent fortement le risque de chute. Aménagez votre logement Libérez les lieux de passage et éclairez-les Ôtez les objets et meubles gênant la circulation. Fixez les câbles électriques,…",
+          "sectionIndex": 6
+        },
+        {
+          "sectionTitle": "test",
+          "text": "test Voulez-vous tester votre risque de chute ? Vous pouvez faire réaliser par votre équipe soignante le **test de lever de chaise (FTSS)**. Ce test consiste à mesurer le temps que vous prenez pour effectuer **5 relevés successifs**, aussi vite que possible, sans vous aider de vos bras. Si ce…",
+          "sectionIndex": 7
+        },
+        {
+          "sectionTitle": "videos",
+          "text": "videos Conseils en vidéo Des vidéos pratiques pour vous aider à prévenir les chutes au quotidien. Cliquez sur une vidéo pour la lancer. Vidéo 1 Vidéo 2 Vidéo 3",
+          "sectionIndex": 8
+        },
+        {
+          "sectionTitle": "aides",
+          "text": "aides Vous renseigner sur vos droits à une aide financière Pour connaître vos droits à une aide financière (pour vous équiper, améliorer votre habitat, payer vos cotisations sportives, etc.) et les organismes qui peuvent vous aider, vous pouvez vous renseigner auprès de votre CCAS :",
+          "sectionIndex": 9
+        }
+      ]
+    },
+    {
+      "articleId": "face-aux-violences",
+      "resourceId": "sm-face-aux-violences",
+      "title": "FACE AUX VIOLENCES, VOUS N'ÊTES PAS SEULES !",
+      "chunks": [
+        {
+          "sectionTitle": "Introduction",
+          "text": "Introduction Est considérée comme violence toute action qui nuit à **l'intégrité physique, psychique et morale** de la personne. Ainsi, une femme peut être victime d'un harcèlement physique, psychique, moral et économique (quand elle se retrouve complètement dépendante financièrement de son…",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "Le saviez-vous",
+          "text": "Le saviez-vous Le saviez-vous ? Sur le plan juridique Si les violences sont réalisées par le conjoint ou l'ex, cela entraîne une circonstance aggravante. Quel que soit l'ITT de la victime, les violences conjugales relèvent du Tribunal correctionnel. Le consentement Vous êtes consentante si vous…",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "aides",
+          "text": "aides Quelles sont les aides possibles à votre disposition ? Numéros nationaux 17 en cas de danger IMMÉDIAT. 3919 ANONYME ET GRATUIT, 24h/24, en partenariat avec les associations mobilisées contre les violences faites aux femmes. 114 24h/24 : SMS pour les personnes sourdes et malentendantes. 119…",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "outils",
+          "text": "outils Quels sont les outils à votre disposition ? Le Violentomètre Un outil d'auto-évaluation composé de 23 questions rapides permettant de repérer les comportements violents et de mesurer si la relation de couple est saine ou, au contraire, violente. Ta relation est saine quand il… respecte tes…",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "lieux",
+          "text": "lieux Quels lieux pour vous accueillir sur la métropole bordelaise ? APAFED association pour l'accueil des femmes en difficultés. 05 56 40 93 66, 7j/7 et 24h/24. CAUVA centre d'accueil en urgence des victimes, avec prise en charge médicale, psychologique et sociale (accueil après dépôt de…",
+          "sectionIndex": 4
+        },
+        {
+          "sectionTitle": "temoignages",
+          "text": "temoignages Quelques extraits & ressources « Touchées » — Alexandra Lamy a un message à vous transmettre Reportage vidéo : la prise en charge thérapeutique des hommes maltraitants Reportage audio : la prise en charge thérapeutique des hommes maltraitants **« Jusqu'à la garde »** : film de Xavier…",
+          "sectionIndex": 5
+        }
+      ]
     }
   ]
 }

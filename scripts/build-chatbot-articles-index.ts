@@ -172,6 +172,21 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     resourceId: "etp-ateliers",
     path: "app/data/ateliers-education-therapeutique.json",
   },
+  {
+    slug: "canicule",
+    resourceId: "sf-canicule",
+    path: "app/data/canicule.json",
+  },
+  {
+    slug: "chute-personne-agee",
+    resourceId: "sf-chute-personne-agee",
+    path: "app/data/chute-personne-agee.json",
+  },
+  {
+    slug: "face-aux-violences",
+    resourceId: "sm-face-aux-violences",
+    path: "app/data/face-aux-violences.json",
+  },
 ]
 
 const TODO_SOURCES = [
