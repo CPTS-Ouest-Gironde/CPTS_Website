@@ -1,0 +1,51 @@
+{
+  "title": "Articles & campagnes",
+  "subtitle": "Nos ressources de prévention dédiées à la santé des femmes",
+  "articles": [
+    {
+      "id": "vaccination-papillomavirus",
+      "title": "La vaccination contre le papillomavirus",
+      "dateLabel": "21 juin 2026",
+      "date": "2026-06-21",
+      "image": "/prevention/sante-famille/papillomavirus.png",
+      "imagePosition": null,
+      "href": "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025"
+    },
+    {
+      "id": "face-aux-violences",
+      "title": "Face aux violences, vous n'êtes pas seules !",
+      "dateLabel": "4 juin 2026",
+      "date": "2026-06-04",
+      "image": "/femme-floue-face-anxiete-vue-f.png",
+      "imagePosition": null,
+      "href": "/prevention/sante-familiale/face-aux-violences"
+    },
+    {
+      "id": "juin-vert-2026",
+      "title": "Juin Vert 2026 : dépistage du cancer du col de l'utérus",
+      "dateLabel": "1 juin 2026",
+      "date": "2026-06-01",
+      "image": "/juin-vert/juin-vert-2026.webp",
+      "imagePosition": "center 25%",
+      "href": "/prevention/sante-familiale/juin-vert-2026"
+    },
+    {
+      "id": "endometriose-depistage-prise-en-charge",
+      "title": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
+      "dateLabel": "17 avril 2026",
+      "date": "2026-04-17",
+      "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
+      "imagePosition": null,
+      "href": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
+    },
+    {
+      "id": "octobre-rose-2025",
+      "title": "Octobre Rose 2025",
+      "dateLabel": "29 septembre 2025",
+      "date": "2025-09-29",
+      "image": "/prevention/sante-famille/octobre-rose.png",
+      "imagePosition": null,
+      "href": "/prevention/sante-familiale/octobre-rose-2025"
+    }
+  ]
+}

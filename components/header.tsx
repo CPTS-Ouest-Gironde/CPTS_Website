@@ -45,6 +45,7 @@ const preventionLinks = [
   { label: "Fiches de suivi", href: "/prevention/memos-suivi" },
   { label: "Articles santé familiale", href: "/prevention/sante-familiale" },
   { label: "Santé mentale", href: "/sante-mental" },
+  { label: "Santé de la femme", href: "/sante-de-la-femme" },
 ] as const
 
 const protectedProfessionalLinks = [
