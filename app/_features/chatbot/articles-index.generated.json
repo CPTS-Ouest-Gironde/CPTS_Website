@@ -640,14 +640,19 @@
           "sectionIndex": 2
         },
         {
+          "sectionTitle": "alerte",
+          "text": "alerte ATTENTION Le département de la Gironde passe en **VIGILANCE ORANGE CANICULE** le **lundi 6 juillet à 12 heures**. Des dispositifs ont été renforcés sur nos 4 communes de Mérignac, Martignas-sur-Jalle, Saint-Jean-d'Illac et Pessac pour les plus fragiles. Pour la commune de Mérignac Les…",
+          "sectionIndex": 3
+        },
+        {
           "sectionTitle": "registre",
           "text": "registre Pensez à vous inscrire sur le registre canicule Ce service est **gratuit et confidentiel**. Il permet de recenser les personnes fragiles et isolées : elles seront contactées par les services du **CCAS** pendant les canicules pour leur rappeler les bons gestes. Sans réponse, la police…",
-          "sectionIndex": 3
+          "sectionIndex": 4
         },
         {
           "sectionTitle": "ressource",
           "text": "ressource Document à consulter Retrouvez l'ensemble des recommandations et des bons gestes à adopter en cas de fortes chaleurs. Ouvrir en plein écran",
-          "sectionIndex": 4
+          "sectionIndex": 5
         }
       ]
     },

@@ -13,6 +13,8 @@ import {
   ClipboardList,
   FileText,
   ExternalLink,
+  AlertTriangle,
+  MapPin,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import data from "@/app/data/canicule.json";
@@ -20,15 +22,48 @@ import data from "@/app/data/canicule.json";
 const description =
   "Conseils canicule : reconnaître les personnes fragiles, adopter les bons gestes face aux fortes chaleurs et s'inscrire sur le registre canicule de votre commune.";
 
+// Détecte les numéros de téléphone (ex : 05 56 55 66 55) et les emails
+// pour les rendre cliquables (tel: / mailto:).
+const PHONE_REGEX = /^0\d(?:[ .]?\d{2}){4}$/;
+const PHONE_OR_EMAIL = /(\b0\d(?:[ .]?\d{2}){4}\b|[\w.+-]+@[\w-]+(?:\.[\w-]+)+)/g;
+
+function linkify(text: string) {
+  return text.split(PHONE_OR_EMAIL).map((part, i) => {
+    if (PHONE_REGEX.test(part)) {
+      return (
+        <a
+          key={i}
+          href={`tel:${part.replace(/[ .]/g, "")}`}
+          className="underline underline-offset-2 hover:text-orange-600 transition-colors"
+        >
+          {part}
+        </a>
+      );
+    }
+    if (part.includes("@")) {
+      return (
+        <a
+          key={i}
+          href={`mailto:${part}`}
+          className="underline underline-offset-2 hover:text-orange-600 transition-colors break-all"
+        >
+          {part}
+        </a>
+      );
+    }
+    return part;
+  });
+}
+
 // Rend le texte en interprétant les marqueurs **gras**.
 function renderInline(text: string) {
   return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
     part.startsWith("**") && part.endsWith("**") ? (
       <strong key={i} className="font-semibold text-foreground">
-        {part.slice(2, -2)}
+        {linkify(part.slice(2, -2))}
       </strong>
     ) : (
-      part
+      <span key={i}>{linkify(part)}</span>
     )
   );
 }
@@ -47,7 +82,7 @@ export default function CaniculePage() {
       <Header />
 
       {/* Hero */}
-      <section className="relative pt-24 lg:pt-32 pb-12 overflow-hidden">
+      <section className="relative pt-32 lg:pt-32 pb-12 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-orange-50 via-amber-50/40 to-background" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
@@ -130,7 +165,19 @@ export default function CaniculePage() {
                     <div className="mt-6 flex items-center gap-3 rounded-xl bg-red-50 border border-red-200 px-4 py-3">
                       <Phone className="w-5 h-5 text-red-600 flex-shrink-0" />
                       <span className="text-sm font-semibold text-red-700">
-                        {data.conseils.emergency}
+                        {data.conseils.emergency.split(/\b(15)\b/).map((part, i) =>
+                          part === "15" ? (
+                            <a
+                              key={i}
+                              href="tel:15"
+                              className="underline underline-offset-2 hover:text-red-800 transition-colors"
+                            >
+                              15
+                            </a>
+                          ) : (
+                            part
+                          )
+                        )}
                       </span>
                     </div>
                   )}
@@ -146,6 +193,58 @@ export default function CaniculePage() {
                 <p className="text-sm leading-relaxed opacity-95">{data.proches.text}</p>
               </div>
             </div>
+
+            {/* ALERTE VIGILANCE ORANGE */}
+            <Card className="border-2 border-orange-400 bg-orange-50/50 overflow-hidden py-0 gap-0">
+              <div className="flex items-start gap-3 bg-orange-500 px-6 py-4 text-white">
+                <AlertTriangle className="w-6 h-6 flex-shrink-0 mt-0.5" />
+                <div>
+                  <h2 className="text-lg font-bold uppercase tracking-wide">
+                    {data.alerte.title}
+                  </h2>
+                  <p className="text-sm leading-relaxed opacity-95">
+                    {renderInline(data.alerte.intro)}
+                  </p>
+                </div>
+              </div>
+              <CardContent className="p-6 lg:p-8 space-y-8">
+                <p className="text-sm font-semibold text-foreground leading-relaxed">
+                  {renderInline(data.alerte.text)}
+                </p>
+                {data.alerte.communes.map((commune, i) => (
+                  <div key={i} className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-5 h-5 text-orange-600 flex-shrink-0" />
+                      <h3 className="text-base font-bold text-foreground">
+                        {commune.name}
+                      </h3>
+                    </div>
+                    {commune.blocks.map((block, j) => (
+                      <div key={j} className="space-y-2 pl-7">
+                        {block.title && (
+                          <h4 className="text-sm font-semibold text-orange-700">
+                            {block.title}
+                          </h4>
+                        )}
+                        <ul className="space-y-2">
+                          {block.items.map((item, k) => (
+                            <li
+                              key={k}
+                              className="flex items-start gap-2 text-sm text-muted-foreground"
+                            >
+                              <span className="mt-2 h-1.5 w-1.5 rounded-full bg-orange-400 flex-shrink-0" />
+                              <span className="leading-relaxed">
+                                {renderInline(item)}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </CardContent>
+            </Card>
 
             {/* REGISTRE CANICULE */}
             <Card className="border-orange-200 bg-orange-50/30">
