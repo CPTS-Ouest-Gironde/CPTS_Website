@@ -33,6 +33,75 @@
     "title": "Pensez aux plus fragiles",
     "text": "Pensez à prendre régulièrement des nouvelles de vos parents et proches fragiles."
   },
+  "alerte": {
+    "title": "ATTENTION",
+    "intro": "Le département de la Gironde passe en **VIGILANCE ORANGE CANICULE** le **lundi 6 juillet à 12 heures**.",
+    "text": "Des dispositifs ont été renforcés sur nos 4 communes de Mérignac, Martignas-sur-Jalle, Saint-Jean-d'Illac et Pessac pour les plus fragiles.",
+    "communes": [
+      {
+        "name": "Pour la commune de Mérignac",
+        "blocks": [
+          {
+            "items": [
+              "Les personnes fragiles, âgées ou en situation de handicap peuvent accéder aux **salles climatisées** du restaurant séniors Jean Brocas et du foyer restaurant du Jard. Des douches sont accessibles au foyer Roger Couderc de 14h à 17h jusqu'au vendredi 26 juin.",
+              "Des douches sont accessibles aux stades du Jard, de Cruchon et de Brettes le samedi 27 juin entre 8h et 12h et aux stades de Cruchon et de Brettes le dimanche 28 juin entre 9h et 12h.",
+              "Les personnes inscrites sur le registre « fortes chaleurs » seront **appelées régulièrement**.",
+              "Des bouteilles d'eau sont distribuées aux personnes sans abri au Relais des solidarités. Une douche est également à leur disposition du lundi au vendredi de 9h à 12h et de 14h à 17h.",
+              "Les médiateurs sociaux réalisent des maraudes (distribution de bouteilles d'eau et orientation vers les lieux frais/douches)."
+            ]
+          },
+          {
+            "title": "Le registre canicule",
+            "items": [
+              "La solidarité protège ! Si vous êtes ou vous connaissez une personne âgée, fragile, isolée ou en situation de handicap, inscrivez-vous au dispositif de lutte contre les fortes chaleurs proposé par la Ville.",
+              "Pour tout renseignement, contactez le CCAS au **05 56 55 66 55**.",
+              "Horaires d'ouverture du CCAS : les lundis de 13h à 17h et du mardi au vendredi de 8h30 à 17h."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Pour la commune de Pessac",
+        "blocks": [
+          {
+            "items": [
+              "Si vous connaissez ou croisez une personne fragile, ou si vous êtes vous-même une personne fragile, contactez l'**Accueil Seniors Handicap au 05 57 93 67 49**.",
+              "Les personnes inscrites sur le registre canicule (1215 à Pessac) sont appelées régulièrement par le CCAS de Pessac depuis le mercredi 17 juin pour prendre de leurs nouvelles et recueillir leurs besoins. La police municipale rend également visite aux personnes inscrites sur le registre canicule, notamment en cas de non-réponse aux appels."
+            ]
+          },
+          {
+            "title": "Personnes sans domicile sur Pessac",
+            "items": [
+              "Des bouteilles d'eau fraîches sont distribuées aux personnes sans domicile fixe lors des maraudes de la police municipale. Des bouteilles d'eau fraîche sont également disponibles au CCAS.",
+              "Le Répit, situé 102 avenue Chaumet, accueille les personnes en situation de grande précarité le mardi, mercredi et vendredi de 9h à 12h."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sur la commune de Martignas-sur-Jalle",
+        "blocks": [
+          {
+            "items": [
+              "En semaine (du lundi au vendredi) : la salle Charles-Vanel peut être ouverte à la demande. Pour y accéder, contactez le CCAS au **05 57 97 00 51**.",
+              "Le week-end : un accueil à l'EHPAD du Bourg peut être envisagé. Si vous souhaitez en bénéficier, merci d'appeler impérativement au **06 77 20 11 64** afin que l'agent en charge du registre puisse prévenir l'établissement."
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sur Saint-Jean-d'Illac",
+        "blocks": [
+          {
+            "items": [
+              "Un accueil est possible à l'**espace Quérandeau** (149 avenue du Las) : ce lieu tempéré est accessible à tous, avec des bouteilles d'eau mises à disposition. Tél : **05 57 97 03 74**.",
+              "Le CCAS tient également un registre pour contacter les personnes fragiles : pour s'inscrire ou signaler une personne vulnérable, contactez le **05 57 97 83 04** ou **ccas@mairie-stjeandillac.fr**."
+            ]
+          }
+        ]
+      }
+    ]
+  },
   "registre": {
     "title": "Pensez à vous inscrire sur le registre canicule",
     "paragraphs": [
