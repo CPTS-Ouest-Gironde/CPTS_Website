@@ -46,6 +46,15 @@
       "image": "/prevention/sante-famille/octobre-rose.png",
       "imagePosition": null,
       "href": "/prevention/sante-familiale/octobre-rose-2025"
+    },
+    {
+      "id": "sante-mentale-des-jeunes",
+      "title": "Santé mentale des jeunes",
+      "dateLabel": "5 juillet 2025",
+      "date": "2025-07-05",
+      "image": "/prevention/sante-famille/sante-mentale-jeune.jpeg",
+      "imagePosition": null,
+      "href": "/prevention/sante-mentale-des-jeunes"
     }
   ]
 }

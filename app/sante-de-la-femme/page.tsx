@@ -43,24 +43,14 @@ export default function SanteDeLaFemmePage() {
           }}
         />
 
-        {/* Illustration - positionnée en absolu sur desktop */}
-        <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none z-10">
-          <Image
-            src="/santé-de-la-femme/hero-sante-femme.webp"
-            alt=""
-            fill
-            sizes="600px"
-            className="object-contain"
-            priority
-            aria-hidden="true"
-          />
-        </div>
-
         <div className="container mx-auto px-4 lg:px-8 relative z-20">
-          <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center">
-            <div className="flex-1 text-center lg:text-left space-y-6 lg:max-w-2xl">
-              <h1 className="text-5xl lg:text-8xl font-bold text-foreground text-balance leading-tight">
-                Santé de la femme
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-16">
+            <div className="text-center lg:text-left space-y-6">
+              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground text-balance leading-tight">
+                La Santé de la femme
+                <span className="block mt-3 text-2xl lg:text-3xl xl:text-4xl font-semibold text-primary">
+                  Annuaire et ressources patients
+                </span>
               </h1>
               <p className="text-lg lg:text-2xl text-muted-foreground text-pretty max-w-xl mx-auto lg:mx-0 font-light">
                 Accompagner et orienter les femmes à chaque étape de leur vie
@@ -96,16 +86,18 @@ export default function SanteDeLaFemmePage() {
                 </Button>
               </div>
             </div>
-            {/* Illustration mobile uniquement */}
-            <div className="lg:hidden relative w-64 h-64 mt-8">
-              <Image
-                src="/santé-de-la-femme/hero-sante-femme.webp"
-                alt="Illustration santé de la femme"
-                fill
-                sizes="256px"
-                className="object-contain"
-                priority
-              />
+            {/* Photo hero */}
+            <div className="w-full max-w-md mx-auto lg:max-w-none overflow-hidden rounded-3xl border border-primary/10 shadow-xl">
+              <div className="relative aspect-[4/3] w-full">
+                <Image
+                  src="/santé-de-la-femme/hero-2-sante-femme.webp"
+                  alt="Quatre femmes de générations différentes, souriantes et complices"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 448px, 560px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
