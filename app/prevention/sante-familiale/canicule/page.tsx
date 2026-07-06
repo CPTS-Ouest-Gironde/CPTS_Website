@@ -246,34 +246,52 @@ export default function CaniculePage() {
               </CardContent>
             </Card>
 
-            {/* REGISTRE CANICULE */}
-            <Card className="border-orange-200 bg-orange-50/30">
-              <CardContent className="p-6 lg:p-8 space-y-4">
-                <div className="flex items-center gap-2">
-                  <ClipboardList className="w-5 h-5 text-orange-600" />
-                  <h2 className="text-xl lg:text-2xl font-bold text-foreground">
-                    {data.registre.title}
-                  </h2>
+            {/* REGISTRE CANICULE — affiche Mérignac + card */}
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,340px)_1fr] gap-8 items-start">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-orange-100 bg-white w-full max-w-sm mx-auto lg:mx-0">
+                <div className="relative w-full aspect-[1754/2480]">
+                  <Image
+                    src={data.registre.image.src}
+                    alt={data.registre.image.alt}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 340px"
+                  />
                 </div>
-                {data.registre.paragraphs.map((p, i) => (
-                  <p key={i} className="text-sm text-muted-foreground leading-relaxed">
-                    {renderInline(p)}
+              </div>
+              <Card className="border-orange-200 bg-orange-50/30">
+                <CardContent className="p-6 lg:p-8 space-y-4">
+                  <div className="flex items-center gap-2">
+                    <ClipboardList className="w-5 h-5 text-orange-600" />
+                    <h2 className="text-xl lg:text-2xl font-bold text-foreground">
+                      {data.registre.title}
+                    </h2>
+                  </div>
+                  {data.registre.paragraphs.map((p, i) => (
+                    <p key={i} className="text-sm text-muted-foreground leading-relaxed">
+                      {renderInline(p)}
+                    </p>
+                  ))}
+                  <p className="text-sm text-muted-foreground italic leading-relaxed bg-white border border-orange-100 rounded-xl p-4">
+                    {renderInline(data.registre.condition)}
                   </p>
-                ))}
-                <p className="text-sm text-muted-foreground italic leading-relaxed bg-white border border-orange-100 rounded-xl p-4">
-                  {renderInline(data.registre.condition)}
-                </p>
-                <a
-                  href={data.registre.cta.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 transition-colors px-5 py-2.5 text-sm font-semibold text-white"
-                >
-                  {data.registre.cta.label}
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </CardContent>
-            </Card>
+                  <div className="flex flex-wrap gap-3">
+                    {data.registre.ctas.map((cta, i) => (
+                      <a
+                        key={i}
+                        href={cta.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-orange-500 hover:bg-orange-600 transition-colors px-5 py-2.5 text-sm font-semibold text-white"
+                      >
+                        {cta.label}
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
             {/* RESSOURCE — document Drive intégré */}
             <div className="rounded-2xl border border-orange-200 bg-white overflow-hidden">

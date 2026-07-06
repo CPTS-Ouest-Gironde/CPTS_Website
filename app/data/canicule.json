@@ -104,14 +104,24 @@
   },
   "registre": {
     "title": "Pensez à vous inscrire sur le registre canicule",
+    "image": {
+      "src": "/actu/registre-canicule-merignac.webp",
+      "alt": "Affiche de la Ville de Mérignac : inscrivez-vous au registre canicule dans le cadre du plan fortes chaleurs"
+    },
     "paragraphs": [
       "Ce service est **gratuit et confidentiel**. Il permet de recenser les personnes fragiles et isolées : elles seront contactées par les services du **CCAS** pendant les canicules pour leur rappeler les bons gestes. Sans réponse, la police municipale se déplace à leur domicile."
     ],
     "condition": "Le registre canicule est déclenché lorsque la chaleur est intense : plus de **34° le jour** et **20° la nuit**, pendant **plus de 3 jours**.",
-    "cta": {
-      "label": "S'inscrire sur le registre canicule (Pessac)",
-      "url": "https://www.pessac.fr/fileadmin/medias/Rubriques/Au_quotidien/famille/seniors/canicule/inscription-registre-canicule-pessac.pdf"
-    }
+    "ctas": [
+      {
+        "label": "S'inscrire sur le registre canicule (Pessac)",
+        "url": "https://www.pessac.fr/fileadmin/medias/Rubriques/Au_quotidien/famille/seniors/canicule/inscription-registre-canicule-pessac.pdf"
+      },
+      {
+        "label": "S'inscrire au plan fortes chaleurs (Mérignac)",
+        "url": "https://www.merignac.com/inscrivez-vous-en-ligne-au-plan-fortes-chaleurs"
+      }
+    ]
   },
   "ressource": {
     "title": "Document à consulter",
