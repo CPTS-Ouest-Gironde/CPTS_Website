@@ -1,0 +1,133 @@
+{
+  "version_date": "2026-06-30",
+  "scope": "CPTS Ouest Gironde",
+  "topic": "Annuaire santé de la femme",
+  "communes": [
+    {
+      "commune": "Pessac",
+      "sections": [
+        {
+          "section_title": "Protection Maternelle et Infantile (PMI)",
+          "resources": [
+            {
+              "name": "PMI de Pessac",
+              "type": "PMI",
+              "address": "10 rue Pierre-Wiehn, 33600 Pessac",
+              "phone": "05 56 45 07 15",
+              "hours": "Lundi à jeudi : 8h30-12h30 et 13h30-17h15 · Vendredi : 8h30-12h30 et 13h30-16h15",
+              "services": "Consultations médicales pour femmes enceintes et enfants de 0-6 ans, conseils et soutien aux futurs parents, recherche de mode de garde, planification familiale",
+              "website": "non précisé"
+            }
+          ]
+        },
+        {
+          "section_title": "Maison du Département Solidarités",
+          "resources": [
+            {
+              "name": "Maison du Département Solidarités de Pessac",
+              "type": "MDS",
+              "address": "10 rue Pierre-Wiehn, 33600 Pessac",
+              "phone": "05 56 45 07 15",
+              "hours": "Lundi à jeudi : 8h30-12h30 et 13h30-17h15 · Vendredi : 8h30-12h30 et 13h30-16h15",
+              "services": "Accueil, écoute, orientation et accompagnement pour les femmes victimes de violences, accès aux droits, accompagnement psychologique et social",
+              "website": "non précisé"
+            }
+          ]
+        },
+        {
+          "section_title": "Autres ressources",
+          "resources": [
+            {
+              "name": "Centre de planification familiale",
+              "type": "Planification familiale",
+              "address": "Avenue Pierre Wiehn, 33600 Pessac",
+              "phone": "05 56 36 35 40",
+              "hours": "non précisé",
+              "services": "non précisé",
+              "website": "non précisé"
+            },
+            {
+              "name": "Espace Santé Étudiants",
+              "type": "Service étudiant",
+              "address": "Université de Bordeaux - Campus de Pessac, 22 Avenue Pey Berland, 33600 Pessac",
+              "phone": "05 33 51 42 00",
+              "hours": "non précisé",
+              "services": "non précisé",
+              "website": "non précisé"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "commune": "Mérignac",
+      "sections": [
+        {
+          "section_title": "Protection Maternelle et Infantile (PMI)",
+          "resources": [
+            {
+              "name": "PMI de Mérignac",
+              "type": "PMI",
+              "address": "21 Rue du 19 Mars 1962, 33700 Mérignac",
+              "phone": "05 56 45 07 20",
+              "hours": "Lundi à jeudi : 8h30-12h30 et 13h30-17h15 · Vendredi : 8h30-12h30 et 13h30-16h15",
+              "services": "Consultations médicales pour femmes enceintes et enfants de 0-6 ans, conseils et soutien aux futurs parents, recherche de mode de garde, planification familiale",
+              "website": "non précisé"
+            }
+          ]
+        },
+        {
+          "section_title": "Maison du Département Solidarités",
+          "resources": [
+            {
+              "name": "Maison du Département Solidarités de Mérignac",
+              "type": "MDS",
+              "address": "21 Rue du 19 Mars 1962, 33700 Mérignac",
+              "phone": "05 56 45 07 20",
+              "hours": "Lundi à jeudi : 8h30-12h30 et 13h30-17h15 · Vendredi : 8h30-12h30 et 13h30-16h15",
+              "services": "Accueil, écoute, orientation et accompagnement pour les femmes victimes de violences, accès aux droits, accompagnement psychologique et social",
+              "website": "non précisé"
+            }
+          ]
+        },
+        {
+          "section_title": "Maison des femmes de Mérignac",
+          "resources": [
+            {
+              "name": "Maison des femmes de Mérignac",
+              "type": "Maison des femmes",
+              "address": "2 Rue Boileau, 33700 Mérignac",
+              "phone": "05 56 55 66 25",
+              "hours": "Lundi à vendredi : 9h-12h et 14h-17h",
+              "services": "Accueil, écoute, orientation et accompagnement pour les femmes victimes de violences, accès aux droits, accompagnement psychologique et social",
+              "website": "non précisé"
+            }
+          ]
+        },
+        {
+          "section_title": "Autres ressources",
+          "resources": [
+            {
+              "name": "Centre de planification familiale",
+              "type": "Planification familiale",
+              "address": "1 Rue Joliot Curie, 33700 Mérignac",
+              "phone": "05 56 97 28 10",
+              "hours": "non précisé",
+              "services": "non précisé",
+              "website": "non précisé"
+            },
+            {
+              "name": "Centre de santé",
+              "type": "Centre de santé",
+              "address": "1 Rue du 19 Mars 1962, 33700 Mérignac",
+              "phone": "non précisé",
+              "hours": "non précisé",
+              "services": "non précisé",
+              "website": "non précisé"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

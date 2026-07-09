@@ -154,3 +154,10 @@
 .animate-badge-glow {
   animation: badge-glow 3s ease-in-out infinite;
 }
+
+/* Scroll fluide pour la navigation par ancres (respecte prefers-reduced-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
