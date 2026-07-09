@@ -1,0 +1,18 @@
+{
+  "title": "Les parcours de la santé de la femme",
+  "subtitle": "Votre CPTS met en place des parcours pluriprofessionnels sur le thème de la ménopause. À venir…",
+  "parcours": [
+    {
+      "id": "menopause",
+      "title": "Ménopause",
+      "status": "En cours de construction",
+      "description": "Un parcours pluriprofessionnel pour accompagner les femmes au moment de la ménopause. Cette page sera complétée au fur et à mesure de l'avancement du parcours."
+    },
+    {
+      "id": "second-parcours",
+      "title": "Second parcours",
+      "status": "À venir",
+      "description": "Un second parcours de la santé de la femme est en préparation. Plus d'informations prochainement."
+    }
+  ]
+}

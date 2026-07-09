@@ -1,11 +1,14 @@
 import Image from "next/image";
-import { MapPin, Newspaper } from "lucide-react";
+import { MapPin, Newspaper, Route } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { SanteFemmeAnnuaire } from "@/components/sante-de-la-femme/annuaire";
 import { SanteFemmeArticles } from "@/components/sante-de-la-femme/articles";
 import articlesData from "@/app/data/sante-de-la-femme-articles.json";
+import parcoursData from "@/app/data/sante-de-la-femme-parcours.json";
 
 export default function SanteDeLaFemmePage() {
   return (
@@ -46,8 +49,10 @@ export default function SanteDeLaFemmePage() {
         <div className="container mx-auto px-4 lg:px-8 relative z-20">
           <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-10 lg:gap-16">
             <div className="text-center lg:text-left space-y-6">
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground text-balance leading-tight">
-                La Santé de la femme
+              <h1 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-bold text-foreground leading-tight">
+                <span className="block whitespace-nowrap">
+                  La Santé de la Femme
+                </span>
                 <span className="block mt-3 text-2xl lg:text-3xl xl:text-4xl font-semibold text-primary">
                   Annuaire et ressources patients
                 </span>
@@ -61,8 +66,8 @@ export default function SanteDeLaFemmePage() {
                 </p>
               </div>
 
-              {/* Navigation rapide : annonce les deux contenus de la page */}
-              <div className="flex flex-col sm:flex-row gap-3 pt-4 justify-center lg:justify-start">
+              {/* Navigation rapide : annonce les trois contenus de la page */}
+              <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 pt-4 justify-center lg:justify-start">
                 <Button
                   asChild
                   size="lg"
@@ -82,6 +87,17 @@ export default function SanteDeLaFemmePage() {
                   <a href="#articles">
                     <Newspaper className="w-4 h-4" />
                     Articles &amp; campagnes
+                  </a>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="rounded-full font-semibold h-12 px-6 bg-background/70 backdrop-blur-sm transition-all duration-200"
+                >
+                  <a href="#parcours">
+                    <Route className="w-4 h-4" />
+                    Nos parcours
                   </a>
                 </Button>
               </div>
@@ -134,6 +150,38 @@ export default function SanteDeLaFemmePage() {
           </div>
 
           <SanteFemmeAnnuaire />
+        </div>
+      </section>
+
+      {/* Section Parcours */}
+      <section id="parcours" className="scroll-mt-28 py-12 lg:py-20 bg-background">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center space-y-3 mb-10">
+            <h2 className="text-2xl lg:text-3xl font-bold text-foreground">
+              {parcoursData.title}
+            </h2>
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+              {parcoursData.subtitle}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            {parcoursData.parcours.map((parcours) => (
+              <Card key={parcours.id} className="border-primary/10">
+                <CardContent className="p-6 space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <h3 className="text-lg font-semibold text-foreground">
+                      {parcours.title}
+                    </h3>
+                    <Badge variant="secondary">{parcours.status}</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {parcours.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 

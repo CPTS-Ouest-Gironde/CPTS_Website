@@ -14,9 +14,8 @@ interface ArticleLink {
 }
 
 export function SanteFemmeArticles() {
-  const articles = [...(articlesData.articles as ArticleLink[])].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  // L'ordre d'affichage est celui du JSON (ordre éditorial, pas chronologique)
+  const articles = articlesData.articles as ArticleLink[];
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-5xl mx-auto">

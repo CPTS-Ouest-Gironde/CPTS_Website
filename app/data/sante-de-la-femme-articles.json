@@ -3,15 +3,6 @@
   "subtitle": "Nos ressources de prévention dédiées à la santé des femmes",
   "articles": [
     {
-      "id": "vaccination-papillomavirus",
-      "title": "La vaccination contre le papillomavirus",
-      "dateLabel": "21 juin 2026",
-      "date": "2026-06-21",
-      "image": "/prevention/sante-famille/papillomavirus.png",
-      "imagePosition": null,
-      "href": "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025"
-    },
-    {
       "id": "face-aux-violences",
       "title": "Face aux violences, vous n'êtes pas seules !",
       "dateLabel": "4 juin 2026",
@@ -55,6 +46,15 @@
       "image": "/prevention/sante-famille/sante-mentale-jeune.jpeg",
       "imagePosition": null,
       "href": "/prevention/sante-mentale-des-jeunes"
+    },
+    {
+      "id": "vaccination-papillomavirus",
+      "title": "La vaccination contre le papillomavirus",
+      "dateLabel": "21 juin 2026",
+      "date": "2026-06-21",
+      "image": "/prevention/sante-famille/papillomavirus.png",
+      "imagePosition": null,
+      "href": "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025"
     }
   ]
 }
