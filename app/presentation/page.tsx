@@ -413,7 +413,7 @@ export default function PresentationPage() {
                   </h3>
                   <p className="text-muted-foreground leading-relaxed mb-8 text-center">
                     L'instance décisionnelle est le conseil d'administration de
-                    la CPTS composé de 8 professionnels de santé suivants :
+                    la CPTS composé de 7 professionnels de santé suivants :
                   </p>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="p-6 rounded-2xl bg-background">
@@ -425,18 +425,6 @@ export default function PresentationPage() {
                       </div>
                       <p className="text-muted-foreground">
                         Dr Aouizerate Erick (Cardiologue)
-                      </p>
-                    </div>
-
-                    <div className="p-6 rounded-2xl bg-background">
-                      <div className="flex items-center gap-3 mb-2">
-                        <Users className="w-6 h-6 text-primary" />
-                        <h4 className="text-lg font-bold text-foreground">
-                          Vice-Présidente
-                        </h4>
-                      </div>
-                      <p className="text-muted-foreground">
-                        Dr Meliani Nedjari Kheira (Médecin Généraliste)
                       </p>
                     </div>
 
