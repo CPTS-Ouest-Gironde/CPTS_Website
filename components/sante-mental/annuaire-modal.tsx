@@ -53,6 +53,7 @@ interface Resource {
 
 interface Section {
   section_title: string;
+  section_badge?: string;
   resources: Resource[];
 }
 
@@ -61,7 +62,7 @@ interface AgeGroup {
   sections: Section[];
 }
 
-function PhoneLink({ phone }: { phone: string }) {
+function PhoneLink({ phone, showFreeBadge = true }: { phone: string; showFreeBadge?: boolean }) {
   const [copied, setCopied] = useState(false);
 
   if (phone === "non précisé" || phone === "à venir") return null;
@@ -78,21 +79,26 @@ function PhoneLink({ phone }: { phone: string }) {
     }
   };
 
-  // Format phone for tel: link (remove dots and spaces)
-  const telLink = `tel:${phone.replace(/[\s.]/g, "")}`;
+  // Certaines structures ont plusieurs numéros séparés par " / "
+  const phoneNumbers = phone.split("/").map((p) => p.trim());
   const isFreeCall = phone.startsWith("0800") || phone === "3114" || phone === "119" || phone === "3919" || phone === "15 / 112";
 
   return (
-    <div className="flex items-center gap-2 text-xs">
+    <div className="flex items-center gap-2 text-xs flex-wrap">
       <Phone className="w-3 h-3 text-muted-foreground flex-shrink-0" />
-      <a
-        href={telLink}
-        className="text-primary hover:underline font-medium"
-        title="Cliquer pour appeler"
-      >
-        {phone}
-      </a>
-      {isFreeCall && (
+      {phoneNumbers.map((num, idx) => (
+        <span key={num}>
+          {idx > 0 && <span className="text-muted-foreground mr-2">/</span>}
+          <a
+            href={`tel:${num.replace(/[\s.]/g, "")}`}
+            className="text-primary hover:underline font-medium"
+            title="Cliquer pour appeler"
+          >
+            {num}
+          </a>
+        </span>
+      ))}
+      {isFreeCall && showFreeBadge && (
         <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded-full font-medium">
           Gratuit
         </span>
@@ -223,7 +229,7 @@ function AgeSelectionForm({
 }
 
 // Resource card component
-function ResourceCard({ resource }: { resource: Resource }) {
+function ResourceCard({ resource, hideFreeBadge }: { resource: Resource; hideFreeBadge?: boolean }) {
   const hasAddress = resource.address !== "non précisé" && resource.address !== "à venir";
   const hasEmail = !!resource.email && resource.email !== "non précisé" && resource.email !== "à venir";
   const hasWebsite = resource.website !== "non précisé" && resource.website !== "à venir";
@@ -256,7 +262,7 @@ function ResourceCard({ resource }: { resource: Resource }) {
         </div>
       )}
 
-      <PhoneLink phone={resource.phone} />
+      <PhoneLink phone={resource.phone} showFreeBadge={!hideFreeBadge} />
 
       {hasEmail && (
         <div className="flex items-center gap-2 text-xs">
@@ -412,13 +418,13 @@ function EmergencyNumbersSection({ resources }: { resources: Resource[] }) {
 // Deduplicate resources across all age groups for the "full directory" view
 function buildDeduplicatedSections(ageGroups: AgeGroup[]): Section[] {
   const resourceKey = (r: Resource) => `${r.name}|${r.phone}|${r.address}`;
-  const sectionMap = new Map<string, { resources: Resource[]; seen: Set<string> }>();
+  const sectionMap = new Map<string, { badge?: string; resources: Resource[]; seen: Set<string> }>();
   const sectionOrder: string[] = [];
 
   for (const group of ageGroups) {
     for (const section of group.sections) {
       if (!sectionMap.has(section.section_title)) {
-        sectionMap.set(section.section_title, { resources: [], seen: new Set() });
+        sectionMap.set(section.section_title, { badge: section.section_badge, resources: [], seen: new Set() });
         sectionOrder.push(section.section_title);
       }
       const entry = sectionMap.get(section.section_title)!;
@@ -434,6 +440,7 @@ function buildDeduplicatedSections(ageGroups: AgeGroup[]): Section[] {
 
   return sectionOrder.map((title) => ({
     section_title: title,
+    section_badge: sectionMap.get(title)!.badge,
     resources: sectionMap.get(title)!.resources,
   }));
 }
@@ -449,13 +456,11 @@ function AnnuaireContent({
   const ageGroups = annuaireData.age_groups as AgeGroup[];
   const isEmergencySection = (sectionTitle: string) =>
     sectionTitle.toLowerCase().includes("urgence");
+  const normalizePhone = (p: string) => p.replace(/[\s.]/g, "");
 
   // Always show "Tous âges" section (emergency numbers) for specific age categories
   const tousAgesGroup = ageGroups.find(g => g.age_group === "Tous âges");
   const showTousAges = category !== null && category !== "Tous âges" && tousAgesGroup;
-  const tousAgesEmergencyResources =
-    tousAgesGroup?.sections.find((s) => isEmergencySection(s.section_title))
-      ?.resources || [];
 
   // For "full directory" view: deduplicated flat sections
   const isFullView = category === null;
@@ -465,6 +470,22 @@ function AnnuaireContent({
   const filteredGroups = isFullView
     ? []
     : ageGroups.filter(g => g.age_group === category);
+
+  // Un numéro déjà présent dans les sections affichées (ex. Drogues Info Service
+  // dans « Addictions – Numéros nationaux ») n'est pas répété dans les numéros
+  // d'urgence et d'écoute — dépend donc de la tranche d'âge affichée
+  const displayedPhones = new Set(
+    (isFullView
+      ? deduplicatedSections.filter((s) => !isEmergencySection(s.section_title))
+      : filteredGroups.flatMap((g) =>
+          g.sections.filter((s) => !isEmergencySection(s.section_title))
+        )
+    ).flatMap((s) => s.resources.map((r) => normalizePhone(r.phone)))
+  );
+  const tousAgesEmergencyResources = (
+    tousAgesGroup?.sections.find((s) => isEmergencySection(s.section_title))
+      ?.resources || []
+  ).filter((r) => !displayedPhones.has(normalizePhone(r.phone)));
 
   return (
     <div className="space-y-6">
@@ -494,19 +515,26 @@ function AnnuaireContent({
           return (
             <EmergencyNumbersSection
               key={section.section_title}
-              resources={section.resources}
+              resources={tousAgesEmergencyResources}
             />
           );
         }
         return (
           <Card key={section.section_title} className="border-border rounded-2xl overflow-hidden bg-card">
             <CardContent className="p-5">
-              <h4 className="text-base font-bold text-card-foreground mb-4">
-                {section.section_title}
-              </h4>
+              <div className="flex items-center justify-between gap-2 flex-wrap mb-4">
+                <h4 className="text-base font-bold text-card-foreground">
+                  {section.section_title}
+                </h4>
+                {section.section_badge && (
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold whitespace-nowrap">
+                    {section.section_badge}
+                  </span>
+                )}
+              </div>
               <div className="grid md:grid-cols-2 gap-3">
                 {section.resources.map((resource, idx) => (
-                  <ResourceCard key={idx} resource={resource} />
+                  <ResourceCard key={idx} resource={resource} hideFreeBadge={!!section.section_badge} />
                 ))}
               </div>
             </CardContent>
@@ -552,15 +580,22 @@ function AnnuaireContent({
             {group.sections.map((section) => (
               <Card key={section.section_title} className="border-border rounded-2xl overflow-hidden bg-card">
                 <CardContent className="p-5">
-                  <h4 className="text-base font-bold text-card-foreground mb-4 flex items-center gap-2">
-                    {section.section_title.includes("urgence") && (
-                      <AlertTriangle className="w-4 h-4 text-red-500" />
+                  <div className="flex items-center justify-between gap-2 flex-wrap mb-4">
+                    <h4 className="text-base font-bold text-card-foreground flex items-center gap-2">
+                      {section.section_title.includes("urgence") && (
+                        <AlertTriangle className="w-4 h-4 text-red-500" />
+                      )}
+                      {section.section_title}
+                    </h4>
+                    {section.section_badge && (
+                      <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full font-semibold whitespace-nowrap">
+                        {section.section_badge}
+                      </span>
                     )}
-                    {section.section_title}
-                  </h4>
+                  </div>
                   <div className="grid md:grid-cols-2 gap-3">
                     {section.resources.map((resource, idx) => (
-                      <ResourceCard key={idx} resource={resource} />
+                      <ResourceCard key={idx} resource={resource} hideFreeBadge={!!section.section_badge} />
                     ))}
                   </div>
                 </CardContent>

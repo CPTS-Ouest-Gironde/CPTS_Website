@@ -209,12 +209,174 @@
           "section_title": "Addictions",
           "resources": [
             {
-              "name": "ANPAA33 – Permanence",
+              "name": "Addictions France 33 – Permanence",
               "type": "Addictologie",
               "address": "419 avenue de Verdun, 33700 Mérignac",
               "phone": "05 57 57 00 77",
               "website": "non précisé",
               "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Groupes de parole",
+          "resources": [
+            {
+              "name": "Alcooliques Anonymes – Pessac Châtaigneraie",
+              "type": "Groupe de parole (Alcool)",
+              "address": "44 avenue de la Châtaigneraie, Centre social Arago-Châtaigneraie, 33600 Pessac",
+              "phone": "09 69 39 40 20 / 06 58 49 52 50",
+              "website": "https://www.alcooliques-anonymes.fr/reunions/pessacchataigneraie/",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Vie Libre Gironde Pessac",
+              "type": "Groupe de parole (Alcool)",
+              "address": "28 avenue de Cohé, Maison du Bourg, 33600 Pessac",
+              "phone": "05 56 29 03 98 / 06 19 06 11 17",
+              "email": "vielibre-bordeauxcentre@vielibre.org",
+              "website": "https://www.vielibre.org",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Vie Libre Gironde Mérignac",
+              "type": "Groupe de parole (Alcool)",
+              "address": "55 avenue du Maréchal De Lattre de Tassigny, Maison des associations, 33700 Mérignac",
+              "phone": "06 61 49 48 54 / 06 75 75 06 73",
+              "email": "vielibre-merignac@vielibre.org",
+              "website": "https://www.vielibre.org/region/nouvelle-aquitaine",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "Possibilité d'un groupe femmes",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Soins",
+          "resources": [
+            {
+              "name": "Filière addictologie de recours – CHU de Bordeaux",
+              "type": "Addictologie",
+              "address": "Hôpital Haut-Lévêque, bâtiment USN, aile A1, 1 avenue Magellan, 33604 Pessac Cedex",
+              "phone": "05 47 75 75 75",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "À partir de 18 ans",
+              "source": "email"
+            },
+            {
+              "name": "Institut des Conduites Alimentaires",
+              "type": "Addictologie",
+              "address": "44 avenue Montesquieu, 33700 Mérignac",
+              "phone": "06 76 73 79 41",
+              "email": "ical33@gmail.com",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Dispositif RENAPSUD",
+              "type": "Addictologie",
+              "address": "CH Charles Perrens, 121 rue de la Béchade, 33000 Bordeaux",
+              "phone": "05 56 56 67 02",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Numéros nationaux",
+          "section_badge": "Appels gratuits ou non surtaxés",
+          "resources": [
+            {
+              "name": "Narcotiques Anonymes",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "01 43 72 12 72",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Alcooliques Anonymes",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "09 69 39 40 20",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Drogues Info Service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0800 23 13 13",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Écoute Cannabis",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0 980 980 940",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Alcool info service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0 980 980 930",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Tabac info service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "39 89",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Joueurs Info Service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "09 74 75 13 13",
+              "website": "non précisé",
+              "coverage": "nationale",
               "access": "non précisé",
               "notes": "non précisé",
               "source": "email"
@@ -311,12 +473,174 @@
           "section_title": "Addictions",
           "resources": [
             {
-              "name": "ANPAA33 – Permanence",
+              "name": "Addictions France 33 – Permanence",
               "type": "Addictologie",
               "address": "419 avenue de Verdun, 33700 Mérignac",
               "phone": "05 57 57 00 77",
               "website": "non précisé",
               "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Groupes de parole",
+          "resources": [
+            {
+              "name": "Alcooliques Anonymes – Pessac Châtaigneraie",
+              "type": "Groupe de parole (Alcool)",
+              "address": "44 avenue de la Châtaigneraie, Centre social Arago-Châtaigneraie, 33600 Pessac",
+              "phone": "09 69 39 40 20 / 06 58 49 52 50",
+              "website": "https://www.alcooliques-anonymes.fr/reunions/pessacchataigneraie/",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Vie Libre Gironde Pessac",
+              "type": "Groupe de parole (Alcool)",
+              "address": "28 avenue de Cohé, Maison du Bourg, 33600 Pessac",
+              "phone": "05 56 29 03 98 / 06 19 06 11 17",
+              "email": "vielibre-bordeauxcentre@vielibre.org",
+              "website": "https://www.vielibre.org",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Vie Libre Gironde Mérignac",
+              "type": "Groupe de parole (Alcool)",
+              "address": "55 avenue du Maréchal De Lattre de Tassigny, Maison des associations, 33700 Mérignac",
+              "phone": "06 61 49 48 54 / 06 75 75 06 73",
+              "email": "vielibre-merignac@vielibre.org",
+              "website": "https://www.vielibre.org/region/nouvelle-aquitaine",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "Possibilité d'un groupe femmes",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Soins",
+          "resources": [
+            {
+              "name": "Filière addictologie de recours – CHU de Bordeaux",
+              "type": "Addictologie",
+              "address": "Hôpital Haut-Lévêque, bâtiment USN, aile A1, 1 avenue Magellan, 33604 Pessac Cedex",
+              "phone": "05 47 75 75 75",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "À partir de 18 ans",
+              "source": "email"
+            },
+            {
+              "name": "Institut des Conduites Alimentaires",
+              "type": "Addictologie",
+              "address": "44 avenue Montesquieu, 33700 Mérignac",
+              "phone": "06 76 73 79 41",
+              "email": "ical33@gmail.com",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Dispositif RENAPSUD",
+              "type": "Addictologie",
+              "address": "CH Charles Perrens, 121 rue de la Béchade, 33000 Bordeaux",
+              "phone": "05 56 56 67 02",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Numéros nationaux",
+          "section_badge": "Appels gratuits ou non surtaxés",
+          "resources": [
+            {
+              "name": "Narcotiques Anonymes",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "01 43 72 12 72",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Alcooliques Anonymes",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "09 69 39 40 20",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Drogues Info Service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0800 23 13 13",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Écoute Cannabis",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0 980 980 940",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Alcool info service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0 980 980 930",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Tabac info service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "39 89",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Joueurs Info Service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "09 74 75 13 13",
+              "website": "non précisé",
+              "coverage": "nationale",
               "access": "non précisé",
               "notes": "non précisé",
               "source": "email"
@@ -387,12 +711,174 @@
           "section_title": "Addictions",
           "resources": [
             {
-              "name": "ANPAA33 – Permanence",
+              "name": "Addictions France 33 – Permanence",
               "type": "Addictologie",
               "address": "419 avenue de Verdun, 33700 Mérignac",
               "phone": "05 57 57 00 77",
               "website": "non précisé",
               "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Groupes de parole",
+          "resources": [
+            {
+              "name": "Alcooliques Anonymes – Pessac Châtaigneraie",
+              "type": "Groupe de parole (Alcool)",
+              "address": "44 avenue de la Châtaigneraie, Centre social Arago-Châtaigneraie, 33600 Pessac",
+              "phone": "09 69 39 40 20 / 06 58 49 52 50",
+              "website": "https://www.alcooliques-anonymes.fr/reunions/pessacchataigneraie/",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Vie Libre Gironde Pessac",
+              "type": "Groupe de parole (Alcool)",
+              "address": "28 avenue de Cohé, Maison du Bourg, 33600 Pessac",
+              "phone": "05 56 29 03 98 / 06 19 06 11 17",
+              "email": "vielibre-bordeauxcentre@vielibre.org",
+              "website": "https://www.vielibre.org",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Vie Libre Gironde Mérignac",
+              "type": "Groupe de parole (Alcool)",
+              "address": "55 avenue du Maréchal De Lattre de Tassigny, Maison des associations, 33700 Mérignac",
+              "phone": "06 61 49 48 54 / 06 75 75 06 73",
+              "email": "vielibre-merignac@vielibre.org",
+              "website": "https://www.vielibre.org/region/nouvelle-aquitaine",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "Possibilité d'un groupe femmes",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Soins",
+          "resources": [
+            {
+              "name": "Filière addictologie de recours – CHU de Bordeaux",
+              "type": "Addictologie",
+              "address": "Hôpital Haut-Lévêque, bâtiment USN, aile A1, 1 avenue Magellan, 33604 Pessac Cedex",
+              "phone": "05 47 75 75 75",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "À partir de 18 ans",
+              "source": "email"
+            },
+            {
+              "name": "Institut des Conduites Alimentaires",
+              "type": "Addictologie",
+              "address": "44 avenue Montesquieu, 33700 Mérignac",
+              "phone": "06 76 73 79 41",
+              "email": "ical33@gmail.com",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Dispositif RENAPSUD",
+              "type": "Addictologie",
+              "address": "CH Charles Perrens, 121 rue de la Béchade, 33000 Bordeaux",
+              "phone": "05 56 56 67 02",
+              "website": "non précisé",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions – Numéros nationaux",
+          "section_badge": "Appels gratuits ou non surtaxés",
+          "resources": [
+            {
+              "name": "Narcotiques Anonymes",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "01 43 72 12 72",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Alcooliques Anonymes",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "09 69 39 40 20",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Drogues Info Service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0800 23 13 13",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Écoute Cannabis",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0 980 980 940",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Alcool info service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "0 980 980 930",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Tabac info service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "39 89",
+              "website": "non précisé",
+              "coverage": "nationale",
+              "access": "non précisé",
+              "notes": "non précisé",
+              "source": "email"
+            },
+            {
+              "name": "Joueurs Info Service",
+              "type": "Numéro national",
+              "address": "non précisé",
+              "phone": "09 74 75 13 13",
+              "website": "non précisé",
+              "coverage": "nationale",
               "access": "non précisé",
               "notes": "non précisé",
               "source": "email"
