@@ -128,6 +128,39 @@
           ]
         }
       ]
+    },
+    {
+      "commune": "Centres experts",
+      "sections": [
+        {
+          "section_title": "Endométriose",
+          "resources": [
+            {
+              "name": "IFEM Endo",
+              "type": "Endométriose",
+              "address": "non précisé",
+              "phone": "non précisé",
+              "hours": "non précisé",
+              "services": "Spécialistes de l'endométriose : une équipe multidisciplinaire",
+              "website": "https://www.institutendometriose.com/linstitut/equipe/"
+            }
+          ]
+        },
+        {
+          "section_title": "Troubles vulvo-vaginaux",
+          "resources": [
+            {
+              "name": "VIV MED",
+              "type": "Centre expert",
+              "address": "25 avenue de la Marne, 33700 Mérignac",
+              "phone": "05 57 57 40 40",
+              "hours": "non précisé",
+              "services": "Centre expert des troubles vulvo-vaginaux",
+              "website": "https://www.vivmed.fr/"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
