@@ -26,6 +26,7 @@ interface Resource {
 
 interface Section {
   section_title: string;
+  section_description?: string;
   resources: Resource[];
 }
 
@@ -114,7 +115,11 @@ function ResourceCard({ resource }: { resource: Resource }) {
           className="flex items-center gap-2 text-xs text-primary hover:underline"
         >
           <ExternalLink className="w-3 h-3" />
-          <span>Accéder au site</span>
+          <span>
+            {resource.website.includes("doctolib.fr")
+              ? "Prendre rendez-vous"
+              : "Accéder au site"}
+          </span>
         </a>
       )}
 
@@ -144,6 +149,11 @@ function CommuneDirectory({ commune }: { commune: Commune }) {
                 <HeartHandshake className="w-4 h-4 text-primary" />
                 {section.section_title}
               </h3>
+              {section.section_description && (
+                <p className="text-sm text-muted-foreground -mt-2 mb-4">
+                  {section.section_description}
+                </p>
+              )}
               <div
                 className={
                   isWide

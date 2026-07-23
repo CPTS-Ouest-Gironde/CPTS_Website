@@ -147,7 +147,31 @@
           ]
         },
         {
-          "section_title": "Troubles vulvo-vaginaux",
+          "section_title": "Cardiologie – Parcours ménopause",
+          "section_description": "Dans notre parcours ménopause, 2 cardiologues proposent leur expertise :",
+          "resources": [
+            {
+              "name": "Dr Aude Mignot",
+              "type": "Cardiologue",
+              "address": "2 rue Georges Nègrevergne, 33700 Mérignac",
+              "phone": "non précisé",
+              "hours": "non précisé",
+              "services": "non précisé",
+              "website": "https://www.doctolib.fr/cardiologue/merignac/aude-mignot"
+            },
+            {
+              "name": "Dr Stéphanie Clément-Guinaudeau",
+              "type": "Cardiologue",
+              "address": "2 rue Georges Nègrevergne, 33700 Mérignac",
+              "phone": "non précisé",
+              "hours": "non précisé",
+              "services": "non précisé",
+              "website": "https://www.doctolib.fr/cardiologue/merignac/stephanie-clement-guinaudeau"
+            }
+          ]
+        },
+        {
+          "section_title": "Centre expert des douleurs vulvo-vaginales et périnéales",
           "resources": [
             {
               "name": "VIV MED",
