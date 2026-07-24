@@ -1,0 +1,154 @@
+{
+  "alert": {
+    "title": "Les fumées du gigantesque feu du Porge sont arrivées sur notre territoire",
+    "image": "/feu/image-feu-post-insta.png",
+    "imageAlt": "Alerte fumées d'incendie — feu du Porge"
+  },
+  "emergencyNumbers": [
+    {
+      "number": "15",
+      "label": "SAMU",
+      "description": "Essoufflement, douleur thoracique, palpitations, confusion, toux persistante"
+    },
+    {
+      "number": "18",
+      "label": "Pompiers",
+      "description": "Suspicion d'intoxication au monoxyde de carbone (CO)"
+    },
+    {
+      "number": "FR-Alert",
+      "label": "Consignes officielles",
+      "description": "France Bleu, France Info et l'application FR-Alert"
+    }
+  ],
+  "risks": {
+    "title": "Les risques des fumées d'incendie",
+    "lungsHeart": {
+      "title": "Pour les poumons et le cœur",
+      "iconName": "HeartPulse",
+      "items": [
+        {
+          "label": "Particules fines PM2.5",
+          "text": "Elles pénètrent profondément dans les poumons. Risque d'irritation, de toux, de crise d'asthme et de bronchite.",
+          "iconName": "Wind"
+        },
+        {
+          "label": "Gaz toxiques",
+          "text": "Monoxyde de carbone (CO) : inodore et mortel. Cyanure, dioxines, formaldéhyde selon les matériaux qui brûlent.",
+          "iconName": "Skull"
+        },
+        {
+          "label": "Aggravation",
+          "text": "Les personnes cardiaques, asthmatiques, atteintes de BPCO, les femmes enceintes, les enfants et les personnes âgées sont particulièrement à risque.",
+          "iconName": "TriangleAlert"
+        }
+      ]
+    },
+    "other": [
+      {
+        "title": "Pour les yeux et la peau",
+        "text": "Irritation, yeux qui piquent, gorge irritée, maux de tête, nausées.",
+        "iconName": "Eye"
+      },
+      {
+        "title": "Risque à long terme",
+        "text": "Une exposition répétée augmente le risque de maladies respiratoires et cardiovasculaires.",
+        "iconName": "CalendarClock"
+      }
+    ]
+  },
+  "recommendations": {
+    "title": "Les 8 recommandations à appliquer",
+    "home": {
+      "title": "Si vous êtes chez vous et que la fumée arrive",
+      "iconName": "House",
+      "items": [
+        {
+          "label": "Restez confiné(e)",
+          "text": "Fermez les fenêtres, portes, volets et aérations. Calfeutrez avec des serviettes mouillées sous les portes.",
+          "iconName": "DoorClosed"
+        },
+        {
+          "label": "Coupez la VMC et la climatisation",
+          "text": "Si vous utilisez la clim, mettez-la en mode « recyclage d'air intérieur ».",
+          "iconName": "AirVent"
+        },
+        {
+          "label": "Suivez les consignes officielles",
+          "text": "Écoutez France Bleu, France Info, ou l'application FR-Alert. Si les pompiers demandent une évacuation, évacuez immédiatement.",
+          "iconName": "Radio"
+        },
+        {
+          "label": "Préparez un sac d'évacuation",
+          "text": "Médicaments, papiers, eau, téléphone, chargeur, masque FFP2.",
+          "iconName": "Backpack"
+        }
+      ]
+    },
+    "outside": {
+      "title": "Si vous devez sortir",
+      "iconName": "Footprints",
+      "items": [
+        {
+          "label": "Portez un masque",
+          "text": "Seul le masque FFP2 est vraiment efficace contre les particules fines. Un masque chirurgical ou en tissu protège très peu. Humidifier un tissu peut aider un peu, mais cela ne suffit pas.",
+          "iconName": "Shield"
+        },
+        {
+          "label": "Protégez-vous",
+          "text": "Portez des lunettes, un chapeau et des manches longues. En rentrant, prenez une douche et changez de vêtements.",
+          "iconName": "Glasses"
+        },
+        {
+          "label": "Évitez les efforts physiques",
+          "text": "Pas de sport, pas de vélo. Restez au calme pour limiter l'inhalation de particules.",
+          "iconName": "Ban"
+        },
+        {
+          "label": "Hydratez-vous",
+          "text": "Hydratez-vous et rincez-vous les yeux et la gorge à l'eau claire.",
+          "iconName": "Droplets"
+        }
+      ]
+    }
+  },
+  "vigilance": {
+    "title": "Personnes devant être particulièrement vigilantes",
+    "callTo": "Contactez le 15 si vous ressentez : essoufflement, douleur thoracique, palpitations, confusion, toux persistante.",
+    "intro": "Cela concerne notamment :",
+    "profiles": [
+      { "label": "Les enfants de moins de 5 ans", "iconName": "Baby" },
+      { "label": "Les personnes de plus de 65 ans", "iconName": "PersonStanding" },
+      {
+        "label": "Les personnes asthmatiques, atteintes de BPCO ou d'insuffisance cardiaque",
+        "iconName": "Stethoscope"
+      },
+      { "label": "Les femmes enceintes", "iconName": "Heart" }
+    ]
+  },
+  "aftermath": {
+    "title": "Après l'incendie",
+    "items": [
+      {
+        "label": "Aérez 10 minutes",
+        "text": "Uniquement lorsque les autorités indiquent que la qualité de l'air est redevenue correcte.",
+        "iconName": "Wind"
+      },
+      {
+        "label": "Lavez à l'eau claire",
+        "text": "Lavez les fruits et légumes du jardin ainsi que les surfaces avec de l'eau.",
+        "iconName": "Apple"
+      }
+    ]
+  },
+  "airQuality": {
+    "title": "Suivez la qualité de l'air en temps réel",
+    "text": "Consultez l'indice de qualité de l'air de votre commune pour adapter vos activités et savoir quand aérer.",
+    "linkLabel": "Consulter Atmo Nouvelle-Aquitaine",
+    "url": "https://www.atmo-nouvelleaquitaine.org/"
+  },
+  "goldenRule": {
+    "title": "Règle d'or",
+    "text": "Si vous sentez la fumée et que vous avez des maux de tête et des nausées, cela peut être le signe d'une intoxication au CO. Aérez, sortez, et appelez le 18."
+  }
+}
