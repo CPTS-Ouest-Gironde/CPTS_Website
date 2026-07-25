@@ -150,7 +150,7 @@
       "items": [
         "Vous ne pouvez pas le voir ni le sentir à faible dose.",
         "Une odeur piquante peut apparaître à forte concentration, mais ce n'est pas fiable.",
-        "Le seul moyen de le connaître est de consulter l'indice de qualité de l'air sur les applis type FR-Alert, ou via le lien Atmo Nouvelle-Aquitaine plus bas dans cet article."
+        "Le seul moyen de le connaître est de consulter l'indice de qualité de l'air sur les applis type FR-Alert, ou via le lien qualité de l'air plus bas dans cet article."
       ]
     },
     "danger": {
@@ -183,8 +183,8 @@
   "airQuality": {
     "title": "Suivez la qualité de l'air en temps réel",
     "text": "Consultez l'indice de qualité de l'air de votre commune pour adapter vos activités et savoir quand aérer.",
-    "linkLabel": "Consulter Atmo Nouvelle-Aquitaine",
-    "url": "https://www.atmo-nouvelleaquitaine.org/"
+    "linkLabel": "Consulter la qualité de l'air (IQAir)",
+    "url": "https://www.iqair.com/fr/air-quality/france/nouvelle-aquitaine/bordeaux"
   },
   "goldenRule": {
     "title": "Règle d'or",
