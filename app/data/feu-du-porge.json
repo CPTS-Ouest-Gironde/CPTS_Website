@@ -70,7 +70,7 @@
         },
         {
           "label": "Coupez la VMC et la climatisation",
-          "text": "Si vous utilisez la clim, mettez-la en mode « recyclage d'air intérieur uniquement ».",
+          "text": "Si vous utilisez la clim, mettez-la en mode « recyclage d'air intérieur uniquement ». Éteignez-la si climatisation centralisée.",
           "iconName": "AirVent"
         },
         {
