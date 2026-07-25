@@ -141,6 +141,45 @@
       }
     ]
   },
+  "ozone": {
+    "title": "Qu'est-ce que l'ozone ?",
+    "intro": "L'ozone est un gaz polluant irritant qui pose problème pour la santé.",
+    "recognize": {
+      "title": "Comment le reconnaître ?",
+      "iconName": "ScanSearch",
+      "items": [
+        "Vous ne pouvez pas le voir ni le sentir à faible dose.",
+        "Une odeur piquante peut apparaître à forte concentration, mais ce n'est pas fiable.",
+        "Le seul moyen de le connaître est de consulter l'indice de qualité de l'air sur les applis type Air France ou FR-Alert."
+      ]
+    },
+    "danger": {
+      "title": "Pourquoi est-il dangereux pour la santé ?",
+      "iconName": "TriangleAlert",
+      "text": "Lorsque vous le respirez, l'ozone est un gaz très oxydant. Il irrite et « brûle » la surface de vos voies respiratoires : nez, gorge, bronches et poumons. Cela provoque : toux, irritation, essoufflement, et une aggravation de l'asthme ou des maladies cardiaques."
+    },
+    "protection": {
+      "title": "Les règles de protection",
+      "subtitle": "Elles sont les mêmes que celles pour les particules fines.",
+      "items": [
+        {
+          "label": "Éviter l'exposition",
+          "text": "Limitez les sorties et le sport en extérieur aux heures chaudes.",
+          "iconName": "Ban"
+        },
+        {
+          "label": "Rester au frais",
+          "text": "Gardez fenêtres fermées l'après-midi et aérez tôt le matin.",
+          "iconName": "Snowflake"
+        },
+        {
+          "label": "Être vigilant",
+          "text": "Si vous êtes asthmatique, cardiaque, enfant, femme enceinte ou de plus de 65 ans, suivez encore plus ces conseils.",
+          "iconName": "TriangleAlert"
+        }
+      ]
+    }
+  },
   "airQuality": {
     "title": "Suivez la qualité de l'air en temps réel",
     "text": "Consultez l'indice de qualité de l'air de votre commune pour adapter vos activités et savoir quand aérer.",

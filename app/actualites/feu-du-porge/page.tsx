@@ -15,15 +15,18 @@ import {
   Gauge,
   Footprints,
   Glasses,
+  Haze,
   Heart,
   HeartPulse,
   House,
   PersonStanding,
   Phone,
   Radio,
+  ScanSearch,
   Shield,
   Siren,
   Skull,
+  Snowflake,
   Stethoscope,
   TriangleAlert,
   Wind,
@@ -51,8 +54,10 @@ const iconMap: Record<string, LucideIcon> = {
   House,
   PersonStanding,
   Radio,
+  ScanSearch,
   Shield,
   Skull,
+  Snowflake,
   Stethoscope,
   TriangleAlert,
   Wind,
@@ -322,6 +327,89 @@ export default function FeuDuPorgePage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ozone */}
+      <section className="py-14 lg:py-20 bg-muted/50">
+        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500 flex items-center justify-center shrink-0">
+              <Haze className="w-6 h-6 text-white" aria-hidden="true" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground uppercase">
+              {data.ozone.title}
+            </h2>
+          </div>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            {data.ozone.intro}
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div className="rounded-3xl border-2 border-amber-500/30 bg-amber-500/5 p-6 lg:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <ItemIcon
+                  name={data.ozone.recognize.iconName}
+                  className="w-7 h-7 text-amber-600"
+                />
+                <h3 className="text-xl font-bold text-foreground">
+                  {data.ozone.recognize.title}
+                </h3>
+              </div>
+              <ul className="space-y-3">
+                {data.ozone.recognize.items.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 text-muted-foreground leading-relaxed"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2.5 shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="rounded-3xl border-2 border-amber-500/30 bg-amber-500/5 p-6 lg:p-8">
+              <div className="flex items-center gap-3 mb-4">
+                <ItemIcon
+                  name={data.ozone.danger.iconName}
+                  className="w-7 h-7 text-amber-600"
+                />
+                <h3 className="text-xl font-bold text-foreground">
+                  {data.ozone.danger.title}
+                </h3>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                {data.ozone.danger.text}
+              </p>
+            </div>
+          </div>
+
+          <div className="rounded-3xl border border-border bg-background p-6 lg:p-8">
+            <h3 className="text-lg lg:text-xl font-bold text-foreground uppercase tracking-wide mb-1">
+              {data.ozone.protection.title}
+            </h3>
+            <p className="text-muted-foreground mb-6">
+              {data.ozone.protection.subtitle}
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {data.ozone.protection.items.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5"
+                >
+                  <ItemIcon
+                    name={item.iconName}
+                    className="w-6 h-6 text-amber-600 mb-3"
+                  />
+                  <p className="font-bold text-foreground mb-2">{item.label}</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
