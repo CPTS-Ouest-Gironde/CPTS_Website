@@ -296,41 +296,6 @@ export default function FeuDuPorgePage() {
         </div>
       </section>
 
-      {/* Après l'incendie */}
-      <section className="py-14 lg:py-20 bg-muted/50">
-        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-600 flex items-center justify-center shrink-0">
-              <Wind className="w-6 h-6 text-white" aria-hidden="true" />
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground uppercase">
-              {data.aftermath.title}
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {data.aftermath.items.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-3xl border-2 border-emerald-500/30 bg-emerald-500/5 p-6 lg:p-8"
-              >
-                <div className="flex items-center gap-3 mb-3">
-                  <ItemIcon
-                    name={item.iconName}
-                    className="w-7 h-7 text-emerald-600"
-                  />
-                  <h3 className="text-xl font-bold text-foreground">
-                    {item.label}
-                  </h3>
-                </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {item.text}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Ozone */}
       <section className="py-14 lg:py-20 bg-muted/50">
         <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
@@ -410,6 +375,41 @@ export default function FeuDuPorgePage() {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Après l'incendie */}
+      <section className="py-14 lg:py-20">
+        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-600 flex items-center justify-center shrink-0">
+              <Wind className="w-6 h-6 text-white" aria-hidden="true" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground uppercase">
+              {data.aftermath.title}
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {data.aftermath.items.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-3xl border-2 border-emerald-500/30 bg-emerald-500/5 p-6 lg:p-8"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <ItemIcon
+                    name={item.iconName}
+                    className="w-7 h-7 text-emerald-600"
+                  />
+                  <h3 className="text-xl font-bold text-foreground">
+                    {item.label}
+                  </h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed">
+                  {item.text}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
