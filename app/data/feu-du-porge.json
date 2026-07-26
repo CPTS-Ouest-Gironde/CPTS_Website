@@ -141,6 +141,29 @@
       }
     ]
   },
+  "samu": {
+    "title": "Informations du SAMU",
+    "intro": "Compte-tenu des expositions de la population générale aux fumées d'incendie, les questions suivantes se posent.",
+    "questions": [
+      {
+        "question": "Doit-on dépister les intoxications au monoxyde de carbone dans la population générale exposée aux fumées ?",
+        "answer": "En l'absence de signes neurologiques objectifs (malaise, perte de connaissance, coma) ou de douleur thoracique d'allure coronarienne, il n'y a pas d'indication à rechercher, chez les patients, le monoxyde de carbone que ce soit dans l'air expiré, par gazométrie ou par SpCO."
+      },
+      {
+        "question": "Faut-il mettre systématiquement sous O2 les personnes exposées aux fumées qui se plaindraient de céphalées ?",
+        "answer": "L'inhalation de fumée peut être responsable de céphalées en raison des fortes odeurs très incommodantes. En l'absence de signes neurologiques objectifs (malaise, perte de connaissance, coma) ou de douleur thoracique d'allure coronarienne, il n'est pas nécessaire de mettre les patients exposés aux fumées de manière systématique sous oxygène."
+      },
+      {
+        "question": "Faut-il proposer de l'oxygénothérapie hyperbare aux patients exposés aux fumées d'incendie et qui auraient un mesurage d'HbCO élevé ?",
+        "answer": "Il n'y a pas d'indication à proposer de l'oxygénothérapie hyperbare aux patients qui n'ont pas de symptômes neurologiques objectifs ou de douleurs thoraciques d'allure coronarienne, sauf femmes enceintes, même s'ils ont des chiffres d'HbCO élevés."
+      }
+    ],
+    "specialCases": {
+      "text": "Le cas des femmes enceintes, et des patients dont l'interrogatoire n'est pas fiable (jeunes enfants, patients avec troubles cognitifs) doit être étudié au cas par cas avec l'aide du centre antipoison ou du médecin hyperbariste.",
+      "phoneLabel": "Centre antipoison",
+      "phone": "05 56 96 40 80"
+    }
+  },
   "ozone": {
     "title": "Qu'est-ce que l'ozone ?",
     "intro": "L'ozone est un gaz polluant irritant qui pose problème pour la santé.",

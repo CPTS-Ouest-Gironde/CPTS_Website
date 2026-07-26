@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import {
   AirVent,
+  Ambulance,
   Apple,
   Baby,
   Backpack,
   Ban,
   CalendarClock,
+  CircleHelp,
   DoorClosed,
   Droplets,
   ExternalLink,
@@ -290,6 +292,62 @@ export default function FeuDuPorgePage() {
                     </p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Informations du SAMU */}
+      <section className="py-14 lg:py-20">
+        <div className="container mx-auto px-4 lg:px-8 max-w-5xl">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center shrink-0">
+              <Ambulance className="w-6 h-6 text-primary-foreground" aria-hidden="true" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground uppercase">
+              {data.samu.title}
+            </h2>
+          </div>
+          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+            {data.samu.intro}
+          </p>
+
+          <div className="space-y-5 mb-6">
+            {data.samu.questions.map((entry) => (
+              <div
+                key={entry.question}
+                className="rounded-3xl border border-border bg-background p-6 lg:p-8 shadow-sm"
+              >
+                <div className="flex items-start gap-3 mb-3">
+                  <CircleHelp
+                    className="w-6 h-6 text-primary shrink-0 mt-0.5"
+                    aria-hidden="true"
+                  />
+                  <h3 className="text-lg lg:text-xl font-bold text-foreground">
+                    {entry.question}
+                  </h3>
+                </div>
+                <p className="text-muted-foreground leading-relaxed lg:pl-9">
+                  {entry.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-3xl border-2 border-primary/30 bg-primary/5 p-6 lg:p-8 flex flex-col md:flex-row items-center gap-5 md:gap-8">
+            <p className="flex-1 text-foreground leading-relaxed">
+              {data.samu.specialCases.text}
+            </p>
+            <div className="flex items-center gap-3 rounded-2xl bg-primary text-primary-foreground px-5 py-4 shrink-0">
+              <Phone className="w-5 h-5" aria-hidden="true" />
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide">
+                  {data.samu.specialCases.phoneLabel}
+                </p>
+                <p className="text-lg font-extrabold">
+                  {data.samu.specialCases.phone}
+                </p>
               </div>
             </div>
           </div>
