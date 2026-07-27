@@ -13,6 +13,7 @@ export function FeaturedCarousel() {
   const [resetTimer, setResetTimer] = useState(0);
 
   useEffect(() => {
+    if (slides.length <= 1) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -91,43 +92,47 @@ export function FeaturedCarousel() {
             ))}
           </div>
 
-          <button
-            onClick={prevSlide}
-            className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-lg z-10"
-            aria-label="Slide précédent"
-          >
-            <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-lg z-10"
-            aria-label="Slide suivant"
-          >
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
-          </button>
-
-          <div
-            className="absolute -bottom-5 md:-bottom-6 left-1/2 -translate-x-1/2 flex gap-2"
-            role="group"
-            aria-label="Navigation carousel"
-          >
-            {slides.map((slide, index) => (
+          {slides.length > 1 && (
+            <>
               <button
-                key={index}
-                onClick={() => {
-                  setCurrentSlide(index);
-                  setResetTimer((prev) => prev + 1);
-                }}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  index === currentSlide
-                    ? "bg-primary w-6 md:w-8"
-                    : "bg-muted-foreground/30"
-                }`}
-                aria-label={`Aller à ${slide.title}`}
-                aria-current={index === currentSlide ? "true" : "false"}
-              />
-            ))}
-          </div>
+                onClick={prevSlide}
+                className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-lg z-10"
+                aria-label="Slide précédent"
+              >
+                <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors shadow-lg z-10"
+                aria-label="Slide suivant"
+              >
+                <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+              </button>
+
+              <div
+                className="absolute -bottom-5 md:-bottom-6 left-1/2 -translate-x-1/2 flex gap-2"
+                role="group"
+                aria-label="Navigation carousel"
+              >
+                {slides.map((slide, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentSlide(index);
+                      setResetTimer((prev) => prev + 1);
+                    }}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === currentSlide
+                        ? "bg-primary w-6 md:w-8"
+                        : "bg-muted-foreground/30"
+                    }`}
+                    aria-label={`Aller à ${slide.title}`}
+                    aria-current={index === currentSlide ? "true" : "false"}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>
