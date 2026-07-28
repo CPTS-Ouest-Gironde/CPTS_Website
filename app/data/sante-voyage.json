@@ -8,7 +8,7 @@
   "title": "Recommandations sanitaires essentielles aux voyageurs",
   "subtitle": "Synthèse basée sur les « Recommandations sanitaires pour les voyageurs » du Ministère de la Santé (France)",
   "hero": {
-    "image": "/prevention/sante-famille/sante-voyage/hero.svg",
+    "image": "/prevention/sante-famille/sante-voyage/introduction.webp",
     "boardingPass": {
       "passenger": "TOUTE LA FAMILLE",
       "from": "OUEST GIRONDE",
@@ -16,6 +16,52 @@
       "flight": "CPTS-2026",
       "gate": "PRÉVENTION",
       "seat": "33A"
+    }
+  },
+  "images": {
+    "introduction": {
+      "alt": "Voyageur consultant une carte avant son départ",
+      "label": "Bien préparer son voyage"
+    },
+    "couverture": {
+      "src": "/prevention/sante-famille/sante-voyage/pas-de-remboursement.webp",
+      "alt": "Voyageuse rappelant l'importance d'anticiper sa couverture médicale",
+      "label": "Anticiper les frais de santé"
+    },
+    "medicaments": {
+      "src": "/prevention/sante-famille/sante-voyage/medicaments.webp",
+      "alt": "Médicaments préparés dans une valise de voyage",
+      "label": "La trousse de secours"
+    },
+    "vaccination": {
+      "src": "/prevention/sante-famille/sante-voyage/vaccination-voyage.webp",
+      "alt": "Certificat international de vaccination, vaccin et passeport numérique",
+      "label": "Vaccinations du voyageur"
+    },
+    "eau": {
+      "src": "/prevention/sante-famille/sante-voyage/purification-eau.webp",
+      "alt": "Voyageuse équipée d'une gourde pendant une randonnée",
+      "label": "Boire une eau sûre"
+    },
+    "phlebite": {
+      "src": "/prevention/sante-famille/sante-voyage/prevention-phlebite.webp",
+      "alt": "Jambes en mouvement illustrant la prévention de la phlébite",
+      "label": "Prévenir la phlébite"
+    },
+    "montagne": {
+      "src": "/prevention/sante-famille/sante-voyage/mal-des-montagnes.webp",
+      "alt": "Randonneuse en altitude face à un lac de montagne",
+      "label": "S'acclimater à l'altitude"
+    },
+    "jetlag": {
+      "src": "/prevention/sante-famille/sante-voyage/jetlag.webp",
+      "alt": "Voyageur fatigué tenant sa carte d'embarquement",
+      "label": "Limiter le décalage horaire"
+    },
+    "senior": {
+      "src": "/prevention/sante-famille/sante-voyage/voyage-personne-agee.webp",
+      "alt": "Couple de voyageurs seniors devant un aéroport",
+      "label": "Voyager à tout âge"
     }
   },
   "ticker": [
@@ -220,7 +266,7 @@
     }
   },
   "pendant": {
-    "title": "Pendant le voyage : les bons réflexes",
+    "title": "Pendant le voyage : les bons réflexes",
     "moustiques": {
       "title": "Prévention des maladies transmises par les moustiques",
       "lead": "Les moustiques peuvent vous transmettre plusieurs maladies graves :",
@@ -324,7 +370,7 @@
     },
     "mam": {
       "title": "Éviter le mal aigu des montagnes (MAM)",
-      "lead": "Cela peut se produire si l'altitude dépasse 2 500 m, car le corps manque d'oxygène. Un traitement par Diamox peut être prescrit sur ordonnance, mais les conseils suivants, sans médicament, sont à respecter :",
+      "lead": "Cela peut se produire à partir de 2 500 m d'altitude, car le corps manque d'oxygène. Un traitement par Diamox peut être prescrit sur ordonnance, mais les conseils suivants, sans médicament, sont à respecter :",
       "conseils": [
         {
           "title": "Montez doucement",

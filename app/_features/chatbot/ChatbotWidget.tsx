@@ -290,7 +290,7 @@ export function ChatbotWidget() {
           role="dialog"
           aria-modal="false"
           aria-labelledby="chatbot-title"
-          className="fixed bottom-20 left-3 right-3 z-[70] sm:bottom-24 sm:left-auto sm:right-4 sm:w-[26rem]"
+          className="fixed bottom-[calc(5rem+env(safe-area-inset-bottom))] left-3 right-3 z-[70] sm:bottom-24 sm:left-auto sm:right-4 sm:w-[26rem]"
           style={panelStyle}
         >
           <ChatWindow
@@ -305,11 +305,11 @@ export function ChatbotWidget() {
         </div>
       ) : null}
 
-      <div className="fixed bottom-4 right-4 z-[70] flex items-center gap-3">
+      <div className="fixed right-4 bottom-[calc(1rem+env(safe-area-inset-bottom))] z-[70] flex items-center gap-3 sm:bottom-4">
         {!isOpen && isCompanionLabelVisible ? (
           <div
             aria-hidden="true"
-            className="hidden max-w-[280px] items-center rounded-2xl border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-right-2 sm:flex"
+            className="flex max-w-[calc(100vw-7rem)] items-center rounded-2xl border border-border bg-card px-3 py-2 text-xs font-medium text-foreground shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-right-2 sm:max-w-[280px] sm:px-4 sm:text-sm"
           >
             Besoin d&apos;aide pour trouver une ressource&nbsp;?
           </div>

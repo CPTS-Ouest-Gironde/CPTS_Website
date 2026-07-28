@@ -10,7 +10,8 @@
       "title": "RECOMMANDATIONS SANITAIRES ESSENTIELLES AUX VOYAGEURS",
       "date": "2026-07-24",
       "dateLabel": "24 juillet 2026",
-      "image": "/prevention/sante-famille/sante-voyage/carte-article.svg",
+      "image": "/prevention/sante-famille/sante-voyage/titre.webp",
+      "disableImageHover": true,
       "slug": "sante-voyage",
       "href": "/prevention/sante-familiale/sante-voyage"
     },

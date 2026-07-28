@@ -197,7 +197,11 @@ export function ChatWindow({
 
       <div className="flex-1 space-y-3 overflow-y-auto px-3 py-3" aria-live="polite" aria-label="Historique des messages">
         {messages.map((message) => (
-          <MessageBubble key={message.id} message={message} />
+          <MessageBubble
+            key={message.id}
+            message={message}
+            onInternalResourceClick={handleClose}
+          />
         ))}
         {isAwaitingRestartConfirm ? (
           <div className="flex justify-start">
