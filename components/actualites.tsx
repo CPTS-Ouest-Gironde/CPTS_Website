@@ -13,6 +13,11 @@ import {
 
 const actualites = [
   {
+    title: "Feu du Porge : les recommandations pour se protéger",
+    image: "/actu/affiche-incendie/1.jpg",
+    link: "/actualites/affiches-incendie",
+  },
+  {
     title: "Registre canicule : protégeons les personnes fragiles",
     image: "/actu/registre-canicule-merignac.webp",
     link: "/actualites/registre-canicule",
@@ -78,7 +83,7 @@ export function Actualites() {
       className="py-12 lg:py-16 bg-gradient-to-b from-secondary/5 to-background"
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-10 lg:mb-10">
             <h2 className="text-2xl lg:text-4xl font-bold text-foreground mb-4 text-balance">
               Actualités Santé du territoire de la CPTS
@@ -86,20 +91,12 @@ export function Actualites() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
 
-          <div className="hidden lg:grid lg:grid-cols-4 gap-6">
-            {actualites.map((actu, index) => (
-              <div key={index} className="h-full flex">
-                <ActuCard actu={actu} />
-              </div>
-            ))}
-          </div>
-
           <Carousel
             opts={{
               align: "start",
               loop: true,
             }}
-            className="w-full lg:hidden"
+            className="w-full"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {actualites.map((actu, index) => (
