@@ -23,7 +23,7 @@ app/
 ├── professionnels/ (4)     # Professional pages
 ├── patients/ (4)           # Patient pages
 ├── prevention/ (4)         # Prevention pages
-├── actualites/ (4)         # News articles
+├── actualites/ (11)        # News articles (incl. feu-du-porge)
 ├── presentation/ (2)       # About pages
 ├── sante-mentale/ (1)      # Mental health v1 [CLIENT]
 ├── sante-mentale-2/ (1)    # Mental health v2 [CLIENT]
@@ -62,6 +62,8 @@ docs/                       # ⚠️ DO NOT TOUCH
 | sante-mentale.json | 9.5KB | Mental health v1 |
 | sante-mentale-2.json | 2.9KB | Mental health v2 |
 | sante-voyage.json | 22KB | Article santé voyage (contenu médical) |
+| feu-du-porge.json | 6KB | Article urgence fumées feu du Porge |
+| hero-slides.json | 2KB | Slides carrousel "À la une" (homepage) |
 
 ## Patterns
 
