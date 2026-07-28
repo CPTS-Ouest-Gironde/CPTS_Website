@@ -37,6 +37,7 @@ import {
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { BackToActualitesLink } from "@/components/back-to-actualites-link";
+import { FeuDuPorgeAdditionalResources } from "@/components/feu-du-porge-additional-resources";
 import data from "@/app/data/feu-du-porge.json";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -297,6 +298,8 @@ export default function FeuDuPorgePage() {
           </div>
         </div>
       </section>
+
+      <FeuDuPorgeAdditionalResources />
 
       {/* Informations du SAMU */}
       <section className="py-14 lg:py-20">
