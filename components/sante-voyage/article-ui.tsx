@@ -69,26 +69,26 @@ export function ChapterHeading({
 
 interface AlertBannerProps {
   tone: "danger" | "warning";
+  accent?: "amber" | "emerald";
   title: string;
   children: ReactNode;
 }
 
 export function AlertBanner({
   tone,
+  accent = "amber",
   title,
   children,
 }: AlertBannerProps) {
-  const styles =
-    tone === "danger" ? "bg-red-600 text-white" : "bg-stone-900 text-amber-50";
+  const stripeAccent = tone === "warning" ? "amber" : accent;
+  const stripe =
+    stripeAccent === "emerald"
+      ? "bg-[repeating-linear-gradient(-45deg,#34d399_0_12px,#1c1917_12px_24px)]"
+      : "bg-[repeating-linear-gradient(-45deg,#fbbf24_0_12px,#1c1917_12px_24px)]";
 
   return (
-    <div
-      className={`${styles} relative overflow-hidden rounded-2xl p-6 lg:p-8`}
-    >
-      <div
-        aria-hidden
-        className="absolute inset-x-0 top-0 h-2 bg-[repeating-linear-gradient(-45deg,#fbbf24_0_12px,#1c1917_12px_24px)]"
-      />
+    <div className="relative overflow-hidden rounded-2xl bg-stone-900 p-6 text-amber-50 lg:p-8">
+      <div aria-hidden className={`${stripe} absolute inset-x-0 top-0 h-2`} />
       <div className="flex items-start gap-4 pt-2">
         <AlertTriangle className="mt-0.5 h-7 w-7 flex-shrink-0" />
         <div>

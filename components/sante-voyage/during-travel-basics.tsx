@@ -90,7 +90,11 @@ export function MosquitoAndRodentAdvice() {
             <p className="mb-6 leading-relaxed text-stone-600">
               {data.pendant.moustiques.paludisme.outro}
             </p>
-            <AlertBanner tone="danger" title="Urgence médicale">
+            <AlertBanner
+              tone="danger"
+              accent="amber"
+              title="Urgence médicale"
+            >
               <p>
                 {renderInline(
                   data.pendant.moustiques.paludisme.alerte,

@@ -56,7 +56,11 @@ export function PhlebitisAdvice() {
         </div>
       </div>
       <Reveal delay={100}>
-        <AlertBanner tone="danger" title="Signes d'alerte">
+        <AlertBanner
+          tone="danger"
+          accent="emerald"
+          title="Signes d'alerte"
+        >
           <p>{data.pendant.phlebite.alerte}</p>
         </AlertBanner>
       </Reveal>
