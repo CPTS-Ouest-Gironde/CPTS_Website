@@ -1,4 +1,4 @@
-import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Pill, ShieldCheck } from "lucide-react";
 
 import data from "@/app/data/sante-voyage.json";
 import { EditorialImage } from "@/components/sante-voyage/editorial-image";
@@ -126,11 +126,20 @@ export function BeforeDepartureSection() {
                 />
               </div>
               <TravelChecklist groups={data.avantDepart.trousse.groups} />
+
+              {/* Conseil pharmacien : clôture la liste de la trousse */}
+              <div className="mt-5 flex items-start gap-3 rounded-2xl border border-amber-300 bg-amber-100/70 p-5">
+                <Pill className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-600" />
+                <p className="text-sm leading-relaxed font-semibold text-stone-800 lg:text-base">
+                  {data.avantDepart.trousse.pharmacien}
+                </p>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={100}>
             <AlertBanner tone="warning" title="Attention">
               <p>{data.avantDepart.trousse.warning}</p>
+              <p className="mt-3">{data.avantDepart.trousse.remboursement}</p>
             </AlertBanner>
           </Reveal>
         </div>

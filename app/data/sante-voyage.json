@@ -119,7 +119,7 @@
             { "id": "antalgiques", "label": "Antalgiques et antipyrétiques : le paracétamol (DCI) est recommandé" },
             { "id": "antidiarrheique", "label": "Traitement contre la diarrhée du voyageur : antidiarrhéique sécrétoire" },
             { "id": "antiemetiques", "label": "Antiémétiques (vomissements et maux de transports)" },
-            { "id": "antihistaminique", "label": "Antihistaminique de dernière génération" },
+            { "id": "antihistaminique", "label": "Antihistaminique de dernière génération (anti-allergique)" },
             { "id": "sro", "label": "Sels de réhydratation orale (SRO) pour les nourrissons" }
           ]
         },
@@ -130,7 +130,7 @@
             { "id": "collyre", "label": "Collyre antiseptique" },
             { "id": "pansements", "label": "Pansements stériles et sutures adhésives" },
             { "id": "serum-phy", "label": "Dosettes de sérum physiologique" },
-            { "id": "brulures", "label": "Topique pour les brûlures" }
+            { "id": "brulures", "label": "Crème pour les brûlures" }
           ]
         },
         {
@@ -152,7 +152,9 @@
           ]
         }
       ],
-      "warning": "Évitez les formes liquides ou les suppositoires et vérifiez que les médicaments soient bien adaptés à l'âge."
+      "pharmacien": "En cas de doute sur le contenu de votre trousse, demandez conseil à votre pharmacien.",
+      "warning": "Évitez les formes liquides ou les suppositoires et vérifiez que les médicaments soient bien adaptés à l'âge.",
+      "remboursement": "Les médicaments achetés en préventif avant le départ ne peuvent pas faire l'objet d'un remboursement par la Sécurité sociale."
     }
   },
   "vaccinations": {
@@ -363,7 +365,7 @@
         },
         {
           "title": "Évitez de croiser les jambes",
-          "text": "Ça compresse les veines."
+          "text": "Cela comprime les veines."
         }
       ],
       "alerte": "Quels signes d'alerte après le vol font suspecter une phlébite ? Mollet chaud, douloureux, gonflé par rapport à l'autre jambe. Consultez urgemment si douleur au mollet, ou douleur dans la poitrine avec essoufflement (possible embolie)."
