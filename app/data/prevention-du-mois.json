@@ -28,6 +28,13 @@
   ],
   "articles": [
     {
+      "id": "sante-voyage",
+      "title": "Recommandations sanitaires essentielles aux voyageurs",
+      "image": "/prevention/sante-famille/sante-voyage/titre.webp",
+      "category": "Santé familiale",
+      "link": "/prevention/sante-familiale/sante-voyage"
+    },
+    {
       "id": "canicule",
       "title": "Conseils canicule : les bons gestes face aux fortes chaleurs",
       "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
@@ -40,13 +47,6 @@
       "image": "/prevention/sante-famille/chute-personne-agee.webp",
       "category": "Santé familiale",
       "link": "/prevention/sante-familiale/chute-personne-agee"
-    },
-    {
-      "id": "juin-vert-2026",
-      "title": "Juin Vert : dépistage du cancer du col de l'utérus",
-      "image": "/juin-vert/juin-vert-2026.webp",
-      "category": "Santé familiale",
-      "link": "/prevention/sante-familiale/juin-vert-2026"
     }
   ]
 }

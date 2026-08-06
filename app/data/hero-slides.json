@@ -1,13 +1,17 @@
 {
   "slides": [
     {
+      "image": "/prevention/sante-famille/sante-voyage/titre.webp",
+      "title": "Recommandations sanitaires essentielles aux voyageurs",
+      "alt": "Recommandations sanitaires essentielles aux voyageurs — vaccins, trousse de secours et bons réflexes",
+      "link": "/prevention/sante-familiale/sante-voyage"
+    },
+    {
       "image": "/feu/image-feu-post-insta.png",
       "title": "Les fumées du gigantesque feu du Porge sont arrivées sur notre territoire",
       "alt": "Alerte : les fumées du feu du Porge sont arrivées sur notre territoire — les bons gestes à adopter",
       "link": "/actualites/feu-du-porge"
-    }
-  ],
-  "slidesDisabled": [
+    },
     {
       "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
       "title": "Conseils canicule : les bons gestes face aux fortes chaleurs",
@@ -21,16 +25,24 @@
       "link": "/prevention/sante-familiale/chute-personne-agee"
     },
     {
-      "image": "/juin-vert/juin-vert-2026.webp",
-      "title": "Juin Vert : le dépistage du cancer du col de l'utérus",
-      "alt": "Juin Vert 2026 — dépistage du cancer du col de l'utérus",
-      "link": "/prevention/sante-familiale/juin-vert-2026"
-    },
-    {
       "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
       "title": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
       "alt": "L'endométriose : qu'est-ce que c'est ? Quelle prise en charge ?",
       "link": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
+    },
+    {
+      "image": "/mon-espace-santé.png",
+      "title": "Mon espace santé : TOUT SAVOIR, TOUT COMPRENDRE et S'EN SERVIR !",
+      "alt": "Mon espace santé",
+      "link": "/patients/mon-espace-sante"
+    }
+  ],
+  "slidesDisabled": [
+    {
+      "image": "/juin-vert/juin-vert-2026.webp",
+      "title": "Juin Vert : le dépistage du cancer du col de l'utérus",
+      "alt": "Juin Vert 2026 — dépistage du cancer du col de l'utérus",
+      "link": "/prevention/sante-familiale/juin-vert-2026"
     },
     {
       "image": "/sante-mentale-professionnels-et-approches/hero-sante-mentale.jpg",
@@ -43,12 +55,6 @@
       "title": "L'insomnie : la comprendre et la traiter",
       "alt": "Insomnie",
       "link": "/prevention/sante-familiale/insomnie"
-    },
-    {
-      "image": "/mon-espace-santé.png",
-      "title": "Mon espace santé : TOUT SAVOIR, TOUT COMPRENDRE et S'EN SERVIR !",
-      "alt": "Mon espace santé",
-      "link": "/patients/mon-espace-sante"
     },
     {
       "image": "/colimaçon.jpg",
