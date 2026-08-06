@@ -5,6 +5,8 @@ interface ArticleSource {
   slug: string
   resourceId: string
   path: string
+  splitLongSections?: boolean
+  collectAllText?: boolean
 }
 
 interface ArticleChunk {
@@ -187,6 +189,13 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     resourceId: "sm-face-aux-violences",
     path: "app/data/face-aux-violences.json",
   },
+  {
+    slug: "sante-voyage",
+    resourceId: "sf-sante-voyage",
+    path: "app/data/sante-voyage.json",
+    splitLongSections: true,
+    collectAllText: true,
+  },
 ]
 
 const TODO_SOURCES = [
@@ -204,6 +213,10 @@ const SECTION_TITLE_LABELS: Record<string, string> = {
   pourquoi: "Pourquoi",
   reconnaitre: "Reconnaître les signes",
   queFaire: "Que faire",
+  avantDepart: "Avant le départ",
+  vaccinations: "Vaccinations",
+  pendant: "Pendant le voyage",
+  profils: "Voyager selon votre profil",
 }
 
 function isRecord(value: JsonValue): value is Record<string, JsonValue> {
@@ -228,14 +241,50 @@ function truncateText(value: string): string {
   return `${slice.slice(0, lastSpace > 180 ? lastSpace : slice.length).trim()}…`
 }
 
-function collectText(value: JsonValue, parentKey = ""): string[] {
+function splitText(value: string): string[] {
+  const chunks: string[] = []
+  let remaining = value
+
+  while (remaining.length > MAX_CHUNK_LENGTH) {
+    const window = remaining.slice(0, MAX_CHUNK_LENGTH + 1)
+    const sentenceEnd = Math.max(
+      window.lastIndexOf(". "),
+      window.lastIndexOf("! "),
+      window.lastIndexOf("? "),
+    )
+    const lastSpace = window.lastIndexOf(" ")
+    const cutPoint = sentenceEnd >= MIN_CHUNK_LENGTH ? sentenceEnd + 1 : lastSpace
+
+    if (cutPoint < MIN_CHUNK_LENGTH) {
+      chunks.push(remaining.slice(0, MAX_CHUNK_LENGTH))
+      remaining = remaining.slice(MAX_CHUNK_LENGTH).trim()
+      continue
+    }
+
+    chunks.push(remaining.slice(0, cutPoint).trim())
+    remaining = remaining.slice(cutPoint).trim()
+  }
+
+  if (remaining) {
+    const lastChunkIndex = chunks.length - 1
+    if (remaining.length < MIN_CHUNK_LENGTH && lastChunkIndex >= 0) {
+      chunks[lastChunkIndex] = `${chunks[lastChunkIndex]} ${remaining}`
+    } else {
+      chunks.push(remaining)
+    }
+  }
+
+  return chunks
+}
+
+function collectText(value: JsonValue, parentKey = "", collectAllText = false): string[] {
   if (typeof value === "string") {
     const text = cleanText(value)
     return text ? [text] : []
   }
 
   if (Array.isArray(value)) {
-    return value.flatMap((item) => collectText(item, parentKey))
+    return value.flatMap((item) => collectText(item, parentKey, collectAllText))
   }
 
   if (!isRecord(value)) {
@@ -247,8 +296,14 @@ function collectText(value: JsonValue, parentKey = ""): string[] {
       return []
     }
 
-    if (TEXT_KEYS.has(key) || TEXT_KEYS.has(parentKey) || isRecord(child) || Array.isArray(child)) {
-      return collectText(child, key)
+    if (
+      collectAllText ||
+      TEXT_KEYS.has(key) ||
+      TEXT_KEYS.has(parentKey) ||
+      isRecord(child) ||
+      Array.isArray(child)
+    ) {
+      return collectText(child, key, collectAllText)
     }
 
     return []
@@ -317,6 +372,9 @@ function getSectionCandidates(data: JsonValue): JsonValue[] {
     "exclusions",
     "linkedin",
     "evenements",
+    "hero",
+    "chapters",
+    "ticker",
   ])
 
   for (const [key, value] of Object.entries(data)) {
@@ -336,22 +394,31 @@ function buildArticle(source: ArticleSource): IndexedArticle {
   const absolutePath = join(ROOT_DIR, source.path)
   const data = JSON.parse(readFileSync(absolutePath, "utf8")) as JsonValue
   const seenTexts = new Set<string>()
-  const chunks = getSectionCandidates(data)
-    .map((section, index): ArticleChunk | null => {
-      const text = truncateText(collectText(section).join(" "))
+  const chunks: ArticleChunk[] = []
+
+  for (const [candidateIndex, section] of getSectionCandidates(data).entries()) {
+    const sectionContent =
+      source.collectAllText && isRecord(section) && section.content !== undefined
+        ? section.content
+        : section
+    const fullText = cleanText(collectText(sectionContent, "", source.collectAllText).join(" "))
+    const sectionTexts = source.splitLongSections
+      ? splitText(fullText)
+      : [truncateText(fullText)]
+
+    for (const text of sectionTexts) {
       if (text.length < MIN_CHUNK_LENGTH || seenTexts.has(text)) {
-        return null
+        continue
       }
 
       seenTexts.add(text)
-
-      return {
-        sectionTitle: getSectionTitle(section, `Section ${index + 1}`),
+      chunks.push({
+        sectionTitle: getSectionTitle(section, `Section ${candidateIndex + 1}`),
         text,
-        sectionIndex: index,
-      }
-    })
-    .filter((chunk): chunk is ArticleChunk => Boolean(chunk))
+        sectionIndex: chunks.length,
+      })
+    }
+  }
 
   return {
     articleId: source.slug,

@@ -15,6 +15,7 @@ interface Article {
   dateLabel: string;
   image: string;
   imagePosition?: string;
+  disableImageHover?: boolean;
   slug: string;
   href?: string;
 }
@@ -176,7 +177,9 @@ export default function SanteFamilialePage() {
                       src={article.image}
                       alt={article.title}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className={`object-cover transition-transform duration-500 ${
+                        article.disableImageHover ? "" : "group-hover:scale-105"
+                      }`}
                       sizes="(max-width: 768px) 100vw, 50vw"
                       style={article.imagePosition ? { objectPosition: article.imagePosition } : undefined}
                     />

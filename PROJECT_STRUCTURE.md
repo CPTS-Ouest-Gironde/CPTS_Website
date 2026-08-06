@@ -31,6 +31,7 @@ app/
 
 components/
 ├── ui/ (56)                # Radix UI components (CHECK FIRST)
+├── sante-voyage/ (3)       # Article santé voyage : reveal (scroll), journey-nav (sticky), travel-checklist [CLIENT]
 ├── header.tsx              # Site header + nav
 ├── footer.tsx              # Site footer
 ├── hero.tsx                # Homepage hero
@@ -60,6 +61,7 @@ docs/                       # ⚠️ DO NOT TOUCH
 | nos-actions-vos-outils.json | 51KB | Tools/actions DB |
 | sante-mentale.json | 9.5KB | Mental health v1 |
 | sante-mentale-2.json | 2.9KB | Mental health v2 |
+| sante-voyage.json | 22KB | Article santé voyage (contenu médical) |
 | feu-du-porge.json | 6KB | Article urgence fumées feu du Porge |
 | hero-slides.json | 2KB | Slides carrousel "À la une" (homepage) |
 

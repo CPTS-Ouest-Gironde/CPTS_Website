@@ -5,6 +5,7 @@ import { useChatbotAnalytics } from "./useChatbotAnalytics"
 
 interface MessageBubbleProps {
   message: ChatMessage
+  onInternalResourceClick: () => void
 }
 
 function resourceHref(resource: ChatResource): string {
@@ -31,7 +32,7 @@ function resourceLabel(resource: ChatResource): string {
   return "Ouvrir la ressource"
 }
 
-export function MessageBubble({ message }: MessageBubbleProps) {
+export function MessageBubble({ message, onInternalResourceClick }: MessageBubbleProps) {
   const { trackEvent } = useChatbotAnalytics()
   const isUser = message.role === "user"
 
@@ -56,6 +57,10 @@ export function MessageBubble({ message }: MessageBubbleProps) {
                   resource_id: suggestion.resource.id,
                   resource_type: suggestion.resource.type,
                 })
+
+                if (isInternal) {
+                  onInternalResourceClick()
+                }
               }
 
               return (

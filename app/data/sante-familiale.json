@@ -6,6 +6,16 @@
   "articlesPerPage": 12,
   "articles": [
     {
+      "id": "sante-voyage",
+      "title": "RECOMMANDATIONS SANITAIRES ESSENTIELLES AUX VOYAGEURS",
+      "date": "2026-07-24",
+      "dateLabel": "24 juillet 2026",
+      "image": "/prevention/sante-famille/sante-voyage/titre.webp",
+      "disableImageHover": true,
+      "slug": "sante-voyage",
+      "href": "/prevention/sante-familiale/sante-voyage"
+    },
+    {
       "id": "canicule",
       "title": "CONSEILS CANICULE",
       "date": "2026-06-03",

@@ -4,7 +4,7 @@ import test from "node:test"
 import { chatbotConfig } from "./chatbot.config"
 import { createInitialState, hydrateState, processQuickReply, processUserInput, restartConversation } from "./engine"
 import { searchResourcesFuzzy } from "./fuzzySearch"
-import { cleanExtract } from "./articlesSearch"
+import { cleanExtract, searchArticles } from "./articlesSearch"
 import type { ChatbotConfig } from "./types"
 import { trackEvent } from "./useChatbotAnalytics"
 
@@ -1117,6 +1117,51 @@ test("processUserInput chute personne agee matche sf-chute-personne-agee", () =>
   assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-chute-personne-agee"))
 })
 
+test("processUserInput oriente les questions de santé en voyage vers le nouvel article", () => {
+  const questions = [
+    "comment préparer un voyage",
+    "quels vaccins pour un voyage",
+    "que faut il mettre dans une trousse de secours voyage",
+    "comment éviter le paludisme",
+    "comment prévenir une phlébite en avion",
+    "comment limiter le jet lag",
+    "peut-on voyager enceinte",
+    "conseils pour un voyage avec enfant",
+  ]
+
+  for (const question of questions) {
+    const state = processUserInput(createInitialState(chatbotConfig), question, chatbotConfig)
+    const suggestionMessage = getLastBotMessageWithSuggestions(state.messages)
+
+    assert.ok(
+      suggestionMessage?.suggestions?.some((item) => item.resource.id === "sf-sante-voyage"),
+      `La question "${question}" doit proposer l'article Santé en voyage`,
+    )
+  }
+})
+
+test("la recherche article indexe aussi les recommandations situées en fin de Santé voyage", () => {
+  const altitudeResults = searchArticles("altitude 2500")
+  const seniorResults = searchArticles("personne agee voyage fortes chaleurs")
+
+  assert.equal(altitudeResults[0]?.resourceId, "sf-sante-voyage")
+  assert.equal(seniorResults[0]?.resourceId, "sf-sante-voyage")
+})
+
+test("l'extrait Santé voyage n'affiche pas deux fois le titre de sa section", () => {
+  const state = processUserInput(
+    createInitialState(chatbotConfig),
+    "comment éviter le paludisme",
+    chatbotConfig,
+  )
+  const extractMessage = state.messages.find((message) =>
+    message.text.includes("Voici ce que j'ai trouvé"),
+  )
+
+  assert.ok(extractMessage)
+  assert.doesNotMatch(extractMessage.text, /Pendant le voyage\s+Pendant le voyage/i)
+})
+
 test("processUserInput vaccin hpv matche sf-papillomavirus", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "vaccin hpv", chatbotConfig)
@@ -1137,15 +1182,17 @@ test("processUserInput vaccination papillomavirus matche sf-papillomavirus", () 
   assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-papillomavirus"))
 })
 
-test("le node prevention-quotidien expose les ressources canicule et chute", () => {
+test("le node prevention-quotidien expose les ressources canicule, chute et voyage", () => {
   const node = chatbotConfig.nodes["prevention-quotidien"]
   assert.ok(node, "le node prevention-quotidien doit exister")
 
   const canicule = node.quickReplies?.find((reply) => reply.id === "qr-prevention-quotidien-canicule")
   const chute = node.quickReplies?.find((reply) => reply.id === "qr-prevention-quotidien-chute")
+  const voyage = node.quickReplies?.find((reply) => reply.id === "qr-prevention-quotidien-voyage")
 
   assert.deepEqual(canicule?.actionResourceIds, ["sf-canicule"])
   assert.deepEqual(chute?.actionResourceIds, ["sf-chute-personne-agee"])
+  assert.deepEqual(voyage?.actionResourceIds, ["sf-sante-voyage"])
 })
 
 test("le menu prevention reference le node prevention-quotidien", () => {

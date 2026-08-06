@@ -161,3 +161,43 @@
     scroll-behavior: smooth;
   }
 }
+
+/* Article santé voyage — bandeau défilant façon panneau d'aéroport */
+@keyframes sv-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-sv-marquee {
+  animation: sv-marquee 30s linear infinite;
+}
+
+.animate-sv-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Article santé voyage — flottement léger des éléments décoratifs du hero */
+@keyframes sv-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--sv-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-12px) rotate(var(--sv-rotate, 0deg));
+  }
+}
+
+.animate-sv-float {
+  animation: sv-float 5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sv-marquee,
+  .animate-sv-float {
+    animation: none;
+  }
+}

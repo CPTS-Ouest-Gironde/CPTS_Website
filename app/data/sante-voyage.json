@@ -1,0 +1,473 @@
+{
+  "backLink": {
+    "href": "/prevention/sante-familiale",
+    "label": "Retour aux articles santé familiale"
+  },
+  "date": "24 juillet 2026",
+  "kicker": "Prévention · Santé du voyageur",
+  "title": "Recommandations sanitaires essentielles aux voyageurs",
+  "subtitle": "Synthèse basée sur les « Recommandations sanitaires pour les voyageurs » du Ministère de la Santé (France)",
+  "hero": {
+    "image": "/prevention/sante-famille/sante-voyage/introduction.webp",
+    "boardingPass": {
+      "passenger": "TOUTE LA FAMILLE",
+      "from": "OUEST GIRONDE",
+      "to": "VOTRE DESTINATION",
+      "flight": "CPTS-2026",
+      "gate": "PRÉVENTION",
+      "seat": "33A"
+    }
+  },
+  "images": {
+    "introduction": {
+      "alt": "Voyageur consultant une carte avant son départ",
+      "label": "Bien préparer son voyage"
+    },
+    "couverture": {
+      "src": "/prevention/sante-famille/sante-voyage/pas-de-remboursement.webp",
+      "alt": "Voyageuse rappelant l'importance d'anticiper sa couverture médicale",
+      "label": "Anticiper les frais de santé"
+    },
+    "medicaments": {
+      "src": "/prevention/sante-famille/sante-voyage/medicaments.webp",
+      "alt": "Médicaments préparés dans une valise de voyage",
+      "label": "La trousse de secours"
+    },
+    "vaccination": {
+      "src": "/prevention/sante-famille/sante-voyage/vaccination-voyage.webp",
+      "alt": "Certificat international de vaccination, vaccin et passeport numérique",
+      "label": "Vaccinations du voyageur"
+    },
+    "eau": {
+      "src": "/prevention/sante-famille/sante-voyage/purification-eau.webp",
+      "alt": "Voyageuse équipée d'une gourde pendant une randonnée",
+      "label": "Boire une eau sûre"
+    },
+    "phlebite": {
+      "src": "/prevention/sante-famille/sante-voyage/prevention-phlebite.webp",
+      "alt": "Jambes en mouvement illustrant la prévention de la phlébite",
+      "label": "Prévenir la phlébite"
+    },
+    "montagne": {
+      "src": "/prevention/sante-famille/sante-voyage/mal-des-montagnes.webp",
+      "alt": "Randonneuse en altitude face à un lac de montagne",
+      "label": "S'acclimater à l'altitude"
+    },
+    "jetlag": {
+      "src": "/prevention/sante-famille/sante-voyage/jetlag.webp",
+      "alt": "Voyageur fatigué tenant sa carte d'embarquement",
+      "label": "Limiter le décalage horaire"
+    },
+    "senior": {
+      "src": "/prevention/sante-famille/sante-voyage/voyage-personne-agee.webp",
+      "alt": "Couple de voyageurs seniors devant un aéroport",
+      "label": "Voyager à tout âge"
+    }
+  },
+  "ticker": [
+    "Consultez idéalement 4 à 8 semaines avant le départ",
+    "Les vaccinations : votre priorité absolue avant un voyage",
+    "Toute fièvre au retour d'une zone impaludée est une urgence médicale",
+    "Bouillir, cuire, peler ou oublier",
+    "En avion : bougez toutes les 30-45 minutes",
+    "Buvez uniquement de l'eau embouteillée ou traitée"
+  ],
+  "intro": {
+    "paragraphs": [
+      "Les voyages internationaux vous exposent à des **risques sanitaires variables** selon votre destination, la durée du séjour, les conditions de voyage et votre état de santé.",
+      "Une bonne préparation vous permettra de **prévenir la majorité des problèmes de santé** rencontrés à l'étranger.",
+      "Les autorités sanitaires françaises recommandent d'anticiper tout voyage **plusieurs semaines avant le départ** afin de mettre à jour vos vaccinations, préparer une trousse médicale adaptée et connaître les risques spécifiques du pays visité."
+    ]
+  },
+  "chapters": [
+    { "id": "avant-le-depart", "num": "01", "label": "Avant le départ" },
+    { "id": "vaccinations", "num": "02", "label": "Vaccinations" },
+    { "id": "pendant-le-voyage", "num": "03", "label": "Pendant le voyage" },
+    { "id": "profils", "num": "04", "label": "Selon votre profil" }
+  ],
+  "avantDepart": {
+    "title": "Préparer votre santé avant le départ",
+    "consultation": {
+      "title": "Consultez suffisamment tôt",
+      "lead": "Une consultation médicale est recommandée **idéalement 4 à 8 semaines avant le départ**, particulièrement pour :",
+      "publics": [
+        "les voyages en zone tropicale",
+        "les séjours prolongés",
+        "les personnes âgées",
+        "les femmes enceintes",
+        "les jeunes enfants",
+        "les personnes atteintes de maladies chroniques ou immunodéprimées"
+      ],
+      "outro": "Cette consultation permet d'évaluer les risques liés à la destination, de vérifier les vaccinations nécessaires et de prescrire si besoin un traitement préventif (par exemple contre le paludisme)."
+    },
+    "couverture": {
+      "title": "Vérifiez votre couverture médicale de santé",
+      "bullets": [
+        "Souscrivez une **assurance voyage incluant le rapatriement sanitaire**.",
+        "Vérifiez les conditions de prise en charge des soins dans le pays de destination ; il est également conseillé de s'inscrire sur l'application **« Ariane »** du ministère de l'Europe et des Affaires étrangères, qui propose de recevoir des alertes sécuritaires et sanitaires par mail ou SMS.",
+        "Conservez une **copie des documents médicaux importants** (ordonnances, carnet de vaccination, groupe sanguin, allergies). Si vous êtes porteur d'une maladie chronique, emportez un compte rendu médical, traduit dans la langue du pays de destination ou au moins en anglais."
+      ]
+    },
+    "trousse": {
+      "title": "Préparez une trousse de secours",
+      "subtitle": "La trousse doit être adaptée au type de voyage. Cochez ce que vous avez déjà préparé — rien n'est enregistré, la liste reste sur cette page.",
+      "groups": [
+        {
+          "title": "Médicaments généraux",
+          "items": [
+            { "id": "medicaments-perso", "label": "Médicaments personnels en quantité suffisante : ayez l'original de votre ordonnance sous sa dénomination commune internationale (DCI)" },
+            { "id": "antalgiques", "label": "Antalgiques et antipyrétiques : le paracétamol (DCI) est recommandé" },
+            { "id": "antidiarrheique", "label": "Traitement contre la diarrhée du voyageur : antidiarrhéique sécrétoire" },
+            { "id": "antiemetiques", "label": "Antiémétiques (vomissements et maux de transports)" },
+            { "id": "antihistaminique", "label": "Antihistaminique de dernière génération (anti-allergique)" },
+            { "id": "sro", "label": "Sels de réhydratation orale (SRO) pour les nourrissons" }
+          ]
+        },
+        {
+          "title": "Soins et pansements",
+          "items": [
+            { "id": "antiseptique", "label": "Antiseptique cutané en conditionnement unidose" },
+            { "id": "collyre", "label": "Collyre antiseptique" },
+            { "id": "pansements", "label": "Pansements stériles et sutures adhésives" },
+            { "id": "serum-phy", "label": "Dosettes de sérum physiologique" },
+            { "id": "brulures", "label": "Crème pour les brûlures" }
+          ]
+        },
+        {
+          "title": "Protection et hygiène",
+          "items": [
+            { "id": "repulsif", "label": "Répulsif anti-moustiques, produits pour imprégner les moustiquaires, antipaludéen à usage préventif" },
+            { "id": "solaire", "label": "Crème solaire indice maximal de protection (IP 50+)" },
+            { "id": "hydroalcoolique", "label": "Solution hydroalcoolique" },
+            { "id": "pastilles-eau", "label": "Pastilles désinfectantes pour l'eau" }
+          ]
+        },
+        {
+          "title": "Ne pas oublier",
+          "items": [
+            { "id": "thermometre", "label": "Un thermomètre" },
+            { "id": "pince", "label": "Une pince à épiler" },
+            { "id": "preservatifs", "label": "Des préservatifs" },
+            { "id": "contention", "label": "Des mi-bas ou des bas de contention" }
+          ]
+        }
+      ],
+      "pharmacien": "En cas de doute sur le contenu de votre trousse, demandez conseil à votre pharmacien.",
+      "warning": "Évitez les formes liquides ou les suppositoires et vérifiez que les médicaments soient bien adaptés à l'âge.",
+      "remboursement": "Les médicaments achetés en préventif avant le départ ne peuvent pas faire l'objet d'un remboursement par la Sécurité sociale."
+    }
+  },
+  "vaccinations": {
+    "title": "Les vaccinations doivent rester votre priorité absolue avant un voyage",
+    "lead": "La vaccination constitue l'une des mesures les plus efficaces pour prévenir les maladies infectieuses liées aux voyages. Le programme vaccinal doit être **individualisé** selon :",
+    "criteria": [
+      "le pays visité",
+      "la saison",
+      "les conditions de séjour",
+      "l'âge du voyageur",
+      "ses antécédents médicaux"
+    ],
+    "calendrier": {
+      "badge": "A",
+      "title": "Être à jour du calendrier vaccinal français",
+      "lead": "Avant toute vaccination spécifique au voyage, chaque voyageur vérifie et met à jour ses vaccinations recommandées en France :",
+      "vaccins": ["Diphtérie", "Tétanos", "Poliomyélite", "Coqueluche", "Rougeole", "Oreillons", "Rubéole"],
+      "note": "Ces maladies circulent encore dans de nombreuses régions du monde, et parfois davantage qu'en France.",
+      "alerte": "La vaccination contre la **rougeole** mérite une attention particulière en raison de la recrudescence d'épidémies dans plusieurs pays : le début de l'année 2026 est marqué par une circulation active du virus aux États-Unis."
+    },
+    "recommandees": {
+      "badge": "B",
+      "title": "Vaccinations fréquemment recommandées pour les voyageurs",
+      "vaccins": [
+        {
+          "name": "Hépatite A",
+          "paragraphs": [
+            "Souvent recommandée pour les pays où les conditions sanitaires sont insuffisantes : Asie (Turquie comprise), continent africain (y compris le Maghreb), Amérique centrale et du Sud et Europe de l'Est.",
+            "La transmission se fait principalement par l'eau ou les aliments contaminés. Elle fait l'objet d'un signalement obligatoire en France."
+          ]
+        },
+        {
+          "name": "Hépatite B",
+          "paragraphs": ["Recommandée pour :"],
+          "bullets": [
+            "les séjours prolongés dans les pays à forte prévalence (Afrique subsaharienne, Asie) ou moyenne prévalence (Europe de l'Est et du Sud, Afrique du Nord, Moyen-Orient, sous-continent indien et Amérique du Sud)",
+            "les expatriations",
+            "les professionnels de santé",
+            "les voyageurs susceptibles d'avoir des soins médicaux sur place"
+          ]
+        },
+        {
+          "name": "Tuberculose",
+          "paragraphs": [
+            "Sa vaccination est recommandée chez les enfants en cas de séjours fréquents ou supérieurs à un mois dans les pays à forte incidence tuberculeuse : Afrique, Asie, Océanie, Amérique centrale, du Sud et Caraïbes, Europe centrale et orientale."
+          ]
+        },
+        {
+          "name": "Fièvre typhoïde",
+          "paragraphs": [
+            "Sa prévention peut être recommandée lors de séjours dans des régions où l'hygiène alimentaire est précaire."
+          ]
+        },
+        {
+          "name": "Rage",
+          "paragraphs": [
+            "Elle est transmise par morsure, griffure ou léchage sur plaie par différents animaux (chiens, chats, primates, chauves-souris, etc.) : il est conseillé d'éviter tout contact avec les mammifères.",
+            "Dans l'Europe de l'Est, des foyers de rage sont régulièrement détectés.",
+            "En général, en dehors de la vaccination pour les personnels exposés, celle-ci est recommandée pour les zones à haut risque (Asie, Afrique et Amérique du Sud) si le séjour est :"
+          ],
+          "bullets": [
+            "prolongé ou aventureux, avec risque élevé de contacts avec les animaux",
+            "camping ou exploration de grottes",
+            "en isolement géographique, comme en zone rurale, rendant difficile l'accès aux soins",
+            "les voyages d'aventure"
+          ],
+          "extra": [
+            "Les enfants peuvent être vaccinés dès qu'ils marchent.",
+            "Une vaccination de pré-exposition simplifie le traitement en cas d'exposition (les immunoglobulines ne sont pas disponibles dans tous les pays)."
+          ]
+        },
+        {
+          "name": "Méningite ACWY",
+          "paragraphs": [
+            "Elle peut être recommandée dans certaines régions d'Afrique subsaharienne et lors de rassemblements de masse."
+          ]
+        },
+        {
+          "name": "Chikungunya",
+          "paragraphs": [
+            "En 2025, malgré l'épidémie qui a sévi à La Réunion et Mayotte, les cas autochtones dans l'hexagone sont restés exceptionnels ; la vaccination est recommandée pour les plus de 12 ans, porteurs ou non de comorbidités, pour les séjours en zone épidémique et ce quelle qu'en soit la durée, et pour tout séjour de plus d'1 mois en zone endémique."
+          ]
+        },
+        {
+          "name": "Dengue",
+          "paragraphs": [
+            "Les nouvelles données confirment la bonne tolérance du vaccin et recommandent la vaccination pour les plus de 6 ans, avec ou sans comorbidités : en zone épidémique quelle que soit la durée, et en zone endémique pour les séjours de plus de 1 mois."
+          ]
+        },
+        {
+          "name": "Encéphalite japonaise",
+          "paragraphs": [
+            "La vaccination est recommandée pour les plus de 2 mois pour les séjours en Asie et au Pacifique occidental (rizières, élevages de porcs) en période de circulation du virus, pendant la saison des pluies ou si les séjours se répètent."
+          ]
+        }
+      ]
+    },
+    "obligatoires": {
+      "badge": "C",
+      "title": "Vaccinations obligatoires dans certains cas",
+      "vaccin": {
+        "name": "Fièvre jaune",
+        "lead": "La vaccination contre la fièvre jaune est l'une des rares vaccinations pouvant être **légalement exigées à l'entrée d'un pays**. Elle est obligatoire :",
+        "bullets": [
+          "pour certains pays d'Afrique et d'Amérique du Sud",
+          "pour les voyageurs en provenance de zones à risque",
+          "pour toute personne se rendant en Guyane française âgée de plus d'un an"
+        ],
+        "outro": "Le vaccin doit être réalisé dans un **centre habilité** et donne lieu à un certificat international de vaccination."
+      }
+    }
+  },
+  "pendant": {
+    "title": "Pendant le voyage : les bons réflexes",
+    "moustiques": {
+      "title": "Prévention des maladies transmises par les moustiques",
+      "lead": "Les moustiques peuvent vous transmettre plusieurs maladies graves :",
+      "maladies": ["Paludisme", "Dengue", "Chikungunya", "Zika", "Fièvre jaune"],
+      "transition": "Il est donc important de mettre en place des mesures de protection individuelle anti-piqûre. Les mesures suivantes sont essentielles :",
+      "mesures": [
+        "port de vêtements longs et couvrants",
+        "utilisation de répulsifs cutanés",
+        "moustiquaires imprégnées pour lit et berceau",
+        "climatisation ou moustiquaires aux fenêtres et aux portes",
+        "limitation des sorties aux heures de forte activité des moustiques"
+      ],
+      "attention": "L'imprégnation des vêtements par la perméthrine n'est plus recommandée depuis 2022 car elle expose à un risque de toxicité individuelle et environnementale. Il en est de même pour l'usage des serpentins fumigènes et des huiles d'eucalyptus citronné.",
+      "paludisme": {
+        "title": "Prévention du paludisme",
+        "lead": "Le paludisme demeure une maladie potentiellement mortelle dans de nombreuses zones tropicales. Sa prévention repose sur deux mesures complémentaires :",
+        "mesures": [
+          "Protection contre les piqûres.",
+          "Traitement médicamenteux préventif lorsque celui-ci est indiqué."
+        ],
+        "outro": "Le choix du traitement dépend de la destination, de la durée du séjour et du profil du voyageur, et est à discuter avec votre médecin.",
+        "alerte": "Toute fièvre au retour d'une zone impaludée constitue une **urgence médicale** nécessitant une consultation rapide."
+      }
+    },
+    "rongeurs": {
+      "title": "Prévenir les maladies liées aux rongeurs",
+      "paragraphs": [
+        "Ils sont propagateurs de nombreuses maladies (dont hantavirus).",
+        "En mai 2026, des mesures de prévention ont été émises pour les voyageurs de zones de circulation du hantavirus Andes (Argentine, Chili).",
+        "Il est recommandé d'éviter le contact direct (morsure) et indirect (urines, déjections ou salive) : se laver les mains après un travail ou une sortie en nature. Bien stocker les aliments de manière sécurisée (notamment en randonnée)."
+      ]
+    },
+    "eau": {
+      "title": "Prévenir les maladies liées à l'eau et à l'alimentation",
+      "lead": "Les infections digestives représentent l'un des problèmes les plus fréquents chez les voyageurs. Il est donc important de respecter des règles d'hygiène alimentaire. Il est recommandé :",
+      "regles": [
+        "de boire uniquement de l'eau embouteillée ou traitée",
+        "d'éviter les glaçons d'origine inconnue",
+        "de consommer des aliments bien cuits",
+        "d'éviter les produits crus ou insuffisamment cuits",
+        "d'éplucher soi-même les fruits",
+        "de se laver régulièrement les mains"
+      ],
+      "assainir": {
+        "title": "Comment assainir de l'eau non potable ?",
+        "lead": "Ne buvez jamais l'eau du robinet si vous avez un doute (risque de diarrhée du voyageur).",
+        "methodes": [
+          {
+            "title": "Bouillir = méthode n°1",
+            "text": "Faites bouillir l'eau à gros bouillons pendant 1 minute. À plus de 2 000 m d'altitude, 3 minutes. Cela tue les bactéries, virus et parasites. Laissez refroidir dans une bouteille propre."
+          },
+          {
+            "title": "Filtre + purification",
+            "text": "Filtre type Sawyer/LifeStraw, ou achetez dans des magasins de sport des pastilles Micropur Forte ou Aquatabs. Le filtre enlève les parasites, les pastilles tuent virus et bactéries. Respectez le temps de contact indiqué."
+          },
+          {
+            "title": "Pastilles seules",
+            "text": "Micropur, Aquatabs, Pristine. Efficaces si l'eau est claire. Attendez 30 min. Goût de chlore : ajoutez un peu de jus de citron après."
+          },
+          {
+            "title": "Eau en bouteille",
+            "text": "Si vous pouvez acheter de l'eau en bouteille : achetez des bouteilles capsulées. Vérifiez le bouchon. Évitez les glaçons et brossez-vous les dents à l'eau en bouteille."
+          }
+        ],
+        "aEviter": "« L'eau a l'air propre » ou « les locaux la boivent » : leur intestin est habitué, pas le vôtre !",
+        "regleOr": "Bouillir, cuire, peler ou oublier",
+        "regleOrNote": "Pour fruits, légumes crus et glaçons."
+      },
+      "reduit": {
+        "lead": "Ces mesures permettent de réduire le risque de :",
+        "maladies": ["diarrhée du voyageur", "hépatite A", "fièvre typhoïde", "choléra"]
+      }
+    },
+    "phlebite": {
+      "title": "Prévenir une phlébite lors des longs transports",
+      "lead": "Les stations assises prolongées en avion sont susceptibles de générer une phlébite. La phlébite est la création d'un caillot dans la jambe. En avion, le risque augmente à cause de l'immobilité, la déshydratation et la pression de la cabine.",
+      "conseilsTitle": "Conseils clés",
+      "conseils": [
+        {
+          "title": "Bougez toutes les 30-45 min",
+          "text": "Levez-vous et marchez dans le couloir. Sinon, assis : pompez les chevilles 20 fois, pliez/dépliez les genoux et bougez les pieds."
+        },
+        {
+          "title": "Hydratez-vous",
+          "text": "1 grand verre d'eau par heure de vol est conseillé. Évitez l'alcool et le café en excès, qui participent à la déshydratation."
+        },
+        {
+          "title": "Vêtements",
+          "text": "Portez plutôt des pantalons ou leggings pas serrés et des chaussures faciles à enlever. Pas de chaussettes qui serrent le mollet."
+        },
+        {
+          "title": "Bas de contention",
+          "text": "Ils sont conseillés si vous avez des facteurs de risque (+50 ans, HTA, diabète, obésité, pilule, antécédent de phlébite, cancer). Si des facteurs de risque sont présents, parlez-en à votre médecin avant : parfois il pourra prescrire une HBPM injectable pour le vol. Quels bas ? Prenez des contentions classe 2, à mettre avant le lever. La pharmacie prendra les mesures pour adapter vos bas."
+        },
+        {
+          "title": "Évitez de croiser les jambes",
+          "text": "Cela comprime les veines."
+        }
+      ],
+      "alerte": "Quels signes d'alerte après le vol font suspecter une phlébite ? Mollet chaud, douloureux, gonflé par rapport à l'autre jambe. Consultez urgemment si douleur au mollet, ou douleur dans la poitrine avec essoufflement (possible embolie)."
+    },
+    "mam": {
+      "title": "Éviter le mal aigu des montagnes (MAM)",
+      "lead": "Cela peut se produire à partir de 2 500 m d'altitude, car le corps manque d'oxygène. Un traitement par Diamox peut être prescrit sur ordonnance, mais les conseils suivants, sans médicament, sont à respecter :",
+      "conseils": [
+        {
+          "title": "Montez doucement",
+          "text": "Règle d'or « climb high, sleep low ». Ne dépassez pas +300-500 m de dénivelé pour dormir chaque jour au-dessus de 2 500 m. 1 jour de repos tous les 1 000 m gagnés."
+        },
+        {
+          "title": "Hydratez-vous + mangez léger",
+          "text": "3-4 L d'eau par jour. Évitez l'alcool."
+        },
+        {
+          "title": "Écoutez votre corps",
+          "text": "Premiers signes de MAM : mal de tête, nausées, fatigue anormale, sommeil altéré. C'est le signal « stop, vous ne montez plus ». Reposez-vous 24 h à la même altitude."
+        },
+        {
+          "title": "Descendez si ça s'aggrave",
+          "text": "Si le mal de tête ne passe pas au paracétamol, associé à des vomissements, un essoufflement au repos et peut-être une confusion, alors redescendez de 500-1 000 m directement. C'est le seul vrai traitement de l'œdème cérébral/pulmonaire."
+        },
+        {
+          "title": "Le traitement par Diamox / Acétazolamide",
+          "text": "Il se prend avant la montée, sur ordonnance. Parlez-en à votre médecin, surtout si vous avez déjà eu le mal des montagnes."
+        },
+        {
+          "title": "Pas de sport à l'arrivée",
+          "text": "Les 24 premières heures, marchez tranquille : le corps s'acclimate."
+        }
+      ],
+      "aRetenir": "Personne n'est immunisé, même les sportifs. Ça ne dépend pas de la forme physique, juste de la vitesse de montée."
+    },
+    "jetlag": {
+      "title": "Éviter le « jet lag »",
+      "lead": "Le jet lag correspond aux symptômes ressentis par un voyageur suite à un décalage horaire. Vous ne pouvez pas l'éviter à 100 %, mais vous pouvez l'atténuer.",
+      "phases": [
+        {
+          "title": "Avant le départ",
+          "conseils": [
+            "**Décalez-vous 2-3 jours avant :** si vous partez vers l'Est, couchez-vous et réveillez-vous 1 h plus tôt. Vers l'Ouest, 1 h plus tard.",
+            "**Hydratez-vous :** buvez beaucoup d'eau 24 h avant. Évitez l'alcool et le café en excès."
+          ]
+        },
+        {
+          "title": "Pendant le vol",
+          "conseils": [
+            "**Réglez votre montre :** dès l'embarquement, mettez-la à l'heure de destination. Votre cerveau suivra.",
+            "**Dormez au bon moment :** si c'est la nuit à destination, essayez de dormir. Masque et bouchons d'oreilles vous aideront. Si c'est le jour, restez éveillé(e).",
+            "**Exposez-vous à la lumière :** à l'arrivée, sortez. La lumière du jour recale votre horloge interne. Vers l'Est = lumière du matin. Vers l'Ouest = lumière de fin d'après-midi."
+          ]
+        },
+        {
+          "title": "À l'arrivée",
+          "conseils": [
+            "**Vivez à l'heure locale :** mangez, dormez aux horaires locaux dès le 1er jour, même si vous n'avez pas faim ou sommeil.",
+            "**Petite sieste seulement :** si besoin, 20 min max avant 15 h. Sinon vous vous décalez encore."
+          ]
+        }
+      ]
+    }
+  },
+  "profils": {
+    "title": "Conseils particuliers pour certaines populations",
+    "items": [
+      {
+        "iconName": "Baby",
+        "title": "Si vous êtes une femme enceinte",
+        "lead": "Avant un voyage, une consultation médicale est indispensable afin d'évaluer :",
+        "bullets": [
+          "les risques infectieux",
+          "les vaccinations autorisées",
+          "les risques liés au transport aérien",
+          "la disponibilité des soins sur place"
+        ],
+        "paragraphs": [
+          "Les voyages aériens sont **contre-indiqués après la 36e semaine** d'une grossesse simple et **après 32 semaines** d'une grossesse multiple.",
+          "Certaines destinations exposées au virus Zika ou au paludisme peuvent être déconseillées."
+        ]
+      },
+      {
+        "iconName": "Users",
+        "title": "Si vous avez de jeunes enfants",
+        "lead": "Les enfants sont particulièrement vulnérables :",
+        "bullets": [
+          "à la déshydratation",
+          "au paludisme",
+          "à la rage",
+          "aux maladies diarrhéiques"
+        ],
+        "paragraphs": ["Leur calendrier vaccinal doit être **rigoureusement à jour**."]
+      },
+      {
+        "iconName": "HeartPulse",
+        "title": "Si vous êtes une personne âgée ou atteinte de maladie chronique",
+        "paragraphs": [
+          "Une consultation pré-voyage est **fortement recommandée** afin d'adapter les traitements et de vérifier l'aptitude au voyage : une vigilance accrue est conseillée pour les voyages exposant aux fortes chaleurs ou aux grands froids (risque de décompensation)."
+        ]
+      }
+    ]
+  },
+  "source": "Recommandations sanitaires du Haut Conseil de la santé publique (HCSP) pour les voyageurs, actualisées en juin 2026."
+}
