@@ -10,6 +10,15 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "soiree-ville-hopital-parcours-cancerologie-juin-2026",
+    title: "Soirée Ville-Hôpital : les parcours en cancérologie — 25 juin 2026",
+    image: "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-1.webp",
+    excerpt:
+      "Professionnels de ville et équipes du CHU de Bordeaux réunis autour des parcours en cancérologie : coordination ville-hôpital, innovations thérapeutiques, recherche clinique et accompagnement des patients pendant et après les traitements.",
+    frame: "landscape",
+    publishedAt: "25 juin 2026",
+  },
+  {
     slug: "equipe-rcp-journee-inter-cpts-nouvelle-aquitaine-juin-2026",
     title:
       "L'équipe RCP à la journée inter-CPTS de Nouvelle-Aquitaine — 11 juin 2026",

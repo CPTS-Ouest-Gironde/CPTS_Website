@@ -8,6 +8,8 @@ import { Footer } from "@/components/footer";
 import { suiviArticles } from "../articles-data";
 import { ArticleMediaCarousel } from "@/components/suivi-activite/article-media-carousel";
 
+const VILLE_HOPITAL_CANCEROLOGIE_JUIN_2026_SLUG =
+  "soiree-ville-hopital-parcours-cancerologie-juin-2026";
 const RCP_INTER_CPTS_JUIN_2026_SLUG =
   "equipe-rcp-journee-inter-cpts-nouvelle-aquitaine-juin-2026";
 const DEPISTAGE_FORMANOIR_JUIN_2026_SLUG =
@@ -54,6 +56,22 @@ function renderParagraphWithBold(text: string) {
 }
 
 const articleDetails = {
+  [VILLE_HOPITAL_CANCEROLOGIE_JUIN_2026_SLUG]: {
+    paragraphs: [
+      "Le 25 juin 2026, une soirée d'échanges a réuni les professionnels de ville et les équipes du CHU de Bordeaux autour des parcours en cancérologie, malgré la canicule.",
+      "Au programme : coordination ville-hôpital, innovations thérapeutiques, recherche clinique et accompagnement des patients pendant et après les traitements.",
+      "Les interventions ont mis en lumière le rôle essentiel des infirmières de coordination, les outils qui facilitent le partage d'informations entre professionnels et l'importance croissante des soins de support.",
+      "Un message fort ressort de cette rencontre : la qualité du parcours patient repose sur une coopération étroite entre tous les acteurs du territoire.",
+      "Merci aux intervenants et aux participants pour la richesse des échanges et leur engagement au service des patients.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-1.webp",
+      "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-2.webp",
+      "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-3.webp",
+      "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-4.webp",
+      "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-5.webp",
+    ],
+  },
   [RCP_INTER_CPTS_JUIN_2026_SLUG]: {
     paragraphs: [
       "Le 11 juin 2026, l'équipe RCP de la CPTS Ouest Gironde est intervenue lors de la journée inter-CPTS de Nouvelle-Aquitaine, organisée par Agora Lib.",
