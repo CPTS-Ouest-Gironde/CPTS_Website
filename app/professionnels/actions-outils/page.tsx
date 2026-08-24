@@ -25,7 +25,7 @@ const groups = [
     step: "01",
     title: "Améliorer l'accès aux soins",
     navLabel: "Accès aux soins",
-    hue: 143,
+    hue: 122,
     illustration: "/actions-outils/acces-soins.svg",
     items: accordionItemsAcces,
   },
@@ -34,7 +34,7 @@ const groups = [
     step: "02",
     title: "Organisation des parcours pluriprofessionnels des patients",
     navLabel: "Parcours pluriprofessionnels",
-    hue: 168,
+    hue: 132,
     illustration: "/actions-outils/parcour-pluripro.svg",
     items: accordionItemsParcours,
   },
@@ -43,7 +43,7 @@ const groups = [
     step: "03",
     title: "Situations Sanitaires Exceptionnelles (SSE)",
     navLabel: "SSE",
-    hue: 125,
+    hue: 140,
     illustration: null,
     items: accordionItemsSSE,
   },
@@ -52,7 +52,7 @@ const groups = [
     step: "04",
     title: "Développer des actions territoriales de prévention",
     navLabel: "Actions de prévention",
-    hue: 190,
+    hue: 148,
     illustration: null,
     items: accordionItemsPrevention,
   },
@@ -68,10 +68,11 @@ const normalize = (value: string) =>
 /* Une nuance par catégorie : seule la teinte varie, la luminosité et la saturation
    restent constantes pour que les 5 aient le même poids visuel. */
 const shades = (hue: number) => ({
-  soft: `oklch(0.972 0.026 ${hue})`,
-  deep: `oklch(0.94 0.05 ${hue})`,
-  strong: `oklch(0.46 0.11 ${hue})`,
-  bar: `oklch(0.972 0.026 ${hue} / 0.92)`,
+  card: `oklch(0.958 0.036 ${hue})`,
+  cardBorder: `oklch(0.885 0.055 ${hue})`,
+  soft: `oklch(0.966 0.03 ${hue})`,
+  border: `oklch(0.9 0.05 ${hue})`,
+  strong: `oklch(0.45 0.11 ${hue})`,
 });
 
 const entries = groups.flatMap((group) =>
@@ -174,7 +175,7 @@ export default function ActionsOutilsPage() {
       label: "Tous",
       count: entries.length,
       title: "",
-      hue: 155,
+      hue: 136,
       // Vue « Tous » : illustration générique de l'équipe pluriprofessionnelle
       illustration: "/actions-outils/acces-soins.svg" as string | null,
     },
@@ -189,21 +190,14 @@ export default function ActionsOutilsPage() {
   ];
 
   const activeFilter = filters.find((filter) => filter.id === activeGroup) ?? filters[0];
-  const tint = shades(activeFilter.hue);
 
   return (
-    <div
-      className="min-h-screen transition-colors duration-500"
-      style={{ backgroundColor: tint.soft }}
-    >
+    <div className="min-h-screen bg-background">
       <Header />
 
       <main>
         {/* En-tête de page */}
-        <section
-          className="relative pt-28 lg:pt-36 pb-8 lg:pb-10 overflow-hidden transition-colors duration-500"
-          style={{ backgroundImage: `linear-gradient(135deg, ${tint.deep}, ${tint.soft} 65%)` }}
-        >
+        <section className="relative pt-28 lg:pt-36 pb-8 lg:pb-10 overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/10 to-background">
           <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -245,10 +239,7 @@ export default function ActionsOutilsPage() {
         </section>
 
         {/* Barre de recherche et filtres, collante sous l'en-tête du site */}
-        <div
-          className="sticky top-28 z-30 border-y border-border backdrop-blur-md transition-colors duration-500"
-          style={{ backgroundColor: tint.bar }}
-        >
+        <div className="sticky top-28 z-30 border-y border-border bg-background/90 backdrop-blur-md">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-6xl mx-auto py-3 space-y-3">
               <div className="relative">
@@ -295,7 +286,7 @@ export default function ActionsOutilsPage() {
                       aria-pressed={isActive}
                       style={{
                         backgroundColor: isActive ? filterTint.strong : filterTint.soft,
-                        borderColor: isActive ? filterTint.strong : filterTint.deep,
+                        borderColor: isActive ? filterTint.strong : filterTint.border,
                         color: isActive ? "white" : filterTint.strong,
                       }}
                       className="flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors hover:brightness-[0.97]"
@@ -329,7 +320,7 @@ export default function ActionsOutilsPage() {
                       item={entry.item}
                       groupStep={entry.group.step}
                       groupLabel={entry.group.navLabel}
-                      accent={shades(entry.group.hue).strong}
+                      tint={shades(entry.group.hue)}
                       index={index}
                       onOpen={openDispositif}
                     />
