@@ -155,12 +155,10 @@
   animation: badge-glow 3s ease-in-out infinite;
 }
 
-/* Scroll fluide pour la navigation par ancres (respecte prefers-reduced-motion) */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-}
+/* Pas de scroll-behavior: smooth sur html : en App Router, cela animait aussi
+   le retour en haut de page à chaque navigation, la nouvelle page s'affichant
+   d'abord à l'ancienne position de scroll. Les défilements fluides voulus sont
+   demandés explicitement en JS via scrollIntoView({ behavior: "smooth" }). */
 
 /* Article santé voyage — bandeau défilant façon panneau d'aéroport */
 @keyframes sv-marquee {
