@@ -7,18 +7,6 @@
       "link": "/prevention/sante-familiale/sante-voyage"
     },
     {
-      "image": "/feu/image-feu-post-insta.png",
-      "title": "Les fumées du gigantesque feu du Porge sont arrivées sur notre territoire",
-      "alt": "Alerte : les fumées du feu du Porge sont arrivées sur notre territoire — les bons gestes à adopter",
-      "link": "/actualites/feu-du-porge"
-    },
-    {
-      "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
-      "title": "Conseils canicule : les bons gestes face aux fortes chaleurs",
-      "alt": "Conseils canicule : les bons gestes face aux fortes chaleurs",
-      "link": "/prevention/sante-familiale/canicule"
-    },
-    {
       "image": "/prevention/sante-famille/chute-personne-agee.webp",
       "title": "Chute de la personne âgée : comment la prévenir ?",
       "alt": "Chute de la personne âgée : comment la prévenir ?",
@@ -38,6 +26,18 @@
     }
   ],
   "slidesDisabled": [
+    {
+      "image": "/feu/image-feu-post-insta.png",
+      "title": "Les fumées du gigantesque feu du Porge sont arrivées sur notre territoire",
+      "alt": "Alerte : les fumées du feu du Porge sont arrivées sur notre territoire — les bons gestes à adopter",
+      "link": "/actualites/feu-du-porge"
+    },
+    {
+      "image": "/prevention/sante-famille/canicule/prevention-canicule.webp",
+      "title": "Conseils canicule : les bons gestes face aux fortes chaleurs",
+      "alt": "Conseils canicule : les bons gestes face aux fortes chaleurs",
+      "link": "/prevention/sante-familiale/canicule"
+    },
     {
       "image": "/juin-vert/juin-vert-2026.webp",
       "title": "Juin Vert : le dépistage du cancer du col de l'utérus",

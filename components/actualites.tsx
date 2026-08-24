@@ -13,11 +13,6 @@ import {
 
 const actualites = [
   {
-    title: "Feu du Porge : les recommandations pour se protéger",
-    image: "/actu/affiche-incendie/1.jpg",
-    link: "/actualites/affiches-incendie",
-  },
-  {
     title: "Registre canicule : protégeons les personnes fragiles",
     image: "/actu/registre-canicule-merignac.webp",
     link: "/actualites/registre-canicule",
