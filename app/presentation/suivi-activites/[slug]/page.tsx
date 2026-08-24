@@ -8,6 +8,8 @@ import { Footer } from "@/components/footer";
 import { suiviArticles } from "../articles-data";
 import { ArticleMediaCarousel } from "@/components/suivi-activite/article-media-carousel";
 
+const RCP_INTER_CPTS_JUIN_2026_SLUG =
+  "equipe-rcp-journee-inter-cpts-nouvelle-aquitaine-juin-2026";
 const DEPISTAGE_FORMANOIR_JUIN_2026_SLUG =
   "depistage-diabete-hypertension-pharmacie-formanoir-juin-2026";
 const SOIREE_PERINATALITE_AVRIL_2026_SLUG =
@@ -52,6 +54,18 @@ function renderParagraphWithBold(text: string) {
 }
 
 const articleDetails = {
+  [RCP_INTER_CPTS_JUIN_2026_SLUG]: {
+    paragraphs: [
+      "Le 11 juin 2026, l'équipe RCP de la CPTS Ouest Gironde est intervenue lors de la journée inter-CPTS de Nouvelle-Aquitaine, organisée par Agora Lib.",
+      "L'atelier animé à cette occasion était consacré au partage d'expérience autour des réunions de concertation pluriprofessionnelle (RCP) mises en place sur notre territoire.",
+      "De nombreuses CPTS présentes ont manifesté leur intérêt pour ce dispositif « donnant-gagnant ».",
+      "Merci à l'équipe RCP pour son intervention et à Agora Lib pour l'organisation de cette journée d'échanges entre CPTS de la région.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/11-juin-rcp-cas-complexe/rcp-cas-complexe-11-juin-1.webp",
+      "/suivi-activite/articles/11-juin-rcp-cas-complexe/rcp-cas-complexe-11-juin-2.webp",
+    ],
+  },
   [DEPISTAGE_FORMANOIR_JUIN_2026_SLUG]: {
     paragraphs: [
       "Les 1er et 11 juin 2026, la CPTS Ouest Gironde a organisé deux journées de sensibilisation et de dépistage à la pharmacie Formanoir à Pessac.",

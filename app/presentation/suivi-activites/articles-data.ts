@@ -10,6 +10,17 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "equipe-rcp-journee-inter-cpts-nouvelle-aquitaine-juin-2026",
+    title:
+      "L'équipe RCP à la journée inter-CPTS de Nouvelle-Aquitaine — 11 juin 2026",
+    image:
+      "/suivi-activite/articles/11-juin-rcp-cas-complexe/rcp-cas-complexe-11-juin-1.webp",
+    excerpt:
+      "L'équipe RCP de la CPTS Ouest Gironde est intervenue lors de la journée inter-CPTS de Nouvelle-Aquitaine organisée par Agora Lib, pour un atelier de partage d'expérience autour de son dispositif de concertation pluriprofessionnelle.",
+    frame: "landscape",
+    publishedAt: "11 juin 2026",
+  },
+  {
     slug: "depistage-diabete-hypertension-pharmacie-formanoir-juin-2026",
     title:
       "Dépistage diabète, hypertension et bilan visuel à la pharmacie Formanoir — juin 2026",
