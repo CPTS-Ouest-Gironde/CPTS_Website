@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef } from "react";
+import Image from "next/image";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -24,6 +25,7 @@ const groups = [
     step: "01",
     title: "Améliorer l'accès aux soins",
     navLabel: "Accès aux soins",
+    illustration: "/actions-outils/acces-soins.svg",
     items: accordionItemsAcces,
   },
   {
@@ -31,6 +33,7 @@ const groups = [
     step: "02",
     title: "Organisation des parcours pluriprofessionnels des patients",
     navLabel: "Parcours pluriprofessionnels",
+    illustration: "/actions-outils/parcour-pluripro.svg",
     items: accordionItemsParcours,
   },
   {
@@ -38,6 +41,7 @@ const groups = [
     step: "03",
     title: "Situations Sanitaires Exceptionnelles (SSE)",
     navLabel: "SSE",
+    illustration: null,
     items: accordionItemsSSE,
   },
   {
@@ -45,6 +49,7 @@ const groups = [
     step: "04",
     title: "Développer des actions territoriales de prévention",
     navLabel: "Actions de prévention",
+    illustration: null,
     items: accordionItemsPrevention,
   },
 ];
@@ -151,13 +156,24 @@ export default function ActionsOutilsPage() {
   }, []);
 
   const filters = [
-    { id: "all", label: "Tous", count: entries.length },
+    {
+      id: "all",
+      label: "Tous",
+      count: entries.length,
+      title: "",
+      // Vue « Tous » : illustration générique de l'équipe pluriprofessionnelle
+      illustration: "/actions-outils/acces-soins.svg" as string | null,
+    },
     ...groups.map((group) => ({
       id: group.id,
       label: group.navLabel,
       count: group.items.length,
+      title: group.title,
+      illustration: group.illustration,
     })),
   ];
+
+  const activeFilter = filters.find((filter) => filter.id === activeGroup) ?? filters[0];
 
   return (
     <div className="min-h-screen bg-background">
@@ -169,19 +185,39 @@ export default function ActionsOutilsPage() {
           <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="max-w-6xl mx-auto space-y-5">
-              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
-                Espace professionnel
+            <div className="max-w-6xl mx-auto grid gap-8 lg:grid-cols-[1fr_340px] lg:items-center">
+              <div className="space-y-5">
+                <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+                  Espace professionnel
+                </div>
+
+                <h1 className="text-4xl lg:text-6xl font-bold text-foreground text-balance">
+                  Nos actions &amp; vos outils
+                </h1>
+
+                <p className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-[68ch]">
+                  {activeFilter.id === "all"
+                    ? `${entries.length} dispositifs répartis en ${groups.length} domaines d'action.`
+                    : activeFilter.title}
+                </p>
               </div>
 
-              <h1 className="text-4xl lg:text-6xl font-bold text-foreground text-balance">
-                Nos actions &amp; vos outils
-              </h1>
-
-              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-[68ch]">
-                {entries.length} dispositifs répartis en {groups.length} domaines
-                d&apos;action.
-              </p>
+              {/* Emplacement réservé : la hauteur ne bouge pas quand une catégorie
+                  n'a pas encore d'illustration. */}
+              <div className="hidden lg:block relative aspect-[4/3]">
+                {activeFilter.illustration && (
+                  <Image
+                    key={activeFilter.illustration}
+                    src={activeFilter.illustration}
+                    alt=""
+                    aria-hidden="true"
+                    fill
+                    priority
+                    className="object-contain animate-in fade-in duration-500"
+                    sizes="340px"
+                  />
+                )}
+              </div>
             </div>
           </div>
         </section>
@@ -308,7 +344,7 @@ export default function ActionsOutilsPage() {
       >
         <DialogContent
           aria-describedby={undefined}
-          className="flex max-h-[88vh] w-[calc(100%-1.5rem)] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0"
+          className="flex max-h-[88vh] w-[calc(100%-1.5rem)] max-w-3xl lg:max-w-5xl xl:max-w-6xl flex-col gap-0 overflow-hidden rounded-2xl p-0"
         >
           {openEntry && (
             <>
