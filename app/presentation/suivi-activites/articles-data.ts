@@ -10,6 +10,36 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "soiree-ville-hopital-parcours-cancerologie-juin-2026",
+    title: "Soirée Ville-Hôpital : les parcours en cancérologie — 25 juin 2026",
+    image: "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-1.webp",
+    excerpt:
+      "Professionnels de ville et équipes du CHU de Bordeaux réunis autour des parcours en cancérologie : coordination ville-hôpital, innovations thérapeutiques, recherche clinique et accompagnement des patients pendant et après les traitements.",
+    frame: "landscape",
+    publishedAt: "25 juin 2026",
+  },
+  {
+    slug: "equipe-rcp-journee-inter-cpts-nouvelle-aquitaine-juin-2026",
+    title:
+      "L'équipe RCP à la journée inter-CPTS de Nouvelle-Aquitaine — 11 juin 2026",
+    image:
+      "/suivi-activite/articles/11-juin-rcp-cas-complexe/rcp-cas-complexe-11-juin-1.webp",
+    excerpt:
+      "L'équipe RCP de la CPTS Ouest Gironde est intervenue lors de la journée inter-CPTS de Nouvelle-Aquitaine organisée par Agora Lib, pour un atelier de partage d'expérience autour de son dispositif de concertation pluriprofessionnelle.",
+    frame: "landscape",
+    publishedAt: "11 juin 2026",
+  },
+  {
+    slug: "depistage-diabete-hypertension-pharmacie-formanoir-juin-2026",
+    title:
+      "Dépistage diabète, hypertension et bilan visuel à la pharmacie Formanoir — juin 2026",
+    image: "/suivi-activite/articles/formanoir-juin/formanoir-1.webp",
+    excerpt:
+      "Deux journées de sensibilisation et de dépistage du diabète et de l'hypertension à la pharmacie Formanoir à Pessac, menées par nos deux infirmières, avec un bilan visuel proposé par Les Opticiens Mobiles.",
+    frame: "portrait",
+    publishedAt: "1er et 11 juin 2026",
+  },
+  {
     slug: "soiree-formation-perinatalite-vulnerabilites-sante-mentale-28-avril-2026",
     title: "Soirée de formation périnatalité : vulnérabilités et santé mentale — 28 avril 2026",
     image: "/suivi-activite/articles/28-avril-2026/soiree-28-avril-1.webp",
