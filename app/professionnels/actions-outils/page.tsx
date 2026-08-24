@@ -25,6 +25,7 @@ const groups = [
     step: "01",
     title: "Améliorer l'accès aux soins",
     navLabel: "Accès aux soins",
+    hue: 143,
     illustration: "/actions-outils/acces-soins.svg",
     items: accordionItemsAcces,
   },
@@ -33,6 +34,7 @@ const groups = [
     step: "02",
     title: "Organisation des parcours pluriprofessionnels des patients",
     navLabel: "Parcours pluriprofessionnels",
+    hue: 168,
     illustration: "/actions-outils/parcour-pluripro.svg",
     items: accordionItemsParcours,
   },
@@ -41,6 +43,7 @@ const groups = [
     step: "03",
     title: "Situations Sanitaires Exceptionnelles (SSE)",
     navLabel: "SSE",
+    hue: 125,
     illustration: null,
     items: accordionItemsSSE,
   },
@@ -49,6 +52,7 @@ const groups = [
     step: "04",
     title: "Développer des actions territoriales de prévention",
     navLabel: "Actions de prévention",
+    hue: 190,
     illustration: null,
     items: accordionItemsPrevention,
   },
@@ -60,6 +64,15 @@ const normalize = (value: string) =>
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+
+/* Une nuance par catégorie : seule la teinte varie, la luminosité et la saturation
+   restent constantes pour que les 5 aient le même poids visuel. */
+const shades = (hue: number) => ({
+  soft: `oklch(0.972 0.026 ${hue})`,
+  deep: `oklch(0.94 0.05 ${hue})`,
+  strong: `oklch(0.46 0.11 ${hue})`,
+  bar: `oklch(0.972 0.026 ${hue} / 0.92)`,
+});
 
 const entries = groups.flatMap((group) =>
   group.items.map((item) => ({
@@ -161,6 +174,7 @@ export default function ActionsOutilsPage() {
       label: "Tous",
       count: entries.length,
       title: "",
+      hue: 155,
       // Vue « Tous » : illustration générique de l'équipe pluriprofessionnelle
       illustration: "/actions-outils/acces-soins.svg" as string | null,
     },
@@ -169,19 +183,27 @@ export default function ActionsOutilsPage() {
       label: group.navLabel,
       count: group.items.length,
       title: group.title,
+      hue: group.hue,
       illustration: group.illustration,
     })),
   ];
 
   const activeFilter = filters.find((filter) => filter.id === activeGroup) ?? filters[0];
+  const tint = shades(activeFilter.hue);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div
+      className="min-h-screen transition-colors duration-500"
+      style={{ backgroundColor: tint.soft }}
+    >
       <Header />
 
       <main>
         {/* En-tête de page */}
-        <section className="relative pt-28 lg:pt-36 pb-8 lg:pb-10 overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/10 to-background">
+        <section
+          className="relative pt-28 lg:pt-36 pb-8 lg:pb-10 overflow-hidden transition-colors duration-500"
+          style={{ backgroundImage: `linear-gradient(135deg, ${tint.deep}, ${tint.soft} 65%)` }}
+        >
           <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -223,7 +245,10 @@ export default function ActionsOutilsPage() {
         </section>
 
         {/* Barre de recherche et filtres, collante sous l'en-tête du site */}
-        <div className="sticky top-28 z-30 border-y border-border bg-background/90 backdrop-blur-md">
+        <div
+          className="sticky top-28 z-30 border-y border-border backdrop-blur-md transition-colors duration-500"
+          style={{ backgroundColor: tint.bar }}
+        >
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-6xl mx-auto py-3 space-y-3">
               <div className="relative">
@@ -260,6 +285,7 @@ export default function ActionsOutilsPage() {
                 <SlidersHorizontal className="hidden h-4 w-4 flex-shrink-0 text-muted-foreground sm:block" />
                 {filters.map((filter) => {
                   const isActive = activeGroup === filter.id;
+                  const filterTint = shades(filter.hue);
 
                   return (
                     <button
@@ -267,18 +293,15 @@ export default function ActionsOutilsPage() {
                       type="button"
                       onClick={() => setActiveGroup(filter.id)}
                       aria-pressed={isActive}
-                      className={`flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
-                        isActive
-                          ? "border-primary bg-primary text-primary-foreground"
-                          : "border-border bg-card text-foreground/70 hover:border-primary/40 hover:text-primary"
-                      }`}
+                      style={{
+                        backgroundColor: isActive ? filterTint.strong : filterTint.soft,
+                        borderColor: isActive ? filterTint.strong : filterTint.deep,
+                        color: isActive ? "white" : filterTint.strong,
+                      }}
+                      className="flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors hover:brightness-[0.97]"
                     >
                       {filter.label}
-                      <span
-                        className={`ml-1.5 text-xs ${
-                          isActive ? "text-primary-foreground/70" : "text-muted-foreground"
-                        }`}
-                      >
+                      <span className="ml-1.5 text-xs opacity-70">
                         {filter.count}
                       </span>
                     </button>
@@ -306,6 +329,7 @@ export default function ActionsOutilsPage() {
                       item={entry.item}
                       groupStep={entry.group.step}
                       groupLabel={entry.group.navLabel}
+                      accent={shades(entry.group.hue).strong}
                       index={index}
                       onOpen={openDispositif}
                     />

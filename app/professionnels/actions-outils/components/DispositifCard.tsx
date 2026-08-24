@@ -5,6 +5,7 @@ interface DispositifCardProps {
   item: AccordionItem;
   groupStep: string;
   groupLabel: string;
+  accent: string;
   index: number;
   onOpen: (id: string) => void;
 }
@@ -13,6 +14,7 @@ export function DispositifCard({
   item,
   groupStep,
   groupLabel,
+  accent,
   index,
   onOpen,
 }: DispositifCardProps) {
@@ -26,10 +28,13 @@ export function DispositifCard({
       className="group relative flex h-full flex-col items-start gap-4 overflow-hidden rounded-2xl border border-border bg-card p-5 text-left transition-all duration-200 animate-in fade-in slide-in-from-bottom-2 fill-mode-both hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
     >
       {/* Filet d'accent qui se déploie au survol */}
-      <span className="absolute inset-x-0 top-0 h-0.5 w-0 bg-primary transition-all duration-300 group-hover:w-full" />
+      <span
+        style={{ backgroundColor: accent }}
+        className="absolute inset-x-0 top-0 h-0.5 w-0 transition-all duration-300 group-hover:w-full"
+      />
 
       <span className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
-        <span className="text-primary">{groupStep}</span>
+        <span style={{ color: accent }}>{groupStep}</span>
         {groupLabel}
       </span>
 
