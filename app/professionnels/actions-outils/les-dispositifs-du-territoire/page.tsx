@@ -58,7 +58,7 @@ export default function DispositifsTerritoireProfessionnelsPage() {
               <span>Retour à la page Actions et outils</span>
             </Link>
 
-            <div className="grid lg:grid-cols-[1fr_360px] gap-6 lg:gap-8 items-center">
+            <div className="grid lg:grid-cols-[1fr_460px] gap-6 lg:gap-8 items-center">
               <div className="space-y-4 max-w-4xl">
                 <p className="inline-flex items-center rounded-full bg-primary/10 text-primary px-3 py-1 text-xs font-semibold uppercase tracking-wide">
                   Espace professionnel sécurisé
@@ -77,13 +77,13 @@ export default function DispositifsTerritoireProfessionnelsPage() {
                 </p>
               </div>
 
-              <div className="relative aspect-[16/10] w-full max-w-md mx-auto lg:max-w-none">
+              <div className="relative aspect-[3/2] w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-border/60 bg-white shadow-sm">
                 <Image
-                  src="/linkpage/sante-mentale/hero-sante-mentale-dispositif.webp"
-                  alt="Illustration des dispositifs en santé mentale"
+                  src="/linkpage/sante-mentale/hero-sm.webp"
+                  alt="Illustration : des professionnels de santé s'orientent parmi les dispositifs du territoire"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 360px"
+                  sizes="(max-width: 1024px) 100vw, 460px"
                   priority
                 />
               </div>
