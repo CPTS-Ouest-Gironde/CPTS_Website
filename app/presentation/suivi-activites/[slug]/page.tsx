@@ -8,6 +8,8 @@ import { Footer } from "@/components/footer";
 import { suiviArticles } from "../articles-data";
 import { ArticleMediaCarousel } from "@/components/suivi-activite/article-media-carousel";
 
+const DEPISTAGE_FORMANOIR_JUIN_2026_SLUG =
+  "depistage-diabete-hypertension-pharmacie-formanoir-juin-2026";
 const SOIREE_PERINATALITE_AVRIL_2026_SLUG =
   "soiree-formation-perinatalite-vulnerabilites-sante-mentale-28-avril-2026";
 const DEPISTAGE_DIABETE_ARAGO_AVRIL_2026_SLUG =
@@ -50,6 +52,19 @@ function renderParagraphWithBold(text: string) {
 }
 
 const articleDetails = {
+  [DEPISTAGE_FORMANOIR_JUIN_2026_SLUG]: {
+    paragraphs: [
+      "Les 1er et 11 juin 2026, la CPTS Ouest Gironde a organisé deux journées de sensibilisation et de dépistage à la pharmacie Formanoir à Pessac.",
+      "Lors de la première journée, plus de 30 patients ont bénéficié d'un dépistage du diabète et de l'hypertension artérielle, réalisé par nos deux infirmières.",
+      "Les Opticiens Mobiles étaient également présents pour proposer un bilan visuel aux personnes accueillies.",
+      "Ces actions « aller vers », menées au plus près des lieux de vie, permettent d'informer sur les facteurs de risque, de repérer précocement les situations à surveiller et d'orienter vers le médecin traitant lorsque cela est nécessaire.",
+      "Merci à la pharmacie Formanoir pour son accueil, aux Opticiens Mobiles pour leur participation et aux infirmières mobilisées sur ces deux journées.",
+    ],
+    mediaImages: [
+      "/suivi-activite/articles/formanoir-juin/formanoir-1.webp",
+      "/suivi-activite/articles/formanoir-juin/formanoir-affiche.webp",
+    ],
+  },
   [SOIREE_PERINATALITE_AVRIL_2026_SLUG]: {
     paragraphs: [
       "Ce 28 avril s'est tenue notre soirée de formation en lien avec le plan santé de la femme en périnatalité (05 février 2026) : « Les vulnérabilités et la santé mentale en périnatalité » était le thème.",

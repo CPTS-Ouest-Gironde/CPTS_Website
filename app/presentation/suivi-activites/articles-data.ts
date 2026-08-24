@@ -10,6 +10,16 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "depistage-diabete-hypertension-pharmacie-formanoir-juin-2026",
+    title:
+      "Dépistage diabète, hypertension et bilan visuel à la pharmacie Formanoir — juin 2026",
+    image: "/suivi-activite/articles/formanoir-juin/formanoir-1.webp",
+    excerpt:
+      "Deux journées de sensibilisation et de dépistage du diabète et de l'hypertension à la pharmacie Formanoir à Pessac, menées par nos deux infirmières, avec un bilan visuel proposé par Les Opticiens Mobiles.",
+    frame: "portrait",
+    publishedAt: "1er et 11 juin 2026",
+  },
+  {
     slug: "soiree-formation-perinatalite-vulnerabilites-sante-mentale-28-avril-2026",
     title: "Soirée de formation périnatalité : vulnérabilités et santé mentale — 28 avril 2026",
     image: "/suivi-activite/articles/28-avril-2026/soiree-28-avril-1.webp",
