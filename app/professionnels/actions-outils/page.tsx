@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { ArrowLeft } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import { Search, SlidersHorizontal, X } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { DispositifNav, type DispositifGroup } from "./components/DispositifNav";
-import { DispositifPanel } from "./components/DispositifPanel";
+import { DispositifCard } from "./components/DispositifCard";
+import { DispositifContent } from "./components/DispositifContent";
 import { TestezVousModal } from "@/components/testez-vous-modal";
 import { Dialog, DialogContent, DialogTitle, VisuallyHidden } from "@/components/ui/dialog";
 import {
@@ -15,10 +15,10 @@ import {
   accordionItemsSSE,
 } from "./data";
 
-/* Les libellés courts sont des extraits littéraux des titres de section existants,
-   aucun intitulé n'est inventé. Les identifiants des dispositifs sont inchangés :
-   les liens entrants type #sante-mentale continuent de fonctionner. */
-const groups: DispositifGroup[] = [
+/* Les libellés courts sont des extraits littéraux des titres de section existants.
+   Les identifiants des dispositifs sont inchangés : les liens entrants type
+   #sante-mentale continuent de fonctionner. */
+const groups = [
   {
     id: "acces-soins",
     step: "01",
@@ -49,47 +49,84 @@ const groups: DispositifGroup[] = [
   },
 ];
 
-const allItems = groups.flatMap((group) =>
-  group.items.map((item) => ({ item, group }))
+/* Minuscules + suppression des accents : « diabete » doit trouver « diabétique ». */
+const normalize = (value: string) =>
+  value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+
+const entries = groups.flatMap((group) =>
+  group.items.map((item) => ({
+    item,
+    group,
+    haystack: normalize(`${item.title} ${item.content ?? ""} ${group.title}`),
+  }))
 );
 
 export default function ActionsOutilsPage() {
-  const [activeId, setActiveId] = useState<string>(allItems[0].item.id);
-  const [mobileView, setMobileView] = useState<"list" | "detail">("list");
+  const [query, setQuery] = useState("");
+  const [activeGroup, setActiveGroup] = useState<string>("all");
+  const [openId, setOpenId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sseImage, setSseImage] = useState<{ src: string; alt: string } | null>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  const knownIds = useMemo(() => new Set(allItems.map((entry) => entry.item.id)), []);
+  const results = useMemo(() => {
+    // Chaque mot saisi doit être présent, quel que soit son ordre :
+    // « mentale sante » trouve autant que « santé mentale ».
+    const tokens = normalize(query).split(/\s+/).filter(Boolean);
 
-  const active = useMemo(
-    () => allItems.find((entry) => entry.item.id === activeId) ?? allItems[0],
-    [activeId]
+    return entries.filter((entry) => {
+      const matchesGroup = activeGroup === "all" || entry.group.id === activeGroup;
+      const matchesQuery = tokens.every((token) => entry.haystack.includes(token));
+      return matchesGroup && matchesQuery;
+    });
+  }, [query, activeGroup]);
+
+  const openEntry = useMemo(
+    () => entries.find((entry) => entry.item.id === openId) ?? null,
+    [openId]
   );
 
-  const selectDispositif = (id: string) => {
-    setActiveId(id);
-    setMobileView("detail");
+  const openDispositif = (id: string) => {
+    setOpenId(id);
     window.history.replaceState(null, "", `${window.location.pathname}#${id}`);
-    // Le conteneur est un point d'ancrage stable, contrairement au panneau qui est remplacé
-    document.getElementById("dispositifs")?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
   };
 
+  const closeDispositif = () => {
+    setOpenId(null);
+    window.history.replaceState(null, "", window.location.pathname);
+  };
+
+  // Lien entrant : /professionnels/actions-outils#sante-mentale ouvre le bon dispositif
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    if (!hash || !knownIds.has(hash)) return;
+    if (hash && entries.some((entry) => entry.item.id === hash)) {
+      setOpenId(hash);
+    }
+  }, []);
 
-    setActiveId(hash);
-    setMobileView("detail");
-    requestAnimationFrame(() => {
-      document.getElementById("dispositifs")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    });
-  }, [knownIds]);
+  // « / » place le curseur dans la recherche, comme sur les outils de documentation
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key !== "/" || event.metaKey || event.ctrlKey) return;
+
+      const target = event.target as HTMLElement | null;
+      const isTyping =
+        target instanceof HTMLInputElement ||
+        target instanceof HTMLTextAreaElement ||
+        target?.isContentEditable;
+
+      if (isTyping) return;
+
+      event.preventDefault();
+      searchRef.current?.focus();
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+    return () => window.removeEventListener("keydown", handleKeydown);
+  }, []);
 
   useEffect(() => {
     const handleOpenModal = () => {
@@ -113,14 +150,23 @@ export default function ActionsOutilsPage() {
     };
   }, []);
 
+  const filters = [
+    { id: "all", label: "Tous", count: entries.length },
+    ...groups.map((group) => ({
+      id: group.id,
+      label: group.navLabel,
+      count: group.items.length,
+    })),
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
       <main>
         {/* En-tête de page */}
-        <section className="relative pt-28 lg:pt-36 pb-10 lg:pb-14 overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/10 to-background">
-          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+        <section className="relative pt-28 lg:pt-36 pb-8 lg:pb-10 overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/10 to-background">
+          <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
             <div className="max-w-6xl mx-auto space-y-5">
@@ -133,56 +179,156 @@ export default function ActionsOutilsPage() {
               </h1>
 
               <p className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-[68ch]">
-                {allItems.length} dispositifs répartis en {groups.length} domaines
+                {entries.length} dispositifs répartis en {groups.length} domaines
                 d&apos;action.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Liste à gauche, dispositif sélectionné à droite */}
-        <section id="dispositifs" className="py-8 lg:py-12 scroll-mt-28">
+        {/* Barre de recherche et filtres, collante sous l'en-tête du site */}
+        <div className="sticky top-28 z-30 border-y border-border bg-background/90 backdrop-blur-md">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-[290px_1fr] lg:gap-8 lg:items-start">
-              {/* Colonne de gauche */}
-              <aside
-                className={`${
-                  mobileView === "detail" ? "hidden" : "block"
-                } lg:block lg:sticky lg:top-32 lg:max-h-[calc(100vh-9rem)] lg:overflow-y-auto lg:pr-2 rounded-2xl border border-border bg-card p-4 lg:bg-transparent lg:border-0 lg:p-0`}
-              >
-                <DispositifNav
-                  groups={groups}
-                  activeId={activeId}
-                  onSelect={selectDispositif}
+            <div className="max-w-6xl mx-auto py-3 space-y-3">
+              <div className="relative">
+                <Search className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <input
+                  ref={searchRef}
+                  type="search"
+                  value={query}
+                  onChange={(event) => setQuery(event.target.value)}
+                  placeholder="Rechercher un dispositif, un parcours, un document…"
+                  aria-label="Rechercher un dispositif"
+                  className="w-full rounded-full border border-border bg-card py-2.5 pl-11 pr-24 text-sm text-foreground placeholder:text-muted-foreground transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 [&::-webkit-search-cancel-button]:hidden"
                 />
-              </aside>
-
-              {/* Colonne de droite */}
-              <div
-                className={`${
-                  mobileView === "list" ? "hidden" : "block"
-                } lg:block`}
-              >
-                <button
-                  type="button"
-                  onClick={() => setMobileView("list")}
-                  className="lg:hidden inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-4 text-sm font-medium"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Tous les dispositifs
-                </button>
-
-                <DispositifPanel
-                  item={active.item}
-                  groupLabel={active.group.title}
-                />
+                {query ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setQuery("");
+                      searchRef.current?.focus();
+                    }}
+                    aria-label="Effacer la recherche"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                ) : (
+                  <kbd className="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2 rounded border border-border bg-muted px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground sm:block">
+                    /
+                  </kbd>
+                )}
               </div>
+
+              <div className="flex items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <SlidersHorizontal className="hidden h-4 w-4 flex-shrink-0 text-muted-foreground sm:block" />
+                {filters.map((filter) => {
+                  const isActive = activeGroup === filter.id;
+
+                  return (
+                    <button
+                      key={filter.id}
+                      type="button"
+                      onClick={() => setActiveGroup(filter.id)}
+                      aria-pressed={isActive}
+                      className={`flex-shrink-0 rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                        isActive
+                          ? "border-primary bg-primary text-primary-foreground"
+                          : "border-border bg-card text-foreground/70 hover:border-primary/40 hover:text-primary"
+                      }`}
+                    >
+                      {filter.label}
+                      <span
+                        className={`ml-1.5 text-xs ${
+                          isActive ? "text-primary-foreground/70" : "text-muted-foreground"
+                        }`}
+                      >
+                        {filter.count}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Grille de dispositifs */}
+        <section className="py-8 lg:py-12">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="max-w-6xl mx-auto">
+              <p className="mb-5 text-sm text-muted-foreground" aria-live="polite">
+                {results.length} dispositif{results.length > 1 ? "s" : ""}
+                {query && ` pour « ${query} »`}
+              </p>
+
+              {results.length > 0 ? (
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {results.map((entry, index) => (
+                    <DispositifCard
+                      key={entry.item.id}
+                      item={entry.item}
+                      groupStep={entry.group.step}
+                      groupLabel={entry.group.navLabel}
+                      index={index}
+                      onOpen={openDispositif}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <div className="rounded-2xl border border-dashed border-border bg-card px-6 py-16 text-center">
+                  <p className="text-base font-semibold text-foreground">
+                    Aucun dispositif ne correspond à cette recherche
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setQuery("");
+                      setActiveGroup("all");
+                    }}
+                    className="mt-4 inline-flex items-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                  >
+                    Réinitialiser les filtres
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </section>
       </main>
 
       <Footer />
+
+      {/* Modale du dispositif */}
+      <Dialog
+        open={!!openEntry}
+        onOpenChange={(open) => {
+          if (!open) closeDispositif();
+        }}
+      >
+        <DialogContent
+          aria-describedby={undefined}
+          className="flex max-h-[88vh] w-[calc(100%-1.5rem)] max-w-3xl flex-col gap-0 overflow-hidden rounded-2xl p-0"
+        >
+          {openEntry && (
+            <>
+              <div className="flex-shrink-0 border-b border-border px-5 py-5 lg:px-8">
+                <p className="mb-1.5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
+                  <span className="text-primary">{openEntry.group.step}</span>
+                  {openEntry.group.navLabel}
+                </p>
+                <DialogTitle className="pr-8 text-xl font-bold text-foreground text-balance lg:text-2xl">
+                  {openEntry.item.title}
+                </DialogTitle>
+              </div>
+
+              <div className="overflow-y-auto px-5 py-6 lg:px-8">
+                <DispositifContent item={openEntry.item} />
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <TestezVousModal
         isOpen={isModalOpen}
