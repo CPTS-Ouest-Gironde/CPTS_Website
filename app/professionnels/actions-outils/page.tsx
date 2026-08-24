@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import Image from "next/image";
@@ -14,29 +14,99 @@ import {
   accordionItemsSSE,
 } from "./data";
 
+/* Sections de la page. Les libellés courts de la barre de navigation sont des
+   extraits littéraux des titres de section, aucun intitulé n'est inventé.
+   Les identifiants sont préfixés « section- » pour ne pas entrer en collision
+   avec les ancres d'accordéon existantes (#sante-mentale, #parcours-ic, ...). */
+const sections = [
+  {
+    id: "section-acces-soins",
+    step: "01",
+    title: "Améliorer l'accès aux soins",
+    navLabel: "Accès aux soins",
+    items: accordionItemsAcces,
+    illustration: "/actions-outils/acces-soins.svg",
+    tinted: false,
+  },
+  {
+    id: "section-parcours",
+    step: "02",
+    title: "Organisation des parcours pluriprofessionnels des patients",
+    navLabel: "Parcours pluriprofessionnels",
+    items: accordionItemsParcours,
+    illustration: "/actions-outils/parcour-pluripro.svg",
+    tinted: true,
+  },
+  {
+    id: "section-sse",
+    step: "03",
+    title: "Situations Sanitaires Exceptionnelles (SSE)",
+    navLabel: "SSE",
+    items: accordionItemsSSE,
+    illustration: null,
+    tinted: false,
+  },
+  {
+    id: "section-prevention",
+    step: "04",
+    title: "Développer des actions territoriales de prévention",
+    navLabel: "Actions de prévention",
+    items: accordionItemsPrevention,
+    illustration: null,
+    tinted: true,
+  },
+];
+
 export default function ActionsOutilsPage() {
-  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
+  const [openAccordions, setOpenAccordions] = useState<string[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sseImage, setSseImage] = useState<{ src: string; alt: string } | null>(null);
 
+  const knownIds = useMemo(
+    () => new Set(sections.flatMap((section) => section.items.map((item) => item.id))),
+    []
+  );
+
   const toggleAccordion = (id: string) => {
-    const next = openAccordion === id ? null : id;
-    setOpenAccordion(next);
-    const url = next
-      ? `${window.location.pathname}#${next}`
-      : window.location.pathname;
-    window.history.replaceState(null, "", url);
+    setOpenAccordions((previous) => {
+      const isOpen = previous.includes(id);
+      const next = isOpen
+        ? previous.filter((openId) => openId !== id)
+        : [...previous, id];
+
+      // L'ancre reflète le dernier panneau ouvert, pour que l'URL reste partageable
+      const url = isOpen
+        ? window.location.pathname
+        : `${window.location.pathname}#${id}`;
+      window.history.replaceState(null, "", url);
+
+      return next;
+    });
+  };
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
   };
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
     if (!hash) return;
-    setOpenAccordion(hash);
+
+    // Ancre d'accordéon : on ouvre le panneau visé. Ancre de section : simple défilement.
+    if (knownIds.has(hash)) {
+      setOpenAccordions([hash]);
+    }
+
     requestAnimationFrame(() => {
-      const el = document.getElementById(hash);
-      el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById(hash)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     });
-  }, []);
+  }, [knownIds]);
 
   useEffect(() => {
     const handleOpenModal = () => {
@@ -60,143 +130,123 @@ export default function ActionsOutilsPage() {
     };
   }, []);
 
+  const totalItems = sections.reduce((total, section) => total + section.items.length, 0);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
 
-      <main className="pt-20">
-        {/* Section Améliorer l'accès aux soins */}
-        <section className="py-16 lg:py-20 relative overflow-hidden">
-          {/* Illustrations décoratives */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-primary/10 to-accent/10 rounded-full blur-3xl" />
-            <div className="absolute top-1/2 -left-32 w-96 h-96 bg-gradient-to-tr from-secondary/10 to-primary/5 rounded-full blur-3xl" />
-
-            {/* Illustration personnage - Équipe de professionnels de santé */}
-            <div className="absolute right-10 w-94 lg:w-100 hidden lg:block">
-              <Image
-                src="/actions-outils/acces-soins.svg"
-                alt=""
-                width={320}
-                height={320}
-                className="w-full h-auto"
-                aria-hidden="true"
-              />
-            </div>
-          </div>
+      <main>
+        {/* En-tête de page */}
+        <section className="relative pt-28 lg:pt-36 pb-12 lg:pb-16 overflow-hidden bg-gradient-to-br from-primary/5 via-secondary/10 to-background">
+          <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              {/* Titre de section */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                  Améliorer l'accès aux soins
-                </h2>
-                <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+            <div className="max-w-5xl mx-auto space-y-6">
+              <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+                Espace professionnel
               </div>
 
-              {/* Accordéons */}
-              <AccordionSection
-                items={accordionItemsAcces}
-                openAccordion={openAccordion}
-                onToggle={toggleAccordion}
-              />
+              <h1 className="text-4xl lg:text-6xl font-bold text-foreground text-balance">
+                Nos actions &amp; vos outils
+              </h1>
+
+              <p className="text-base lg:text-lg text-muted-foreground leading-relaxed max-w-[68ch]">
+                {totalItems} dispositifs répartis en {sections.length} domaines
+                d&apos;action.
+              </p>
+
+              {/* Sommaire d'entrée */}
+              <div className="flex flex-wrap gap-2.5 pt-2">
+                {sections.map((section) => (
+                  <button
+                    key={section.id}
+                    type="button"
+                    onClick={() => scrollToSection(section.id)}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-foreground shadow-sm transition-colors hover:border-primary/40 hover:bg-primary/5 hover:text-primary"
+                  >
+                    <span className="text-xs font-bold text-primary">
+                      {section.step}
+                    </span>
+                    {section.navLabel}
+                    <span className="text-xs text-muted-foreground">
+                      {section.items.length}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Section Organisation des parcours */}
-        <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 to-accent/5 relative overflow-hidden">
-          {/* Illustrations décoratives */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-bl from-accent/20 to-transparent rounded-full blur-3xl" />
-            <div className="absolute bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-3xl" />
-
-            {/* Illustration - Parcours pluriprofessionnels */}
-            <div className="absolute top-0 left-0 w-64 lg:w-79.5 hidden lg:block">
-              <Image
-                src="/actions-outils/parcour-pluripro.svg"
-                alt=""
-                width={320}
-                height={320}
-                className="w-full h-auto"
-                aria-hidden="true"
-              />
-            </div>
+        {/* Barre de navigation collante */}
+        <div className="sticky top-28 z-30 border-y border-border bg-background/90 backdrop-blur-md">
+          <div className="container mx-auto px-4 lg:px-8">
+            <nav
+              aria-label="Sections de la page"
+              className="max-w-5xl mx-auto flex gap-1 overflow-x-auto py-2.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {sections.map((section) => (
+                <button
+                  key={section.id}
+                  type="button"
+                  onClick={() => scrollToSection(section.id)}
+                  className="flex-shrink-0 rounded-full px-3.5 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                >
+                  {section.navLabel}
+                </button>
+              ))}
+            </nav>
           </div>
+        </div>
 
-          <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              {/* Titre de section */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                  Organisation des parcours pluriprofessionnels des patients
-                </h2>
-                <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+        {sections.map((section) => (
+          <section
+            key={section.id}
+            id={section.id}
+            className={`relative py-14 lg:py-20 overflow-hidden scroll-mt-44 ${
+              section.tinted ? "bg-muted/40" : "bg-background"
+            }`}
+          >
+            {section.illustration && (
+              <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute top-8 right-0 w-64 xl:w-80 hidden xl:block opacity-70">
+                  <Image
+                    src={section.illustration}
+                    alt=""
+                    width={320}
+                    height={320}
+                    className="w-full h-auto"
+                    aria-hidden="true"
+                  />
+                </div>
               </div>
+            )}
 
-              {/* Accordéons */}
-              <AccordionSection
-                items={accordionItemsParcours}
-                openAccordion={openAccordion}
-                onToggle={toggleAccordion}
-              />
-            </div>
-          </div>
-        </section>
+            <div className="container mx-auto px-4 lg:px-8 relative z-10">
+              <div className="max-w-5xl mx-auto">
+                {/* Titre de section aligné à gauche, avec repère de progression */}
+                <div className="mb-8 lg:mb-10">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">
+                      {section.step}
+                    </span>
+                    <span className="h-px flex-1 bg-border" />
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground text-balance max-w-3xl">
+                    {section.title}
+                  </h2>
+                </div>
 
-        {/* Section SSE */}
-        <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 to-accent/5 relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-20 right-10 w-72 h-72 bg-gradient-to-bl from-accent/20 to-transparent rounded-full blur-3xl" />
-            <div className="absolute bottom-20 -left-20 w-80 h-80 bg-gradient-to-tr from-primary/15 to-transparent rounded-full blur-3xl" />
-          </div>
-
-          <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                  Situations Sanitaires Exceptionnelles (SSE)
-                </h2>
-                <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+                <AccordionSection
+                  items={section.items}
+                  openAccordions={openAccordions}
+                  onToggle={toggleAccordion}
+                />
               </div>
-
-              <AccordionSection
-                items={accordionItemsSSE}
-                openAccordion={openAccordion}
-                onToggle={toggleAccordion}
-              />
             </div>
-          </div>
-        </section>
-
-        {/* Section Prévention territoriale */}
-        <section className="py-16 lg:py-20 relative overflow-hidden">
-          {/* Illustrations décoratives */}
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-10 left-1/4 w-64 h-64 bg-gradient-to-br from-secondary/15 to-accent/10 rounded-full blur-3xl" />
-            <div className="absolute bottom-10 right-1/4 w-80 h-80 bg-gradient-to-tl from-primary/10 to-transparent rounded-full blur-3xl" />
-          </div>
-
-          <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="max-w-5xl mx-auto">
-              {/* Titre de section */}
-              <div className="text-center mb-12">
-                <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-                  Développer des actions territoriales de prévention
-                </h2>
-                <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
-              </div>
-
-              {/* Accordéons */}
-              <AccordionSection
-                items={accordionItemsPrevention}
-                openAccordion={openAccordion}
-                onToggle={toggleAccordion}
-              />
-            </div>
-          </div>
-        </section>
+          </section>
+        ))}
       </main>
 
       <Footer />
