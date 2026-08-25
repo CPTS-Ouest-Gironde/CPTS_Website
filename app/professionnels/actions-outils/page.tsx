@@ -25,7 +25,8 @@ const groups = [
     step: "01",
     title: "Améliorer l'accès aux soins",
     navLabel: "Accès aux soins",
-    hue: 122,
+    bgHue: 114,
+    accentHue: 132,
     illustration: "/actions-outils/acces-soins.svg",
     items: accordionItemsAcces,
   },
@@ -34,7 +35,8 @@ const groups = [
     step: "02",
     title: "Organisation des parcours pluriprofessionnels des patients",
     navLabel: "Parcours pluriprofessionnels",
-    hue: 132,
+    bgHue: 125,
+    accentHue: 140,
     illustration: "/actions-outils/parcour-pluripro.svg",
     items: accordionItemsParcours,
   },
@@ -43,7 +45,8 @@ const groups = [
     step: "03",
     title: "Situations Sanitaires Exceptionnelles (SSE)",
     navLabel: "SSE",
-    hue: 140,
+    bgHue: 137,
+    accentHue: 148,
     illustration: null,
     items: accordionItemsSSE,
   },
@@ -52,7 +55,8 @@ const groups = [
     step: "04",
     title: "Développer des actions territoriales de prévention",
     navLabel: "Actions de prévention",
-    hue: 148,
+    bgHue: 148,
+    accentHue: 156,
     illustration: null,
     items: accordionItemsPrevention,
   },
@@ -67,12 +71,12 @@ const normalize = (value: string) =>
 
 /* Une nuance par catégorie : seule la teinte varie, la luminosité et la saturation
    restent constantes pour que les 5 aient le même poids visuel. */
-const shades = (hue: number) => ({
-  card: `oklch(0.958 0.036 ${hue})`,
-  cardBorder: `oklch(0.885 0.055 ${hue})`,
-  soft: `oklch(0.966 0.03 ${hue})`,
-  border: `oklch(0.9 0.05 ${hue})`,
-  strong: `oklch(0.45 0.11 ${hue})`,
+const shades = (bgHue: number, accentHue: number) => ({
+  card: `oklch(0.958 0.055 ${bgHue})`,
+  cardBorder: `oklch(0.87 0.075 ${bgHue})`,
+  soft: `oklch(0.966 0.045 ${bgHue})`,
+  border: `oklch(0.89 0.07 ${bgHue})`,
+  strong: `oklch(0.45 0.12 ${accentHue})`,
 });
 
 const entries = groups.flatMap((group) =>
@@ -175,7 +179,8 @@ export default function ActionsOutilsPage() {
       label: "Tous",
       count: entries.length,
       title: "",
-      hue: 136,
+      bgHue: 131,
+      accentHue: 145,
       // Vue « Tous » : illustration générique de l'équipe pluriprofessionnelle
       illustration: "/actions-outils/acces-soins.svg" as string | null,
     },
@@ -184,7 +189,8 @@ export default function ActionsOutilsPage() {
       label: group.navLabel,
       count: group.items.length,
       title: group.title,
-      hue: group.hue,
+      bgHue: group.bgHue,
+      accentHue: group.accentHue,
       illustration: group.illustration,
     })),
   ];
@@ -276,7 +282,7 @@ export default function ActionsOutilsPage() {
                 <SlidersHorizontal className="hidden h-4 w-4 flex-shrink-0 text-muted-foreground sm:block" />
                 {filters.map((filter) => {
                   const isActive = activeGroup === filter.id;
-                  const filterTint = shades(filter.hue);
+                  const filterTint = shades(filter.bgHue, filter.accentHue);
 
                   return (
                     <button
@@ -320,7 +326,7 @@ export default function ActionsOutilsPage() {
                       item={entry.item}
                       groupStep={entry.group.step}
                       groupLabel={entry.group.navLabel}
-                      tint={shades(entry.group.hue)}
+                      tint={shades(entry.group.bgHue, entry.group.accentHue)}
                       index={index}
                       onOpen={openDispositif}
                     />
