@@ -1,4 +1,4 @@
-export const satisfactionPharmacienOpenMonths = [9, 10] as const
+export const satisfactionPharmacienOpenMonths = [8, 9, 10] as const
 
 export function getSatisfactionPharmacienReferenceYear(date = new Date()) {
   return date.getFullYear()

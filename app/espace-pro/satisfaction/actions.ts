@@ -130,6 +130,16 @@ export async function submitSatisfactionPharmacien(
   })
 
   if (insertResult.error) {
+    if (
+      insertResult.error.code === "23505" ||
+      insertResult.error.message.includes("satisfaction_pharmacien_user_year_unique")
+    ) {
+      return {
+        ...INITIAL_STATE,
+        formError: `Vous avez déjà répondu à ce questionnaire pour ${currentReferenceYear}.`,
+      }
+    }
+
     return {
       ...INITIAL_STATE,
       formError: "Impossible d'enregistrer votre questionnaire pour le moment.",
