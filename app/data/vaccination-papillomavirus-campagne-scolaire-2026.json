@@ -1,8 +1,8 @@
 {
   "title": "LA VACCINATION CONTRE LE PAPILLOMAVIRUS DES 11 ANS : NOUVELLE CAMPAGNE SCOLAIRE 2026 !",
   "date": "21 juin 2026",
-  "image": "/prevention/sante-famille/vaccination-papillomavirus/ado-pancarte-vaccination.webp",
-  "imageAlt": "Un collégien souriant tenant une pancarte « Vaccination saves lives »",
+  "image": "/prevention/sante-famille/vaccination-papillomavirus/bras-pansement-vaccination.webp",
+  "imageAlt": "Gros plan sur le bras d'un enfant portant un pansement après une vaccination",
   "backLink": {
     "href": "/prevention/sante-familiale",
     "label": "Retour à Santé familiale"
@@ -44,7 +44,6 @@
       "id": "pourquoi",
       "navLabel": "Pourquoi lutter contre le HPV",
       "title": "POURQUOI LUTTER CONTRE LE VIRUS HUMAIN PAPILLOMA (HPV) ?",
-      "color": "purple",
       "icon": "shield",
       "content": [
         "Ce virus est responsable de **l'infection sexuellement transmissible la plus fréquente** : 80% des personnes seront infectées au cours de leurs vies.",
@@ -57,7 +56,6 @@
       "id": "transmission",
       "navLabel": "Comment il se transmet",
       "title": "COMMENT HPV SE TRANSMET-IL ?",
-      "color": "blue",
       "icon": "shield",
       "content": [
         "**Le virus se transmet par contact des muqueuses ou de la peau**, presque exclusivement pendant les rapports sexuels avec ou sans pénétration.",
@@ -68,7 +66,6 @@
       "id": "consequences",
       "navLabel": "Quelles conséquences",
       "title": "QUELLES CONSÉQUENCES SUITE À L'INFECTION HPV ?",
-      "color": "red",
       "icon": "shield",
       "content": [
         "Le papillomavirus humain (HPV) regroupe près de 200 types de virus. Si **90 % des infections sont éliminées naturellement par l'organisme en moins de deux ans**, les infections qui persistent provoquent une grande variété de pathologies (bénignes ou non).",
@@ -155,7 +152,6 @@
       "id": "depuis-quand",
       "navLabel": "Depuis quand",
       "title": "DEPUIS QUAND LA VACCINATION EST-ELLE PROPOSÉE ?",
-      "color": "amber",
       "icon": "syringe",
       "content": [
         "Depuis 2007, la prévention est proposée chez les filles de 11 à14 ans. **Cette prévention a été élargie aux garçons depuis janvier 2021**.",
@@ -182,7 +178,6 @@
       "id": "objectifs",
       "navLabel": "Objectifs de la campagne",
       "title": "QUELS OBJECTIFS POUR LA CAMPAGNE VACCINALE DES 5èmes ?",
-      "color": "green",
       "icon": "target",
       "content": [
         "Pour la campagne 2024/2025, la Nouvelle Aquitaine a révélé une dynamique vaccinale régionale forte et s'est classée au **1 er rang national avec 16.6 % d' élèves de 5 ème vaccinés** !",
@@ -206,7 +201,6 @@
       "id": "securite",
       "navLabel": "La vaccination est-elle sûre",
       "title": "LA VACCINATION EST-ELLE SÛRE ?",
-      "color": "teal",
       "icon": "shield",
       "content": [
         "Cette vaccination **a fait ses preuves** dans plus de 80 pays : plus de 100 000 000 d'enfants et adolescents ont déjà été vaccinés. Le suivi effectué confirme la sécurité de ce vaccin **utilisé depuis plus de 16 ans**.",
@@ -222,7 +216,6 @@
       "id": "age",
       "navLabel": "À quel âge se faire vacciner",
       "title": "À QUEL ÂGE PEUT-ON SE FAIRE VACCINER ?",
-      "color": "indigo",
       "icon": "syringe",
       "content": [
         "La vaccination est recommandée pour tous les **jeunes de 11 ans à 14 ans révolus en schéma vaccinal de 2 doses** (M0 + M6).",
@@ -234,7 +227,6 @@
       "id": "pourquoi-11-ans",
       "navLabel": "Pourquoi dès 11 ans",
       "title": "POURQUOI DÈS L'ÂGE DE 11 ANS ?",
-      "color": "orange",
       "icon": "help",
       "content": [
         "Il peut être associé au rdv vaccinal de DTPCOQ des 11 ans."
@@ -244,15 +236,14 @@
         "**Seules 2 doses** suffiront pour assurer l'immunité."
       ],
       "illustration": {
-        "image": "/prevention/sante-famille/vaccination-papillomavirus/bras-pansement-vaccination.webp",
-        "alt": "Gros plan sur le bras d'un enfant portant un pansement après une vaccination"
+        "image": "/prevention/sante-famille/vaccination-papillomavirus/ado-pancarte-vaccination.webp",
+        "alt": "Un collégien souriant tenant une pancarte « Vaccination saves lives »"
       }
     },
     {
       "id": "actions",
       "navLabel": "Actions sur notre territoire",
       "title": "QUELLES ACTIONS SUR NOTRE TERRITOIRE ?",
-      "color": "sky",
       "icon": "shield",
       "content": [
         "L'ARS de Nouvelle Aquitaine et le CHU de BORDEAUX ont uni leur force pour lancer la campagne de vaccination scolaire ciblant ainsi 35 établissements de la métropole Bordelaise : soit 4635 élèves pour l'année scolaire 2024-2025."
