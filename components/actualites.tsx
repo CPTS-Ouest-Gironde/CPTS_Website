@@ -1,33 +1,24 @@
-"use client";
-
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Clock3 } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@/components/ui/carousel";
+
+// À rétablir avec le carrousel (voir plus bas) :
+// "use client";
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+//   CarouselPrevious,
+//   CarouselNext,
+// } from "@/components/ui/carousel";
 
 const actualites = [
-  {
-    title: "Registre canicule : protégeons les personnes fragiles",
-    image: "/actu/registre-canicule-merignac.webp",
-    link: "/actualites/registre-canicule",
-  },
-  {
-    title: "Vous souffrez d'une rhinite allergique ?",
-    image: "/actu/affiche-rhinite.webp",
-    link: "/actualites/rhinite-allergique",
-  },
   {
     title: "Les urgences, ce n'est pas une évidence",
     image: "/actu/urgence-pas-une-evidence.webp",
     link: "/actualites/urgences-pas-une-evidence",
     // Cette image a le même ratio 4:5 que la carte : on ajoute du padding
-    // pour qu'elle "flotte" comme les deux autres affiches (plus étroites).
+    // pour qu'elle "flotte" comme les autres affiches (plus étroites).
     imageClassName: "p-7 lg:p-8",
   },
   {
@@ -71,6 +62,31 @@ function ActuCard({ actu }: { actu: (typeof actualites)[0] }) {
   );
 }
 
+function ActuPlaceholderCard() {
+  return (
+    <div className="rounded-2xl bg-white shadow-md border border-dashed border-primary/30 flex flex-col h-full">
+      <div className="p-4 lg:p-3 relative aspect-[3/4] lg:aspect-[4/5]">
+        <div className="w-full h-full rounded-lg bg-gradient-to-br from-secondary/20 to-primary/5 flex flex-col items-center justify-center gap-3 text-center px-6">
+          <div className="w-14 h-14 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+            <Clock3 className="w-7 h-7" />
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Une nouvelle actualité du territoire sera publiée ici prochainement.
+          </p>
+        </div>
+      </div>
+      <div className="p-6 pt-2 lg:p-4 lg:pt-1 space-y-3 lg:space-y-2 flex flex-col flex-1">
+        <h3 className="text-lg lg:text-base font-bold text-foreground leading-tight flex-1">
+          Actualité à venir
+        </h3>
+        <div className="inline-flex items-center gap-2 text-sm lg:text-xs font-semibold text-muted-foreground px-4 py-2 lg:px-3 lg:py-1.5 rounded-full border-2 border-dashed border-border w-fit">
+          <span>Bientôt disponible</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Actualites() {
   return (
     <section
@@ -85,6 +101,17 @@ export function Actualites() {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+            {actualites.map((actu, index) => (
+              <ActuCard key={index} actu={actu} />
+            ))}
+            <ActuPlaceholderCard />
+          </div>
+
+          {/* Affichage carrousel : à réactiver quand il y aura plus de 3 cartes
+              (remplacer la grille ci-dessus par ce bloc et rétablir le
+              "use client" et les imports Carousel en haut du fichier).
 
           <Carousel
             opts={{
@@ -104,12 +131,18 @@ export function Actualites() {
                   </div>
                 </CarouselItem>
               ))}
+              <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-[47%] lg:basis-[32%]">
+                <div className="h-full flex">
+                  <ActuPlaceholderCard />
+                </div>
+              </CarouselItem>
             </CarouselContent>
             <div className="flex justify-center gap-4 mt-6">
               <CarouselPrevious className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
               <CarouselNext className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
             </div>
           </Carousel>
+          */}
         </div>
       </div>
     </section>
