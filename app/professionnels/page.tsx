@@ -157,10 +157,12 @@ export default async function ProfessionnelsHubPage() {
                   return (
                     <Card
                       key={shortcut.href}
-                      className="rounded-2xl border border-border/80 bg-card shadow-sm"
+                      /* Vert pastel repris de la page Nos actions & vos outils
+                         (teinte 131, celle de la vue « Tous »). */
+                      className="rounded-2xl border border-[oklch(0.87_0.075_131)] bg-[oklch(0.958_0.055_131)] shadow-sm transition-shadow hover:shadow-md"
                     >
                       <CardContent className="flex h-full flex-col p-6">
-                        <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                        <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/70 text-primary">
                           <Icon className="h-5 w-5" />
                         </div>
 

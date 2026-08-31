@@ -278,6 +278,7 @@ export const accordionItemsParcours: AccordionItem[] = [
         {/* Auto-évaluation EPOF */}
         <div className="flex justify-center">
           <button
+            data-epof-trigger
             onClick={() => {
               const event = new CustomEvent("open-epof-modal");
               window.dispatchEvent(event);
