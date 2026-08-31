@@ -81,7 +81,13 @@ type Section = {
     }[];
   };
   encadreSecondaire?: string;
-  media?: { image: string; alt: string; linkUrl: string; linkLabel: string };
+  media?: {
+    image: string;
+    alt: string;
+    linkUrl: string;
+    linkLabel: string;
+    linkSource?: string;
+  };
 };
 
 const sections = data.sections as Section[];
@@ -575,15 +581,22 @@ export default function VaccinationPapillomavirusPage() {
                           className="h-auto w-full object-cover transition-transform duration-500 hover:scale-105"
                         />
                       </a>
-                      <a
-                        href={section.media.linkUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 break-all text-sm text-[var(--sand-700)] transition-colors hover:text-[var(--sand-900)]"
-                      >
-                        <ExternalLink className="h-4 w-4 flex-shrink-0" />
-                        <span>{section.media.linkLabel}</span>
-                      </a>
+                      <div className="flex flex-wrap items-center gap-x-3 gap-y-2 pt-1">
+                        <a
+                          href={section.media.linkUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-[var(--sand-700)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[var(--sand-800)]"
+                        >
+                          {fr(section.media.linkLabel)}
+                          <ExternalLink className="h-4 w-4 flex-shrink-0" />
+                        </a>
+                        {section.media.linkSource && (
+                          <span className="text-sm text-[var(--sand-900)]/60">
+                            {section.media.linkSource}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </Question>
                 );
