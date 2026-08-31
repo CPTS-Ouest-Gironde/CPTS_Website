@@ -94,6 +94,11 @@ export default function ActionsOutilsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sseImage, setSseImage] = useState<{ src: string; alt: string } | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  // Fiche à rouvrir quand on referme le questionnaire, et demande de
+  // repositionnement sur le bouton qui l'avait ouvert.
+  const [epofReturnId, setEpofReturnId] = useState<string | null>(null);
+  const [restoreEpofPosition, setRestoreEpofPosition] = useState(false);
+  const openIdRef = useRef<string | null>(null);
 
   const results = useMemo(() => {
     // Chaque mot saisi doit être présent, quel que soit son ordre :
@@ -152,11 +157,17 @@ export default function ActionsOutilsPage() {
   }, []);
 
   useEffect(() => {
+    openIdRef.current = openId;
+  }, [openId]);
+
+  useEffect(() => {
     const handleOpenModal = () => {
       // Le questionnaire est une modale maison rendue dans l'arbre de la page,
       // alors que la fiche dispositif est un Dialog Radix porté en fin de body :
       // à z-index égal le Dialog passe devant et garde le focus. On referme donc
-      // la fiche avant d'ouvrir le questionnaire plutôt que de les empiler.
+      // la fiche avant d'ouvrir le questionnaire plutôt que de les empiler,
+      // en retenant laquelle rouvrir ensuite.
+      setEpofReturnId(openIdRef.current);
       setOpenId(null);
       setIsModalOpen(true);
     };
@@ -166,6 +177,35 @@ export default function ActionsOutilsPage() {
       window.removeEventListener('open-epof-modal', handleOpenModal);
     };
   }, []);
+
+  // Rouvre la fiche puis replace la vue sur le bouton du questionnaire.
+  useEffect(() => {
+    if (!restoreEpofPosition || !openId) return;
+
+    let second = 0;
+    const first = requestAnimationFrame(() => {
+      second = requestAnimationFrame(() => {
+        document
+          .querySelector<HTMLElement>("[data-epof-trigger]")
+          ?.scrollIntoView({ block: "center" });
+        setRestoreEpofPosition(false);
+      });
+    });
+
+    return () => {
+      cancelAnimationFrame(first);
+      if (second) cancelAnimationFrame(second);
+    };
+  }, [restoreEpofPosition, openId]);
+
+  const handleCloseEpof = () => {
+    setIsModalOpen(false);
+    if (epofReturnId) {
+      setOpenId(epofReturnId);
+      setEpofReturnId(null);
+      setRestoreEpofPosition(true);
+    }
+  };
 
   useEffect(() => {
     const handleOpenSseImage = (e: Event) => {
@@ -392,10 +432,7 @@ export default function ActionsOutilsPage() {
         </DialogContent>
       </Dialog>
 
-      <TestezVousModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
+      <TestezVousModal isOpen={isModalOpen} onClose={handleCloseEpof} />
 
       <Dialog open={!!sseImage} onOpenChange={() => setSseImage(null)}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden">
