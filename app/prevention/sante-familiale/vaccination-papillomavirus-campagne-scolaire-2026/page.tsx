@@ -11,9 +11,8 @@ import {
   ShieldCheck,
   HelpCircle,
   Target,
-  ListOrdered,
 } from "lucide-react";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import data from "@/app/data/vaccination-papillomavirus-campagne-scolaire-2026.json";
 
@@ -86,6 +85,9 @@ type Section = {
 
 const sections = data.sections as Section[];
 
+/** Les questions illustrées alternent le côté de leur photo. */
+const illustratedIds = sections.filter((s) => s.illustration).map((s) => s.id);
+
 const sectionIcons: Record<string, LucideIcon> = {
   shield: ShieldCheck,
   syringe: Syringe,
@@ -93,7 +95,7 @@ const sectionIcons: Record<string, LucideIcon> = {
   target: Target,
 };
 
-const NNBSP = " ";
+const NNBSP = " ";
 
 /**
  * Typographie française : espace fine insécable avant la ponctuation double,
@@ -123,34 +125,15 @@ function RichText({ text }: { text: string }) {
   );
 }
 
-/** Carte de section : même habillage pour les neuf questions. */
-function SectionCard({
-  children,
-  id,
-  className = "",
-}: {
-  children: React.ReactNode;
-  id?: string;
-  className?: string;
-}) {
-  return (
-    <section
-      id={id}
-      className={`scroll-mt-28 rounded-3xl border border-[var(--sand-200)] bg-[var(--sand-100)] ${className}`}
-    >
-      {children}
-    </section>
-  );
-}
-
-function SectionHeading({ section }: { section: Section }) {
+/** Titre de question : pas de carte, une pastille d'icône et le titre. */
+function QuestionHeading({ section }: { section: Section }) {
   const Icon = sectionIcons[section.icon] ?? ShieldCheck;
   return (
-    <div className="flex items-start gap-3 mb-5">
+    <div className="mb-5 flex items-start gap-3">
       <span className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-[var(--sand-200)]">
         <Icon className="h-[18px] w-[18px] text-[var(--sand-700)]" />
       </span>
-      <h2 className="text-xl lg:text-2xl font-bold text-[var(--sand-800)] leading-snug pt-1">
+      <h2 className="pt-1 text-xl font-bold leading-snug text-[var(--sand-800)] lg:text-[1.6rem]">
         {fr(section.title)}
       </h2>
     </div>
@@ -161,11 +144,44 @@ function Paragraphs({ items }: { items: string[] }) {
   return (
     <>
       {items.map((p, i) => (
-        <p key={i} className="text-[15px] lg:text-base leading-[1.75] text-[var(--sand-900)]/80">
+        <p
+          key={i}
+          className="text-[15px] leading-[1.75] text-[var(--sand-900)]/80 lg:text-base"
+        >
           <RichText text={p} />
         </p>
       ))}
     </>
+  );
+}
+
+function CheckList({ items }: { items: string[] }) {
+  return (
+    <ul className="space-y-2 pt-1">
+      {items.map((item, i) => (
+        <li
+          key={i}
+          className="flex items-start gap-3 text-[15px] leading-[1.7] text-[var(--sand-900)]/80"
+        >
+          <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[var(--sand-600)]" />
+          <span>
+            <RichText text={item} />
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Enveloppe d'une question : filet de séparation et ancre. */
+function Question({ id, children }: { id: string; children: ReactNode }) {
+  return (
+    <section
+      id={id}
+      className="scroll-mt-28 border-t border-[var(--sand-200)] pt-10 first:border-t-0 first:pt-0"
+    >
+      {children}
+    </section>
   );
 }
 
@@ -179,7 +195,9 @@ function StatTile({ figure, tone = "sand" }: { figure: Figure; tone?: "sand" | "
   return (
     <div className={`rounded-2xl border ${c.border} bg-white/70 p-5`}>
       <div className={`mb-3 h-0.5 w-8 rounded-full ${c.rule}`} />
-      <p className={`text-3xl font-semibold tracking-tight ${c.value}`}>{fr(figure.value)}</p>
+      <p className={`text-2xl font-semibold tracking-tight lg:text-3xl ${c.value}`}>
+        {fr(figure.value)}
+      </p>
       {figure.unit && (
         <p className="mt-1 text-sm text-[var(--sand-900)]/60">{fr(figure.unit)}</p>
       )}
@@ -224,7 +242,7 @@ function CouvertureMeter({
   couverture: NonNullable<Section["couverture"]>;
 }) {
   return (
-    <div className="rounded-3xl border border-[var(--sand-200)] bg-white/70 p-6 lg:p-7">
+    <div className="mt-6 rounded-3xl border border-[var(--sand-200)] bg-white/70 p-6 lg:p-7">
       <div className="mb-6 flex flex-wrap items-baseline justify-between gap-2">
         <h3 className="text-base font-semibold text-[var(--sand-800)]">
           {fr(couverture.title)}
@@ -266,7 +284,8 @@ function CouvertureMeter({
           aria-hidden="true"
         />
         <p className="text-sm leading-relaxed text-[var(--sand-900)]/70">
-          {fr(couverture.objectif.label)} : {fr(couverture.objectif.display)}. {fr(couverture.note)}
+          {fr(couverture.objectif.label)} : {fr(couverture.objectif.display)}.{" "}
+          {fr(couverture.note)}
         </p>
       </div>
     </div>
@@ -278,108 +297,83 @@ export default function VaccinationPapillomavirusPage() {
     <main style={palette} className="min-h-screen bg-[var(--sand-50)]">
       <Header />
 
-      {/* Hero — le fond prolonge celui de la photo */}
-      <section className="relative overflow-hidden bg-[var(--sand-100)] pt-24 lg:pt-32 pb-12 lg:pb-16">
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-[var(--sand-50)]" />
-        <div className="container relative z-10 mx-auto px-4 lg:px-8">
-          <div className="mx-auto max-w-5xl">
-            <Link
-              href={data.backLink.href}
-              className="mb-8 inline-flex items-center gap-2 text-[var(--sand-700)] transition-colors hover:text-[var(--sand-900)]"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              <span>{fr(data.backLink.label)}</span>
-            </Link>
-
-            <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-              <div className="lg:col-span-7">
-                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--sand-300)] bg-[var(--sand-50)] px-3 py-1 text-sm text-[var(--sand-800)]">
+      {/* Hero — titre à gauche, photo à droite ; pleine largeur sur mobile */}
+      <section className="bg-[var(--sand-100)]">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="mx-auto max-w-6xl">
+            <div className="grid items-center gap-8 pb-10 pt-24 lg:grid-cols-2 lg:gap-14 lg:pb-16 lg:pt-32">
+              <div>
+                <Link
+                  href={data.backLink.href}
+                  className="mb-7 inline-flex items-center gap-2 text-[var(--sand-700)] transition-colors hover:text-[var(--sand-900)]"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                  <span>{fr(data.backLink.label)}</span>
+                </Link>
+                <div className="mb-5 flex items-center gap-2 text-sm text-[var(--sand-800)]">
                   <Calendar className="h-4 w-4 text-[var(--sand-600)]" />
                   <span>{data.date}</span>
                 </div>
-                <h1 className="text-balance text-3xl font-bold leading-tight text-[var(--sand-900)] lg:text-[2.75rem]">
+                <h1 className="text-balance text-3xl font-bold leading-[1.15] text-[var(--sand-900)] lg:text-[2.9rem]">
                   {fr(data.title)}
                 </h1>
               </div>
 
-              <div className="lg:col-span-5">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg ring-1 ring-[var(--sand-300)]">
-                  <Image
-                    src={data.image}
-                    alt={data.imageAlt}
-                    fill
-                    className="object-cover"
-                    priority
-                    quality={75}
-                    sizes="(max-width: 1024px) 100vw, 460px"
-                  />
-                </div>
+              <div className="relative -mx-4 aspect-[4/3] sm:mx-0 sm:overflow-hidden sm:rounded-[2rem] sm:shadow-lg sm:ring-1 sm:ring-[var(--sand-300)] lg:aspect-[5/4]">
+                <Image
+                  src={data.image}
+                  alt={data.imageAlt}
+                  fill
+                  className="object-cover"
+                  priority
+                  quality={75}
+                  sizes="(max-width: 1024px) 100vw, 560px"
+                />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Corps de l'article */}
-      <section className="pb-20 pt-10 lg:pb-28">
+      {/* Chapô — bande pleine largeur, texte plus grand */}
+      <section className="border-b border-[var(--sand-200)] bg-[var(--sand-100)]">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="mx-auto max-w-3xl space-y-10">
-
-            {/* Chapô */}
-            <div className="rounded-3xl border-l-4 border-[var(--sand-400)] bg-white/70 py-6 pl-6 pr-6 lg:pl-8 lg:pr-8 space-y-4">
+          <div className="mx-auto max-w-4xl pb-12 pt-2 lg:pb-14">
+            <div className="space-y-4">
               {data.intro.paragraphs.map((p, i) => (
                 <p
                   key={i}
-                  className="text-base leading-[1.75] text-[var(--sand-900)]/85 lg:text-[17px]"
+                  className="text-[17px] leading-[1.7] text-[var(--sand-900)]/85 lg:text-xl"
                 >
                   <RichText text={p.text} />
                 </p>
               ))}
             </div>
-
-            {/* Bandeau — schéma vaccinal simplifié */}
-            <div className="rounded-2xl bg-[var(--sand-400)] px-6 py-5 text-center">
-              <p className="text-lg font-bold text-[var(--sand-900)]">
+            <div className="mt-8 rounded-2xl bg-[var(--sand-400)] px-6 py-5 text-center">
+              <p className="text-base font-bold text-[var(--sand-900)] lg:text-lg">
                 {fr(data.intro.banner)}
               </p>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <div className="space-y-4">
-              <Paragraphs items={data.intro.paragraphs2} />
-            </div>
+      {/* Corps — sommaire latéral collant + fil de lecture */}
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="mx-auto max-w-6xl gap-14 pb-20 pt-12 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:pb-28">
 
-            {/* Chiffres méningocoques */}
-            <div className="rounded-3xl border border-[var(--sand-200)] bg-[var(--sand-100)] p-6 lg:p-8">
-              <p className="mb-5 font-semibold text-[var(--sand-800)]">
-                {fr(data.intro.stats.label)}
+          {/* Sommaire : bandeau défilant sur mobile, colonne collante ensuite */}
+          <aside className="mb-10 lg:mb-0">
+            <nav aria-label="Sommaire de l'article" className="lg:sticky lg:top-28">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--sand-600)]">
+                Les questions abordées
               </p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {data.intro.stats.figures.map((figure, i) => (
-                  <StatTile key={i} figure={figure} />
-                ))}
-              </div>
-              <p className="pt-5 text-[15px] leading-[1.75] text-[var(--sand-900)]/80 lg:text-base">
-                {fr(data.intro.conclusion)}
-              </p>
-            </div>
-
-            {/* Sommaire */}
-            <nav
-              aria-label="Sommaire de l'article"
-              className="rounded-3xl border border-[var(--sand-300)] bg-white/70 p-6 lg:p-7"
-            >
-              <div className="mb-4 flex items-center gap-2">
-                <ListOrdered className="h-5 w-5 text-[var(--sand-600)]" />
-                <h2 className="text-base font-semibold text-[var(--sand-800)]">
-                  Les questions abordées
-                </h2>
-              </div>
-              <ol className="grid gap-x-6 gap-y-1 sm:grid-cols-2">
+              <ol className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
                 {sections.map((section, i) => (
-                  <li key={section.id}>
+                  <li key={section.id} className="flex-shrink-0 lg:flex-shrink">
                     <a
                       href={`#${section.id}`}
-                      className="flex items-baseline gap-3 rounded-lg px-2 py-2 text-sm text-[var(--sand-900)]/75 transition-colors hover:bg-[var(--sand-100)] hover:text-[var(--sand-800)]"
+                      className="flex items-baseline gap-2.5 whitespace-nowrap rounded-full border border-[var(--sand-300)] bg-white/70 px-3.5 py-2 text-sm text-[var(--sand-900)]/80 transition-colors hover:text-[var(--sand-800)] lg:whitespace-normal lg:rounded-none lg:border-0 lg:border-l-2 lg:border-[var(--sand-200)] lg:bg-transparent lg:px-3 lg:py-2 lg:hover:border-[var(--sand-400)]"
                     >
                       <span className="text-xs font-semibold tabular-nums text-[var(--sand-600)]">
                         {String(i + 1).padStart(2, "0")}
@@ -390,6 +384,29 @@ export default function VaccinationPapillomavirusPage() {
                 ))}
               </ol>
             </nav>
+          </aside>
+
+          {/* Fil de lecture */}
+          <div className="space-y-10">
+
+            {/* Suite de l'introduction */}
+            <div className="space-y-4">
+              <Paragraphs items={data.intro.paragraphs2} />
+            </div>
+
+            <div className="rounded-3xl border border-[var(--sand-200)] bg-[var(--sand-100)] p-6 lg:p-7">
+              <p className="mb-5 font-semibold text-[var(--sand-800)]">
+                {fr(data.intro.stats.label)}
+              </p>
+              <div className="grid grid-cols-2 gap-3 lg:gap-4">
+                {data.intro.stats.figures.map((figure, i) => (
+                  <StatTile key={i} figure={figure} />
+                ))}
+              </div>
+              <p className="pt-5 text-[15px] leading-[1.75] text-[var(--sand-900)]/80">
+                {fr(data.intro.conclusion)}
+              </p>
+            </div>
 
             {/* Questions */}
             {sections.map((section) => {
@@ -397,15 +414,13 @@ export default function VaccinationPapillomavirusPage() {
               /* Conséquences : deux familles de HPV + répartition régionale */
               if (section.groupes) {
                 return (
-                  <div key={section.id} id={section.id} className="scroll-mt-28 space-y-5">
-                    <SectionCard className="p-6 lg:p-8">
-                      <SectionHeading section={section} />
-                      <div className="space-y-4">
-                        <Paragraphs items={section.content} />
-                      </div>
-                    </SectionCard>
+                  <Question key={section.id} id={section.id}>
+                    <QuestionHeading section={section} />
+                    <div className="space-y-4">
+                      <Paragraphs items={section.content} />
+                    </div>
 
-                    <div className="grid items-start gap-5 lg:grid-cols-2">
+                    <div className="mt-6 grid items-start gap-4 md:grid-cols-2">
                       {section.groupes.map((groupe) => {
                         const c =
                           groupe.tone === "amber"
@@ -415,7 +430,7 @@ export default function VaccinationPapillomavirusPage() {
                         return (
                           <div
                             key={groupe.id}
-                            className={`h-full rounded-3xl border ${c.border} ${c.bg} p-6`}
+                            className={`h-full rounded-3xl border ${c.border} ${c.bg} p-5 lg:p-6`}
                           >
                             <span className={`inline-block rounded-full ${c.chip} px-3 py-1 text-xs font-semibold`}>
                               {fr(groupe.types)}
@@ -453,14 +468,14 @@ export default function VaccinationPapillomavirusPage() {
                     </div>
 
                     {section.repartition && (
-                      <div className="rounded-3xl border border-[var(--clay-200)] bg-[var(--clay-50)] p-6 lg:p-8">
+                      <div className="mt-4 rounded-3xl border border-[var(--clay-200)] bg-[var(--clay-50)] p-6 lg:p-7">
                         <h3 className="text-lg font-bold text-[var(--clay-800)]">
                           {fr(section.repartition.title)}
                         </h3>
                         <p className="mb-5 mt-2 text-[15px] leading-[1.75] text-[var(--sand-900)]/80">
                           {fr(section.repartition.intro)}
                         </p>
-                        <div className="grid gap-4 sm:grid-cols-3">
+                        <div className="grid gap-3 sm:grid-cols-3 lg:gap-4">
                           {section.repartition.figures.map((figure, i) => (
                             <StatTile key={i} figure={figure} tone="clay" />
                           ))}
@@ -470,22 +485,20 @@ export default function VaccinationPapillomavirusPage() {
                         </p>
                       </div>
                     )}
-                  </div>
+                  </Question>
                 );
               }
 
               /* Depuis quand : schéma vaccinal + encadré réglementaire */
               if (section.schemaVaccinal) {
                 return (
-                  <div key={section.id} id={section.id} className="scroll-mt-28 space-y-5">
-                    <SectionCard className="p-6 lg:p-8">
-                      <SectionHeading section={section} />
-                      <div className="space-y-4">
-                        <Paragraphs items={section.content} />
-                      </div>
-                    </SectionCard>
+                  <Question key={section.id} id={section.id}>
+                    <QuestionHeading section={section} />
+                    <div className="space-y-4">
+                      <Paragraphs items={section.content} />
+                    </div>
 
-                    <div className="space-y-5 rounded-3xl border border-[var(--sand-300)] bg-white/70 p-6 lg:p-8">
+                    <div className="mt-6 space-y-5 rounded-3xl border border-[var(--sand-300)] bg-white/70 p-6 lg:p-7">
                       <h3 className="text-lg font-bold text-[var(--sand-800)]">
                         {fr(section.schemaVaccinal.title)}
                       </h3>
@@ -528,48 +541,44 @@ export default function VaccinationPapillomavirusPage() {
                     </div>
 
                     {section.encadreSecondaire && (
-                      <div className="rounded-3xl border border-[var(--sand-400)] bg-[var(--sand-150)] p-6 lg:p-8">
+                      <div className="mt-4 rounded-3xl border border-[var(--sand-400)] bg-[var(--sand-150)] p-6 lg:p-7">
                         <p className="text-[15px] leading-[1.75] text-[var(--sand-900)]/85">
                           {fr(section.encadreSecondaire)}
                         </p>
                       </div>
                     )}
-                  </div>
+                  </Question>
                 );
               }
 
               /* Objectifs : jauges de couverture vaccinale */
               if (section.couverture) {
                 return (
-                  <div key={section.id} id={section.id} className="scroll-mt-28 space-y-5">
-                    <SectionCard className="p-6 lg:p-8">
-                      <SectionHeading section={section} />
-                      <div className="space-y-4">
-                        <Paragraphs items={section.content} />
-                      </div>
-                    </SectionCard>
+                  <Question key={section.id} id={section.id}>
+                    <QuestionHeading section={section} />
+                    <div className="space-y-4">
+                      <Paragraphs items={section.content} />
+                    </div>
                     <CouvertureMeter couverture={section.couverture} />
-                  </div>
+                  </Question>
                 );
               }
 
               /* Actions : bloc média cliquable */
               if (section.media) {
                 return (
-                  <div key={section.id} id={section.id} className="scroll-mt-28 space-y-5">
-                    <SectionCard className="p-6 lg:p-8">
-                      <SectionHeading section={section} />
-                      <div className="space-y-4">
-                        <Paragraphs items={section.content} />
-                      </div>
-                    </SectionCard>
+                  <Question key={section.id} id={section.id}>
+                    <QuestionHeading section={section} />
+                    <div className="space-y-4">
+                      <Paragraphs items={section.content} />
+                    </div>
 
-                    <div className="space-y-3">
+                    <div className="mt-6 space-y-3">
                       <a
                         href={section.media.linkUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block overflow-hidden rounded-3xl shadow-md transition-shadow hover:shadow-lg"
+                        className="-mx-4 block overflow-hidden shadow-md transition-shadow hover:shadow-lg sm:mx-0 sm:rounded-3xl"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -588,76 +597,58 @@ export default function VaccinationPapillomavirusPage() {
                         <span>{section.media.linkLabel}</span>
                       </a>
                     </div>
-                  </div>
+                  </Question>
                 );
               }
 
-              /* Questions illustrées : texte et photo côte à côte */
+              /* Questions illustrées : photo pleine largeur sur mobile,
+                 en vis-à-vis alterné sur grand écran */
               if (section.illustration) {
+                const imageFirst = illustratedIds.indexOf(section.id) % 2 === 1;
                 return (
-                  <SectionCard key={section.id} id={section.id} className="overflow-hidden">
-                    <div className="grid items-stretch lg:grid-cols-5">
-                      <div className="p-6 lg:col-span-3 lg:p-8">
-                        <SectionHeading section={section} />
+                  <Question key={section.id} id={section.id}>
+                    <div className="grid gap-6 md:grid-cols-2 md:items-center md:gap-8">
+                      <div className={imageFirst ? "md:order-2" : undefined}>
+                        <QuestionHeading section={section} />
                         <div className="space-y-4">
                           <Paragraphs items={section.content} />
-                          {section.items && (
-                            <ul className="space-y-2 pt-1">
-                              {section.items.map((item, i) => (
-                                <li
-                                  key={i}
-                                  className="flex items-start gap-3 text-[15px] leading-[1.7] text-[var(--sand-900)]/80"
-                                >
-                                  <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[var(--sand-600)]" />
-                                  <span><RichText text={item} /></span>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
+                          {section.items && <CheckList items={section.items} />}
                         </div>
                       </div>
-                      <div className="relative min-h-[240px] lg:col-span-2 lg:min-h-full">
+                      <div
+                        className={`relative -mx-4 aspect-[4/3] sm:mx-0 sm:overflow-hidden sm:rounded-3xl ${
+                          imageFirst ? "md:order-1" : ""
+                        }`}
+                      >
                         <Image
                           src={section.illustration.image}
                           alt={section.illustration.alt}
                           fill
                           className="object-cover"
                           quality={72}
-                          sizes="(max-width: 1024px) 100vw, 300px"
+                          sizes="(max-width: 768px) 100vw, 360px"
                         />
                       </div>
                     </div>
-                  </SectionCard>
+                  </Question>
                 );
               }
 
               /* Questions simples */
               return (
-                <SectionCard key={section.id} id={section.id} className="p-6 lg:p-8">
-                  <SectionHeading section={section} />
+                <Question key={section.id} id={section.id}>
+                  <QuestionHeading section={section} />
                   <div className="space-y-4">
                     <Paragraphs items={section.content} />
-                    {section.items && (
-                      <ul className="space-y-2 pt-1">
-                        {section.items.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-3 text-[15px] leading-[1.7] text-[var(--sand-900)]/80"
-                          >
-                            <CheckCircle2 className="mt-1 h-4 w-4 flex-shrink-0 text-[var(--sand-600)]" />
-                            <span><RichText text={item} /></span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
+                    {section.items && <CheckList items={section.items} />}
                   </div>
-                </SectionCard>
+                </Question>
               );
             })}
 
           </div>
         </div>
-      </section>
+      </div>
 
       <Footer />
     </main>
