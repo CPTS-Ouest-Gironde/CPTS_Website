@@ -63,6 +63,11 @@ const nextConfig = {
         destination: '/espace-pro/demande-orientation-psy',
         permanent: true,
       },
+      {
+        source: '/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025',
+        destination: '/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2026',
+        permanent: true,
+      },
     ]
   },
   async headers() {
