@@ -153,6 +153,11 @@ export default function ActionsOutilsPage() {
 
   useEffect(() => {
     const handleOpenModal = () => {
+      // Le questionnaire est une modale maison rendue dans l'arbre de la page,
+      // alors que la fiche dispositif est un Dialog Radix porté en fin de body :
+      // à z-index égal le Dialog passe devant et garde le focus. On referme donc
+      // la fiche avant d'ouvrir le questionnaire plutôt que de les empiler.
+      setOpenId(null);
       setIsModalOpen(true);
     };
 
