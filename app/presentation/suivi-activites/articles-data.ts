@@ -10,6 +10,16 @@ export interface SuiviArticle {
 // Ordre du plus récent au plus ancien
 export const suiviArticles: SuiviArticle[] = [
   {
+    slug: "incendies-saint-jean-dillac-msp-aout-2026",
+    title:
+      "Incendies à Saint Jean d'Illac : cinq jours pour prendre soin de ceux qui luttaient contre le feu — 11 août 2026",
+    image: "/suivi-activite/articles/11-08-2026/post-st-jean-dillac.webp",
+    excerpt:
+      "Bravo à l'équipe de la future MSP de Saint Jean d'Illac d'avoir su faire « communauté » et d'avoir démontré leur capacité d'initiative et de réactivité en situation de crise.",
+    frame: "landscape",
+    publishedAt: "11 août 2026",
+  },
+  {
     slug: "soiree-ville-hopital-parcours-cancerologie-juin-2026",
     title: "Soirée Ville-Hôpital : les parcours en cancérologie — 25 juin 2026",
     image: "/suivi-activite/articles/25-juin-ville-hop/25-juin-ville-hop-1.webp",

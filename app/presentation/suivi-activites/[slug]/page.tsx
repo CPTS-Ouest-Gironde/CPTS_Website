@@ -8,6 +8,8 @@ import { Footer } from "@/components/footer";
 import { suiviArticles } from "../articles-data";
 import { ArticleMediaCarousel } from "@/components/suivi-activite/article-media-carousel";
 
+const INCENDIES_ST_JEAN_DILLAC_AOUT_2026_SLUG =
+  "incendies-saint-jean-dillac-msp-aout-2026";
 const VILLE_HOPITAL_CANCEROLOGIE_JUIN_2026_SLUG =
   "soiree-ville-hopital-parcours-cancerologie-juin-2026";
 const RCP_INTER_CPTS_JUIN_2026_SLUG =
@@ -56,6 +58,12 @@ function renderParagraphWithBold(text: string) {
 }
 
 const articleDetails = {
+  [INCENDIES_ST_JEAN_DILLAC_AOUT_2026_SLUG]: {
+    paragraphs: [
+      "Bravo à l'équipe de la future MSP de Saint Jean d'Illac d'avoir su faire « communauté » et d'avoir démontré leur capacité d'initiative et de réactivité en situation de crise.",
+    ],
+    mediaImages: [] as string[],
+  },
   [VILLE_HOPITAL_CANCEROLOGIE_JUIN_2026_SLUG]: {
     paragraphs: [
       "Le 25 juin 2026, une soirée d'échanges a réuni les professionnels de ville et les équipes du CHU de Bordeaux autour des parcours en cancérologie, malgré la canicule.",
@@ -348,6 +356,10 @@ export default async function SuiviActiviteArticlePage({ params }: PageProps) {
     article.slug === ATELIER_DIVERSIFICATION_5_MARS_2026_SLUG
       ? "https://www.doctolib.fr/dieteticien/merignac/celine-maillard-merignac/booking/availabilities?specialityId=414&telehealth=false&placeId=practice-763409&motiveIds%5B%5D=13383386&pid=practice-763409&source=profile"
       : null;
+  const externalArticleUrl =
+    article.slug === INCENDIES_ST_JEAN_DILLAC_AOUT_2026_SLUG
+      ? "https://avecsantena.fr/incendies-a-saint-jean-dillac-cinq-jours-pour-prendre-soin-de-ceux-qui-luttaient-contre-le-feu/"
+      : null;
   const webinarVideoEmbedUrl =
     article.slug === WEBINAIRE_RHINITE_ALLERGIQUE_SLUG
       ? "https://www.youtube-nocookie.com/embed/-O7xYjJR3uE?rel=0&modestbranding=1"
@@ -416,6 +428,22 @@ export default async function SuiviActiviteArticlePage({ params }: PageProps) {
                         {renderParagraphWithBold(paragraph)}
                       </p>
                     ))}
+                    {externalArticleUrl && (
+                      <div className="space-y-3 pt-2">
+                        <p className="text-muted-foreground leading-relaxed">
+                          Découvrez l&apos;article :
+                        </p>
+                        <a
+                          href={externalArticleUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                        >
+                          Lire l&apos;article sur avecsantena.fr
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </div>
+                    )}
                     {articleRegistrationUrl && (
                       <div className="space-y-3 pt-2">
                         <p className="text-muted-foreground leading-relaxed">

@@ -256,6 +256,18 @@ export function Contact() {
                 </div>
               )}
 
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                Les informations recueillies via ce formulaire (prénom, nom, email, message) sont
+                utilisées uniquement pour traiter votre demande et y répondre. Elles sont destinées
+                à l&apos;équipe de la CPTS Ouest Gironde et ne sont jamais transmises à des tiers.
+                Conformément au RGPD, vous pouvez exercer vos droits d&apos;accès, de rectification
+                et de suppression en écrivant à{" "}
+                <a href={`mailto:${EMAIL}`} className="underline hover:text-primary transition-colors">
+                  {EMAIL}
+                </a>
+                .
+              </p>
+
               <Button
                 type="submit"
                 size="lg"
