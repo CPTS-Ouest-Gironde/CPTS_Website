@@ -374,7 +374,7 @@ export const chatbotConfig: ChatbotConfig = {
       title: "Santé familiale - Vaccination papillomavirus",
       description: "Informations sur la vaccination contre le papillomavirus et la campagne scolaire.",
       audience: "patient",
-      href: "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2025",
+      href: "/prevention/sante-familiale/vaccination-papillomavirus-campagne-scolaire-2026",
     },
     "sf-canicule": {
       id: "sf-canicule",

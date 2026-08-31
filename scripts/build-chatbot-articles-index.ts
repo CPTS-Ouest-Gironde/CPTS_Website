@@ -70,6 +70,17 @@ const TEXT_KEYS = new Set([
   "services",
   "modalites",
   "missions",
+  "banner",
+  "encadreSecondaire",
+  "schemaVaccinal",
+  "vaccines",
+  "groupes",
+  "pathologies",
+  "stat",
+  "repartition",
+  "figures",
+  "couverture",
+  "objectif",
 ])
 const IGNORED_KEYS = new Set([
   "id",
@@ -130,9 +141,10 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     path: "app/data/vaccination-anti-covid-2025.json",
   },
   {
-    slug: "vaccination-papillomavirus-campagne-scolaire-2025",
+    slug: "vaccination-papillomavirus-campagne-scolaire-2026",
     resourceId: "sf-papillomavirus",
-    path: "app/data/vaccination-papillomavirus-campagne-scolaire-2025.json",
+    path: "app/data/vaccination-papillomavirus-campagne-scolaire-2026.json",
+    splitLongSections: true,
   },
   {
     slug: "sante-mentale-des-jeunes",
