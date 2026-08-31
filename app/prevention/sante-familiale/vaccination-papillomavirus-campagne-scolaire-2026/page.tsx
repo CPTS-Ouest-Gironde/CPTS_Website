@@ -15,6 +15,7 @@ import {
 import type { CSSProperties, ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
 import data from "@/app/data/vaccination-papillomavirus-campagne-scolaire-2026.json";
+import { ArticleToc } from "@/components/papillomavirus-article/article-toc";
 
 /**
  * Palette dérivée du fond de la photo de l'article (sable chaud #C8A878).
@@ -95,7 +96,8 @@ const sectionIcons: Record<string, LucideIcon> = {
   target: Target,
 };
 
-const NNBSP = " ";
+/** Espace fine insécable U+202F, en échappement pour rester visible en relecture. */
+const NNBSP = "\u202F";
 
 /**
  * Typographie française : espace fine insécable avant la ponctuation double,
@@ -301,7 +303,7 @@ export default function VaccinationPapillomavirusPage() {
       <section className="bg-[var(--sand-100)]">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="mx-auto max-w-6xl">
-            <div className="grid items-center gap-8 pb-10 pt-24 lg:grid-cols-2 lg:gap-14 lg:pb-16 lg:pt-32">
+            <div className="grid items-center gap-8 pb-10 pt-32 lg:grid-cols-2 lg:gap-14 lg:pb-16">
               <div>
                 <Link
                   href={data.backLink.href}
@@ -360,30 +362,16 @@ export default function VaccinationPapillomavirusPage() {
 
       {/* Corps — sommaire latéral collant + fil de lecture */}
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="mx-auto max-w-6xl gap-14 pb-20 pt-12 lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:pb-28">
+        <div className="mx-auto max-w-6xl gap-12 pb-20 pt-12 lg:grid lg:grid-cols-[248px_minmax(0,1fr)] lg:pb-28">
 
           {/* Sommaire : bandeau défilant sur mobile, colonne collante ensuite */}
           <aside className="mb-10 lg:mb-0">
-            <nav aria-label="Sommaire de l'article" className="lg:sticky lg:top-28">
-              <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-[var(--sand-600)]">
-                Les questions abordées
-              </p>
-              <ol className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0 lg:pb-0">
-                {sections.map((section, i) => (
-                  <li key={section.id} className="flex-shrink-0 lg:flex-shrink">
-                    <a
-                      href={`#${section.id}`}
-                      className="flex items-baseline gap-2.5 whitespace-nowrap rounded-full border border-[var(--sand-300)] bg-white/70 px-3.5 py-2 text-sm text-[var(--sand-900)]/80 transition-colors hover:text-[var(--sand-800)] lg:whitespace-normal lg:rounded-none lg:border-0 lg:border-l-2 lg:border-[var(--sand-200)] lg:bg-transparent lg:px-3 lg:py-2 lg:hover:border-[var(--sand-400)]"
-                    >
-                      <span className="text-xs font-semibold tabular-nums text-[var(--sand-600)]">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="leading-snug">{fr(section.navLabel)}</span>
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
+            <ArticleToc
+              items={sections.map((section) => ({
+                id: section.id,
+                label: fr(section.navLabel),
+              }))}
+            />
           </aside>
 
           {/* Fil de lecture */}
