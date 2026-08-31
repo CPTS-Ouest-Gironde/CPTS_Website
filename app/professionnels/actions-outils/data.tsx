@@ -5,7 +5,7 @@ import { ImageCarousel } from "./components/ImageCarousel";
 import { RcpTeamCard } from "./components/RcpTeamCard";
 import { ZoomableImage } from "./components/ZoomableImage";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { Clock, ExternalLink } from "lucide-react";
 import { DownloadButton } from "@/components/download-button";
 
 export const accordionItemsAcces: AccordionItem[] = [
@@ -417,138 +417,25 @@ export const accordionItemsParcours: AccordionItem[] = [
     ),
   },
   {
-    id: "sante-mentale",
-    title: "Santé mentale",
+    id: "programme-parachute",
+    title: "Programme Para'chute",
     content: "",
     files: [],
     customContent: (
       <div className="space-y-8">
-        {/* Section 1: Dispositifs du Territoire */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-6">
-            1/ Les Dispositifs du Territoire :
-          </h3>
-          <div className="grid gap-3">
-            <DownloadButton
-              fileName="Questions Psy"
-              fileUrl="/actions-outils/sante-mentale/Questions-Psy.pdf"
-            />
-            <DownloadButton
-              fileName="emsi²"
-              fileUrl="/actions-outils/sante-mentale/emsi%C2%B2.pdf"
-            />
-          </div>
-        </div>
-
-        {/* Section 2: Re-Med + Réponse Psy */}
-        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
-          <h4 className="text-xl font-bold text-foreground mb-4">
-            Dispositif réservé aux médecins généralistes du territoire:
-          </h4>
-          <div className="space-y-3">
-            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
-              <p className="font-bold text-primary text-lg mb-2">Re-Med</p>
-              <p className="text-sm text-muted-foreground italic">
-                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
-                projet Parcours Santé mentale 'boite à outils')
-              </p>
+        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 lg:p-8 rounded-xl">
+          <div className="flex flex-col items-center text-center gap-5">
+            <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
+              <Clock className="w-8 h-8 text-primary" aria-hidden="true" />
             </div>
-            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
-              <p className="font-bold text-primary text-lg mb-2">Réponse Psy</p>
-              <p className="text-sm text-muted-foreground italic">
-                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
-                projet Parcours Santé mentale 'boite à outils')
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Section 2: Dispositifs proposés par la CPTS */}
-        <div>
-          <h3 className="text-2xl font-bold text-foreground mb-6">
-            2/ Des dispositifs proposés par la CPTS avec les acteurs du
-            territoire
-          </h3>
-
-          <div className="space-y-6">
-            {/* RCP Psy */}
-            <div className="bg-primary/5 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
-                  Dispositif N°1
-                </span>
-              </div>
-              <div className="flex items-center gap-3 flex-wrap">
-                <h4 className="text-xl font-bold text-foreground">
-                  Les RCP Psy de la CPTS
-                </h4>
-                <Link
-                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-rcp-psy"
-                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
-                >
-                  Accéder aux ressources
-                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-              <p className="text-muted-foreground leading-relaxed">
-                cf onglet Réunion de Concertation Pluriprofessionnelle
-              </p>
-            </div>
-
-            {/* Demande d'orientation */}
-            <div className="bg-secondary/60 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
-                  Dispositif N°2
-                </span>
-              </div>
-              <div className="flex items-center gap-3 flex-wrap">
-                <h4 className="text-xl font-bold text-foreground">
-                  Dispositif CPTS d'orientation en Psychiatrie
-                </h4>
-                <Link
-                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-orientation-psychiatrie"
-                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
-                >
-                  Accéder aux ressources
-                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-              <p className="text-muted-foreground leading-relaxed">
-                Vous êtes en difficulté avec une prise en charge en santé mentale
-                ? Vous souhaitez un avis spécialisé pour une orientation.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                Une infirmière en psychiatrie de la Maison de santé les Pins
-                (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
-                un temps dédié pour vous répondre
-              </p>
-
-              <div className="space-y-3">
-                <p className="font-semibold text-foreground">Comment ?</p>
-                <ul className="space-y-2 text-muted-foreground leading-relaxed">
-                  <li>
-                    • Remplir le formulaire de demande d'orientation disponible
-                    sur Plexus Santé
-                  </li>
-                  <li>
-                    • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
-                    <a
-                      href="mailto:elise.patenere@pro.mssante.fr"
-                      className="text-primary hover:underline font-semibold"
-                    >
-                      elise.patenere@pro.mssante.fr
-                    </a>
-                  </li>
-                  <li>
-                    • L'IDE Psy (Elise Patenere) répond par un mail au
-                    Professionnel de Santé proposant une orientation possible
-                    ( et/ou rdv téléphonique si besoin pour expliciter
-                    l'orientation).
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <h3 className="text-2xl font-bold text-foreground">
+              Contenu à venir
+            </h3>
+            <p className="text-muted-foreground leading-relaxed max-w-xl">
+              Le programme Para&apos;chute est en cours de préparation. Les
+              documents et formulaires seront mis à disposition ici dès leur
+              validation.
+            </p>
           </div>
         </div>
       </div>
@@ -556,7 +443,7 @@ export const accordionItemsParcours: AccordionItem[] = [
   },
   {
     id: "reunions-concertation",
-    title: "Des réunions de Concertation Pluriprofessionnelle",
+    title: "Réunions de Concertation Pluriprofessionnelle (RCP)",
     content: "",
     files: [],
     customContent: (
@@ -740,6 +627,144 @@ export const accordionItemsParcours: AccordionItem[] = [
           <p className="text-muted-foreground">
             15 septembre 2026 – Autour d'un buffet
           </p>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "sante-mentale",
+    title: "Santé mentale",
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-8">
+        {/* Section 1: Dispositifs du Territoire */}
+        <div>
+          <h3 className="text-2xl font-bold text-foreground mb-6">
+            1/ Les Dispositifs du Territoire :
+          </h3>
+          <div className="grid gap-3">
+            <DownloadButton
+              fileName="Questions Psy"
+              fileUrl="/actions-outils/sante-mentale/Questions-Psy.pdf"
+            />
+            <DownloadButton
+              fileName="emsi²"
+              fileUrl="/actions-outils/sante-mentale/emsi%C2%B2.pdf"
+            />
+          </div>
+        </div>
+
+        {/* Section 2: Re-Med + Réponse Psy */}
+        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
+          <h4 className="text-xl font-bold text-foreground mb-4">
+            Dispositif réservé aux médecins généralistes du territoire:
+          </h4>
+          <div className="space-y-3">
+            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
+              <p className="font-bold text-primary text-lg mb-2">Re-Med</p>
+              <p className="text-sm text-muted-foreground italic">
+                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
+                projet Parcours Santé mentale 'boite à outils')
+              </p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border-l-4 border-primary">
+              <p className="font-bold text-primary text-lg mb-2">Réponse Psy</p>
+              <p className="text-sm text-muted-foreground italic">
+                (pour obtenir la ligne directe, rendez-vous sur Plexus Santé -
+                projet Parcours Santé mentale 'boite à outils')
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Section 2: Dispositifs proposés par la CPTS */}
+        <div>
+          <h3 className="text-2xl font-bold text-foreground mb-6">
+            2/ Des dispositifs proposés par la CPTS avec les acteurs du
+            territoire
+          </h3>
+
+          <div className="space-y-6">
+            {/* RCP Psy */}
+            <div className="bg-primary/5 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+                  Dispositif N°1
+                </span>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h4 className="text-xl font-bold text-foreground">
+                  Les RCP Psy de la CPTS
+                </h4>
+                <Link
+                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-rcp-psy"
+                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+                >
+                  Accéder aux ressources
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                cf onglet Réunion de Concertation Pluriprofessionnelle
+              </p>
+            </div>
+
+            {/* Demande d'orientation */}
+            <div className="bg-secondary/60 border-2 border-primary/15 rounded-2xl p-6 lg:p-8 space-y-4">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-primary text-white text-sm font-bold uppercase tracking-wider px-4 py-1.5 shadow-sm">
+                  Dispositif N°2
+                </span>
+              </div>
+              <div className="flex items-center gap-3 flex-wrap">
+                <h4 className="text-xl font-bold text-foreground">
+                  Dispositif CPTS d'orientation en Psychiatrie
+                </h4>
+                <Link
+                  href="/professionnels/actions-outils/les-dispositifs-du-territoire#dispositif-orientation-psychiatrie"
+                  className="sm:ml-auto inline-flex items-center justify-center gap-2 rounded-full border border-primary/30 bg-white px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
+                >
+                  Accéder aux ressources
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+              <p className="text-muted-foreground leading-relaxed">
+                Vous êtes en difficulté avec une prise en charge en santé mentale
+                ? Vous souhaitez un avis spécialisé pour une orientation.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                Une infirmière en psychiatrie de la Maison de santé les Pins
+                (clinique psychiatrique , 35 rue du blayais 33600 Pessac) propose
+                un temps dédié pour vous répondre
+              </p>
+
+              <div className="space-y-3">
+                <p className="font-semibold text-foreground">Comment ?</p>
+                <ul className="space-y-2 text-muted-foreground leading-relaxed">
+                  <li>
+                    • Remplir le formulaire de demande d'orientation disponible
+                    sur Plexus Santé
+                  </li>
+                  <li>
+                    • Envoyer le formulaire par messagerie de santé sécurisée à{" "}
+                    <a
+                      href="mailto:elise.patenere@pro.mssante.fr"
+                      className="text-primary hover:underline font-semibold"
+                    >
+                      elise.patenere@pro.mssante.fr
+                    </a>
+                  </li>
+                  <li>
+                    • L'IDE Psy (Elise Patenere) répond par un mail au
+                    Professionnel de Santé proposant une orientation possible
+                    ( et/ou rdv téléphonique si besoin pour expliciter
+                    l'orientation).
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     ),
