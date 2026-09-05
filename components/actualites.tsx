@@ -1,4 +1,4 @@
-import { ArrowRight, Clock3 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -13,6 +13,11 @@ import { cn } from "@/lib/utils";
 // } from "@/components/ui/carousel";
 
 const actualites = [
+  {
+    title: "La Collective RUN",
+    image: "/actu/collective-run-2026/affiche-collective-run-2026.webp",
+    link: "/actualites/collective-run-2026",
+  },
   {
     title: "Les urgences, ce n'est pas une évidence",
     image: "/actu/urgence-pas-une-evidence.webp",
@@ -62,6 +67,9 @@ function ActuCard({ actu }: { actu: (typeof actualites)[0] }) {
   );
 }
 
+// Carte "Actualite a venir" : a remettre dans la grille (et a decommenter
+// ici) quand il reste une place libre sur la ligne de trois cartes.
+/*
 function ActuPlaceholderCard() {
   return (
     <div className="rounded-2xl bg-white shadow-md border border-dashed border-primary/30 flex flex-col h-full">
@@ -86,6 +94,7 @@ function ActuPlaceholderCard() {
     </div>
   );
 }
+*/
 
 export function Actualites() {
   return (
@@ -106,7 +115,8 @@ export function Actualites() {
             {actualites.map((actu, index) => (
               <ActuCard key={index} actu={actu} />
             ))}
-            <ActuPlaceholderCard />
+            {/* Emplacement en attente : reafficher <ActuPlaceholderCard /> ici
+                quand il reste une place libre sur la ligne de trois cartes. */}
           </div>
 
           {/* Affichage carrousel : à réactiver quand il y aura plus de 3 cartes
