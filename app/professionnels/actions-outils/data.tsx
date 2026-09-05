@@ -774,7 +774,12 @@ export const accordionItemsParcours: AccordionItem[] = [
     id: "vis-ma-vie",
     title: "Vis ma vie",
     content: "",
-    files: [],
+    files: [
+      {
+        name: "Formulaire Vis ma vie",
+        url: "https://drive.google.com/file/d/1TNs_r9B9Cc4Nyxl3zbs3dXH38aC3k2UK/view?usp=sharing",
+      },
+    ],
     customContent: (
       <div className="space-y-8">
         {/* Illustration : deux confreres qui echangent leur blouse */}
@@ -825,21 +830,11 @@ export const accordionItemsParcours: AccordionItem[] = [
           </ul>
         </div>
 
-        {/* Formulaire */}
-        <div className="bg-secondary/60 border-2 border-primary/15 rounded-2xl p-6 space-y-3">
-          <h3 className="text-xl font-bold text-foreground">Participer</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Complétez le formulaire pour vous inscrire au dispositif.
+        {/* Participer */}
+        <div className="bg-primary/5 p-5 rounded-lg border-l-4 border-primary">
+          <p className="text-foreground leading-relaxed">
+            Pour participer, complétez le formulaire ci-dessous.
           </p>
-          <a
-            href="https://drive.google.com/file/d/1TNs_r9B9Cc4Nyxl3zbs3dXH38aC3k2UK/view?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
-          >
-            Formulaire Vis ma vie
-            <ExternalLink className="w-4 h-4" aria-hidden="true" />
-          </a>
         </div>
       </div>
     ),
