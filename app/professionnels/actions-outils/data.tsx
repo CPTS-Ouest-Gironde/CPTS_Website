@@ -769,6 +769,68 @@ export const accordionItemsParcours: AccordionItem[] = [
       </div>
     ),
   },
+  {
+    id: "vis-ma-vie",
+    title: "Vis ma vie",
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-8">
+        {/* Objectif */}
+        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
+          <h3 className="text-xl font-bold text-foreground mb-3">Objectif</h3>
+          <p className="text-foreground leading-relaxed text-lg">
+            Fédérer les professionnels de santé adhérents — accueillir des
+            collègues ou des étudiants.
+          </p>
+        </div>
+
+        {/* Le principe */}
+        <div className="space-y-4">
+          <h3 className="text-xl font-bold text-foreground">Le principe</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Ouvrir son cabinet à d&apos;autres spécialités, accompagner sur du
+            domicile (avec l&apos;accord du patient).
+          </p>
+          <div className="bg-primary/5 p-5 rounded-lg border-l-4 border-primary">
+            <p className="text-foreground leading-relaxed">
+              Passer une <strong>demi-journée, indemnisée par la CPTS</strong>,
+              avec un professionnel de santé et découvrir son organisation, ses
+              compétences, ses contraintes — afin d&apos;améliorer le parcours
+              patient.
+            </p>
+          </div>
+        </div>
+
+        {/* Exemples de binômes */}
+        <div className="space-y-4">
+          <h3 className="text-xl font-bold text-foreground">Quelques exemples</h3>
+          <ul className="space-y-2 text-muted-foreground leading-relaxed">
+            <li>• IDEL / Médecin généraliste</li>
+            <li>• Kinésithérapeute (visite à domicile) / Médecin généraliste</li>
+            <li>• Psychomotricien / Médecin généraliste…</li>
+          </ul>
+        </div>
+
+        {/* Formulaire */}
+        <div className="bg-secondary/60 border-2 border-primary/15 rounded-2xl p-6 space-y-3">
+          <h3 className="text-xl font-bold text-foreground">Participer</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Complétez le formulaire pour vous inscrire au dispositif.
+          </p>
+          <a
+            href="https://drive.google.com/file/d/1TNs_r9B9Cc4Nyxl3zbs3dXH38aC3k2UK/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-semibold transition-all duration-300 hover:bg-primary/90 hover:shadow-lg"
+          >
+            Formulaire Vis ma vie
+            <ExternalLink className="w-4 h-4" aria-hidden="true" />
+          </a>
+        </div>
+      </div>
+    ),
+  },
 ];
 
 export const accordionItemsPrevention: AccordionItem[] = [
