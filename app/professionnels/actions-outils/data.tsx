@@ -4,6 +4,7 @@ import { AccordionItem } from "./types";
 import { ImageCarousel } from "./components/ImageCarousel";
 import { RcpTeamCard } from "./components/RcpTeamCard";
 import { ZoomableImage } from "./components/ZoomableImage";
+import Image from "next/image";
 import Link from "next/link";
 import { Clock, ExternalLink } from "lucide-react";
 import { DownloadButton } from "@/components/download-button";
@@ -776,6 +777,18 @@ export const accordionItemsParcours: AccordionItem[] = [
     files: [],
     customContent: (
       <div className="space-y-8">
+        {/* Illustration : deux confreres qui echangent leur blouse */}
+        <div className="mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-primary/15">
+          <Image
+            src="/actions-outils/vis-ma-vie/vis-ma-vie.webp"
+            alt="Deux professionnels de santé s'échangent leur blouse, symbole de la découverte du métier de l'autre"
+            width={1672}
+            height={941}
+            sizes="(max-width: 768px) 100vw, 448px"
+            className="h-auto w-full"
+          />
+        </div>
+
         {/* Objectif */}
         <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
           <h3 className="text-xl font-bold text-foreground mb-3">Objectif</h3>
