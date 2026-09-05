@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { BackToActualitesLink } from "@/components/back-to-actualites-link";
+import { ActualiteCarrousel } from "@/components/actualite-carrousel";
 import { cn } from "@/lib/utils";
 
 interface SimpleActualitePageProps {
@@ -11,6 +12,13 @@ interface SimpleActualitePageProps {
   imageAlt: string;
   intro?: ReactNode;
   posterCardClassName?: string;
+  /** Ratio du cadre de l'affiche. Carre pour les visuels de carrousel. */
+  posterAspectClassName?: string;
+  /**
+   * Visuels supplementaires (pages 2 et suivantes d'un carrousel). Quand ils
+   * sont fournis, l'affiche et eux sont parcourus dans un carrousel unique.
+   */
+  carrousel?: { src: string; alt: string }[];
 }
 
 export function SimpleActualitePage({
@@ -19,6 +27,8 @@ export function SimpleActualitePage({
   imageAlt,
   intro,
   posterCardClassName,
+  posterAspectClassName = "aspect-[3/4]",
+  carrousel,
 }: SimpleActualitePageProps) {
   return (
     <main className="min-h-screen">
@@ -42,23 +52,30 @@ export function SimpleActualitePage({
       <section className="pb-20 lg:pb-32">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <div
-              className={cn(
-                "max-w-2xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-border bg-card",
-                posterCardClassName
-              )}
-            >
-              <div className="relative w-full aspect-[3/4]">
-                <Image
-                  src={imageSrc}
-                  alt={imageAlt}
-                  fill
-                  className="object-contain"
-                  priority
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
-                />
+            {carrousel && carrousel.length > 0 ? (
+              <ActualiteCarrousel
+                slides={[{ src: imageSrc, alt: imageAlt }, ...carrousel]}
+                aspectClassName={posterAspectClassName}
+              />
+            ) : (
+              <div
+                className={cn(
+                  "max-w-2xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-border bg-card",
+                  posterCardClassName
+                )}
+              >
+                <div className={cn("relative w-full", posterAspectClassName)}>
+                  <Image
+                    src={imageSrc}
+                    alt={imageAlt}
+                    fill
+                    className="object-contain"
+                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
+                  />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

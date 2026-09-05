@@ -1,0 +1,260 @@
+{
+  "title": "LA VACCINATION CONTRE LE PAPILLOMAVIRUS DES 11 ANS : NOUVELLE CAMPAGNE SCOLAIRE 2026 !",
+  "date": "31 août 2026",
+  "image": "/prevention/sante-famille/vaccination-papillomavirus/bras-pansement-vaccination.webp",
+  "imageAlt": "Gros plan sur le bras d'un enfant portant un pansement après une vaccination",
+  "backLink": {
+    "href": "/prevention/sante-familiale",
+    "label": "Retour à Santé familiale"
+  },
+  "intro": {
+    "paragraphs": [
+      {
+        "text": "En cette **rentrée 2026, une vaccination contre les infections HPV sera de nouveau proposée à tous les élèves de collège de la classe de 5ème**. Elle sera proposée pour **les adolescents volontaires** avec **autorisation de leurs parents**.",
+        "highlight": []
+      },
+      {
+        "text": "En partenariat avec l'ARS, **le CHU de BORDEAUX** s'engage dans la campagne de vaccination scolaire.",
+        "highlight": []
+      }
+    ],
+    "banner": "1 année scolaire = 1 établissement = 2 doses, 1 schéma vaccinal complet",
+    "paragraphs2": [
+      "En 2023, il a été décidé de proposer la vaccination en milieu scolaire, pour renforcer la médecine préventive et la rendre accessible à tous : une 1ère dose sera proposée en octobre-décembre, avec un 2ème rappel au printemps-fin juin. Pour les élèves ayant reçu 1 dose, une dose de rattrapage est prévue en 4ème ou auprès d'un professionnel de santé de ville.",
+      "**la Nouvelle-Aquitaine a été l'une des régions pilotes pour expérimenter la vaccination contre les infections à méningocoques** chez les collégiens, en même temps que la vaccination contre les HPV.",
+      "Depuis l'année dernière, la grande nouveauté de la campagne vaccinale scolaire intègre désormais la **vaccination contre les 4 méningocoques ACWY**."
+    ],
+    "stats": {
+      "label": "Sur l'année scolaire 2024-2025 :",
+      "figures": [
+        {
+          "value": "6 264",
+          "label": "autorisations parentales recueillies"
+        },
+        {
+          "value": "4 201",
+          "label": "élèves ont bénéficié du vaccin méningocoque"
+        }
+      ]
+    },
+    "conclusion": "Il sera donc proposé aux parents, cette année aussi, de faire conjointement la protection contre HPV et contre les MENINGOCOQUES"
+  },
+  "sections": [
+    {
+      "id": "pourquoi",
+      "navLabel": "Pourquoi proposer la vaccination HPV au collège",
+      "title": "POURQUOI PROPOSER LA VACCINATION HPV AU COLLÈGE ?",
+      "icon": "shield",
+      "content": [
+        "Ce virus est responsable de **l'infection sexuellement transmissible la plus fréquente** : 80% des personnes seront infectées au cours de leurs vies.",
+        "Les HPV dits « hauts risques », au nombre de 12, peuvent être responsables de certains cancers et verrues condylomes.",
+        "En France, chaque année plus de **6400 nouveaux cas de cancers sont attribués à HPV**, dont 3100 cancer de col chez la femme.",
+        "Le meilleur moyen de prévenir ces cancers reste la vaccination : elle prévient jusqu'à 90 % des infections HPV"
+      ]
+    },
+    {
+      "id": "transmission",
+      "navLabel": "Comment il se transmet",
+      "title": "COMMENT HPV SE TRANSMET-IL ?",
+      "icon": "shield",
+      "content": [
+        "**Le virus se transmet par contact des muqueuses ou de la peau**, presque exclusivement pendant les rapports sexuels avec ou sans pénétration.",
+        "Les préservatifs protègent imparfaitement contre cette infection."
+      ]
+    },
+    {
+      "id": "consequences",
+      "navLabel": "Quelles conséquences",
+      "title": "QUELLES CONSÉQUENCES SUITE À L'INFECTION HPV ?",
+      "icon": "shield",
+      "content": [
+        "Le papillomavirus humain (HPV) regroupe près de 200 types de virus. Si **90 % des infections sont éliminées naturellement par l'organisme en moins de deux ans**, les infections qui persistent provoquent une grande variété de pathologies (bénignes ou non).",
+        "Le papillomavirus est une infection extrêmement courante : **80 % des adultes seront exposés au virus au cours de leur vie**. C'est la persistance des HPV dits « à haut risque » qui provoque l'apparition lente des lésions précancéreuses voire cancéreuses."
+      ],
+      "groupes": [
+        {
+          "id": "bas-risque",
+          "label": "Les HPV à « bas risque »",
+          "types": "Principalement HPV 6 et 11",
+          "tone": "amber",
+          "resume": "Ne provoquent pas de cancer, mais entraînent des anomalies cutanées et muqueuses très contagieuses.",
+          "pathologies": [
+            {
+              "nom": "Les verrues anogénitales (condylomes)",
+              "description": "Surnommées « crêtes de coq », ces excroissances touchent la vulve, le pénis, l'anus ou le vagin. Elles sont souvent douloureuses et complexes à traiter (récidives fréquentes).",
+              "stat": {
+                "value": "470 à 500",
+                "unit": "cas de condylomes par an",
+                "scope": "Nouvelle-Aquitaine",
+                "note": "Estimation des campagnes locales de santé, répartis à parts égales (50/50) entre les hommes et les femmes."
+              }
+            },
+            {
+              "nom": "La papillomatose respiratoire récurrente",
+              "description": "Une pathologie rare où des verrues se développent sur les cordes vocales et dans le larynx, obstruant parfois les voies respiratoires."
+            }
+          ]
+        },
+        {
+          "id": "haut-risque",
+          "label": "Les HPV à « haut risque » ou oncogènes",
+          "types": "Principalement HPV 16 et 18",
+          "tone": "red",
+          "resume": "Directement responsables des modifications de l'ADN cellulaire menant aux cancers.",
+          "pathologies": [
+            {
+              "nom": "Les lésions précancéreuses (dysplasies)",
+              "description": "Des modifications cellulaires invisibles à l'œil nu (détectées par frottis ou colposcopie) qui peuvent évoluer lentement sur 10 à 20 ans.",
+              "stat": {
+                "value": "2 800 à 3 000",
+                "unit": "femmes diagnostiquées chaque année",
+                "scope": "Nouvelle-Aquitaine",
+                "note": "Pour des lésions précancéreuses du col de l'utérus liées aux HPV. L'apparition de lésions précancéreuses (souvent dues aux HPV 16 et 18) peut précéder les cancers de l'anus : elles touchent plutôt les hommes."
+              }
+            },
+            {
+              "nom": "Les cancers invasifs",
+              "description": "Lorsque les cellules anormales rompent la barrière des tissus profonds et se propagent.",
+              "stat": {
+                "value": "6 400 à 7 100",
+                "unit": "diagnostics annuels",
+                "scope": "France",
+                "note": "Cancers en lien avec les HPV."
+              }
+            }
+          ]
+        }
+      ],
+      "repartition": {
+        "title": "Répartition des cancers liés aux HPV en Nouvelle-Aquitaine",
+        "intro": "Les infections persistantes à papillomavirus touchent à la fois les femmes et les hommes (environ un quart des cas) et se répartissent principalement ainsi :",
+        "figures": [
+          {
+            "value": "270 à 300",
+            "label": "Cancer du col de l'utérus",
+            "unit": "nouveaux cas par an"
+          },
+          {
+            "value": "≈ 140",
+            "label": "Cancers de l'anus",
+            "unit": "cas par an"
+          },
+          {
+            "value": "≈ 140",
+            "label": "Cancers de la sphère ORL (gorge, pharynx)",
+            "unit": "cas par an"
+          }
+        ],
+        "note": "Autres localisations plus rares : cancers du vagin, de la vulve et du pénis."
+      }
+    },
+    {
+      "id": "depuis-quand",
+      "navLabel": "Depuis quand",
+      "title": "DEPUIS QUAND LA VACCINATION EST-ELLE PROPOSÉE ?",
+      "icon": "syringe",
+      "content": [
+        "Depuis 2007, la prévention est proposée chez les filles de 11 à14 ans. **Cette prévention a été élargie aux garçons depuis janvier 2021**.",
+        "Cette prévention est désormais proposée jusqu'à l'âge de 26 ans révolu pour tous."
+      ],
+      "schemaVaccinal": {
+        "title": "Schéma vaccinal",
+        "vaccines": [
+          {
+            "name": "Vaccin nonavalent (Gardasil 9®) :",
+            "intro": "Vaccination initiée chez les filles et chez les garçons :",
+            "doses": [
+              "Entre 11 et 14 ans révolus : deux doses espacées de 5 à 13 mois.",
+              "Entre 15 ans et 26 ans révolus : trois doses administrées selon un schéma 0, 2 et 6 mois."
+            ],
+            "note": "Il n'y a pas de contre-indication à compléter un schéma vaccinal incomplet.",
+            "nouveauNote": "L'extension du rattrapage vaccinal contre les HPV jusqu'à 26 ans, pour les femmes et pour les hommes, est effective depuis le 12 décembre 2025."
+          }
+        ]
+      },
+      "encadreSecondaire": "Depuis la rentrée scolaire 2023-2024, la vaccination contre les HPV est proposée aux jeunes filles et jeunes garçons de 11 à 14 ans scolarisés dans les collèges publics et les collèges privés sous contrat volontaire. Cette vaccination est gratuite et nécessite l'autorisation des 2 parents."
+    },
+    {
+      "id": "objectifs",
+      "navLabel": "Objectifs de la campagne",
+      "title": "QUELS OBJECTIFS POUR LA CAMPAGNE VACCINALE DES 5èmes ?",
+      "icon": "target",
+      "content": [
+        "Pour la campagne 2024/2025, la Nouvelle Aquitaine a révélé une dynamique vaccinale régionale forte et s'est classée au **1 er rang national avec 16.6 % d' élèves de 5 ème vaccinés** !",
+        "La couverture vaccinale nationale contre les infections à papillomavirus (HPV) continue de progresser. L'écart de couverture vaccinale entre les filles et les garçons continue de se réduire. Cette progression est encourageante, mais la couverture vaccinale reste encore insuffisante pour réduire l'incidence des cancers liés à ces HPV."
+      ],
+      "couverture": {
+        "title": "Couverture vaccinale à 16 ans, schéma complet",
+        "items": [
+          { "label": "Filles", "value": 56.9, "display": "56,9 %" },
+          { "label": "Garçons", "value": 36.3, "display": "36,3 %" }
+        ],
+        "objectif": {
+          "value": 80,
+          "display": "80 %",
+          "label": "Objectif national d'ici 2030"
+        },
+        "note": "Objectif fixé par la stratégie décennale de lutte contre les cancers, chez les filles comme chez les garçons."
+      }
+    },
+    {
+      "id": "securite",
+      "navLabel": "La vaccination est-elle sûre",
+      "title": "LA VACCINATION EST-ELLE SÛRE ?",
+      "icon": "shield",
+      "content": [
+        "Cette vaccination **a fait ses preuves** dans plus de 80 pays : plus de 100 000 000 d'enfants et adolescents ont déjà été vaccinés. Le suivi effectué confirme la sécurité de ce vaccin **utilisé depuis plus de 16 ans**.",
+        "L'efficacité est aujourd'hui démontrée sur la réduction des lésions précancéreuses.",
+        "La vaccination protège à plus de 90% contre les HPV oncogènes ou responsables de condylomes."
+      ],
+      "illustration": {
+        "image": "/prevention/sante-famille/vaccination-papillomavirus/ado-vaccinee-professionnel-sante.webp",
+        "alt": "Une adolescente vaccinée, pansement au bras, aux côtés d'une professionnelle de santé"
+      }
+    },
+    {
+      "id": "age",
+      "navLabel": "À quel âge se faire vacciner",
+      "title": "À QUEL ÂGE PEUT-ON SE FAIRE VACCINER ?",
+      "icon": "syringe",
+      "content": [
+        "La vaccination est recommandée pour tous les **jeunes de 11 ans à 14 ans révolus en schéma vaccinal de 2 doses**, espacées de 5 à 13 mois : ce délai permet de faire la seconde dose au cours de la même année scolaire.",
+        "Un rattrapage est possible **de 14 à 26 ans en schéma vaccinal de 3 doses** (M0 + M2 + M6).",
+        "Depuis le 12 décembre 2025, le rattrapage vaccinal est possible jusqu'à 26 ans révolus pour les femmes et pour les hommes."
+      ]
+    },
+    {
+      "id": "pourquoi-11-ans",
+      "navLabel": "Pourquoi dès 11 ans",
+      "title": "POURQUOI DÈS L'ÂGE DE 11 ANS ?",
+      "icon": "help",
+      "content": [
+        "Il peut être associé au rdv vaccinal de DTPCOQ des 11 ans."
+      ],
+      "items": [
+        "Il permettra une **meilleure réponse immunitaire**.",
+        "**Seules 2 doses** suffiront pour assurer l'immunité."
+      ],
+      "illustration": {
+        "image": "/prevention/sante-famille/vaccination-papillomavirus/ado-pancarte-vaccination.webp",
+        "alt": "Un collégien souriant tenant une pancarte « Vaccination saves lives »"
+      }
+    },
+    {
+      "id": "actions",
+      "navLabel": "Actions sur notre territoire",
+      "title": "QUELLES ACTIONS SUR NOTRE TERRITOIRE ?",
+      "icon": "shield",
+      "content": [
+        "L'ARS de Nouvelle Aquitaine et le CHU de BORDEAUX ont uni leur force pour lancer la campagne de vaccination scolaire ciblant ainsi 35 établissements de la métropole Bordelaise : soit 4635 élèves pour l'année scolaire 2024-2025."
+      ],
+      "media": {
+        "image": "https://old.cpts-ouest-gironde.fr/wp-content/uploads/2023/06/visuel-couverture-video-motion-hpv-vaccination-nouvelle-aquitaine-20231.png",
+        "alt": "Campagne de vaccination HPV au collège - ARS Nouvelle-Aquitaine",
+        "linkUrl": "https://www.nouvelle-aquitaine.ars.sante.fr/dossier-de-presse-du-lancement-de-la-campagne-de-vaccination-hpv-human-papillomavirus",
+        "linkLabel": "Voir le dossier de presse de l'ARS",
+        "linkSource": "nouvelle-aquitaine.ars.sante.fr"
+      }
+    }
+  ]
+}
