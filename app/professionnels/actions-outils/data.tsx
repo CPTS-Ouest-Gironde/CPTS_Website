@@ -611,7 +611,32 @@ export const accordionItemsParcours: AccordionItem[] = [
     id: "programme-parachute",
     title: "Programme Para'chute",
     content: "",
-    files: [],
+    files: [
+      {
+        name: "Fiche action Para'chute — CPTS Ouest Gironde",
+        url: "https://drive.google.com/file/d/19wVNZcT7WXRQCxZPHKjEXH6j-yjJM1by/view?usp=drive_link",
+      },
+      {
+        name: "Fiche de signalement de chute",
+        url: "https://drive.google.com/file/d/1UAv7uGsmWPdWAkSrfZyxA6hNiHNGyoJj/view?usp=drive_link",
+      },
+      {
+        name: "Fiche d'inclusion aux ateliers",
+        url: "https://drive.google.com/file/d/1---F-P92bTfLqwZCGohlKOrlG5etCLjz/view?usp=drive_link",
+      },
+      {
+        name: "Fiche d'évaluation — début de programme",
+        url: "https://drive.google.com/file/d/1spTKArm6c_iSFLNnzHDb3wDWyk42M7U5/view?usp=drive_link",
+      },
+      {
+        name: "Fiche d'évaluation — fin de programme",
+        url: "https://drive.google.com/file/d/1vSn5ixRQ31Ug0YJPrm6Z2LyzJGI85IFw/view?usp=drive_link",
+      },
+      {
+        name: "Fiche d'évaluation — M3 et M12",
+        url: "https://drive.google.com/file/d/1g-ONHP2hmsHm_WxmH2C0yv1Nb3bFpqDy/view?usp=drive_link",
+      },
+    ],
     customContent: (
       <div className="space-y-10">
         {/* En-tête : l'illustration et l'enjeu, côte à côte */}
