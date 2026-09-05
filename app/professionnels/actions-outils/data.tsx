@@ -177,6 +177,196 @@ Comment : Saisir la CPAM de situations d'assurés via un formulaire de saisine �
 
 export const accordionItemsParcours: AccordionItem[] = [
   {
+    id: "reunions-concertation",
+    title: "Concertation Pluriprofessionnelle (RCP)",
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-8">
+        {/* Bandeau intro */}
+        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
+          <p className="text-foreground leading-relaxed text-lg">
+            La CPTS Ouest Gironde propose deux dispositifs de Concertation
+            Pluriprofessionnelle complémentaires, selon la nature de la
+            situation rencontrée par votre patient.
+          </p>
+        </div>
+
+        {/* Empilé : chaque RCP contient une liste numérotée + un bloc "Pourquoi", qui respirent mieux pleine largeur. La distinction visuelle se fait par les deux nuances de vert. */}
+        <div className="space-y-8">
+          {/* RCP Cas complexes */}
+          <div className="bg-primary/5 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
+            <h3 className="text-2xl font-bold text-foreground">
+              RCP cas complexes CPTS Ouest Gironde
+            </h3>
+            <ZoomableImage
+              src="/actions-outils/RCP-cas-complexe.webp"
+              alt="Infographie du parcours RCP cas complexes CPTS Ouest Gironde en 5 étapes : situation initiale en impasse diagnostique, demande adressée à la CPTS, déroulement de la RCP, synthèse et plan d'action concertée, bénéfices pour le patient et le professionnel"
+              width={1536}
+              height={1024}
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 800px"
+            />
+            <RcpTeamCard
+              label="Équipe RCP cas complexes :"
+              members="Dr Ismahène Abed, Dr Christophe Adam, Dr Sophie Clément Perrin, Claire Laborde, Hugo Ledoux, Dr Monika Nguon"
+              variant="complex"
+            />
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Pourquoi solliciter une RCP cas complexes ?
+              </h4>
+              <div className="space-y-4">
+                <p className="text-muted-foreground leading-relaxed">
+                  Si la prise en charge d'un de vos patients vous paraît
+                  complexe, difficile, insatisfaisante... car il reste
+                  douloureux, essoufflé, symptomatique...
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Professionnels de santé, si vous êtes préoccupés, en manque
+                  de réseau ou de solutions pratiques
+                </p>
+              </div>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Comment ?
+              </h4>
+              <ol className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    1
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Remplir le questionnaire requérant (disponible sur Plexus
+                    Santé - Projet RCP 'boite à outils')
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    2
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Proposer le questionnaire patient à votre patient (même
+                    espace Plexus)
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    3
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    La CPTS organise un temps d'échanges pluriprofessionnel à
+                    partir du parcours de soins du patient (avis de médecin
+                    généraliste, spécialiste, infirmier, kinésithérapeute,
+                    podologue, psychologue, sage-femme…) avec propositions de
+                    résolutions de problèmes
+                  </p>
+                </li>
+              </ol>
+            </div>
+            <p className="text-primary font-semibold">
+              40 minutes d'échanges par dossier maximum
+            </p>
+          </div>
+
+          {/* RCP Psy */}
+          <div className="bg-secondary/60 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
+            <h3 className="text-2xl font-bold text-foreground">
+              RCP Psy CPTS Ouest Gironde
+            </h3>
+            <RcpTeamCard
+              label="Équipe RCP Psy :"
+              members="Dr Comby Viallard, Dr Piat, Dr Ledieu, Dr Meliani Nedjari, Tifanie Akiki, Morgane Sini, Elise Patenere"
+              variant="psy"
+            />
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Pourquoi solliciter une RCP Psy ?
+              </h4>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
+                  <p className="text-muted-foreground leading-relaxed">
+                    Réunir les professionnels qui gravitent autour de votre
+                    patient pour une cohérence dans la prise en charge (médecin
+                    généraliste, spécialistes, psychologue, professionnels
+                    paramédicaux, professionnels socioéducatifs, du milieu
+                    scolaire ou du travail etc.)
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
+                  <p className="text-muted-foreground leading-relaxed">
+                    Solliciter un appui diagnostic en équipe pluridisciplinaire
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
+                  <p className="text-muted-foreground leading-relaxed">
+                    Solliciter un avis thérapeutique et aide à la prescription
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
+                  <p className="text-muted-foreground leading-relaxed">
+                    Solliciter une aide à l'orientation: les dispositifs
+                    sanitaires ou médico-sociaux spécialisés ressources sociales
+                    et droits des patients
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Comment ?
+              </h4>
+              <ol className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    1
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Remplir le questionnaire requérant
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    2
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Proposer le questionnaire à destination de votre patient
+                    (disponible sur Plexus Projet Santé mentale 'boite à
+                    outils')
+                  </p>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    3
+                  </span>
+                  <p className="text-muted-foreground leading-relaxed pt-0.5">
+                    Envoyer les questionnaires aux membres de la RCP ainsi que
+                    la liste des intervenants que vous souhaitez inviter lors de
+                    cette réunion
+                  </p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        {/* Calendrier commun aux deux RCP */}
+        <div className="bg-white p-6 rounded-xl border-2 border-primary/20">
+          <h4 className="text-xl font-bold text-foreground mb-4">
+            Prochaines réunions 2026&nbsp;:
+          </h4>
+          <p className="text-muted-foreground">
+            15 septembre 2026 – Autour d'un buffet
+          </p>
+        </div>
+      </div>
+    ),
+  },
+  {
     id: "parcours-ic",
     title: "Parcours IC (Insuffisance Cardiaque)",
     content: "",
@@ -438,196 +628,6 @@ export const accordionItemsParcours: AccordionItem[] = [
               validation.
             </p>
           </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: "reunions-concertation",
-    title: "Réunions de Concertation Pluriprofessionnelle (RCP)",
-    content: "",
-    files: [],
-    customContent: (
-      <div className="space-y-8">
-        {/* Bandeau intro */}
-        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
-          <p className="text-foreground leading-relaxed text-lg">
-            La CPTS Ouest Gironde propose deux dispositifs de Concertation
-            Pluriprofessionnelle complémentaires, selon la nature de la
-            situation rencontrée par votre patient.
-          </p>
-        </div>
-
-        {/* Empilé : chaque RCP contient une liste numérotée + un bloc "Pourquoi", qui respirent mieux pleine largeur. La distinction visuelle se fait par les deux nuances de vert. */}
-        <div className="space-y-8">
-          {/* RCP Cas complexes */}
-          <div className="bg-primary/5 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
-            <h3 className="text-2xl font-bold text-foreground">
-              RCP cas complexes CPTS Ouest Gironde
-            </h3>
-            <ZoomableImage
-              src="/actions-outils/RCP-cas-complexe.webp"
-              alt="Infographie du parcours RCP cas complexes CPTS Ouest Gironde en 5 étapes : situation initiale en impasse diagnostique, demande adressée à la CPTS, déroulement de la RCP, synthèse et plan d'action concertée, bénéfices pour le patient et le professionnel"
-              width={1536}
-              height={1024}
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 800px"
-            />
-            <RcpTeamCard
-              label="Équipe RCP cas complexes :"
-              members="Dr Ismahène Abed, Dr Christophe Adam, Dr Sophie Clément Perrin, Claire Laborde, Hugo Ledoux, Dr Monika Nguon"
-              variant="complex"
-            />
-            <div>
-              <h4 className="text-xl font-bold text-foreground mb-4">
-                Pourquoi solliciter une RCP cas complexes ?
-              </h4>
-              <div className="space-y-4">
-                <p className="text-muted-foreground leading-relaxed">
-                  Si la prise en charge d'un de vos patients vous paraît
-                  complexe, difficile, insatisfaisante... car il reste
-                  douloureux, essoufflé, symptomatique...
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Professionnels de santé, si vous êtes préoccupés, en manque
-                  de réseau ou de solutions pratiques
-                </p>
-              </div>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold text-foreground mb-4">
-                Comment ?
-              </h4>
-              <ol className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    1
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Remplir le questionnaire requérant (disponible sur Plexus
-                    Santé - Projet RCP 'boite à outils')
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    2
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Proposer le questionnaire patient à votre patient (même
-                    espace Plexus)
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    3
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    La CPTS organise un temps d'échanges pluriprofessionnel à
-                    partir du parcours de soins du patient (avis de médecin
-                    généraliste, spécialiste, infirmier, kinésithérapeute,
-                    podologue, psychologue, sage-femme…) avec propositions de
-                    résolutions de problèmes
-                  </p>
-                </li>
-              </ol>
-            </div>
-            <p className="text-primary font-semibold">
-              40 minutes d'échanges par dossier maximum
-            </p>
-          </div>
-
-          {/* RCP Psy */}
-          <div className="bg-secondary/60 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
-            <h3 className="text-2xl font-bold text-foreground">
-              RCP Psy CPTS Ouest Gironde
-            </h3>
-            <RcpTeamCard
-              label="Équipe RCP Psy :"
-              members="Dr Comby Viallard, Dr Piat, Dr Ledieu, Dr Meliani Nedjari, Tifanie Akiki, Morgane Sini, Elise Patenere"
-              variant="psy"
-            />
-            <div>
-              <h4 className="text-xl font-bold text-foreground mb-4">
-                Pourquoi solliciter une RCP Psy ?
-              </h4>
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
-                  <p className="text-muted-foreground leading-relaxed">
-                    Réunir les professionnels qui gravitent autour de votre
-                    patient pour une cohérence dans la prise en charge (médecin
-                    généraliste, spécialistes, psychologue, professionnels
-                    paramédicaux, professionnels socioéducatifs, du milieu
-                    scolaire ou du travail etc.)
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
-                  <p className="text-muted-foreground leading-relaxed">
-                    Solliciter un appui diagnostic en équipe pluridisciplinaire
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
-                  <p className="text-muted-foreground leading-relaxed">
-                    Solliciter un avis thérapeutique et aide à la prescription
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
-                  <p className="text-muted-foreground leading-relaxed">
-                    Solliciter une aide à l'orientation: les dispositifs
-                    sanitaires ou médico-sociaux spécialisés ressources sociales
-                    et droits des patients
-                  </p>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-xl font-bold text-foreground mb-4">
-                Comment ?
-              </h4>
-              <ol className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    1
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Remplir le questionnaire requérant
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    2
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Proposer le questionnaire à destination de votre patient
-                    (disponible sur Plexus Projet Santé mentale 'boite à
-                    outils')
-                  </p>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="flex-shrink-0 w-6 h-6 bg-primary text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    3
-                  </span>
-                  <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Envoyer les questionnaires aux membres de la RCP ainsi que
-                    la liste des intervenants que vous souhaitez inviter lors de
-                    cette réunion
-                  </p>
-                </li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        {/* Calendrier commun aux deux RCP */}
-        <div className="bg-white p-6 rounded-xl border-2 border-primary/20">
-          <h4 className="text-xl font-bold text-foreground mb-4">
-            Prochaines réunions 2026&nbsp;:
-          </h4>
-          <p className="text-muted-foreground">
-            15 septembre 2026 – Autour d'un buffet
-          </p>
         </div>
       </div>
     ),
