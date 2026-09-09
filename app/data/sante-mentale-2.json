@@ -47,12 +47,12 @@
     },
     {
       "title": "Santé mentale et numérique",
-      "description": "Impact du numérique sur la santé mentale",
+      "description": "Écrans, réseaux sociaux, sommeil : comprendre l'impact du numérique et adopter des repères simples",
       "iconName": "Brain",
       "color": "bg-blue-100 hover:bg-blue-200 dark:bg-blue-900/30 dark:hover:bg-blue-900/50",
-      "image": null,
-      "link": null,
-      "hasContent": false
+      "image": "/sante-mentale-numerique/hero.webp",
+      "link": "/sante-mental/sante-mentale-et-numerique",
+      "hasContent": true
     },
     {
       "title": "Anxiété & Stress",

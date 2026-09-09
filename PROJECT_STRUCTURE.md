@@ -27,11 +27,14 @@ app/
 ├── presentation/ (2)       # About pages
 ├── sante-mentale/ (1)      # Mental health v1 [CLIENT]
 ├── sante-mentale-2/ (1)    # Mental health v2 [CLIENT]
+├── sante-mental/sante-mentale-et-numerique/  # Article écrans & santé mentale (RSC, police Newsreader locale à la page)
 └── faq/ (1)                # FAQ
 
 components/
 ├── ui/ (56)                # Radix UI components (CHECK FIRST)
 ├── sante-voyage/ (3)       # Article santé voyage : reveal (scroll), journey-nav (sticky), travel-checklist [CLIENT]
+├── sante-mental/questions-explorer.tsx  # 10 questions : liste + détail sur desktop, accordéon sur mobile [CLIENT]
+├── sante-mental/numerique-icons.tsx     # IconMap partagé de l'article numérique
 ├── header.tsx              # Site header + nav
 ├── footer.tsx              # Site footer
 ├── hero.tsx                # Homepage hero
@@ -60,7 +63,8 @@ docs/                       # ⚠️ DO NOT TOUCH
 | supports.json | 3KB | Support materials |
 | nos-actions-vos-outils.json | 51KB | Tools/actions DB |
 | sante-mentale.json | 9.5KB | Mental health v1 |
-| sante-mentale-2.json | 2.9KB | Mental health v2 |
+| sante-mentale-2.json | 2.9KB | Mental health v2 (cartes du hub /sante-mental) |
+| sante-mentale-numerique.json | 25KB | Article Numérique et santé mentale des jeunes (chiffres, ami/ennemi, cerveau, impacts, pistes, mesures publiques, règle 3-6-9-12, aide, 10 questions, 10 repères) |
 | sante-voyage.json | 22KB | Article santé voyage (contenu médical) |
 | feu-du-porge.json | 6KB | Article urgence fumées feu du Porge |
 | hero-slides.json | 2KB | Slides carrousel "À la une" (homepage) |
@@ -174,4 +178,4 @@ header → navigation-data.ts
 ```
 
 ## Last Updated
-2026-01-09
+2026-09-09

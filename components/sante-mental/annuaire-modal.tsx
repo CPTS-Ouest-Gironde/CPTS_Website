@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -34,6 +34,8 @@ import annuaireData from "@/app/data/annuaire-santé-mental.json";
 interface AnnuaireModalProps {
   isOpen: boolean;
   onClose: () => void;
+  /** Tranche d'âge à afficher directement à l'ouverture (sinon le formulaire) */
+  initialCategory?: string;
 }
 
 type AgeCategory = null | string;
@@ -615,10 +617,17 @@ function AnnuaireContent({
   );
 }
 
-export function AnnuaireModal({ isOpen, onClose }: AnnuaireModalProps) {
+export function AnnuaireModal({ isOpen, onClose, initialCategory }: AnnuaireModalProps) {
   const [selectedCategory, setSelectedCategory] = useState<AgeCategory | "form">(
-    "form"
+    initialCategory ?? "form"
   );
+
+  // Ouverture directe sur une tranche d'âge (lien profond ?age=…)
+  useEffect(() => {
+    if (isOpen && initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [isOpen, initialCategory]);
 
   // Reset to form when modal closes
   const handleClose = () => {

@@ -81,6 +81,24 @@ const TEXT_KEYS = new Set([
   "figures",
   "couverture",
   "objectif",
+  "question",
+  "answer",
+  "advice",
+  "numbers",
+  "keyword",
+  "area",
+  "measure",
+  "effectLabel",
+  "signals",
+  "age",
+  "rules",
+  "lead",
+  "plus",
+  "minus",
+  "lignes",
+  "regle",
+  "quatrePas",
+  "nouveautes",
 ])
 const IGNORED_KEYS = new Set([
   "id",
@@ -112,6 +130,7 @@ const IGNORED_KEYS = new Set([
   "phone",
   "email",
   "address",
+  "zone",
 ])
 
 const ARTICLE_SOURCES: ArticleSource[] = [
@@ -172,6 +191,12 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     path: "app/data/sante-mentale-professionnels-et-approches.json",
   },
   {
+    slug: "sante-mentale-et-numerique",
+    resourceId: "sm-numerique",
+    path: "app/data/sante-mentale-numerique.json",
+    splitLongSections: true,
+  },
+  {
     slug: "annuaire-sante-mental",
     resourceId: "sante-mentale-annuaire",
     path: "app/data/annuaire-santé-mental.json",
@@ -229,6 +254,18 @@ const SECTION_TITLE_LABELS: Record<string, string> = {
   vaccinations: "Vaccinations",
   pendant: "Pendant le voyage",
   profils: "Voyager selon votre profil",
+  cerveau: "Les écrans et le cerveau",
+  questions: "10 questions que vous vous posez",
+  reperes: "10 repères pratiques",
+  aide: "Numéros d'urgence",
+  balance: "Le numérique : ami ou ennemi ?",
+  impacts: "Impacts des réseaux sociaux sur la santé mentale",
+  pistes: "Pistes concrètes de prévention",
+  mesures: "Ce que propose le ministère de la Santé",
+  aideQuand: "Quand demander de l'aide",
+  aideOu: "Où demander de l'aide",
+  recap: "Pour récapituler",
+  sources: "Sources",
 }
 
 function isRecord(value: JsonValue): value is Record<string, JsonValue> {
