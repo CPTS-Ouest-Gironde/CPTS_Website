@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ArrowLeft, ArrowRight, Calendar, Clock, Phone } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { BrainMap } from "@/components/sante-mental/brain-map";
 import { QuestionsExplorer } from "@/components/sante-mental/questions-explorer";
 import { NumeriqueIcon } from "@/components/sante-mental/numerique-icons";
 import data from "@/app/data/sante-mentale-numerique.json";
@@ -129,10 +128,18 @@ export default function SanteMentaleEtNumeriquePage() {
             <SectionTitle title={cerveau.title} intro={cerveau.intro} />
 
             <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 lg:gap-16 items-start">
-              <div className="max-w-[360px] lg:max-w-[440px] mx-auto lg:sticky lg:top-28">
-                <BrainMap zones={zones} />
+              <div className="w-full max-w-[360px] lg:max-w-[440px] mx-auto lg:sticky lg:top-28">
+                <div className="relative w-full aspect-[1097/1287]">
+                  <Image
+                    src={cerveau.image}
+                    alt={cerveau.imageAlt}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 360px, 460px"
+                  />
+                </div>
                 <p className="mt-3 text-xs text-muted-foreground text-center">
-                  Schéma simplifié, les numéros renvoient à la liste.
+                  Les numéros renvoient à la liste.
                 </p>
               </div>
 

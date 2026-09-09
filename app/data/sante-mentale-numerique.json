@@ -19,7 +19,7 @@
         "title": "Attention",
         "keyword": "Dopamine",
         "area": "cortex préfrontal",
-        "color": "#DC7B57",
+        "color": "#D9763A",
         "text": "Le cortex préfrontal régule l'attention et la concentration. Les écrans stimulent la dopamine, ce qui peut rendre la concentration difficile sur la durée."
       },
       {
@@ -37,7 +37,7 @@
         "title": "Langage",
         "keyword": "Matière blanche",
         "area": "aires langagières",
-        "color": "#D9A93A",
+        "color": "#D2A52E",
         "text": "Une exposition excessive peut ralentir le développement du langage et affaiblir les connexions neuronales."
       },
       {
@@ -46,7 +46,7 @@
         "title": "Émotions",
         "keyword": "Estime de soi",
         "area": "amygdale",
-        "color": "#C4707E",
+        "color": "#D9866A",
         "text": "Une surstimulation émotionnelle peut fragiliser la régulation des émotions et l'estime de soi chez l'enfant."
       },
       {
@@ -55,11 +55,13 @@
         "title": "Mémoire",
         "keyword": "Hippocampe",
         "area": "consolidation des souvenirs",
-        "color": "#8A6BB0",
+        "color": "#9A5FA0",
         "text": "Un usage prolongé des écrans peut nuire à la consolidation des souvenirs et à la mémoire à long terme."
       }
     ],
-    "conclusion": "Un usage conscient, c'est un cerveau en équilibre."
+    "conclusion": "Un usage conscient, c'est un cerveau en équilibre.",
+    "image": "/sante-mentale-numerique/cerveau-enfant.webp",
+    "imageAlt": "Profil d'un enfant avec les cinq zones du cerveau numérotées de 1 à 5"
   },
   "questions": {
     "title": "10 questions que vous vous posez",

@@ -33,7 +33,6 @@ app/
 components/
 ├── ui/ (56)                # Radix UI components (CHECK FIRST)
 ├── sante-voyage/ (3)       # Article santé voyage : reveal (scroll), journey-nav (sticky), travel-checklist [CLIENT]
-├── sante-mental/brain-map.tsx  # Schéma SVG du cerveau (5 zones colorées) pour l'article numérique [RSC]
 ├── sante-mental/questions-explorer.tsx  # 10 questions : liste + détail sur desktop, accordéon sur mobile [CLIENT]
 ├── sante-mental/numerique-icons.tsx     # IconMap partagé de l'article numérique
 ├── header.tsx              # Site header + nav
