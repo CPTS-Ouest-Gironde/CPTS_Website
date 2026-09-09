@@ -638,8 +638,100 @@
         },
         {
           "sectionTitle": "Où s'adresser ?",
-          "text": "Où s'adresser ? Sur le territoire, plusieurs structures peuvent proposer un accompagnement en santé mentale : Cabinets libéraux Psychologues et psychiatres CMP Centres médico-psychologiques MDA Maisons des adolescents PAEJ Points accueil écoute jeunes Consulter l'annuaire santé mentale Ressources…",
+          "text": "Où s'adresser ? Sur le territoire, plusieurs structures peuvent proposer un accompagnement en santé mentale : Cabinets libéraux Psychologues et psychiatres CMP Centres médico-psychologiques MDA Maisons des adolescents PAEJ Points accueil écoute jeunes Vous pouvez consulter l'annuaire de la CPTS ou…",
           "sectionIndex": 5
+        }
+      ]
+    },
+    {
+      "articleId": "sante-mentale-et-numerique",
+      "resourceId": "sm-numerique",
+      "title": "Santé mentale et numérique",
+      "chunks": [
+        {
+          "sectionTitle": "Les écrans et le cerveau",
+          "text": "Les écrans et le cerveau Les écrans et le cerveau Comprendre l'impact des écrans sur nos fonctions cérébrales : les cinq zones clés du cerveau. Attention Dopamine cortex préfrontal Le cortex préfrontal régule l'attention et la concentration.",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "Les écrans et le cerveau",
+          "text": "Les écrans stimulent la dopamine, ce qui peut rendre la concentration difficile sur la durée. Sommeil Mélatonine rythme circadien La lumière bleue des écrans réduit la production de mélatonine, perturbant le sommeil et l'endormissement.",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "Les écrans et le cerveau",
+          "text": "Langage Matière blanche aires langagières Une exposition excessive peut ralentir le développement du langage et affaiblir les connexions neuronales. Émotions Estime de soi amygdale Une surstimulation émotionnelle peut fragiliser la régulation des émotions et l'estime de soi chez l'enfant.",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "Les écrans et le cerveau",
+          "text": "Mémoire Hippocampe consolidation des souvenirs Un usage prolongé des écrans peut nuire à la consolidation des souvenirs et à la mémoire à long terme. Un usage conscient, c'est un cerveau en équilibre.",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "10 questions que vous vous posez 10 questions que vous vous posez Conseils pratiques pour un équilibre digital au quotidien. Chaque question est reliée à la zone du cerveau qu'elle concerne. Temps d'écran : trop, c'est combien de temps ? Il n'y a pas de durée unique.",
+          "sectionIndex": 4
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Au-delà de 3 à 4 heures par jour hors travail, le risque de fatigue augmente. 50 minutes d'écran, puis 10 minutes de pause. Réseaux sociaux : quels effets sur l'humeur et le stress ? La comparaison permanente aux autres peut accroître le stress. Limiter les abonnements et trier son fil d'actualité.",
+          "sectionIndex": 5
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Écrans le soir : quel impact sur le sommeil ? Oui, il y en a un : la lumière bleue freine la production de mélatonine, l'hormone du sommeil. Couper les écrans une heure avant de dormir. Victime de cyberharcèlement, que faire ? Ne pas répondre, conserver les preuves et bloquer la personne.",
+          "sectionIndex": 6
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider. Fatigue numérique : irritabilité, difficultés de concentration, maux de tête ? Ce sont des signes de surcharge cognitive.",
+          "sectionIndex": 7
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Faire des micro-pauses avec la règle 20-20-20 : toutes les 20 minutes, regarder à 20 mètres pendant 20 secondes. Doomscrolling : pourquoi je scrolle des infos anxiogènes ? C'est une habitude qui renforce l'anxiété. Un seul créneau par jour pour s'informer, plutôt qu'en continu.",
+          "sectionIndex": 8
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Mon enfant et TikTok : à partir de quel âge ? Déconseillé avant 13 ans. Activer le contrôle parental, limiter à moins d'une heure par jour et échanger régulièrement sur ce qu'il regarde. Je me compare aux autres en ligne, est-ce normal ? La plupart des personnes montrent une réalité mise en scène.",
+          "sectionIndex": 9
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Se déconnecter dès que le mal-être apparaît et revenir au présent. Des usages positifs du numérique, ça existe ? Oui : méditation guidée, suivi de l'humeur, apprentissage en ligne. Privilégier des applications labellisées et fiables. Déconnexion saine : à quoi ça sert ?",
+          "sectionIndex": 10
+        },
+        {
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Elle améliore la concentration, le sommeil et le bien-être. Une journée par mois sans écran.",
+          "sectionIndex": 11
+        },
+        {
+          "sectionTitle": "10 repères pratiques",
+          "text": "10 repères pratiques 10 repères pratiques Pour un usage serein du numérique au quotidien. Fixer des temps d'écran adaptés 30 à 60 minutes maximum, en alternant avec une pause de 45 minutes. Préserver le sommeil Pas d'écran une heure avant le coucher, et une chambre sans écran.",
+          "sectionIndex": 12
+        },
+        {
+          "sectionTitle": "10 repères pratiques",
+          "text": "Diversifier les activités Numérique, mais aussi activité physique, rencontres en présentiel et créativité. Parler et repérer Échanger sur ce qui est vu et vécu en ligne, rester à l'écoute sans juger. Protéger ses données et sa vie privée Comptes en paramètres privés et mots de passe forts.",
+          "sectionIndex": 13
+        },
+        {
+          "sectionTitle": "10 repères pratiques",
+          "text": "Prévenir le cyberharcèlement Respecter les autres, signaler et bloquer. Veiller à la santé mentale Repérer les signes de stress, d'isolement ou d'irritabilité. Impliquer la famille Des règles d'usage à la maison, co-construites ensemble.",
+          "sectionIndex": 14
+        },
+        {
+          "sectionTitle": "10 repères pratiques",
+          "text": "Utiliser des contenus fiables Sources officielles et esprit critique. Demander de l'aide sans attendre Parler à un professionnel de santé.",
+          "sectionIndex": 15
+        },
+        {
+          "sectionTitle": "Numéros d'urgence",
+          "text": "Numéros d'urgence Numéros d'urgence Gratuits, 24h/24 et 7j/7. 3018 Violences numériques et cyberharcèlement Pour les jeunes, les parents et les professionnels confrontés au harcèlement en ligne. 3114 Prévention du suicide Pour toute personne en détresse, ou inquiète pour un proche.",
+          "sectionIndex": 16
         }
       ]
     },

@@ -1220,3 +1220,24 @@ test("la ressource sm-face-aux-violences pointe vers la route prevention", () =>
   assert.equal(resource.isSensitive, true)
   assert.equal(resource.sensitivityCategory, "violence")
 })
+
+test("processUserInput oriente une question sur les écrans vers l'article santé mentale et numérique", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "mon fils est accro à tiktok", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.equal(suggestionMessage.suggestions?.[0]?.resource.id, "sm-numerique")
+})
+
+test("processUserInput propose le 3018 en premier sur une situation de cyberharcèlement", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je suis victime de cyberharcèlement", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const resourceIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.equal(resourceIds[0], "urgence-3018")
+  assert.ok(resourceIds.includes("sm-numerique"))
+})

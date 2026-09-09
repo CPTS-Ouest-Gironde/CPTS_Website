@@ -44,7 +44,14 @@ function hasExploratoryMarker(intentInput: string): boolean {
 }
 
 const SENSITIVE_ALLOWED_RESOURCE_IDS = {
-  violence: new Set(["sm-face-aux-violences", "urgence-3919", "urgence-17", "sante-mentale-annuaire"]),
+  violence: new Set([
+    "sm-face-aux-violences",
+    "urgence-3919",
+    "urgence-3018",
+    "urgence-17",
+    "sm-numerique",
+    "sante-mentale-annuaire",
+  ]),
   suicide: new Set(["urgence-3114", "sante-mentale-annuaire", "sante-mentale"]),
   "danger-vital": new Set(["urgence-15", "urgence-17", "medecin-traitant"]),
 } satisfies Record<NonNullable<ChatResource["sensitivityCategory"]>, Set<string>>
