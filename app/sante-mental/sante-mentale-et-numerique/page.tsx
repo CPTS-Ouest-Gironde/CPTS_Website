@@ -2,37 +2,13 @@ import type { Metadata } from "next";
 import { Newsreader } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Baby,
-  BatteryLow,
-  BedDouble,
-  Bike,
-  BookOpenCheck,
-  Calendar,
-  Clock,
-  Hand,
-  HeartHandshake,
-  HeartPulse,
-  House,
-  Leaf,
-  LockKeyhole,
-  MessagesSquare,
-  MonitorSmartphone,
-  MoonStar,
-  Phone,
-  Scale,
-  ShieldAlert,
-  ShieldCheck,
-  Timer,
-  Tornado,
-  TreePine,
-  type LucideIcon,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, Phone } from "lucide-react";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { BrainMap } from "@/components/sante-mental/brain-map";
+import { ArticleToc } from "@/components/sante-mental/article-toc";
+import { QuestionsExplorer } from "@/components/sante-mental/questions-explorer";
+import { NumeriqueIcon } from "@/components/sante-mental/numerique-icons";
 import data from "@/app/data/sante-mentale-numerique.json";
 
 const newsreader = Newsreader({
@@ -45,41 +21,41 @@ const newsreader = Newsreader({
 
 const serif = "font-(family-name:--font-newsreader)";
 
-const iconMap: Record<string, LucideIcon> = {
-  Baby,
-  BatteryLow,
-  BedDouble,
-  Bike,
-  BookOpenCheck,
-  Hand,
-  HeartHandshake,
-  HeartPulse,
-  House,
-  Leaf,
-  LockKeyhole,
-  MessagesSquare,
-  MonitorSmartphone,
-  MoonStar,
-  Scale,
-  ShieldAlert,
-  ShieldCheck,
-  Timer,
-  Tornado,
-  TreePine,
-};
-
-function Icon({ name, className }: { name: string; className?: string }) {
-  const I = iconMap[name] ?? Leaf;
-  return <I className={className} aria-hidden="true" />;
-}
+// Teinte claire dérivée d'une couleur de zone
+const tint = (color: string, pct: number) =>
+  `color-mix(in srgb, ${color} ${pct}%, white)`;
 
 export const metadata: Metadata = {
   title: `${data.title} | CPTS Ouest Gironde`,
   description: data.subtitle,
 };
 
+function ZoneStrip({
+  zones,
+  className = "",
+}: {
+  zones: { id: string; color: string }[];
+  className?: string;
+}) {
+  return (
+    <div
+      className={`flex h-1.5 rounded-full overflow-hidden ${className}`}
+      aria-hidden="true"
+    >
+      {zones.map((z) => (
+        <span
+          key={z.id}
+          className="flex-1"
+          style={{ backgroundColor: z.color }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export default function SanteMentaleEtNumeriquePage() {
   const { cerveau, questions, reperes, aide } = data;
+  const zones = cerveau.zones;
 
   return (
     <main className={`min-h-screen ${newsreader.variable}`}>
@@ -113,6 +89,7 @@ export default function SanteMentaleEtNumeriquePage() {
             >
               {data.title}
             </h1>
+            <ZoneStrip zones={zones} className="w-40 mb-6" />
             <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed text-pretty max-w-2xl">
               {data.subtitle}
             </p>
@@ -137,25 +114,8 @@ export default function SanteMentaleEtNumeriquePage() {
 
       {/* CORPS DE L'ARTICLE */}
       <div className="container mx-auto px-4 lg:px-8 py-10 lg:py-16">
-        <div className="max-w-5xl mx-auto lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-16">
-          {/* Sommaire : chips horizontales sur mobile, colonne fixe sur desktop */}
-          <nav
-            aria-label="Sommaire de l'article"
-            className="mb-8 lg:mb-0"
-          >
-            <ol className="flex flex-wrap lg:flex-col gap-2 lg:gap-0 lg:sticky lg:top-28 lg:border-l lg:border-border">
-              {data.toc.map((item) => (
-                <li key={item.id} className="shrink-0">
-                  <a
-                    href={`#${item.id}`}
-                    className="block rounded-full lg:rounded-none border lg:border-0 border-border bg-background px-4 py-2 lg:px-4 lg:py-2.5 text-sm text-foreground/80 hover:text-primary hover:border-primary lg:hover:bg-secondary/40 lg:border-l-2 lg:border-l-transparent lg:hover:border-l-primary lg:-ml-px transition-colors"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+        <div className="max-w-6xl mx-auto lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
+          <ArticleToc items={data.toc} />
 
           <article className="min-w-0 space-y-20 lg:space-y-28">
             {/* 1. LE CERVEAU */}
@@ -169,16 +129,16 @@ export default function SanteMentaleEtNumeriquePage() {
                 {cerveau.intro}
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-[260px_minmax(0,1fr)] gap-10 md:gap-12 items-start">
-                <div className="max-w-[300px] mx-auto md:mx-0 md:sticky md:top-28">
-                  <BrainMap zones={cerveau.zones} />
+              <div className="grid grid-cols-1 md:grid-cols-[300px_minmax(0,1fr)] gap-10 md:gap-14 items-start">
+                <div className="max-w-[320px] mx-auto md:mx-0 md:sticky md:top-28">
+                  <BrainMap zones={zones} />
                   <p className="mt-3 text-xs text-muted-foreground text-center md:text-left">
                     Schéma simplifié, les numéros renvoient à la liste.
                   </p>
                 </div>
 
                 <ol className="space-y-8">
-                  {cerveau.zones.map((zone) => (
+                  {zones.map((zone) => (
                     <li
                       key={zone.id}
                       className="grid grid-cols-[2.25rem_minmax(0,1fr)] gap-x-4"
@@ -195,7 +155,8 @@ export default function SanteMentaleEtNumeriquePage() {
                         style={{ borderColor: zone.color }}
                       >
                         <h3
-                          className={`${serif} text-2xl font-medium text-foreground leading-none`}
+                          className={`${serif} text-2xl font-medium leading-none`}
+                          style={{ color: zone.color }}
                         >
                           <span className="sr-only">{zone.number}. </span>
                           {zone.title}
@@ -213,18 +174,7 @@ export default function SanteMentaleEtNumeriquePage() {
               </div>
 
               <figure className="mt-14 max-w-2xl">
-                <div
-                  className="flex h-1.5 rounded-full overflow-hidden mb-5"
-                  aria-hidden="true"
-                >
-                  {cerveau.zones.map((z) => (
-                    <span
-                      key={z.id}
-                      className="flex-1"
-                      style={{ backgroundColor: z.color }}
-                    />
-                  ))}
-                </div>
+                <ZoneStrip zones={zones} className="mb-5" />
                 <blockquote
                   className={`${serif} italic text-2xl sm:text-3xl text-foreground leading-snug`}
                 >
@@ -240,39 +190,15 @@ export default function SanteMentaleEtNumeriquePage() {
               >
                 {questions.title}
               </h2>
-              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mb-6">
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mb-8">
                 {questions.intro}
               </p>
 
-              <dl className="border-t border-border">
-                {questions.items.map((item) => (
-                  <div
-                    key={item.question}
-                    className="border-b border-border py-7 grid grid-cols-[1.5rem_minmax(0,1fr)] gap-x-4"
-                  >
-                    <Icon
-                      name={item.iconName}
-                      className="w-6 h-6 text-primary mt-0.5"
-                    />
-                    <div className="max-w-2xl">
-                      <dt
-                        className={`${serif} text-xl sm:text-2xl font-medium text-foreground leading-snug`}
-                      >
-                        {item.question}
-                      </dt>
-                      <dd className="mt-3 space-y-3">
-                        <p className="text-base leading-relaxed text-foreground/90">
-                          {item.answer}
-                        </p>
-                        <p className="rounded-lg bg-secondary/50 px-4 py-3 text-base leading-relaxed text-secondary-foreground">
-                          <strong className="font-semibold">Conseil :</strong>{" "}
-                          {item.advice}
-                        </p>
-                      </dd>
-                    </div>
-                  </div>
-                ))}
-              </dl>
+              <QuestionsExplorer
+                items={questions.items}
+                zones={zones}
+                serifClass={serif}
+              />
             </section>
 
             {/* 3. LES 10 REPÈRES */}
@@ -287,24 +213,30 @@ export default function SanteMentaleEtNumeriquePage() {
               </p>
 
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
-                {reperes.items.map((item) => (
-                  <li
-                    key={item.title}
-                    className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4"
-                  >
-                    <span className="w-11 h-11 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
-                      <Icon name={item.iconName} className="w-5 h-5" />
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground leading-snug">
-                        {item.title}
-                      </h3>
-                      <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">
-                        {item.text}
-                      </p>
-                    </div>
-                  </li>
-                ))}
+                {reperes.items.map((item, i) => {
+                  const color = zones[i % zones.length].color;
+                  return (
+                    <li
+                      key={item.title}
+                      className="grid grid-cols-[2.75rem_minmax(0,1fr)] gap-x-4"
+                    >
+                      <span
+                        className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: tint(color, 18), color }}
+                      >
+                        <NumeriqueIcon name={item.iconName} className="w-5 h-5" />
+                      </span>
+                      <div>
+                        <h3 className="text-lg font-semibold text-foreground leading-snug">
+                          {item.title}
+                        </h3>
+                        <p className="mt-1.5 text-base leading-relaxed text-muted-foreground">
+                          {item.text}
+                        </p>
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </section>
 

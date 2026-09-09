@@ -10,10 +10,22 @@
   "heroImage": "/sante-mentale-numerique/hero.jpg",
   "heroImageAlt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
   "toc": [
-    { "id": "cerveau", "label": "Les écrans et le cerveau" },
-    { "id": "questions", "label": "10 questions que vous vous posez" },
-    { "id": "reperes", "label": "10 repères pratiques" },
-    { "id": "aide", "label": "Numéros d'urgence" }
+    {
+      "id": "cerveau",
+      "label": "Les écrans et le cerveau"
+    },
+    {
+      "id": "questions",
+      "label": "10 questions que vous vous posez"
+    },
+    {
+      "id": "reperes",
+      "label": "10 repères pratiques"
+    },
+    {
+      "id": "aide",
+      "label": "Numéros d'urgence"
+    }
   ],
   "cerveau": {
     "title": "Les écrans et le cerveau",
@@ -69,67 +81,77 @@
   },
   "questions": {
     "title": "10 questions que vous vous posez",
-    "intro": "Des réponses courtes et des conseils pratiques pour un équilibre numérique au quotidien.",
+    "intro": "Des réponses courtes et un conseil concret pour chacune. Chaque question est reliée à la zone du cerveau qu'elle concerne.",
     "items": [
       {
         "iconName": "MonitorSmartphone",
         "question": "Temps d'écran : trop, c'est combien de temps ?",
         "answer": "Il n'y a pas de durée unique. Au-delà de 3 à 4 heures par jour hors travail, le risque de fatigue augmente.",
-        "advice": "50 minutes d'écran, puis 10 minutes de pause."
+        "advice": "50 minutes d'écran, puis 10 minutes de pause.",
+        "zone": "attention"
       },
       {
         "iconName": "HeartPulse",
         "question": "Réseaux sociaux : quels effets sur l'humeur et le stress ?",
         "answer": "La comparaison permanente aux autres peut accroître le stress.",
-        "advice": "Limiter les abonnements et trier son fil d'actualité."
+        "advice": "Limiter les abonnements et trier son fil d'actualité.",
+        "zone": "emotions"
       },
       {
         "iconName": "MoonStar",
         "question": "Écrans le soir : quel impact sur le sommeil ?",
         "answer": "Oui, il y en a un : la lumière bleue freine la production de mélatonine, l'hormone du sommeil.",
-        "advice": "Couper les écrans une heure avant de dormir."
+        "advice": "Couper les écrans une heure avant de dormir.",
+        "zone": "sommeil"
       },
       {
         "iconName": "ShieldAlert",
         "question": "Victime de cyberharcèlement, que faire ?",
         "answer": "Ne pas répondre, conserver les preuves (captures d'écran) et bloquer la personne.",
-        "advice": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider."
+        "advice": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider.",
+        "zone": "emotions"
       },
       {
         "iconName": "BatteryLow",
         "question": "Fatigue numérique : irritabilité, difficultés de concentration, maux de tête ?",
         "answer": "Ce sont des signes de surcharge cognitive.",
-        "advice": "Faire des micro-pauses avec la règle 20-20-20 : toutes les 20 minutes, regarder à 20 mètres pendant 20 secondes."
+        "advice": "Faire des micro-pauses avec la règle 20-20-20 : toutes les 20 minutes, regarder à 20 mètres pendant 20 secondes.",
+        "zone": "attention"
       },
       {
         "iconName": "Tornado",
         "question": "Doomscrolling : pourquoi je scrolle des infos anxiogènes ?",
         "answer": "C'est une habitude qui renforce l'anxiété au lieu de l'apaiser.",
-        "advice": "Un seul créneau par jour pour s'informer, plutôt qu'en continu."
+        "advice": "Un seul créneau par jour pour s'informer, plutôt qu'en continu.",
+        "zone": "emotions"
       },
       {
         "iconName": "Baby",
         "question": "Mon enfant et TikTok : à partir de quel âge ?",
         "answer": "Déconseillé avant 13 ans.",
-        "advice": "Activer le contrôle parental, limiter à moins d'une heure par jour et échanger régulièrement sur ce qu'il regarde."
+        "advice": "Activer le contrôle parental, limiter à moins d'une heure par jour et échanger régulièrement sur ce qu'il regarde.",
+        "zone": "langage"
       },
       {
         "iconName": "Scale",
         "question": "Je me compare aux autres en ligne, est-ce normal ?",
         "answer": "La plupart des personnes montrent une réalité mise en scène, pas leur quotidien.",
-        "advice": "Se déconnecter dès que le mal-être apparaît et revenir au présent."
+        "advice": "Se déconnecter dès que le mal-être apparaît et revenir au présent.",
+        "zone": "emotions"
       },
       {
         "iconName": "Leaf",
         "question": "Des usages positifs du numérique, ça existe ?",
         "answer": "Oui : méditation guidée, suivi de l'humeur, apprentissage en ligne.",
-        "advice": "Privilégier des applications labellisées et fiables."
+        "advice": "Privilégier des applications labellisées et fiables.",
+        "zone": "memoire"
       },
       {
         "iconName": "TreePine",
         "question": "Déconnexion saine : à quoi ça sert ?",
         "answer": "Elle améliore la concentration, le sommeil et le bien-être.",
-        "advice": "Une journée par mois sans écran."
+        "advice": "Une journée par mois sans écran.",
+        "zone": "sommeil"
       }
     ]
   },
