@@ -181,7 +181,7 @@ export function QuestionsExplorer({
               type="button"
               onClick={() => setOpen(Math.max(0, active - 1))}
               disabled={active === 0}
-              className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-primary disabled:opacity-40 disabled:hover:text-foreground/80 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground disabled:opacity-40 disabled:hover:text-foreground/80 transition-colors"
             >
               <ArrowLeft className="w-4 h-4" aria-hidden="true" />
               Question précédente
@@ -193,7 +193,7 @@ export function QuestionsExplorer({
               type="button"
               onClick={() => setOpen(Math.min(items.length - 1, active + 1))}
               disabled={active === items.length - 1}
-              className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-primary disabled:opacity-40 disabled:hover:text-foreground/80 transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-foreground disabled:opacity-40 disabled:hover:text-foreground/80 transition-colors"
             >
               Question suivante
               <ArrowRight className="w-4 h-4" aria-hidden="true" />

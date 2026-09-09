@@ -35,6 +35,9 @@ const serif = "font-(family-name:--font-newsreader)";
 const tint = (color: string, pct: number) =>
   `color-mix(in srgb, ${color} ${pct}%, white)`;
 
+// Encre brune des affiches, pour les blocs pleins
+const ink = "#3F3A34";
+
 export const metadata: Metadata = {
   title: `${data.title} | CPTS Ouest Gironde`,
   description: data.subtitle,
@@ -80,15 +83,19 @@ function SectionTitle({ title, intro }: { title: string; intro?: string }) {
   );
 }
 
-function PhoneButton({ number }: { number: string }) {
+function PhoneButton({ number, color }: { number: string; color: string }) {
   // Les numéros longs (0 800…) passent en corps réduit pour tenir dans la colonne
   const isLong = number.replace(/\s/g, "").length > 5;
   return (
     <a
       href={`tel:${number.replace(/\s/g, "")}`}
-      className="group inline-flex max-w-full items-center gap-4 rounded-2xl bg-primary-foreground text-primary pl-4 pr-6 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary-foreground/50"
+      className="group inline-flex max-w-full items-center gap-4 rounded-2xl bg-white text-foreground pl-4 pr-6 py-3 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-white/50"
+      style={{ color }}
     >
-      <span className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+      <span
+        className="w-12 h-12 rounded-full text-white flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform"
+        style={{ backgroundColor: color }}
+      >
         <Phone className="w-5 h-5" aria-hidden="true" />
       </span>
       <span className="flex flex-col leading-none">
@@ -99,7 +106,7 @@ function PhoneButton({ number }: { number: string }) {
         >
           {number}
         </span>
-        <span className="mt-1.5 text-xs font-semibold text-primary/70">
+        <span className="mt-1.5 text-xs font-semibold text-foreground/60">
           Appeler ce numéro
         </span>
       </span>
@@ -214,9 +221,16 @@ export default function SanteMentaleEtNumeriquePage() {
                 );
               })}
             </dl>
-            <p className="mt-8 max-w-3xl mx-auto flex items-start gap-3 rounded-2xl bg-primary/10 border border-primary/20 px-5 py-4 text-base md:text-lg text-foreground leading-relaxed">
+            <p
+              className="mt-8 max-w-3xl mx-auto flex items-start gap-3 rounded-2xl border px-5 py-4 text-base md:text-lg text-foreground leading-relaxed"
+              style={{
+                backgroundColor: tint(zones[0].color, 12),
+                borderColor: tint(zones[0].color, 40),
+              }}
+            >
               <AlertTriangle
-                className="w-5 h-5 mt-1 text-primary shrink-0"
+                className="w-5 h-5 mt-1 shrink-0"
+                style={{ color: zones[0].color }}
                 aria-hidden="true"
               />
               {intro.alert}
@@ -231,9 +245,18 @@ export default function SanteMentaleEtNumeriquePage() {
           <div className="max-w-6xl mx-auto">
             <SectionTitle title={balance.title} />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
-              <div className="rounded-3xl bg-background border border-border p-6 md:p-8">
+              <div
+                className="rounded-3xl border p-6 md:p-8"
+                style={{
+                  backgroundColor: tint(zones[1].color, 10),
+                  borderColor: tint(zones[1].color, 40),
+                }}
+              >
                 <h3 className="flex items-center gap-3 text-2xl font-bold text-foreground mb-6">
-                  <span className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+                  <span
+                    className="w-10 h-10 rounded-full text-white flex items-center justify-center"
+                    style={{ backgroundColor: zones[1].color }}
+                  >
                     <Plus className="w-5 h-5" aria-hidden="true" />
                   </span>
                   {balance.plus.title}
@@ -245,7 +268,8 @@ export default function SanteMentaleEtNumeriquePage() {
                       className="flex items-start gap-3 text-base leading-relaxed text-foreground/90"
                     >
                       <Check
-                        className="w-5 h-5 mt-1 text-primary shrink-0"
+                        className="w-5 h-5 mt-1 shrink-0"
+                        style={{ color: zones[1].color }}
                         aria-hidden="true"
                       />
                       <span>{item}</span>
@@ -422,24 +446,35 @@ export default function SanteMentaleEtNumeriquePage() {
           <div className="max-w-6xl mx-auto">
             <SectionTitle title={pistes.title} intro={pistes.intro} />
             <ul className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6">
-              {pistes.items.map((item) => (
-                <li
-                  key={item.measure}
-                  className="flex flex-col rounded-3xl bg-primary text-primary-foreground p-6 md:p-8"
-                >
-                  <span
-                    className={`${serif} text-5xl md:text-6xl font-medium leading-none tracking-tight`}
+              {pistes.items.map((item, i) => {
+                const color = zones[[1, 0, 4][i] ?? i].color;
+                return (
+                  <li
+                    key={item.measure}
+                    className="flex flex-col rounded-3xl border p-6 md:p-8"
+                    style={{
+                      backgroundColor: tint(color, 12),
+                      borderColor: tint(color, 45),
+                    }}
                   >
-                    {item.effect}
-                  </span>
-                  <span className="mt-2 text-sm text-primary-foreground/80">
-                    {item.effectLabel}
-                  </span>
-                  <p className="mt-6 pt-5 border-t border-primary-foreground/25 text-base md:text-lg font-medium leading-snug">
-                    {item.measure}
-                  </p>
-                </li>
-              ))}
+                    <span
+                      className={`${serif} text-5xl md:text-6xl font-medium leading-none tracking-tight`}
+                      style={{ color }}
+                    >
+                      {item.effect}
+                    </span>
+                    <span className="mt-2 text-sm text-muted-foreground">
+                      {item.effectLabel}
+                    </span>
+                    <p
+                      className="mt-6 pt-5 border-t text-base md:text-lg font-medium leading-snug text-foreground"
+                      style={{ borderColor: tint(color, 45) }}
+                    >
+                      {item.measure}
+                    </p>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -468,7 +503,8 @@ export default function SanteMentaleEtNumeriquePage() {
                         href={item.link.href}
                         target={item.link.href.startsWith("http") ? "_blank" : undefined}
                         rel={item.link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-4"
+                        style={{ color: zones[0].color }}
                       >
                         {item.link.href.startsWith("tel:") ? (
                           <Phone className="w-4 h-4" aria-hidden="true" />
@@ -596,11 +632,13 @@ export default function SanteMentaleEtNumeriquePage() {
                 {mesures.nouveautes.items.map((item) => (
                   <li
                     key={item.title}
-                    className="rounded-2xl bg-background border-2 border-primary/30 p-6"
+                    className="rounded-2xl bg-background border-2 p-6"
+                    style={{ borderColor: tint(zones[4].color, 50) }}
                   >
                     <h4 className="flex items-start gap-3 text-lg font-bold text-foreground leading-snug">
                       <Sparkles
-                        className="w-5 h-5 mt-1 text-primary shrink-0"
+                        className="w-5 h-5 mt-1 shrink-0"
+                        style={{ color: zones[4].color }}
                         aria-hidden="true"
                       />
                       {item.title}
@@ -644,20 +682,23 @@ export default function SanteMentaleEtNumeriquePage() {
             <div>
               <SectionTitle title={aideOu.title} intro={aideOu.intro} />
 
-              <div className="rounded-3xl bg-primary text-primary-foreground p-6 sm:p-10 mb-8">
+              <div
+                className="rounded-3xl text-white p-6 sm:p-10 mb-8"
+                style={{ backgroundColor: ink }}
+              >
                 <h3
                   className={`${serif} text-2xl md:text-3xl font-medium leading-tight mb-8`}
                 >
                   {aideOu.lignes.title}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {aideOu.lignes.items.map((n) => (
+                  {aideOu.lignes.items.map((n, i) => (
                     <div key={n.number}>
-                      <PhoneButton number={n.number} />
+                      <PhoneButton number={n.number} color={zones[[0, 3, 1][i] ?? 0].color} />
                       <p className="mt-4 text-lg font-semibold leading-snug">
                         {n.label}
                       </p>
-                      <p className="mt-1 text-primary-foreground/80 leading-relaxed">
+                      <p className="mt-1 text-white/75 leading-relaxed">
                         {n.text}
                       </p>
                     </div>
@@ -678,7 +719,8 @@ export default function SanteMentaleEtNumeriquePage() {
                       {group.items.map((item) => (
                         <li key={item.name} className="flex items-start gap-3">
                           <span
-                            className="mt-2.5 w-2 h-2 rounded-full bg-primary shrink-0"
+                            className="mt-2.5 w-2 h-2 rounded-full shrink-0"
+                            style={{ backgroundColor: zones[0].color }}
                             aria-hidden="true"
                           />
                           <div>
@@ -701,7 +743,8 @@ export default function SanteMentaleEtNumeriquePage() {
                   <li key={l.href}>
                     <Link
                       href={l.href}
-                      className="group inline-flex items-start gap-2 text-primary font-medium hover:underline underline-offset-4"
+                      className="group inline-flex items-start gap-2 font-medium hover:underline underline-offset-4"
+                      style={{ color: zones[0].color }}
                     >
                       <ArrowRight
                         className="w-4 h-4 mt-1 shrink-0 group-hover:translate-x-1 transition-transform"
