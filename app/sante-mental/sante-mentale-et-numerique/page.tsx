@@ -524,6 +524,18 @@ export default function SanteMentaleEtNumeriquePage() {
                         {item.link.label}
                       </a>
                     )}
+                    {"document" in item && item.document && (
+                      <a
+                        href={item.document.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-3 self-start inline-flex items-center gap-2 rounded-full border-2 px-4 py-2 text-sm font-semibold hover:-translate-y-0.5 hover:shadow-md transition-all"
+                        style={{ borderColor: zones[0].color, color: zones[0].color }}
+                      >
+                        <ExternalLink className="w-4 h-4 shrink-0" aria-hidden="true" />
+                        {item.document.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -628,6 +640,19 @@ export default function SanteMentaleEtNumeriquePage() {
                     </li>
                   ))}
                 </ul>
+                <p className="mt-5 text-sm md:text-base text-muted-foreground leading-relaxed">
+                  {mesures.quatrePas.documentText}
+                </p>
+                <a
+                  href={mesures.quatrePas.document.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all"
+                  style={{ backgroundColor: zones[3].color }}
+                >
+                  <ExternalLink className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  {mesures.quatrePas.document.label}
+                </a>
               </div>
             </div>
 

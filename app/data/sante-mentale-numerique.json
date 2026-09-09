@@ -205,6 +205,10 @@
         "link": {
           "href": "https://www.1000-premiers-jours.fr/fr",
           "label": "Le site des 1 000 premiers jours"
+        },
+        "document": {
+          "href": "https://drive.google.com/file/d/1PO740Rbo7vNGl-df47CX2sJWeBBZuuYN/view?usp=sharing",
+          "label": "Consulter le livret « Bien grandir avec les écrans »"
         }
       }
     ],
@@ -253,7 +257,12 @@
         "Pas d'écran pendant les repas",
         "Pas d'écran avant de s'endormir",
         "Pas d'écran dans la chambre"
-      ]
+      ],
+      "document": {
+        "href": "https://drive.google.com/file/d/1PO740Rbo7vNGl-df47CX2sJWeBBZuuYN/view?usp=sharing",
+        "label": "Consulter le livret « Bien grandir avec les écrans »"
+      },
+      "documentText": "Ces quatre règles sont celles du livret du ministère de l'Éducation nationale, avec des repères pour chaque âge."
     },
     "nouveautes": {
       "title": "Nouveauté 2026",
