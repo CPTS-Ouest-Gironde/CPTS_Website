@@ -40,7 +40,7 @@ export function BrainMap({ zones }: { zones: Zone[] }) {
 
       {/* Zones colorées, découpées par la silhouette */}
       <g clipPath="url(#brain-clip)">
-        <rect width="400" height="300" fill="#EDE8DF" />
+        <rect width="400" height="300" fill={zones[3]?.color ?? "#C4707E"} />
         {zones.map((z) => {
           const s = zoneShapes[z.id];
           if (!s) return null;

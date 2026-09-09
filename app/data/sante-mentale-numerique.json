@@ -7,26 +7,8 @@
   "readingTime": "8 min de lecture",
   "title": "Santé mentale et numérique",
   "subtitle": "Ce que les écrans font à notre cerveau, les questions que l'on se pose au quotidien, et dix repères simples pour un usage serein.",
-  "heroImage": "/sante-mentale-numerique/hero.jpg",
+  "heroImage": "/sante-mentale-numerique/hero.webp",
   "heroImageAlt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
-  "toc": [
-    {
-      "id": "cerveau",
-      "label": "Les écrans et le cerveau"
-    },
-    {
-      "id": "questions",
-      "label": "10 questions que vous vous posez"
-    },
-    {
-      "id": "reperes",
-      "label": "10 repères pratiques"
-    },
-    {
-      "id": "aide",
-      "label": "Numéros d'urgence"
-    }
-  ],
   "cerveau": {
     "title": "Les écrans et le cerveau",
     "intro": "Comprendre l'impact des écrans sur nos fonctions cérébrales. Cinq zones clés sont concernées, en particulier chez l'enfant.",
