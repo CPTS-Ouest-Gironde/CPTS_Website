@@ -64,7 +64,7 @@ docs/                       # ⚠️ DO NOT TOUCH
 | nos-actions-vos-outils.json | 51KB | Tools/actions DB |
 | sante-mentale.json | 9.5KB | Mental health v1 |
 | sante-mentale-2.json | 2.9KB | Mental health v2 (cartes du hub /sante-mental) |
-| sante-mentale-numerique.json | 9KB | Article Santé mentale et numérique (cerveau, 10 questions, 10 repères, 3018/3114) |
+| sante-mentale-numerique.json | 25KB | Article Numérique et santé mentale des jeunes (chiffres, ami/ennemi, cerveau, impacts, pistes, mesures publiques, règle 3-6-9-12, aide, 10 questions, 10 repères) |
 | sante-voyage.json | 22KB | Article santé voyage (contenu médical) |
 | feu-du-porge.json | 6KB | Article urgence fumées feu du Porge |
 | hero-slides.json | 2KB | Slides carrousel "À la une" (homepage) |

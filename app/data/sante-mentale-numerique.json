@@ -4,14 +4,65 @@
     "label": "Retour à Santé mentale"
   },
   "date": "9 septembre 2026",
-  "readingTime": "8 min de lecture",
-  "title": "Santé mentale et numérique",
-  "subtitle": "Ce que les écrans font à notre cerveau, les questions que l'on se pose au quotidien, et dix repères simples pour un usage serein.",
+  "readingTime": "15 min de lecture",
+  "title": "Numérique et santé mentale des jeunes",
+  "subtitle": "Le numérique fait partie du quotidien, parfois dès le plus jeune âge. Ce qu'il apporte, ce qu'il abîme, ce que disent les chercheurs et les pouvoirs publics, et vers qui se tourner.",
   "heroImage": "/sante-mentale-numerique/hero.webp",
   "heroImageAlt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
+  "intro": {
+    "paragraphs": [
+      "En France, parfois à des âges très jeunes, vous utilisez l'outil numérique au quotidien : communication, éducation, divertissement et e-commerce.",
+      "Le numérique est impactant sur votre manière d'interagir avec le monde."
+    ],
+    "figures": [
+      {
+        "value": "94 %",
+        "label": "des foyers français avaient accès à internet en 2024"
+      },
+      {
+        "value": "48 M",
+        "label": "d'usagers d'internet par jour"
+      },
+      {
+        "value": "2 h 40",
+        "label": "par jour passées sur internet en moyenne"
+      },
+      {
+        "value": "+ de 4 h",
+        "label": "par jour devant les écrans pour les 6-14 ans, selon Santé publique France"
+      }
+    ],
+    "alert": "Les risques sanitaires sont réels et l'accompagnement est devenu nécessaire."
+  },
+  "balance": {
+    "title": "Le numérique : ami ou ennemi ?",
+    "plus": {
+      "title": "Les +",
+      "items": [
+        "L'IA est devenue un outil d'échange virtuel important, tant sur le plan professionnel que personnel.",
+        "Les réseaux sociaux facilitent la communication et l'accès à l'information : il existe également des dispositifs nationaux proposant du soutien psychologique par téléphone, tchat ou SMS.",
+        "43 % des usagers de smartphone utilisent des applis de santé : méditation guidée, sites médicaux, applis de cohérence cardiaque, coaching médical, téléconsultation, télé-expertise…",
+        "Le numérique permet aussi de garder le lien avec la famille qui est loin.",
+        "Il permet l'apprentissage de langues étrangères, de travaux manuels…",
+        "Dans les protocoles d'accueil individualisé (PAI), les outils numériques sont préconisés pour aider les élèves à pallier leur trouble du neurodéveloppement (TND)."
+      ]
+    },
+    "minus": {
+      "title": "Les −",
+      "intro": "Mais les réseaux peuvent engendrer des effets psychologiques néfastes et durables.",
+      "items": [
+        "Depuis 2021, on a assisté à une nette augmentation du temps passé sur les réseaux sociaux.",
+        "Dans le même temps, Santé publique France annonçait en 2021 une augmentation de 40 % des admissions des adolescents aux urgences pour tentatives de suicide. Selon l'Insee, la corrélation entre le numérique et la santé mentale a déjà été illustrée, mais le lien causal est plus complexe à établir.",
+        "Si certaines interactions sociales numériques peuvent être considérées comme du lien social, facteur de protection de la santé mentale, d'autres au contraire favorisent l'isolement, le cyberharcèlement, ou sont constitutives de violences sexistes et sexuelles, revenge porn, harcèlement scolaire, exposition à des contenus violents et pornographiques et violences psychologiques (dégradation du sommeil, perte de confiance en soi…)."
+      ]
+    }
+  },
   "cerveau": {
-    "title": "Les écrans et le cerveau",
-    "intro": "Comprendre l'impact des écrans sur nos fonctions cérébrales : les cinq zones clés du cerveau.",
+    "title": "Quels effets des écrans sur le cerveau humain ?",
+    "intro": "Chaque notification, vidéo ou like provoque une micro-libération de dopamine. Le cerveau s'habitue, à chaque notification, à chaque scroll, à être stimulé toutes les 3 secondes. Il en résulte une baisse de la concentration et une forme d'euphorie ou d'excitation mentale. Utiliser les écrans le soir favorise une baisse de la production de mélatonine et perturbe donc le sommeil, retardé et moins profond.",
+    "zonesTitle": "Les cinq zones clés du cerveau",
+    "image": "/sante-mentale-numerique/cerveau-enfant.webp",
+    "imageAlt": "Profil d'un enfant avec les cinq zones du cerveau numérotées de 1 à 5",
     "zones": [
       {
         "id": "attention",
@@ -59,9 +110,253 @@
         "text": "Un usage prolongé des écrans peut nuire à la consolidation des souvenirs et à la mémoire à long terme."
       }
     ],
-    "conclusion": "Un usage conscient, c'est un cerveau en équilibre.",
-    "image": "/sante-mentale-numerique/cerveau-enfant.webp",
-    "imageAlt": "Profil d'un enfant avec les cinq zones du cerveau numérotées de 1 à 5"
+    "conclusion": "Un usage conscient, c'est un cerveau en équilibre."
+  },
+  "impacts": {
+    "title": "Quels sont les impacts néfastes des réseaux sociaux sur la santé mentale ?",
+    "intro": "Les effets sont multiples, mais en premier lieu les réseaux peuvent être à l'origine de :",
+    "image": "/sante-mentale-numerique/parents-soucieux.webp",
+    "imageAlt": "Deux parents perplexes, la main sur le menton",
+    "items": [
+      {
+        "title": "Troubles addictifs",
+        "text": "Avec un usage qui déborde et une perte de contrôle."
+      },
+      {
+        "title": "Troubles anxieux, voire dépressifs, avec des troubles du sommeil",
+        "text": "On estime en 2025 que l'usage excessif des réseaux serait associé à près de 600 000 cas de dépression chez les adolescents français (étude AP-HP, Pr Hoertel, publiée dans PLOS Medicine le 21 octobre 2025)."
+      },
+      {
+        "title": "Le FoMO (fear of missing out)",
+        "text": "Caractéristique de l'usage d'internet : ne pas être connecté, notamment sur Instagram, peut générer une crainte envahissante que d'autres vivent des expériences enrichissantes dont on est absent."
+      },
+      {
+        "title": "Isolement social et perte de confiance",
+        "text": "Certains peuvent préférer développer des relations en ligne, virtuelles, plutôt qu'en réel."
+      },
+      {
+        "title": "Troubles de la concentration",
+        "text": "Notamment sur les tâches longues à accomplir, avec un risque de décrochage scolaire. La durée moyenne de concentration sur une tâche est passée de 12 minutes en 2000 à 2 minutes aujourd'hui chez les ados."
+      },
+      {
+        "title": "Cyberharcèlement",
+        "text": "Moqueries en groupe, rumeurs en ligne pouvant générer anxiété, perte de l'estime de soi, honte et impacts psychotraumatiques."
+      },
+      {
+        "title": "Conflits familiaux",
+        "text": "Générés par les difficultés à établir des règles d'usage du numérique."
+      },
+      {
+        "title": "Réduction de l'activité physique et prise de poids",
+        "text": "Selon l'OMS, la durée minimale d'activité physique chez les jeunes de 5 à 17 ans devrait être de 60 minutes par jour, principalement de l'endurance. Ce temps se réduit si l'addiction aux écrans augmente et contribue à la prise de poids : l'augmentation du poids est directement corrélée au temps passé devant les écrans."
+      }
+    ]
+  },
+  "pistes": {
+    "title": "Quelles pistes concrètes de prévention ?",
+    "intro": "Les chercheurs (Inserm, Institut de psychiatrie et neurosciences de Paris, hôpital Corentin-Celton AP-HP…) ont développé un modèle de micro-simulation pour évaluer l'impact des réseaux sociaux sur le risque de dépression, et proposé des pistes pour améliorer ce constat alarmant.",
+    "items": [
+      {
+        "measure": "Limiter l'usage des réseaux sociaux à 1 h par jour",
+        "effect": "− 14,7 %",
+        "effectLabel": "de dépression possible"
+      },
+      {
+        "measure": "Remplacer 30 min de réseaux sociaux par 30 min d'activité physique",
+        "effect": "− 12,9 %",
+        "effectLabel": "de prévalence de la dépression"
+      },
+      {
+        "measure": "Arrêt complet des réseaux sociaux pour les 8,5 % d'adolescents les plus à risque",
+        "effect": "− 12 %",
+        "effectLabel": "de prévalence de la dépression"
+      }
+    ]
+  },
+  "mesures": {
+    "title": "Que propose le ministère de la Santé pour minimiser la nuisance du numérique chez les jeunes ?",
+    "items": [
+      {
+        "title": "Le 3018",
+        "text": "Répond aux urgences du mal-être numérique avec une ligne d'écoute téléphonique gratuite et confidentielle, de 9 h à 23 h tous les jours. Existe aussi en application.",
+        "link": {
+          "href": "tel:3018",
+          "label": "Appeler le 3018"
+        }
+      },
+      {
+        "title": "jeprotegemonenfant.gouv.fr",
+        "text": "Plateforme lancée en 2021 : fiches pratiques et conseils adaptés à l'âge.",
+        "link": {
+          "href": "https://jeprotegemonenfant.gouv.fr",
+          "label": "Consulter la plateforme"
+        }
+      },
+      {
+        "title": "Un passeport internet dès le collège",
+        "text": "Un programme de certification des compétences numériques a été généralisé pour toutes les classes de 6e depuis 2024. Il inclut une sensibilisation dès le CM1 et la remise d'un « passeport internet » pour mieux appréhender les outils numériques et leurs risques."
+      },
+      {
+        "title": "Aucun écran de 0 à 3 ans en accueil petite enfance",
+        "text": "Depuis l'arrêté du 27 juin 2025, il est interdit d'exposer des enfants de 0 à 3 ans aux écrans dans les lieux d'accueil de la petite enfance."
+      },
+      {
+        "title": "Les 1 000 premiers jours",
+        "text": "Une campagne de communication rappelle aux parents l'importance des interactions humaines et leur impact sur le développement psychologique et psychomoteur de l'enfant. Des campagnes ciblent plus précisément l'usage des écrans de 0 à 3 ans.",
+        "link": {
+          "href": "https://www.1000-premiers-jours.fr",
+          "label": "Le site des 1 000 premiers jours"
+        }
+      }
+    ],
+    "regle": {
+      "title": "La règle 3-6-9-12",
+      "intro": "Élaborée par le psychiatre Serge Tisseron, elle a été reprise par le ministère et la commission écrans de 2024.",
+      "steps": [
+        {
+          "age": "Avant 3 ans",
+          "title": "Pas d'écran",
+          "text": "Le cerveau a besoin de toucher, bouger, interagir en vrai. Aucun écran ne l'aide à se développer avant 3 ans, même dit « éducatif »."
+        },
+        {
+          "age": "De 3 à 6 ans",
+          "title": "Pas de console perso, pas d'écran seul",
+          "text": "Toujours accompagné d'un adulte, avec un temps très limité (20 min max) : pas le matin avant l'école, pas le soir avant de dormir. On privilégie la créativité, pas la consommation passive."
+        },
+        {
+          "age": "De 6 à 9 ans",
+          "title": "Pas d'internet seul",
+          "text": "Pas de tablette ou console à soi dans la chambre. On découvre internet avec un adulte, on joue aux jeux vidéo ensemble et on met des mots sur ce qu'on voit.",
+          "rules": [
+            "Tout ce qu'on y met peut devenir public.",
+            "Tout ce qu'on y voit n'est pas vrai.",
+            "Il y a des contenus qui peuvent choquer."
+          ]
+        },
+        {
+          "age": "De 9 à 12 ans",
+          "title": "Internet accompagné, pas de réseau social",
+          "text": "On apprend à se protéger : pas de données personnelles, pas de chat avec des inconnus, pas de réseau social avant 13 ans (âge légal), et 15 ans idéalement en solo. On continue le contrôle parental en mode dialogue."
+        },
+        {
+          "age": "Après 12 ans",
+          "title": "Rester vigilant ensemble",
+          "text": "Réseaux avec compte privé, accompagnement les premiers mois. On co-construit les règles : horaires, zones sans écran (repas, chambre), temps d'écran. On garde 1 h sans écran avant le coucher pour protéger le sommeil."
+        }
+      ]
+    },
+    "quatrePas": {
+      "title": "Les 4 « pas » qui vont avec, pour tous les âges",
+      "image": "/sante-mentale-numerique/parents-interdisant.webp",
+      "imageAlt": "Deux parents, l'une les mains ouvertes, l'autre le poing levé",
+      "items": [
+        "Pas d'écran le matin",
+        "Pas d'écran pendant les repas",
+        "Pas d'écran avant de s'endormir",
+        "Pas d'écran dans la chambre"
+      ]
+    },
+    "nouveautes": {
+      "title": "Nouveauté 2026",
+      "items": [
+        {
+          "title": "Réseaux sociaux interdits aux moins de 15 ans : une loi votée mais non applicable",
+          "text": "Loi adoptée le 21 juillet : l'accès à un service de réseau social en ligne est interdit pour les mineurs de moins de 15 ans. Elle a été censurée le 14 août pour atteinte à la liberté : la loi est donc votée mais non applicable."
+        },
+        {
+          "title": "Le lycée sans portable dès la rentrée 2026",
+          "text": "Après les écoles et collèges (loi de 2018), les lycées passent aussi en « sans portable » dès la rentrée 2026-2027. Le slogan du gouvernement : « de la cloche à la cloche », du début à la fin de la journée dans l'établissement, pas de téléphone. Loi promulguée le 24 août 2026, publiée au Journal officiel du 25 août."
+        }
+      ]
+    }
+  },
+  "aideQuand": {
+    "title": "Quand demander de l'aide ?",
+    "text": "Si vous notez chez votre enfant ou adolescent un repli dans sa chambre ou une irritabilité marquée depuis plusieurs semaines, des plaintes somatiques (grosse fatigue, maux de tête ou maux de ventre fréquents), un discours dévalorisant ou une perte de motivation, pensez à questionner les effets des écrans utilisés.",
+    "signals": [
+      "Repli dans sa chambre",
+      "Irritabilité marquée depuis plusieurs semaines",
+      "Grosse fatigue, maux de tête ou de ventre fréquents",
+      "Discours dévalorisant",
+      "Perte de motivation"
+    ]
+  },
+  "aideOu": {
+    "title": "Où demander de l'aide ?",
+    "intro": "Il est recommandé de consulter un professionnel de santé ou de se tourner vers des structures d'écoute ou d'addictologie adaptées.",
+    "lignes": {
+      "title": "Les lignes d'écoute",
+      "items": [
+        {
+          "number": "3018",
+          "label": "Harcèlement et questions liées au numérique",
+          "text": "En cas de harcèlement avéré ou pour toute question liée au numérique. Gratuit."
+        },
+        {
+          "number": "3114",
+          "label": "Prévention du suicide",
+          "text": "Numéro national, 24 h/24 et 7 j/7."
+        },
+        {
+          "number": "0 800 235 236",
+          "label": "Fil Santé Jeunes",
+          "text": "Écoute anonyme et gratuite pour les 12-25 ans."
+        }
+      ]
+    },
+    "professionnels": {
+      "title": "Les professionnels de santé en premier recours",
+      "items": [
+        {
+          "name": "Votre médecin traitant",
+          "text": "Premier bilan et écoute sans jugement, avec orientation."
+        },
+        {
+          "name": "Psychologue et psychiatre spécialisés en addictologie",
+          "text": "Aide pour comprendre ce qui entretient l'usage excessif des écrans et mettre en place des stratégies concrètes pour le réguler."
+        },
+        {
+          "name": "L'infirmière scolaire de l'établissement",
+          "text": "Peut vous aider et vous conseiller sur l'orientation : repérage, accueil, éducation, prévention et orientation."
+        }
+      ]
+    },
+    "structures": {
+      "title": "Les structures spécialisées pour les jeunes et leurs familles",
+      "items": [
+        {
+          "name": "Consultations Jeunes Consommateurs (CJC)",
+          "text": "Accueil anonyme et gratuit des jeunes de 12 à 25 ans et de l'entourage, pour aborder toutes les addictions, y compris aux jeux vidéo ou à internet."
+        },
+        {
+          "name": "Centre médico-psychologique (CMP)",
+          "text": "Prise en charge (infirmier, psychologue, psychiatre) proche de votre domicile."
+        },
+        {
+          "name": "CSAPA",
+          "text": "Les centres de soins, d'accompagnement et de prévention en addictologie prennent en charge tout usage excessif."
+        },
+        {
+          "name": "Maisons des adolescents (MDA)",
+          "text": "Un espace d'accueil, d'écoute et d'orientation."
+        }
+      ]
+    },
+    "links": [
+      {
+        "href": "/sante-mentale-professionnels-et-approches",
+        "label": "Vers qui se tourner ? Les professionnels de la santé mentale"
+      },
+      {
+        "href": "/prevention/sante-familiale/sante-mentale-des-jeunes",
+        "label": "La santé mentale des jeunes"
+      }
+    ]
+  },
+  "recap": {
+    "title": "Pour récapituler",
+    "text": "L'objectif n'est pas de diaboliser les écrans mais de bien les utiliser pour garder un cerveau en équilibre. Restez à l'écoute et parlez à vos jeunes proches : vous serez un soutien essentiel !",
+    "lead": "Pour aller plus loin, 10 questions que vous vous posez et 10 repères pratiques pour un usage serein du numérique."
   },
   "questions": {
     "title": "10 questions que vous vous posez",
@@ -195,31 +490,14 @@
       }
     ]
   },
-  "aide": {
-    "title": "Numéros d'urgence",
-    "intro": "Gratuits, 24h/24 et 7j/7.",
-    "numbers": [
-      {
-        "number": "3018",
-        "label": "Violences numériques et cyberharcèlement",
-        "description": "Pour les jeunes, les parents et les professionnels confrontés au harcèlement en ligne."
-      },
-      {
-        "number": "3114",
-        "label": "Prévention du suicide",
-        "description": "Pour toute personne en détresse, ou inquiète pour un proche."
-      }
+  "sources": {
+    "title": "Sources",
+    "items": [
+      "Commission écrans 2024",
+      "ANSES 2023, temps d'écran",
+      "HAS, bon usage des écrans",
+      "Santé publique France"
     ],
-    "links": [
-      {
-        "href": "/sante-mentale-professionnels-et-approches",
-        "label": "Vers qui se tourner ? Les professionnels de la santé mentale"
-      },
-      {
-        "href": "/prevention/sante-familiale/sante-mentale-des-jeunes",
-        "label": "La santé mentale des jeunes"
-      }
-    ]
-  },
-  "sources": "Sources : Commission écrans 2024, ANSES."
+    "bibliographie": "Tristan Cebellieu, « Le numérique et ses impacts sur notre santé mentale », Sciences pharmaceutiques, 2025, dumas-05291707."
+  }
 }
