@@ -1,6 +1,12 @@
 {
   "slides": [
     {
+      "image": "/sante-mentale-numerique/hero.webp",
+      "title": "Santé mentale et numérique : les écrans, notre cerveau et dix repères pour un usage serein",
+      "alt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
+      "link": "/sante-mental/sante-mentale-et-numerique"
+    },
+    {
       "image": "/prevention/sante-famille/vaccination-papillomavirus/bras-pansement-vaccination.webp",
       "title": "Vaccination contre le papillomavirus dès 11 ans : nouvelle campagne scolaire 2026",
       "alt": "Gros plan sur le bras d'un enfant portant un pansement après une vaccination contre le papillomavirus",
