@@ -185,8 +185,12 @@
         }
       },
       {
-        "title": "jeprotegemonenfant.gouv.fr",
-        "text": "Plateforme lancée en 2021 : fiches pratiques et conseils adaptés à l'âge."
+        "title": "La plateforme Je protège mon enfant",
+        "text": "Lancée en 2021 par l'État : fiches pratiques et conseils adaptés à l'âge de votre enfant.",
+        "link": {
+          "href": "https://jeprotegemonenfant.gouv.fr/",
+          "label": "Consulter la plateforme"
+        }
       },
       {
         "title": "Un passeport internet dès le collège",

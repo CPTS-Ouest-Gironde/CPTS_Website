@@ -503,8 +503,8 @@ export default function SanteMentaleEtNumeriquePage() {
                         href={item.link.href}
                         target={item.link.href.startsWith("http") ? "_blank" : undefined}
                         rel={item.link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold hover:underline underline-offset-4"
-                        style={{ color: zones[0].color }}
+                        className="mt-5 self-start inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all focus-visible:outline-none focus-visible:ring-4"
+                        style={{ backgroundColor: zones[0].color }}
                       >
                         {item.link.href.startsWith("tel:") ? (
                           <Phone className="w-4 h-4" aria-hidden="true" />
