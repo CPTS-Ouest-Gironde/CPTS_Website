@@ -10,6 +10,11 @@ import { VideosView } from "./videos-view";
 
 type ViewType = "navigation" | "articles" | "videos-aide" | "videos-parlent";
 
+// Correspondance paramètre d'URL → tranche d'âge de l'annuaire
+const ANNUAIRE_AGE_PARAMS: Record<string, string> = {
+  jeunes: "Adolescents / Jeunes adultes (jusqu’à 25 ans)",
+};
+
 export function ColimaconNavigation() {
   const [currentView, setCurrentView] = useState<ViewType>("navigation");
   const [isAnnuaireOpen, setIsAnnuaireOpen] = useState(false);
@@ -47,6 +52,10 @@ export function ColimaconNavigation() {
       setIsAnnuaireOpen(true);
     }
   }, [searchParams]);
+
+  // ?age=jeunes ouvre l'annuaire directement sur la tranche 12-25 ans
+  const annuaireInitialCategory =
+    ANNUAIRE_AGE_PARAMS[searchParams.get("age") ?? ""];
 
   const handleBack = () => setCurrentView("navigation");
 
@@ -278,6 +287,7 @@ export function ColimaconNavigation() {
         <AnnuaireModal
           isOpen={isAnnuaireOpen}
           onClose={() => setIsAnnuaireOpen(false)}
+          initialCategory={annuaireInitialCategory}
         />
       </>
     );

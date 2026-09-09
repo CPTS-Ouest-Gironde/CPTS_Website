@@ -5,8 +5,8 @@
   },
   "date": "9 septembre 2026",
   "readingTime": "15 min de lecture",
-  "title": "Numérique et santé mentale des jeunes",
-  "subtitle": "Le numérique fait partie du quotidien, parfois dès le plus jeune âge. Ce qu'il apporte, ce qu'il abîme, ce que disent les chercheurs et les pouvoirs publics, et vers qui se tourner.",
+  "title": "Santé mentale des jeunes et numérique",
+  "subtitle": "Le numérique fait partie du quotidien, parfois dès le plus jeune âge : avantages ? Inconvénients ? Prévention ? Modalités de prise en charge si troubles de l'usage ?",
   "heroImage": "/sante-mentale-numerique/hero.webp",
   "heroImageAlt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
   "intro": {
@@ -44,15 +44,14 @@
         "43 % des usagers de smartphone utilisent des applis de santé : méditation guidée, sites médicaux, applis de cohérence cardiaque, coaching médical, téléconsultation, télé-expertise…",
         "Le numérique permet aussi de garder le lien avec la famille qui est loin.",
         "Il permet l'apprentissage de langues étrangères, de travaux manuels…",
-        "Dans les protocoles d'accueil individualisé (PAI), les outils numériques sont préconisés pour aider les élèves à pallier leur trouble du neurodéveloppement (TND)."
+        "Dans les protocoles d'accueil individualisé (PAI), les outils numériques sont préconisés pour aider les élèves à pallier à leur trouble du neurodéveloppement (TND)."
       ]
     },
     "minus": {
       "title": "Les −",
       "intro": "Mais les réseaux peuvent engendrer des effets psychologiques néfastes et durables.",
       "items": [
-        "Depuis 2021, on a assisté à une nette augmentation du temps passé sur les réseaux sociaux.",
-        "Dans le même temps, Santé publique France annonçait en 2021 une augmentation de 40 % des admissions des adolescents aux urgences pour tentatives de suicide. Selon l'Insee, la corrélation entre le numérique et la santé mentale a déjà été illustrée, mais le lien causal est plus complexe à établir.",
+        "Depuis 2021, on a assisté à une nette augmentation du temps passé sur les réseaux sociaux. Dans le même temps, Santé publique France annonçait en 2021 une augmentation de 40 % des admissions des adolescents aux urgences pour tentatives de suicide. Selon l'Insee, la corrélation entre le numérique et la santé mentale a déjà été illustrée, mais le lien causal est plus complexe à établir.",
         "Si certaines interactions sociales numériques peuvent être considérées comme du lien social, facteur de protection de la santé mentale, d'autres au contraire favorisent l'isolement, le cyberharcèlement, ou sont constitutives de violences sexistes et sexuelles, revenge porn, harcèlement scolaire, exposition à des contenus violents et pornographiques et violences psychologiques (dégradation du sommeil, perte de confiance en soi…)."
       ]
     }
@@ -154,7 +153,7 @@
   },
   "pistes": {
     "title": "Quelles pistes concrètes de prévention ?",
-    "intro": "Les chercheurs (Inserm, Institut de psychiatrie et neurosciences de Paris, hôpital Corentin-Celton AP-HP…) ont développé un modèle de micro-simulation pour évaluer l'impact des réseaux sociaux sur le risque de dépression, et proposé des pistes pour améliorer ce constat alarmant.",
+    "intro": "Les chercheurs (Inserm, Institut de psychiatrie et neurosciences de Paris, hôpital Corentin-Celton AP-HP…) ont développé un modèle de micro-simulation pour évaluer l'impact des réseaux sociaux sur le risque de dépression, et ont proposé des pistes pour améliorer ce constat alarmant.",
     "items": [
       {
         "measure": "Limiter l'usage des réseaux sociaux à 1 h par jour",
@@ -202,7 +201,11 @@
       },
       {
         "title": "Les 1 000 premiers jours",
-        "text": "Une campagne de communication rappelle aux parents l'importance des interactions humaines et leur impact sur le développement psychologique et psychomoteur de l'enfant. Des campagnes ciblent plus précisément l'usage des écrans de 0 à 3 ans."
+        "text": "Une campagne de communication rappelle aux parents l'importance des interactions humaines et leur impact sur le développement psychologique et psychomoteur de l'enfant. Des campagnes ciblent plus précisément l'usage des écrans de 0 à 3 ans.",
+        "link": {
+          "href": "https://www.1000-premiers-jours.fr/fr",
+          "label": "Le site des 1 000 premiers jours"
+        }
       }
     ],
     "regle": {
@@ -330,11 +333,31 @@
         },
         {
           "name": "CSAPA",
-          "text": "Les centres de soins, d'accompagnement et de prévention en addictologie prennent en charge tout usage excessif."
+          "text": "Les centres de soins, d'accompagnement et de prévention en addictologie prennent en charge tout usage excessif.",
+          "contacts": [
+            {
+              "label": "CSAPA de Bordeaux – Addictions France",
+              "address": "67 rue Chevalier, 33000 Bordeaux",
+              "phone": "05 57 57 00 77",
+              "email": "na33@addictions-france.org"
+            },
+            {
+              "label": "Antenne MDSI Mérignac",
+              "address": "419 avenue de Verdun, 33700 Mérignac",
+              "phone": "05 57 57 00 77"
+            }
+          ]
         },
         {
           "name": "Maisons des adolescents (MDA)",
-          "text": "Un espace d'accueil, d'écoute et d'orientation."
+          "text": "Un espace d'accueil, d'écoute et d'orientation.",
+          "contacts": [
+            {
+              "label": "MDA – Permanence Le relais des familles (La parenthèse)",
+              "address": "23 bis avenue du Dr Fernand Grosse, 33700 Mérignac",
+              "phone": "05 56 38 48 65"
+            }
+          ]
         }
       ]
     },
@@ -347,7 +370,12 @@
         "href": "/prevention/sante-familiale/sante-mentale-des-jeunes",
         "label": "La santé mentale des jeunes"
       }
-    ]
+    ],
+    "annuaire": {
+      "href": "/sante-mental?open=annuaire&age=jeunes",
+      "label": "Voir l'annuaire santé mentale des 12-25 ans",
+      "text": "Toutes les structures du territoire pour les adolescents et jeunes adultes, avec adresses et numéros."
+    }
   },
   "recap": {
     "title": "Pour récapituler",

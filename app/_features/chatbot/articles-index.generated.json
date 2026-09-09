@@ -646,7 +646,7 @@
     {
       "articleId": "sante-mentale-et-numerique",
       "resourceId": "sm-numerique",
-      "title": "Numérique et santé mentale des jeunes",
+      "title": "Santé mentale des jeunes et numérique",
       "chunks": [
         {
           "sectionTitle": "Introduction",
@@ -675,7 +675,7 @@
         },
         {
           "sectionTitle": "Le numérique : ami ou ennemi ?",
-          "text": "Il permet l'apprentissage de langues étrangères, de travaux manuels… Dans les protocoles d'accueil individualisé (PAI), les outils numériques sont préconisés pour aider les élèves à pallier leur trouble du neurodéveloppement (TND).",
+          "text": "Il permet l'apprentissage de langues étrangères, de travaux manuels… Dans les protocoles d'accueil individualisé (PAI), les outils numériques sont préconisés pour aider les élèves à pallier à leur trouble du neurodéveloppement (TND).",
           "sectionIndex": 5
         },
         {
@@ -770,7 +770,7 @@
         },
         {
           "sectionTitle": "Pistes concrètes de prévention",
-          "text": "Les chercheurs (Inserm, Institut de psychiatrie et neurosciences de Paris, hôpital Corentin-Celton AP-HP…) ont développé un modèle de micro-simulation pour évaluer l'impact des réseaux sociaux sur le risque de dépression, et proposé des pistes pour améliorer ce constat alarmant.",
+          "text": "Les chercheurs (Inserm, Institut de psychiatrie et neurosciences de Paris, hôpital Corentin-Celton AP-HP…) ont développé un modèle de micro-simulation pour évaluer l'impact des réseaux sociaux sur le risque de dépression, et ont proposé des pistes pour améliorer ce constat alarmant.",
           "sectionIndex": 24
         },
         {
@@ -905,83 +905,88 @@
         },
         {
           "sectionTitle": "Où demander de l'aide",
-          "text": "Maisons des adolescents (MDA) Un espace d'accueil, d'écoute et d'orientation.",
+          "text": "CSAPA de Bordeaux – Addictions France Antenne MDSI Mérignac Maisons des adolescents (MDA) Un espace d'accueil, d'écoute et d'orientation.",
           "sectionIndex": 51
         },
         {
-          "sectionTitle": "Pour récapituler",
-          "text": "Pour récapituler Pour récapituler L'objectif n'est pas de diaboliser les écrans mais de bien les utiliser pour garder un cerveau en équilibre. Restez à l'écoute et parlez à vos jeunes proches : vous serez un soutien essentiel !",
+          "sectionTitle": "Où demander de l'aide",
+          "text": "MDA – Permanence Le relais des familles (La parenthèse) Voir l'annuaire santé mentale des 12-25 ans Toutes les structures du territoire pour les adolescents et jeunes adultes, avec adresses et numéros.",
           "sectionIndex": 52
         },
         {
           "sectionTitle": "Pour récapituler",
-          "text": "Pour aller plus loin, 10 questions que vous vous posez et 10 repères pratiques pour un usage serein du numérique.",
+          "text": "Pour récapituler Pour récapituler L'objectif n'est pas de diaboliser les écrans mais de bien les utiliser pour garder un cerveau en équilibre. Restez à l'écoute et parlez à vos jeunes proches : vous serez un soutien essentiel !",
           "sectionIndex": 53
         },
         {
-          "sectionTitle": "10 questions que vous vous posez",
-          "text": "10 questions que vous vous posez 10 questions que vous vous posez Conseils pratiques pour un équilibre digital au quotidien. Chaque question est reliée à la zone du cerveau qu'elle concerne. Temps d'écran : trop, c'est combien de temps ? Il n'y a pas de durée unique.",
+          "sectionTitle": "Pour récapituler",
+          "text": "Pour aller plus loin, 10 questions que vous vous posez et 10 repères pratiques pour un usage serein du numérique.",
           "sectionIndex": 54
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Au-delà de 3 à 4 heures par jour hors travail, le risque de fatigue augmente. 50 minutes d'écran, puis 10 minutes de pause. Réseaux sociaux : quels effets sur l'humeur et le stress ? La comparaison permanente aux autres peut accroître le stress. Limiter les abonnements et trier son fil d'actualité.",
+          "text": "10 questions que vous vous posez 10 questions que vous vous posez Conseils pratiques pour un équilibre digital au quotidien. Chaque question est reliée à la zone du cerveau qu'elle concerne. Temps d'écran : trop, c'est combien de temps ? Il n'y a pas de durée unique.",
           "sectionIndex": 55
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Écrans le soir : quel impact sur le sommeil ? Oui, il y en a un : la lumière bleue freine la production de mélatonine, l'hormone du sommeil. Couper les écrans une heure avant de dormir. Victime de cyberharcèlement, que faire ? Ne pas répondre, conserver les preuves et bloquer la personne.",
+          "text": "Au-delà de 3 à 4 heures par jour hors travail, le risque de fatigue augmente. 50 minutes d'écran, puis 10 minutes de pause. Réseaux sociaux : quels effets sur l'humeur et le stress ? La comparaison permanente aux autres peut accroître le stress. Limiter les abonnements et trier son fil d'actualité.",
           "sectionIndex": 56
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider. Fatigue numérique : irritabilité, difficultés de concentration, maux de tête ? Ce sont des signes de surcharge cognitive.",
+          "text": "Écrans le soir : quel impact sur le sommeil ? Oui, il y en a un : la lumière bleue freine la production de mélatonine, l'hormone du sommeil. Couper les écrans une heure avant de dormir. Victime de cyberharcèlement, que faire ? Ne pas répondre, conserver les preuves et bloquer la personne.",
           "sectionIndex": 57
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Faire des micro-pauses avec la règle 20-20-20 : toutes les 20 minutes, regarder à 20 mètres pendant 20 secondes. Doomscrolling : pourquoi je scrolle des infos anxiogènes ? C'est une habitude qui renforce l'anxiété. Un seul créneau par jour pour s'informer, plutôt qu'en continu.",
+          "text": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider. Fatigue numérique : irritabilité, difficultés de concentration, maux de tête ? Ce sont des signes de surcharge cognitive.",
           "sectionIndex": 58
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Mon enfant et TikTok : à partir de quel âge ? Déconseillé avant 13 ans. Activer le contrôle parental, limiter à moins d'une heure par jour et échanger régulièrement sur ce qu'il regarde. Je me compare aux autres en ligne, est-ce normal ? La plupart des personnes montrent une réalité mise en scène.",
+          "text": "Faire des micro-pauses avec la règle 20-20-20 : toutes les 20 minutes, regarder à 20 mètres pendant 20 secondes. Doomscrolling : pourquoi je scrolle des infos anxiogènes ? C'est une habitude qui renforce l'anxiété. Un seul créneau par jour pour s'informer, plutôt qu'en continu.",
           "sectionIndex": 59
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Se déconnecter dès que le mal-être apparaît et revenir au présent. Des usages positifs du numérique, ça existe ? Oui : méditation guidée, suivi de l'humeur, apprentissage en ligne. Privilégier des applications labellisées et fiables. Déconnexion saine : à quoi ça sert ?",
+          "text": "Mon enfant et TikTok : à partir de quel âge ? Déconseillé avant 13 ans. Activer le contrôle parental, limiter à moins d'une heure par jour et échanger régulièrement sur ce qu'il regarde. Je me compare aux autres en ligne, est-ce normal ? La plupart des personnes montrent une réalité mise en scène.",
           "sectionIndex": 60
         },
         {
           "sectionTitle": "10 questions que vous vous posez",
-          "text": "Elle améliore la concentration, le sommeil et le bien-être. Une journée par mois sans écran.",
+          "text": "Se déconnecter dès que le mal-être apparaît et revenir au présent. Des usages positifs du numérique, ça existe ? Oui : méditation guidée, suivi de l'humeur, apprentissage en ligne. Privilégier des applications labellisées et fiables. Déconnexion saine : à quoi ça sert ?",
           "sectionIndex": 61
         },
         {
-          "sectionTitle": "10 repères pratiques",
-          "text": "10 repères pratiques 10 repères pratiques Pour un usage serein du numérique au quotidien. Fixer des temps d'écran adaptés 30 à 60 minutes maximum, en alternant avec une pause de 45 minutes. Préserver le sommeil Pas d'écran une heure avant le coucher, et une chambre sans écran.",
+          "sectionTitle": "10 questions que vous vous posez",
+          "text": "Elle améliore la concentration, le sommeil et le bien-être. Une journée par mois sans écran.",
           "sectionIndex": 62
         },
         {
           "sectionTitle": "10 repères pratiques",
-          "text": "Diversifier les activités Numérique, mais aussi activité physique, rencontres en présentiel et créativité. Parler et repérer Échanger sur ce qui est vu et vécu en ligne, rester à l'écoute sans juger. Protéger ses données et sa vie privée Comptes en paramètres privés et mots de passe forts.",
+          "text": "10 repères pratiques 10 repères pratiques Pour un usage serein du numérique au quotidien. Fixer des temps d'écran adaptés 30 à 60 minutes maximum, en alternant avec une pause de 45 minutes. Préserver le sommeil Pas d'écran une heure avant le coucher, et une chambre sans écran.",
           "sectionIndex": 63
         },
         {
           "sectionTitle": "10 repères pratiques",
-          "text": "Prévenir le cyberharcèlement Respecter les autres, signaler et bloquer. Veiller à la santé mentale Repérer les signes de stress, d'isolement ou d'irritabilité. Impliquer la famille Des règles d'usage à la maison, co-construites ensemble.",
+          "text": "Diversifier les activités Numérique, mais aussi activité physique, rencontres en présentiel et créativité. Parler et repérer Échanger sur ce qui est vu et vécu en ligne, rester à l'écoute sans juger. Protéger ses données et sa vie privée Comptes en paramètres privés et mots de passe forts.",
           "sectionIndex": 64
         },
         {
           "sectionTitle": "10 repères pratiques",
-          "text": "Utiliser des contenus fiables Sources officielles et esprit critique. Demander de l'aide sans attendre Parler à un professionnel de santé.",
+          "text": "Prévenir le cyberharcèlement Respecter les autres, signaler et bloquer. Veiller à la santé mentale Repérer les signes de stress, d'isolement ou d'irritabilité. Impliquer la famille Des règles d'usage à la maison, co-construites ensemble.",
           "sectionIndex": 65
+        },
+        {
+          "sectionTitle": "10 repères pratiques",
+          "text": "Utiliser des contenus fiables Sources officielles et esprit critique. Demander de l'aide sans attendre Parler à un professionnel de santé.",
+          "sectionIndex": 66
         },
         {
           "sectionTitle": "Sources",
           "text": "Sources Sources Commission écrans 2024 ANSES 2023, temps d'écran HAS, bon usage des écrans Santé publique France Tristan Cebellieu, « Le numérique et ses impacts sur notre santé mentale », Sciences pharmaceutiques, 2025, dumas-05291707.",
-          "sectionIndex": 66
+          "sectionIndex": 67
         }
       ]
     },

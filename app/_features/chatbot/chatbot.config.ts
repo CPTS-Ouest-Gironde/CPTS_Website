@@ -227,7 +227,7 @@ export const chatbotConfig: ChatbotConfig = {
     "sm-numerique": {
       id: "sm-numerique",
       type: "internal",
-      title: "Numérique et santé mentale des jeunes",
+      title: "Santé mentale des jeunes et numérique",
       description:
         "Écrans, réseaux sociaux, sommeil, cyberharcèlement : effets sur le cerveau, règle 3-6-9-12, mesures publiques, où demander de l'aide et dix repères pour un usage serein.",
       audience: "patient",

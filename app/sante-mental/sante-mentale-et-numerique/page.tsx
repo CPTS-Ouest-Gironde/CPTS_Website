@@ -6,10 +6,13 @@ import {
   AlertTriangle,
   ArrowLeft,
   ArrowRight,
+  BookUser,
   Calendar,
   Check,
   Clock,
   ExternalLink,
+  Mail,
+  MapPin,
   Minus,
   Phone,
   Plus,
@@ -37,6 +40,13 @@ const tint = (color: string, pct: number) =>
 
 // Encre brune des affiches, pour les blocs pleins
 const ink = "#3F3A34";
+
+type Contact = {
+  label: string;
+  address: string;
+  phone: string;
+  email?: string;
+};
 
 export const metadata: Metadata = {
   title: `${data.title} | CPTS Ouest Gironde`,
@@ -730,12 +740,85 @@ export default function SanteMentaleEtNumeriquePage() {
                             <p className="mt-1 text-sm md:text-base leading-relaxed text-muted-foreground">
                               {item.text}
                             </p>
+                            {"contacts" in item && (
+                              <ul className="mt-3 space-y-2">
+                                {(item.contacts as Contact[]).map((c) => (
+                                  <li
+                                    key={c.label}
+                                    className="rounded-xl border border-border bg-muted/30 px-4 py-3 text-sm"
+                                  >
+                                    <p className="font-semibold text-foreground">
+                                      {c.label}
+                                    </p>
+                                    <p className="mt-1 flex items-start gap-2 text-muted-foreground">
+                                      <MapPin
+                                        className="w-4 h-4 mt-0.5 shrink-0"
+                                        aria-hidden="true"
+                                      />
+                                      {c.address}
+                                    </p>
+                                    <div className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
+                                      <a
+                                        href={`tel:${c.phone.replace(/\s/g, "")}`}
+                                        className="inline-flex items-center gap-2 font-semibold hover:underline underline-offset-4"
+                                        style={{ color: zones[0].color }}
+                                      >
+                                        <Phone className="w-4 h-4" aria-hidden="true" />
+                                        {c.phone}
+                                      </a>
+                                      {c.email && (
+                                        <a
+                                          href={`mailto:${c.email}`}
+                                          className="inline-flex items-center gap-2 font-semibold hover:underline underline-offset-4 break-all"
+                                          style={{ color: zones[0].color }}
+                                        >
+                                          <Mail className="w-4 h-4 shrink-0" aria-hidden="true" />
+                                          {c.email}
+                                        </a>
+                                      )}
+                                    </div>
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
                           </div>
                         </li>
                       ))}
                     </ul>
                   </div>
                 ))}
+              </div>
+
+              {/* Annuaire 12-25 ans */}
+              <div
+                className="mt-6 rounded-3xl border p-6 md:p-8 flex flex-col md:flex-row md:items-center gap-5 md:gap-8"
+                style={{
+                  backgroundColor: tint(zones[1].color, 10),
+                  borderColor: tint(zones[1].color, 40),
+                }}
+              >
+                <span
+                  className="w-14 h-14 rounded-2xl text-white flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: zones[1].color }}
+                >
+                  <BookUser className="w-7 h-7" aria-hidden="true" />
+                </span>
+                <div className="flex-1">
+                  <p className="text-lg font-bold text-foreground leading-snug">
+                    {aideOu.annuaire.label}
+                  </p>
+                  <p className="mt-1 text-sm md:text-base text-muted-foreground leading-relaxed">
+                    {aideOu.annuaire.text}
+                  </p>
+                </div>
+                <Link
+                  href={aideOu.annuaire.href}
+                  className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all shrink-0"
+                  style={{ backgroundColor: zones[1].color }}
+                >
+                  Ouvrir l'annuaire
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </Link>
               </div>
 
               <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
