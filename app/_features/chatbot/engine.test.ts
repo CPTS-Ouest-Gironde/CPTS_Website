@@ -1241,3 +1241,13 @@ test("processUserInput propose le 3018 en premier sur une situation de cyberharc
   assert.equal(resourceIds[0], "urgence-3018")
   assert.ok(resourceIds.includes("sm-numerique"))
 })
+
+test("processUserInput en mode exploratoire reste sur la ressource matchée par mot-clé", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "c'est quoi le fomo", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.ok(suggestionMessage)
+  assert.equal(suggestionMessage.suggestions?.[0]?.resource.id, "sm-numerique")
+})

@@ -805,10 +805,14 @@ export function processUserInput(
     // Agreement non-exploratoire : on contraint la recherche à la ressource du matcher pour
     // éviter qu'un article secondaire (bruit Fuse) ne s'invite si la ressource principale
     // est filtrée par recentlySuggested.
+    // Même logique en exploratoire dès que le matcher a trouvé un mot-clé : l'extrait
+    // vient d'une ressource matchée, pas d'un article rapproché par Fuse sur un mot court.
     const allowedResourceIds =
       !exploratory && articleAgreesWithMatcherTop && matcherTopResourceId !== undefined
         ? new Set([matcherTopResourceId])
-        : undefined
+        : exploratory && numericSafeMatches.length > 0
+          ? new Set(numericSafeMatches.map((match) => match.resource.id))
+          : undefined
 
     const priorityArticleState = buildArticleSearchState(
       config,
