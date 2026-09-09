@@ -1,0 +1,219 @@
+{
+  "backLink": {
+    "href": "/sante-mental",
+    "label": "Retour à Santé mentale"
+  },
+  "date": "9 septembre 2026",
+  "readingTime": "8 min de lecture",
+  "title": "Santé mentale et numérique",
+  "subtitle": "Ce que les écrans font à notre cerveau, les questions que l'on se pose au quotidien, et dix repères simples pour un usage serein.",
+  "heroImage": "/sante-mentale-numerique/hero.jpg",
+  "heroImageAlt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
+  "toc": [
+    { "id": "cerveau", "label": "Les écrans et le cerveau" },
+    { "id": "questions", "label": "10 questions que vous vous posez" },
+    { "id": "reperes", "label": "10 repères pratiques" },
+    { "id": "aide", "label": "Numéros d'urgence" }
+  ],
+  "cerveau": {
+    "title": "Les écrans et le cerveau",
+    "intro": "Comprendre l'impact des écrans sur nos fonctions cérébrales. Cinq zones clés sont concernées, en particulier chez l'enfant.",
+    "zones": [
+      {
+        "id": "attention",
+        "number": 1,
+        "title": "Attention",
+        "keyword": "Dopamine",
+        "area": "cortex préfrontal",
+        "color": "#DC7B57",
+        "text": "Le cortex préfrontal régule l'attention et la concentration. Les écrans stimulent la dopamine, ce qui peut rendre la concentration difficile sur la durée."
+      },
+      {
+        "id": "sommeil",
+        "number": 2,
+        "title": "Sommeil",
+        "keyword": "Mélatonine",
+        "area": "rythme circadien",
+        "color": "#5C8FBF",
+        "text": "La lumière bleue des écrans réduit la production de mélatonine, perturbant le sommeil et l'endormissement."
+      },
+      {
+        "id": "langage",
+        "number": 3,
+        "title": "Langage",
+        "keyword": "Matière blanche",
+        "area": "aires langagières",
+        "color": "#D9A93A",
+        "text": "Une exposition excessive peut ralentir le développement du langage et affaiblir les connexions neuronales."
+      },
+      {
+        "id": "emotions",
+        "number": 4,
+        "title": "Émotions",
+        "keyword": "Estime de soi",
+        "area": "amygdale",
+        "color": "#C4707E",
+        "text": "Une surstimulation émotionnelle peut fragiliser la régulation des émotions et l'estime de soi chez l'enfant."
+      },
+      {
+        "id": "memoire",
+        "number": 5,
+        "title": "Mémoire",
+        "keyword": "Hippocampe",
+        "area": "consolidation des souvenirs",
+        "color": "#8A6BB0",
+        "text": "Un usage prolongé des écrans peut nuire à la consolidation des souvenirs et à la mémoire à long terme."
+      }
+    ],
+    "conclusion": "Un usage conscient, c'est un cerveau en équilibre."
+  },
+  "questions": {
+    "title": "10 questions que vous vous posez",
+    "intro": "Des réponses courtes et des conseils pratiques pour un équilibre numérique au quotidien.",
+    "items": [
+      {
+        "iconName": "MonitorSmartphone",
+        "question": "Temps d'écran : trop, c'est combien de temps ?",
+        "answer": "Il n'y a pas de durée unique. Au-delà de 3 à 4 heures par jour hors travail, le risque de fatigue augmente.",
+        "advice": "50 minutes d'écran, puis 10 minutes de pause."
+      },
+      {
+        "iconName": "HeartPulse",
+        "question": "Réseaux sociaux : quels effets sur l'humeur et le stress ?",
+        "answer": "La comparaison permanente aux autres peut accroître le stress.",
+        "advice": "Limiter les abonnements et trier son fil d'actualité."
+      },
+      {
+        "iconName": "MoonStar",
+        "question": "Écrans le soir : quel impact sur le sommeil ?",
+        "answer": "Oui, il y en a un : la lumière bleue freine la production de mélatonine, l'hormone du sommeil.",
+        "advice": "Couper les écrans une heure avant de dormir."
+      },
+      {
+        "iconName": "ShieldAlert",
+        "question": "Victime de cyberharcèlement, que faire ?",
+        "answer": "Ne pas répondre, conserver les preuves (captures d'écran) et bloquer la personne.",
+        "advice": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider."
+      },
+      {
+        "iconName": "BatteryLow",
+        "question": "Fatigue numérique : irritabilité, difficultés de concentration, maux de tête ?",
+        "answer": "Ce sont des signes de surcharge cognitive.",
+        "advice": "Faire des micro-pauses avec la règle 20-20-20 : toutes les 20 minutes, regarder à 20 mètres pendant 20 secondes."
+      },
+      {
+        "iconName": "Tornado",
+        "question": "Doomscrolling : pourquoi je scrolle des infos anxiogènes ?",
+        "answer": "C'est une habitude qui renforce l'anxiété au lieu de l'apaiser.",
+        "advice": "Un seul créneau par jour pour s'informer, plutôt qu'en continu."
+      },
+      {
+        "iconName": "Baby",
+        "question": "Mon enfant et TikTok : à partir de quel âge ?",
+        "answer": "Déconseillé avant 13 ans.",
+        "advice": "Activer le contrôle parental, limiter à moins d'une heure par jour et échanger régulièrement sur ce qu'il regarde."
+      },
+      {
+        "iconName": "Scale",
+        "question": "Je me compare aux autres en ligne, est-ce normal ?",
+        "answer": "La plupart des personnes montrent une réalité mise en scène, pas leur quotidien.",
+        "advice": "Se déconnecter dès que le mal-être apparaît et revenir au présent."
+      },
+      {
+        "iconName": "Leaf",
+        "question": "Des usages positifs du numérique, ça existe ?",
+        "answer": "Oui : méditation guidée, suivi de l'humeur, apprentissage en ligne.",
+        "advice": "Privilégier des applications labellisées et fiables."
+      },
+      {
+        "iconName": "TreePine",
+        "question": "Déconnexion saine : à quoi ça sert ?",
+        "answer": "Elle améliore la concentration, le sommeil et le bien-être.",
+        "advice": "Une journée par mois sans écran."
+      }
+    ]
+  },
+  "reperes": {
+    "title": "10 repères pratiques",
+    "intro": "Pour un usage serein du numérique au quotidien. Une liste à parcourir seul ou en famille.",
+    "items": [
+      {
+        "iconName": "Timer",
+        "title": "Fixer des temps d'écran adaptés",
+        "text": "30 à 60 minutes maximum, en alternant avec une pause de 45 minutes."
+      },
+      {
+        "iconName": "BedDouble",
+        "title": "Préserver le sommeil",
+        "text": "Pas d'écran une heure avant le coucher, et une chambre sans écran."
+      },
+      {
+        "iconName": "Bike",
+        "title": "Diversifier les activités",
+        "text": "Numérique, mais aussi activité physique, rencontres en présentiel et créativité."
+      },
+      {
+        "iconName": "MessagesSquare",
+        "title": "Parler et repérer",
+        "text": "Échanger sur ce qui est vu et vécu en ligne, rester à l'écoute sans juger."
+      },
+      {
+        "iconName": "LockKeyhole",
+        "title": "Protéger ses données et sa vie privée",
+        "text": "Comptes en paramètres privés et mots de passe forts."
+      },
+      {
+        "iconName": "ShieldCheck",
+        "title": "Prévenir le cyberharcèlement",
+        "text": "Respecter les autres, signaler et bloquer."
+      },
+      {
+        "iconName": "HeartHandshake",
+        "title": "Veiller à la santé mentale",
+        "text": "Repérer les signes de stress, d'isolement ou d'irritabilité."
+      },
+      {
+        "iconName": "House",
+        "title": "Impliquer la famille",
+        "text": "Des règles d'usage à la maison, co-construites ensemble."
+      },
+      {
+        "iconName": "BookOpenCheck",
+        "title": "Utiliser des contenus fiables",
+        "text": "Sources officielles et esprit critique."
+      },
+      {
+        "iconName": "Hand",
+        "title": "Demander de l'aide sans attendre",
+        "text": "Parler à un professionnel de santé."
+      }
+    ]
+  },
+  "aide": {
+    "title": "Numéros d'urgence",
+    "intro": "Gratuits, anonymes, 24h/24 et 7j/7.",
+    "numbers": [
+      {
+        "number": "3018",
+        "label": "Violences numériques et cyberharcèlement",
+        "description": "Pour les jeunes, les parents et les professionnels confrontés au harcèlement en ligne."
+      },
+      {
+        "number": "3114",
+        "label": "Prévention du suicide",
+        "description": "Pour toute personne en détresse, ou inquiète pour un proche."
+      }
+    ],
+    "links": [
+      {
+        "href": "/sante-mentale-professionnels-et-approches",
+        "label": "Vers qui se tourner ? Les professionnels de la santé mentale"
+      },
+      {
+        "href": "/prevention/sante-familiale/sante-mentale-des-jeunes",
+        "label": "La santé mentale des jeunes"
+      }
+    ]
+  },
+  "sources": "Sources : Commission écrans 2024, ANSES."
+}

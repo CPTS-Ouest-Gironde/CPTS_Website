@@ -27,11 +27,13 @@ app/
 ├── presentation/ (2)       # About pages
 ├── sante-mentale/ (1)      # Mental health v1 [CLIENT]
 ├── sante-mentale-2/ (1)    # Mental health v2 [CLIENT]
+├── sante-mental/sante-mentale-et-numerique/  # Article écrans & santé mentale (RSC, police Newsreader locale à la page)
 └── faq/ (1)                # FAQ
 
 components/
 ├── ui/ (56)                # Radix UI components (CHECK FIRST)
 ├── sante-voyage/ (3)       # Article santé voyage : reveal (scroll), journey-nav (sticky), travel-checklist [CLIENT]
+├── sante-mental/brain-map.tsx  # Schéma SVG du cerveau (5 zones colorées) pour l'article numérique [RSC]
 ├── header.tsx              # Site header + nav
 ├── footer.tsx              # Site footer
 ├── hero.tsx                # Homepage hero
@@ -60,7 +62,8 @@ docs/                       # ⚠️ DO NOT TOUCH
 | supports.json | 3KB | Support materials |
 | nos-actions-vos-outils.json | 51KB | Tools/actions DB |
 | sante-mentale.json | 9.5KB | Mental health v1 |
-| sante-mentale-2.json | 2.9KB | Mental health v2 |
+| sante-mentale-2.json | 2.9KB | Mental health v2 (cartes du hub /sante-mental) |
+| sante-mentale-numerique.json | 9KB | Article Santé mentale et numérique (cerveau, 10 questions, 10 repères, 3018/3114) |
 | sante-voyage.json | 22KB | Article santé voyage (contenu médical) |
 | feu-du-porge.json | 6KB | Article urgence fumées feu du Porge |
 | hero-slides.json | 2KB | Slides carrousel "À la une" (homepage) |
@@ -174,4 +177,4 @@ header → navigation-data.ts
 ```
 
 ## Last Updated
-2026-01-09
+2026-09-09
