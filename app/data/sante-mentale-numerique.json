@@ -11,7 +11,7 @@
   "heroImageAlt": "Une femme consulte une tablette, des bulles colorées s'échappent de sa tête",
   "cerveau": {
     "title": "Les écrans et le cerveau",
-    "intro": "Comprendre l'impact des écrans sur nos fonctions cérébrales. Cinq zones clés sont concernées, en particulier chez l'enfant.",
+    "intro": "Comprendre l'impact des écrans sur nos fonctions cérébrales : les cinq zones clés du cerveau.",
     "zones": [
       {
         "id": "attention",
@@ -63,7 +63,7 @@
   },
   "questions": {
     "title": "10 questions que vous vous posez",
-    "intro": "Des réponses courtes et un conseil concret pour chacune. Chaque question est reliée à la zone du cerveau qu'elle concerne.",
+    "intro": "Conseils pratiques pour un équilibre digital au quotidien. Chaque question est reliée à la zone du cerveau qu'elle concerne.",
     "items": [
       {
         "iconName": "MonitorSmartphone",
@@ -89,7 +89,7 @@
       {
         "iconName": "ShieldAlert",
         "question": "Victime de cyberharcèlement, que faire ?",
-        "answer": "Ne pas répondre, conserver les preuves (captures d'écran) et bloquer la personne.",
+        "answer": "Ne pas répondre, conserver les preuves et bloquer la personne.",
         "advice": "Signaler les contenus et en parler à un adulte de confiance. Le 3018 est là pour vous aider.",
         "zone": "emotions"
       },
@@ -103,7 +103,7 @@
       {
         "iconName": "Tornado",
         "question": "Doomscrolling : pourquoi je scrolle des infos anxiogènes ?",
-        "answer": "C'est une habitude qui renforce l'anxiété au lieu de l'apaiser.",
+        "answer": "C'est une habitude qui renforce l'anxiété.",
         "advice": "Un seul créneau par jour pour s'informer, plutôt qu'en continu.",
         "zone": "emotions"
       },
@@ -117,7 +117,7 @@
       {
         "iconName": "Scale",
         "question": "Je me compare aux autres en ligne, est-ce normal ?",
-        "answer": "La plupart des personnes montrent une réalité mise en scène, pas leur quotidien.",
+        "answer": "La plupart des personnes montrent une réalité mise en scène.",
         "advice": "Se déconnecter dès que le mal-être apparaît et revenir au présent.",
         "zone": "emotions"
       },
@@ -139,7 +139,7 @@
   },
   "reperes": {
     "title": "10 repères pratiques",
-    "intro": "Pour un usage serein du numérique au quotidien. Une liste à parcourir seul ou en famille.",
+    "intro": "Pour un usage serein du numérique au quotidien.",
     "items": [
       {
         "iconName": "Timer",
@@ -195,7 +195,7 @@
   },
   "aide": {
     "title": "Numéros d'urgence",
-    "intro": "Gratuits, anonymes, 24h/24 et 7j/7.",
+    "intro": "Gratuits, 24h/24 et 7j/7.",
     "numbers": [
       {
         "number": "3018",
