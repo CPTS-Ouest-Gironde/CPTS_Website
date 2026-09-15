@@ -233,6 +233,12 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     splitLongSections: true,
     collectAllText: true,
   },
+  {
+    slug: "journee-coeur-des-femmes",
+    resourceId: "actu-journee-coeur-des-femmes",
+    path: "app/data/journee-coeur-des-femmes.json",
+    collectAllText: true,
+  },
 ]
 
 const TODO_SOURCES = [
@@ -266,6 +272,10 @@ const SECTION_TITLE_LABELS: Record<string, string> = {
   aideOu: "Où demander de l'aide",
   recap: "Pour récapituler",
   sources: "Sources",
+  evenement: "L'événement",
+  infos: "Parcours de dépistage cardio-vasculaire : date, lieu, public",
+  inscription: "Inscription",
+  partenaires: "Partenaires",
 }
 
 function isRecord(value: JsonValue): value is Record<string, JsonValue> {

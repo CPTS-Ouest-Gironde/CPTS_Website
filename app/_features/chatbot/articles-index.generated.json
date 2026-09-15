@@ -1558,6 +1558,38 @@
           "sectionIndex": 63
         }
       ]
+    },
+    {
+      "articleId": "journee-coeur-des-femmes",
+      "resourceId": "actu-journee-coeur-des-femmes",
+      "title": "Journée du Cœur des Femmes",
+      "chunks": [
+        {
+          "sectionTitle": "Introduction",
+          "text": "Agir pour le Cœur des Femmes et ses professionnels de santé Ambassadeurs accueillent toutes les femmes pour faire le point sur leur santé cardio-vasculaire. Gratuit, sur inscription préalable.",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "L'événement",
+          "text": "Dans 8 cas sur 10, l'accident cardio-vasculaire est évitable Une action financée par Agir pour le Cœur des Femmes, grâce à ses mécènes et à la générosité du public.",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "Parcours de dépistage cardio-vasculaire : date, lieu, public",
+          "text": "Date Mercredi 7 octobre 2026, entre 9h00 et 15h30 Lieu Clinique du Sport – 4 rue Georges Négrevergne, Mérignac Parcours Parcours de dépistage d'1h30 gratuit pour les femmes à partir de 18 ans",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "Inscription",
+          "text": "Inscription sur Doctolib Inscription préalable obligatoire, en scannant le QR code de l'affiche ou directement sur Doctolib.",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "Partenaires",
+          "text": "Avec la participation de CPTS Ouest Gironde CHU de Bordeaux Viatris GE HealthCare Maison du Rein – AURAD Aquitaine Clinique du Sport Bordeaux-Mérignac (Vivalto Santé) Ell'ipsa AMOC – Association des Malades et Opérés Cardiaques Doctolib Ville de Mérignac",
+          "sectionIndex": 4
+        }
+      ]
     }
   ]
 }

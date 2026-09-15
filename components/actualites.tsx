@@ -14,9 +14,9 @@ import { cn } from "@/lib/utils";
 
 const actualites = [
   {
-    title: "La Collective RUN",
-    image: "/actu/collective-run-2026/affiche-collective-run-2026.webp",
-    link: "/actualites/collective-run-2026",
+    title: "Journée du Cœur des Femmes",
+    image: "/actu/journee-coeur-des-femmes/affiche-journee-coeur-des-femmes.webp",
+    link: "/actualites/journee-coeur-des-femmes",
   },
   {
     title: "Les urgences, ce n'est pas une évidence",
