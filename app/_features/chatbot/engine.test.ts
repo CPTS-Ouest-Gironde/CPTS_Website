@@ -1251,3 +1251,61 @@ test("processUserInput en mode exploratoire reste sur la ressource matchée par 
   assert.ok(suggestionMessage)
   assert.equal(suggestionMessage.suggestions?.[0]?.resource.id, "sm-numerique")
 })
+
+test("processUserInput \"qu'est-ce que la journée du cœur des femmes\" remonte l'actualité avec un extrait", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "qu'est-ce que la journée du cœur des femmes", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait attendu pour la Journée du Cœur des Femmes")
+  assert.match(extractMessage.text, /cardio-vasculaire/i)
+  assert.ok(suggestionIds.includes("actu-journee-coeur-des-femmes"))
+})
+
+test("processUserInput \"comment m'inscrire à la journée du coeur des femmes\" place l'actualité en tête", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "comment m'inscrire à la journée du coeur des femmes", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "actu-journee-coeur-des-femmes")
+})
+
+test("processUserInput \"dépistage cardio mérignac\" retourne l'extrait date et lieu, pas Mars Bleu", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "dépistage cardio mérignac", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait attendu sur le dépistage cardio")
+  assert.match(extractMessage.text, /7 octobre 2026/)
+  assert.ok(suggestionIds.includes("actu-journee-coeur-des-femmes"))
+  assert.ok(!suggestionIds.includes("sf-mars-bleu-2026"), "Mars Bleu ne doit pas remonter sur un dépistage cardio")
+})
+
+test("processUserInput \"dépistage cardiovasculaire gratuit\" cible l'actualité sans déclencher l'urgence 15", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "où faire un dépistage cardiovasculaire gratuit pour une femme", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestionIds.includes("actu-journee-coeur-des-femmes"), "actu-journee-coeur-des-femmes attendu en suggestion")
+  assert.ok(!suggestionIds.includes("urgence-15"), "une question de prévention ne doit pas remonter l'urgence 15")
+})
+
+test("processUserInput \"douleur au coeur\" reste une urgence malgré l'actualité cœur des femmes", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "j'ai une douleur au coeur", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestionIds.includes("urgence-15"), "urgence-15 attendu sur une douleur au coeur")
+  assert.ok(!suggestionIds.includes("actu-journee-coeur-des-femmes"), "l'actualité ne doit pas concurrencer une urgence")
+})
