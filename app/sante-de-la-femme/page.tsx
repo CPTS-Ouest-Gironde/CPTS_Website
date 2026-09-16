@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPin, Newspaper, Route } from "lucide-react";
+import { ExternalLink, MapPin, Newspaper, PencilRuler, Route } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -165,22 +165,83 @@ export default function SanteDeLaFemmePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {parcoursData.parcours.map((parcours) => (
-              <Card key={parcours.id} className="border-primary/10">
-                <CardContent className="p-6 space-y-3">
-                  <div className="flex items-center justify-between gap-3">
-                    <h3 className="text-lg font-semibold text-foreground">
-                      {parcours.title}
-                    </h3>
-                    <Badge variant="secondary">{parcours.status}</Badge>
-                  </div>
-                  <p className="text-sm text-muted-foreground">
-                    {parcours.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
+          <div className="max-w-5xl mx-auto space-y-6">
+            {parcoursData.parcours.map((parcours) => {
+              const flyer = parcours.flyer;
+              return flyer ? (
+                /* Parcours avec flyer en aperçu : texte + visuel côte à côte sur desktop */
+                <Card key={parcours.id} className="border-primary/10 overflow-hidden">
+                  <CardContent className="p-0 grid grid-cols-1 lg:grid-cols-5">
+                    <div className="p-6 lg:p-8 space-y-4 lg:col-span-2 flex flex-col">
+                      <div className="flex items-center justify-between gap-3">
+                        <h3 className="text-xl font-semibold text-foreground">
+                          {parcours.title}
+                        </h3>
+                        <Badge variant="secondary">{parcours.status}</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground">
+                        {parcours.description}
+                      </p>
+                      <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 flex gap-3 text-sm text-amber-800">
+                        <PencilRuler className="w-5 h-5 flex-shrink-0 text-amber-600" aria-hidden="true" />
+                        <p>{flyer.note}</p>
+                      </div>
+                      <div className="pt-2 mt-auto">
+                        <Button asChild variant="outline" className="rounded-full font-semibold">
+                          <a
+                            href={flyer.src}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            {flyer.linkLabel}
+                          </a>
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="lg:col-span-3 bg-secondary/20 p-4 lg:p-6 flex flex-col justify-center gap-3">
+                      <span className="self-start inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-3 py-1 text-xs font-semibold text-amber-950 shadow">
+                        <PencilRuler className="w-3.5 h-3.5" aria-hidden="true" />
+                        {flyer.badge}
+                      </span>
+                      <div className="relative w-full aspect-[1754/1241] rounded-xl overflow-hidden border-2 border-dashed border-amber-400/70 bg-white shadow-sm">
+                        <Image
+                          src={flyer.src}
+                          alt={flyer.alt}
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 600px"
+                          className="object-contain"
+                        />
+                        {/* Filigrane : rappelle que le document n'est pas finalisé */}
+                        <div
+                          className="pointer-events-none absolute inset-0 flex items-center justify-center"
+                          aria-hidden="true"
+                        >
+                          <span className="-rotate-[20deg] text-2xl sm:text-3xl lg:text-4xl font-black uppercase tracking-[0.15em] text-foreground/10 whitespace-nowrap">
+                            {flyer.watermark}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Card key={parcours.id} className="border-primary/10 max-w-3xl mx-auto">
+                  <CardContent className="p-6 space-y-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <h3 className="text-lg font-semibold text-foreground">
+                        {parcours.title}
+                      </h3>
+                      <Badge variant="secondary">{parcours.status}</Badge>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {parcours.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>

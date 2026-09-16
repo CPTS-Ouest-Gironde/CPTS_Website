@@ -6,7 +6,15 @@
       "id": "menopause",
       "title": "Ménopause",
       "status": "En cours de construction",
-      "description": "Un parcours pluriprofessionnel pour accompagner les femmes au moment de la ménopause. Cette page sera complétée au fur et à mesure de l'avancement du parcours."
+      "description": "Un parcours pluriprofessionnel pour accompagner les femmes au moment de la ménopause. Cette page sera complétée au fur et à mesure de l'avancement du parcours.",
+      "flyer": {
+        "src": "/santé-de-la-femme/flyer-parcours-menopause.webp",
+        "alt": "Flyer « Et si c'était la ménopause ? » – Parcours ménopause en trois niveaux : connaître les ressources (reseaumenopause33.fr), solliciter des spécialistes du territoire via Omnidoc, échanger entre pairs en RCP. Reconnaître les signes de la ménopause. Une collaboration CPTS Ouest Gironde, CPTS Bordeaux Ouest Santé Booste et Réseau Ménopause 33.",
+        "badge": "Aperçu · document de travail",
+        "watermark": "Version de travail",
+        "note": "Ce flyer est en cours d'élaboration par les professionnels de santé du territoire : il ne s'agit pas de la version finale et son contenu peut encore évoluer.",
+        "linkLabel": "Voir le flyer en grand"
+      }
     },
     {
       "id": "second-parcours",
