@@ -1,22 +1,24 @@
 import type { LucideIcon } from "lucide-react";
-import { CalendarDays, ExternalLink, HeartPulse, MapPin } from "lucide-react";
+import { ArrowRight, CalendarDays, Footprints, MapPin } from "lucide-react";
 import { SimpleActualitePage } from "@/components/simple-actualite-page";
-import data from "@/app/data/journee-coeur-des-femmes.json";
+import data from "@/app/data/octobre-rose-pessac-2026.json";
 
 const iconMap: Record<string, LucideIcon> = {
   CalendarDays,
   MapPin,
-  HeartPulse,
+  Footprints,
 };
 
-export default function JourneeCoeurDesFemmesPage() {
+export default function OctobreRosePessac2026Page() {
   return (
     <SimpleActualitePage
       title={data.title}
       imageSrc={data.image}
       imageAlt={data.imageAlt}
       heroClassName="bg-gradient-to-br from-pink-100 via-pink-50/60 to-background"
-      posterCardClassName="border-pink-200"
+      carrousel={[
+        { src: data.programme.image, alt: data.programme.imageAlt },
+      ]}
       intro={
         <div className="space-y-6">
           <div className="rounded-2xl border border-pink-200 bg-pink-50 p-5 lg:p-6 space-y-4">
@@ -24,7 +26,7 @@ export default function JourneeCoeurDesFemmesPage() {
               {data.intro}
             </p>
             <p className="inline-block rounded-full bg-white border border-pink-300 px-4 py-2 text-sm lg:text-base font-semibold text-pink-700">
-              {data.evenement.chiffre}
+              {data.accroche}
             </p>
           </div>
 
@@ -50,40 +52,54 @@ export default function JourneeCoeurDesFemmesPage() {
             })}
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-5 lg:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-            <p className="text-muted-foreground leading-relaxed">
-              {data.inscription.note}
-            </p>
-            <a
-              href={data.inscription.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-pink-700 transition-colors flex-shrink-0"
-            >
-              {data.inscription.label}
-              <ExternalLink className="w-4 h-4" aria-hidden="true" />
-            </a>
+          <div className="rounded-2xl border border-border bg-card p-5 lg:p-6 space-y-3">
+            <p className="font-semibold text-foreground">{data.programmeTitle}</p>
+            <ul className="space-y-2">
+              {data.programmeItems.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-muted-foreground leading-relaxed"
+                >
+                  <span
+                    className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-pink-500"
+                    aria-hidden="true"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="space-y-3">
-            <p className="text-muted-foreground leading-relaxed">
-              {data.evenement.financement}
+            <p className="font-semibold text-foreground">
+              {data.autresRendezVous.title}
             </p>
-            <div className="space-y-2">
-              <p className="font-semibold text-foreground">
-                {data.partenaires.title}
-              </p>
-              <ul className="flex flex-wrap gap-2">
-                {data.partenaires.items.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul className="flex flex-wrap gap-2">
+              {data.autresRendezVous.items.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-border bg-card px-3 py-1 text-sm text-muted-foreground"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {data.autresRendezVous.note}
+            </p>
+          </div>
+
+          <div className="rounded-2xl border border-border bg-card p-5 lg:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <p className="text-muted-foreground leading-relaxed">
+              {data.depistage.text}
+            </p>
+            <a
+              href={data.depistage.link}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-pink-700 transition-colors flex-shrink-0"
+            >
+              {data.depistage.label}
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </a>
           </div>
         </div>
       }

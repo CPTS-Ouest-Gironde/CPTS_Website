@@ -1,0 +1,50 @@
+{
+  "title": "Octobre Rose à Pessac",
+  "image": "/actu/7-octobre-rose-2026/affiche-octobre-rose-pessac-2026.webp",
+  "imageAlt": "Affiche Octobre Rose Pessac, mercredi 7 octobre 2026 de 14h à 18h, place de la Ve République",
+  "programme": {
+    "image": "/actu/7-octobre-rose-2026/programme-octobre-rose-pessac-2026.webp",
+    "imageAlt": "Programme de l'après-midi Octobre Rose à Pessac : marche et village en rose, et les autres rendez-vous du mois"
+  },
+  "intro": "« Le plus beau patrimoine, c'est votre santé. » La Ville de Pessac et son CCAS vous donnent rendez-vous pour une après-midi de sensibilisation au dépistage du cancer du sein, ouverte à toutes et à tous.",
+  "accroche": "Marche et village en rose, place de la Ve République",
+  "infos": [
+    {
+      "iconName": "CalendarDays",
+      "label": "Date",
+      "text": "Mercredi 7 octobre 2026, de 14h à 18h"
+    },
+    {
+      "iconName": "MapPin",
+      "label": "Lieu",
+      "text": "Place de la Ve République, Pessac"
+    },
+    {
+      "iconName": "Footprints",
+      "label": "Marche rose",
+      "text": "Départ à 15h pour 4 km dans la ville, après un échauffement à 14h30"
+    }
+  ],
+  "programmeTitle": "Au programme de l'après-midi",
+  "programmeItems": [
+    "Stands d'information et de sensibilisation avec la Ligue contre le Cancer Gironde",
+    "Stands d'animation, jeux et musique",
+    "Performance d'une artiste muraliste et création collective ouverte à tous les âges",
+    "Sélection de livres de la Bibliambule",
+    "Collation rose à 16h pour clôturer l'après-midi"
+  ],
+  "autresRendezVous": {
+    "title": "Et aussi en octobre à Pessac",
+    "items": [
+      "2 et 3 octobre : salon Santé & Bien-être du Soroptimist, avec des conférences médicales sur inscription",
+      "4 octobre : match de basket rose de l'Entente Pessac Basket Club",
+      "10 et 11 octobre : tournoi de softball mixte « Les Panthères Roses »"
+    ],
+    "note": "Une tombola est organisée au profit de la Ligue contre le Cancer. Retrouvez le détail de chaque rendez-vous au verso du flyer."
+  },
+  "depistage": {
+    "text": "Sans symptôme ni risque particulier, le dépistage du cancer du sein par mammographie est recommandé tous les deux ans de 50 à 74 ans. Vous avez des questions sur le dépistage ou l'auto-palpation ?",
+    "label": "Voir notre page Octobre Rose",
+    "link": "/prevention/sante-familiale/octobre-rose-2025"
+  }
+}

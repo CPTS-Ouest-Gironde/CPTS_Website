@@ -12,6 +12,8 @@ interface SimpleActualitePageProps {
   imageAlt: string;
   intro?: ReactNode;
   posterCardClassName?: string;
+  /** Fond du bandeau d'en-tete, pour accorder la page a l'evenement. */
+  heroClassName?: string;
   /** Ratio du cadre de l'affiche. Carre pour les visuels de carrousel. */
   posterAspectClassName?: string;
   /**
@@ -27,6 +29,7 @@ export function SimpleActualitePage({
   imageAlt,
   intro,
   posterCardClassName,
+  heroClassName = "bg-gradient-to-br from-primary/5 via-secondary/10 to-background",
   posterAspectClassName = "aspect-[3/4]",
   carrousel,
 }: SimpleActualitePageProps) {
@@ -35,7 +38,7 @@ export function SimpleActualitePage({
       <Header />
 
       <section className="relative pt-24 lg:pt-32 pb-12 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/10 to-background" />
+        <div className={cn("absolute inset-0", heroClassName)} />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto">
             <BackToActualitesLink className="mb-6" />
