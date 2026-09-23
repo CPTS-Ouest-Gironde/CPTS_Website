@@ -1,0 +1,55 @@
+{
+  "title": "Santé mentale des jeunes : parlons-en !",
+  "image": "/actu/sante-mentale-jeunes-2026/affiche-sante-mentale-jeunes-2026.webp",
+  "imageAlt": "Affiche Soirée parentalité Santé mentale des jeunes, parlons-en ! Jeudi 1er octobre 2026 à 18h30, centre Joséphine Baker, Saint-Jean-d'Illac",
+  "intro": "Une soirée pour partager. La Ville de Saint-Jean-d'Illac organise une soirée d'échange et de sensibilisation autour de la santé mentale des jeunes, ouverte aux familles et aux professionnels.",
+  "accroche": "Soirée parentalité – conférence et ateliers thématiques",
+  "objectif": "Mieux comprendre les enjeux liés à la santé mentale des jeunes, identifier les signes de fragilité et découvrir les ressources qui peuvent accompagner les adolescents et leur entourage.",
+  "infos": [
+    {
+      "iconName": "CalendarDays",
+      "label": "Date",
+      "text": "Jeudi 1er octobre 2026, à 18h30"
+    },
+    {
+      "iconName": "MapPin",
+      "label": "Lieu",
+      "text": "Centre Joséphine Baker – salle S. Villenave, Saint-Jean-d'Illac"
+    },
+    {
+      "iconName": "Users",
+      "label": "Public",
+      "text": "Familles et professionnels, dans un cadre bienveillant et accessible à tous"
+    }
+  ],
+  "programmeTitle": "Deux grands temps",
+  "programmeItems": [
+    {
+      "title": "Une conférence",
+      "text": "Qu'est-ce que la santé mentale ?"
+    },
+    {
+      "title": "Des ateliers thématiques",
+      "text": "Des échanges autour de trois thèmes : les signes d'alerte, la prévention et les troubles du neurodéveloppement."
+    }
+  ],
+  "intervenants": {
+    "title": "Soirée animée par",
+    "items": [
+      "Réseau Ados Gironde",
+      "Maxime David, thérapeute",
+      "Pôle Ressource Handicap 33"
+    ]
+  },
+  "video": {
+    "title": "Une première sensibilisation à la santé mentale",
+    "text": "En attendant la soirée, cette courte vidéo propose une première approche de ce qu'est la santé mentale.",
+    "youtubeId": "wRhDO5TUdHU",
+    "source": "Source : Promotion Santé Normandie"
+  },
+  "inscription": {
+    "label": "Je souhaite participer",
+    "link": "https://docs.google.com/forms/d/e/1FAIpQLSfzvdWwm_-a-DRvs8PKtYZtzt1TRj1GNL3POACesitZQAzTSw/viewform",
+    "note": "Vous souhaitez participer ? Faites-le savoir en remplissant le formulaire d'inscription."
+  }
+}

@@ -245,6 +245,12 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     path: "app/data/octobre-rose-pessac-2026.json",
     collectAllText: true,
   },
+  {
+    slug: "sante-mentale-jeunes-2026",
+    resourceId: "actu-sante-mentale-jeunes-2026",
+    path: "app/data/sante-mentale-jeunes-2026.json",
+    collectAllText: true,
+  },
 ]
 
 const TODO_SOURCES = [

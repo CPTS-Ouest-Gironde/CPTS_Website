@@ -1351,3 +1351,47 @@ test("processUserInput \"mammographie\" garde la page prévention en tête, pas 
 
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sf-octobre-rose-2025")
 })
+
+test("processUserInput \"soirée santé mentale des jeunes\" remonte l'actualité avec un extrait", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "c'est quoi la soirée santé mentale des jeunes", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait attendu pour la soirée santé mentale des jeunes")
+  assert.match(extractMessage.text, /Saint-Jean-d'Illac/)
+  assert.equal(suggestionIds[0], "actu-sante-mentale-jeunes-2026")
+})
+
+test("processUserInput \"inscription soirée santé mentale\" place l'actualité en tête", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "comment faire l'inscription à la soirée santé mentale", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "actu-sante-mentale-jeunes-2026")
+})
+
+test("processUserInput \"mon ado va mal\" garde la page santé mentale des jeunes, pas l'événement en tête", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "mon adolescent a un mal être", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestionIds.includes("sante-mentale-jeunes"), "la page santé mentale des jeunes attendue")
+  assert.notEqual(suggestionIds[0], "actu-sante-mentale-jeunes-2026", "l'événement ne doit pas passer devant les ressources d'aide")
+})
+
+test("processUserInput \"je veux me tuer\" reste une urgence malgré l'actualité santé mentale", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "je veux me tuer", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestionIds.includes("urgence-3114"), "urgence-3114 attendu")
+  assert.ok(!suggestionIds.includes("actu-sante-mentale-jeunes-2026"), "l'actualité ne doit pas concurrencer une urgence")
+})
