@@ -15,16 +15,17 @@ export default function OctobreRosePessac2026Page() {
       title={data.title}
       imageSrc={data.image}
       imageAlt={data.imageAlt}
+      heroClassName="bg-gradient-to-br from-pink-100 via-pink-50/60 to-background"
       carrousel={[
         { src: data.programme.image, alt: data.programme.imageAlt },
       ]}
       intro={
         <div className="space-y-6">
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 lg:p-6 space-y-4">
+          <div className="rounded-2xl border border-pink-200 bg-pink-50 p-5 lg:p-6 space-y-4">
             <p className="text-base lg:text-lg font-semibold text-foreground">
               {data.intro}
             </p>
-            <p className="inline-block rounded-full bg-white border border-primary/30 px-4 py-2 text-sm lg:text-base font-semibold text-primary">
+            <p className="inline-block rounded-full bg-white border border-pink-300 px-4 py-2 text-sm lg:text-base font-semibold text-pink-700">
               {data.accroche}
             </p>
           </div>
@@ -37,7 +38,7 @@ export default function OctobreRosePessac2026Page() {
                   key={info.label}
                   className="rounded-2xl border border-border bg-card p-5 space-y-2"
                 >
-                  <div className="flex items-center gap-2 text-primary">
+                  <div className="flex items-center gap-2 text-pink-600">
                     {Icon && <Icon className="w-5 h-5" aria-hidden="true" />}
                     <span className="text-xs font-semibold uppercase tracking-wide">
                       {info.label}
@@ -60,7 +61,7 @@ export default function OctobreRosePessac2026Page() {
                   className="flex items-start gap-3 text-muted-foreground leading-relaxed"
                 >
                   <span
-                    className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary"
+                    className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-pink-500"
                     aria-hidden="true"
                   />
                   <span>{item}</span>
@@ -94,7 +95,7 @@ export default function OctobreRosePessac2026Page() {
             </p>
             <a
               href={data.depistage.link}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-primary text-primary-foreground px-5 py-2.5 text-sm font-semibold hover:bg-primary/90 transition-colors flex-shrink-0"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-pink-600 text-white px-5 py-2.5 text-sm font-semibold hover:bg-pink-700 transition-colors flex-shrink-0"
             >
               {data.depistage.label}
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
