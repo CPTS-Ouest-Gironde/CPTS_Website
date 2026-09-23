@@ -1622,6 +1622,43 @@
           "sectionIndex": 4
         }
       ]
+    },
+    {
+      "articleId": "sante-mentale-jeunes-2026",
+      "resourceId": "actu-sante-mentale-jeunes-2026",
+      "title": "Santé mentale des jeunes : parlons-en !",
+      "chunks": [
+        {
+          "sectionTitle": "Introduction",
+          "text": "Une soirée pour partager. La Ville de Saint-Jean-d'Illac organise une soirée d'échange et de sensibilisation autour de la santé mentale des jeunes, ouverte aux familles et aux professionnels.",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "Parcours de dépistage cardio-vasculaire : date, lieu, public",
+          "text": "Date Jeudi 1er octobre 2026, à 18h30 Lieu Centre Joséphine Baker – salle S. Villenave, Saint-Jean-d'Illac Public Familles et professionnels, dans un cadre bienveillant et accessible à tous",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "programmeItems",
+          "text": "Une conférence Qu'est-ce que la santé mentale ? Des ateliers thématiques Des échanges autour de trois thèmes : les signes d'alerte, la prévention et les troubles du neurodéveloppement.",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "intervenants",
+          "text": "Soirée animée par Réseau Ados Gironde Maxime David, thérapeute Pôle Ressource Handicap 33",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "video",
+          "text": "Une première sensibilisation à la santé mentale En attendant la soirée, cette courte vidéo propose une première approche de ce qu'est la santé mentale. wRhDO5TUdHU Source : Promotion Santé Normandie",
+          "sectionIndex": 4
+        },
+        {
+          "sectionTitle": "Inscription",
+          "text": "Je souhaite participer Vous souhaitez participer ? Faites-le savoir en remplissant le formulaire d'inscription.",
+          "sectionIndex": 5
+        }
+      ]
     }
   ]
 }

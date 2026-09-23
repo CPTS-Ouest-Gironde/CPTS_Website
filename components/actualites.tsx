@@ -13,6 +13,13 @@ import { cn } from "@/lib/utils";
 
 const actualites = [
   {
+    title: "Santé mentale des jeunes : parlons-en !",
+    image: "/actu/sante-mentale-jeunes-2026/affiche-sante-mentale-jeunes-2026.webp",
+    link: "/actualites/sante-mentale-jeunes-2026",
+    // Visuel 4:5 comme la carte : meme padding que l'affiche des urgences.
+    imageClassName: "p-7 lg:p-8",
+  },
+  {
     title: "Octobre Rose à Pessac",
     image: "/actu/7-octobre-rose-2026/affiche-octobre-rose-pessac-2026.webp",
     link: "/actualites/octobre-rose-pessac-2026",
