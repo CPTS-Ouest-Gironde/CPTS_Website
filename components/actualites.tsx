@@ -1,18 +1,22 @@
+"use client";
+
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
-// À rétablir avec le carrousel (voir plus bas) :
-// "use client";
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-//   CarouselPrevious,
-//   CarouselNext,
-// } from "@/components/ui/carousel";
-
 const actualites = [
+  {
+    title: "Octobre Rose à Pessac",
+    image: "/actu/7-octobre-rose-2026/affiche-octobre-rose-pessac-2026.webp",
+    link: "/actualites/octobre-rose-pessac-2026",
+  },
   {
     title: "Journée du Cœur des Femmes",
     image: "/actu/journee-coeur-des-femmes/affiche-journee-coeur-des-femmes.webp",
@@ -111,17 +115,16 @@ export function Actualites() {
             <div className="w-24 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 mx-auto rounded-full" />
           </div>
 
+          {/* Affichage grille (3 cartes max) : à rétablir à la place du
+              carrousel quand il y a 3 cartes ou moins, et retirer le
+              "use client" et les imports Carousel en haut du fichier.
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
             {actualites.map((actu, index) => (
               <ActuCard key={index} actu={actu} />
             ))}
-            {/* Emplacement en attente : reafficher <ActuPlaceholderCard /> ici
-                quand il reste une place libre sur la ligne de trois cartes. */}
           </div>
-
-          {/* Affichage carrousel : à réactiver quand il y aura plus de 3 cartes
-              (remplacer la grille ci-dessus par ce bloc et rétablir le
-              "use client" et les imports Carousel en haut du fichier).
+          */}
 
           <Carousel
             opts={{
@@ -141,18 +144,12 @@ export function Actualites() {
                   </div>
                 </CarouselItem>
               ))}
-              <CarouselItem className="pl-2 md:pl-4 basis-[85%] md:basis-[47%] lg:basis-[32%]">
-                <div className="h-full flex">
-                  <ActuPlaceholderCard />
-                </div>
-              </CarouselItem>
             </CarouselContent>
             <div className="flex justify-center gap-4 mt-6">
               <CarouselPrevious className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
               <CarouselNext className="static translate-y-0 bg-primary text-white hover:bg-primary/90" />
             </div>
           </Carousel>
-          */}
         </div>
       </div>
     </section>

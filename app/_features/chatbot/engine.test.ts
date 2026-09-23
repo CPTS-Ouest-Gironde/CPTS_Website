@@ -1309,3 +1309,45 @@ test("processUserInput \"douleur au coeur\" reste une urgence malgré l'actualit
   assert.ok(suggestionIds.includes("urgence-15"), "urgence-15 attendu sur une douleur au coeur")
   assert.ok(!suggestionIds.includes("actu-journee-coeur-des-femmes"), "l'actualité ne doit pas concurrencer une urgence")
 })
+
+test("processUserInput \"octobre rose à pessac\" remonte l'actualité avec un extrait", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "octobre rose à pessac", chatbotConfig)
+
+  const extractMessage = nextState.messages.find((message) => message.text.includes("Voici ce que j'ai trouvé"))
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(extractMessage, "extrait attendu pour Octobre Rose à Pessac")
+  assert.match(extractMessage.text, /Pessac/)
+  assert.equal(suggestionIds[0], "actu-octobre-rose-pessac-2026")
+})
+
+test("processUserInput \"marche rose\" place l'actualité en tête", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "à quelle heure est la marche rose", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "actu-octobre-rose-pessac-2026")
+})
+
+test("processUserInput \"octobre rose\" propose l'actualité et la page prévention", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "octobre rose", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestionIds.includes("actu-octobre-rose-pessac-2026"), "l'actualité Octobre Rose Pessac attendue")
+  assert.ok(suggestionIds.includes("sf-octobre-rose-2025"), "la page prévention Octobre Rose attendue")
+})
+
+test("processUserInput \"mammographie\" garde la page prévention en tête, pas l'événement", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "où faire une mammographie", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sf-octobre-rose-2025")
+})

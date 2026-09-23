@@ -1590,6 +1590,38 @@
           "sectionIndex": 4
         }
       ]
+    },
+    {
+      "articleId": "octobre-rose-pessac-2026",
+      "resourceId": "actu-octobre-rose-pessac-2026",
+      "title": "Octobre Rose à Pessac",
+      "chunks": [
+        {
+          "sectionTitle": "Introduction",
+          "text": "« Le plus beau patrimoine, c'est votre santé. » La Ville de Pessac et son CCAS vous donnent rendez-vous pour une après-midi de sensibilisation au dépistage du cancer du sein, ouverte à toutes et à tous.",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "Parcours de dépistage cardio-vasculaire : date, lieu, public",
+          "text": "Date Mercredi 7 octobre 2026, de 14h à 18h Lieu Place de la Ve République, Pessac Marche rose Départ à 15h pour 4 km dans la ville, après un échauffement à 14h30",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "programmeItems",
+          "text": "Stands d'information et de sensibilisation avec la Ligue contre le Cancer Gironde Stands d'animation, jeux et musique Performance d'une artiste muraliste et création collective ouverte à tous les âges Sélection de livres de la Bibliambule Collation rose à 16h pour clôturer l'après-midi",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "autresRendezVous",
+          "text": "Et aussi en octobre à Pessac 2 et 3 octobre : salon Santé & Bien-être du Soroptimist, avec des conférences médicales sur inscription 4 octobre : match de basket rose de l'Entente Pessac Basket Club 10 et 11 octobre : tournoi de softball mixte « Les Panthères Roses » Une tombola est organisée au…",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "depistage",
+          "text": "Sans symptôme ni risque particulier, le dépistage du cancer du sein par mammographie est recommandé tous les deux ans de 50 à 74 ans. Vous avez des questions sur le dépistage ou l'auto-palpation ? Voir notre page Octobre Rose",
+          "sectionIndex": 4
+        }
+      ]
     }
   ]
 }

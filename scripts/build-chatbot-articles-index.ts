@@ -239,6 +239,12 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     path: "app/data/journee-coeur-des-femmes.json",
     collectAllText: true,
   },
+  {
+    slug: "octobre-rose-pessac-2026",
+    resourceId: "actu-octobre-rose-pessac-2026",
+    path: "app/data/octobre-rose-pessac-2026.json",
+    collectAllText: true,
+  },
 ]
 
 const TODO_SOURCES = [
