@@ -34,6 +34,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/prevention/sante-familiale/octobre-rose-2025',
+        destination: '/prevention/sante-familiale/octobre-rose-2026',
+        permanent: true,
+      },
+      {
         source: '/presentation-de-la-cpts-ouest-gironde',
         destination: '/presentation',
         permanent: true,
