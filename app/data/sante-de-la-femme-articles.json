@@ -3,6 +3,15 @@
   "subtitle": "Nos ressources de prévention dédiées à la santé des femmes",
   "articles": [
     {
+      "id": "octobre-rose-2026",
+      "title": "Octobre Rose 2026",
+      "dateLabel": "2 octobre 2026",
+      "date": "2026-10-02",
+      "image": "/prevention/sante-famille/octobre-rose-2.webp",
+      "imagePosition": null,
+      "href": "/prevention/sante-familiale/octobre-rose-2026"
+    },
+    {
       "id": "face-aux-violences",
       "title": "Face aux violences, vous n'êtes pas seules !",
       "dateLabel": "4 juin 2026",
@@ -28,15 +37,6 @@
       "image": "/endometriose-depistage-prise-en-charge/endometriose-hero.jpg",
       "imagePosition": null,
       "href": "/prevention/sante-familiale/endometriose-depistage-prise-en-charge"
-    },
-    {
-      "id": "octobre-rose-2026",
-      "title": "Octobre Rose 2026",
-      "dateLabel": "2 octobre 2026",
-      "date": "2026-10-02",
-      "image": "/prevention/sante-famille/octobre-rose-2.webp",
-      "imagePosition": null,
-      "href": "/prevention/sante-familiale/octobre-rose-2026"
     },
     {
       "id": "sante-mentale-des-jeunes",

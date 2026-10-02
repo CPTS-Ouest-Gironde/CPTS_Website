@@ -3,6 +3,9 @@ import { Newspaper, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+// Image précédente : "/hero/hero-illustration-team.png"
+const HERO_IMAGE = "/hero-home-octobre-rose.webp";
+
 export function NewHero() {
   return (
     <section className="relative pt-[calc(var(--home-header-height)+2rem)] pb-8 lg:pt-[calc(var(--home-header-height)+3rem)] lg:pb-28 bg-transparent">
@@ -49,8 +52,8 @@ export function NewHero() {
           <div className="flex-1 min-w-0 w-full mt-2 lg:mt-0 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-[min(44rem,45vw)] h-[320px] sm:h-[360px] md:h-[420px] lg:h-[clamp(420px,40vw,620px)]">
               <Image
-                src="/hero/hero-illustration-team.png"
-                alt="Illustration professionnels de santé"
+                src={HERO_IMAGE}
+                alt="Illustration professionnels de santé mobilisés pour Octobre Rose"
                 fill
                 className="object-contain"
                 sizes="(max-width: 768px) 90vw, (max-width: 1024px) 70vw, 45vw"
