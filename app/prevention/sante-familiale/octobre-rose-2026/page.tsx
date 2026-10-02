@@ -1,15 +1,38 @@
 // @ts-nocheck
+import type { Metadata } from "next";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, ExternalLink, CalendarDays, Leaf, Users, LucideIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import data from "@/app/data/octobre-rose-2025.json";
+import data from "@/app/data/octobre-rose-2026.json";
 
 const IconMap: Record<string, LucideIcon> = { CalendarDays, Leaf, Users };
 
-export default function OctobreRose2025Page() {
+const pageTitle = `${data.title} | CPTS Ouest Gironde`;
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: data.description,
+  alternates: {
+    canonical: "/prevention/sante-familiale/octobre-rose-2026",
+  },
+  openGraph: {
+    title: pageTitle,
+    description: data.description,
+    type: "article",
+    locale: "fr_FR",
+    images: [{ url: `https://cpts-ouest-gironde.fr${data.image}`, alt: data.imageAlt }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: data.description,
+  },
+};
+
+export default function OctobreRose2026Page() {
   return (
     <main className="min-h-screen">
       <Header />
@@ -31,8 +54,8 @@ export default function OctobreRose2025Page() {
               {data.title}
             </h1>
             <div className="rounded-2xl overflow-hidden shadow-xl">
-              <div className="relative w-full aspect-[16/9]">
-                <Image src={data.image} alt={data.title} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 900px" />
+              <div className="relative w-full aspect-[16/9] bg-muted">
+                <Image src={data.image} alt={data.imageAlt} fill className="object-contain" priority sizes="(max-width: 768px) 100vw, 900px" />
               </div>
             </div>
           </div>
@@ -159,23 +182,37 @@ export default function OctobreRose2025Page() {
                   <p className="text-sm text-pink-600 font-semibold mt-1">{data.sections[4].subtitle}</p>
                 </div>
                 <div className="space-y-3">
-                  {data.sections[4].events.map((event, i) => (
-                    <div key={i} className="p-4 rounded-xl bg-white border border-rose-100">
-                      <p className="font-bold text-foreground text-sm mb-1">{event.title}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed mb-2">{event.text}</p>
-                      {event.link && (
-                        <a
-                          href={event.link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-pink-600 hover:text-pink-700 transition-colors"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          {event.link.label}
-                        </a>
-                      )}
-                    </div>
-                  ))}
+                  {data.sections[4].events.map((event, i) => {
+                    const linkClass = "inline-flex items-center gap-1.5 text-xs font-semibold text-pink-600 hover:text-pink-700 transition-colors";
+                    const isInternal = event.link?.url.startsWith("/");
+                    return (
+                      <div key={i} className="p-4 rounded-xl bg-white border border-rose-100">
+                        <p className="font-bold text-foreground text-sm mb-1">{event.title}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed mb-2">{event.text}</p>
+                        {event.items.length > 0 && (
+                          <ul className="space-y-1.5 mb-3">
+                            {event.items.map((item, j) => (
+                              <li key={j} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                <span className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 flex-shrink-0" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        {event.link && (isInternal ? (
+                          <Link href={event.link.url} className={linkClass}>
+                            <ExternalLink className="w-3 h-3" />
+                            {event.link.label}
+                          </Link>
+                        ) : (
+                          <a href={event.link.url} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                            <ExternalLink className="w-3 h-3" />
+                            {event.link.label}
+                          </a>
+                        ))}
+                      </div>
+                    );
+                  })}
                 </div>
               </CardContent>
             </Card>

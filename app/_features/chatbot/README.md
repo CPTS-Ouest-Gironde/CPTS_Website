@@ -49,7 +49,7 @@ L'ordre de résolution est strict :
 Exemples :
 
 - `médecin traitant` matche directement `medecin-traitant`.
-- `mammographie` matche `sf-octobre-rose-2025` via `keywordIndex`.
+- `mammographie` matche `sf-octobre-rose-2026` via `keywordIndex`.
 - `psicothérapie` peut remonter `sm-pro-approches` via Fuse si le matcher déterministe échoue.
 - Une phrase sans rapport affiche le hub `fallback`.
 

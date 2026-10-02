@@ -1,0 +1,129 @@
+{
+  "title": "OCTOBRE ROSE 2026",
+  "date": "2 octobre 2026",
+  "image": "/prevention/sante-famille/octobre-rose-2.webp",
+  "imageAlt": "Octobre Rose 2026 : sensibilisation au dépistage du cancer du sein",
+  "description": "Octobre Rose 2026 : dépistage du cancer du sein, chiffres clés en Nouvelle-Aquitaine, examens selon l'âge, facteurs de risque et rendez-vous sur votre territoire (Pessac, Saint-Jean-d'Illac, Martignas, Bergonié, CHU).",
+  "backLink": {
+    "label": "Retour à Santé familiale",
+    "href": "/prevention/sante-familiale"
+  },
+  "intro": {
+    "text": "Chaque année en France, 1 femme sur 8 risque de développer un cancer du sein.",
+    "paragraphs": [
+      "C'est le cancer le plus fréquent chez la femme et celui qui cause le plus grand nombre de décès avec 61 214 nouveaux cas détectés en 2023 : augmentation constante depuis 2010 !",
+      "Grâce au dépistage précoce, le cancer du sein peut être guéri dans 9 cas sur 10. Il permet aussi une prise en charge moins lourde pour les patientes (82 % de chirurgie conservatrice dans le dépistage organisé (DO) contre 70 % hors DO – 34 % de chimiothérapie dans le DO contre 53 % hors DO).",
+      "Pourtant, près d'une femme sur deux ne participe pas au dépistage organisé du cancer du sein en Nouvelle-Aquitaine."
+    ]
+  },
+  "chiffres": {
+    "title": "CHIFFRES CLÉS EN NOUVELLE-AQUITAINE",
+    "stats": [
+      { "value": "6 600", "label": "nouveaux cas de cancer du sein par an environ en Nouvelle-Aquitaine" },
+      { "value": "47,5 %", "label": "de taux de participation au dépistage organisé du cancer du sein en France en 2025 — près d'une femme sur deux ne participe pas au dépistage organisé dans la région" },
+      { "value": "7 500", "label": "cancers du sein dépistés grâce au dépistage organisé, dont certains grâce au système de seconde lecture" }
+    ],
+    "note": "Au-delà d'un simple dépistage, le dépistage organisé (DO) permet d'augmenter la qualité du contrôle grâce à une deuxième lecture systématique des mammographies, assurée par un second radiologue expert."
+  },
+  "sections": [
+    {
+      "id": "examens",
+      "title": "Le cancer du sein : quels examens et à quel âge ?",
+      "items": [
+        { "age": "Dès 25 ans", "text": "Un examen clinique des seins (observation et palpation) par un professionnel de santé est recommandé, tous les ans, dès l'âge de 25 ans." },
+        { "age": "Entre 50 et 74 ans", "text": "Sans symptôme ni niveau de risque élevé ou très élevé, un dépistage est recommandé par une mammographie tous les deux ans." },
+        { "age": "Après 74 ans", "text": "La question du dépistage du cancer du sein doit être examinée au cas par cas avec un médecin." }
+      ]
+    },
+    {
+      "id": "comment",
+      "title": "Le dépistage, comment ça marche ?",
+      "intro": "Le dépistage du cancer du sein repose sur :",
+      "steps": [
+        "Un examen clinique des seins",
+        "Une mammographie",
+        "Éventuellement, d'autres examens peuvent être nécessaires (par exemple une échographie +/- biopsie, une IRM, etc.)"
+      ],
+      "paragraphs": [
+        "Le dépistage permet de repérer une lésion avant l'apparition de symptômes, et notamment de détecter des cancers de petite taille et peu évolués avant qu'ils ne soient palpables. Le dépistage augmente les chances de guérison et permet la mise en place de traitements moins lourds et moins agressifs.",
+        "L'invitation pour réaliser la mammographie vous est envoyée par courrier si vous ne disposez pas de compte AMELI : sans réaction de votre part, une deuxième relance intervient 6 mois après. Pour avoir de nouvelles étiquettes d'identification, vous pouvez vous adresser à la CPAM via le 3646 (service gratuit + coût d'un appel).",
+        "Les médecins traitants pourront, courant 2024, disposer de la liste de leurs patientes qui n'ont pas réalisé leurs mammographies afin de mieux les sensibiliser."
+      ]
+    },
+    {
+      "id": "facteurs",
+      "title": "Quels sont les facteurs qui augmentent le risque ?",
+      "factors": [
+        { "iconName": "CalendarDays", "label": "L'âge", "text": "Près de 80 % des cancers du sein se développent après 50 ans." },
+        { "iconName": "Leaf", "label": "Nos modes de vie", "text": "Le tabac, l'alcool, le manque d'activité physique, une alimentation peu équilibrée… augmentent le risque de cancer, dont celui du sein." },
+        { "iconName": "Users", "label": "Les antécédents", "text": "Antécédents médicaux (précédents cancers, affections du sein), personnels (exposition aux radiations médicales avant 30 ans) et familiaux (cancers)." }
+      ]
+    },
+    {
+      "id": "showroom",
+      "title": "Le showroom – « cancer du sein »",
+      "paragraphs": [
+        "Visitez la nouvelle exposition interactive en ligne, pour informer et sensibiliser tous les publics et toutes les générations à l'intérêt du dépistage du cancer du sein.",
+        "Une expérience immersive et pédagogique qui se présente sous la forme d'une visite virtuelle pour apporter des réponses aux différentes questions concernant le cancer du sein : les facteurs de risques, la prévention, les modalités de dépistage selon l'âge et le niveau de risque, les examens d'imagerie et les traitements.",
+        "Le visiteur est accompagné tout au long de son parcours par Alice Detollenaere, mannequin et influenceuse, qui témoigne de l'intérêt d'un diagnostic précoce qui lui a sauvé la vie."
+      ],
+      "link": {
+        "label": "Visualiser l'exposition interactive du showroom du sein",
+        "url": "#showroom"
+      }
+    },
+    {
+      "id": "actions",
+      "title": "Quelles actions sur votre territoire ?",
+      "subtitle": "Les communes et établissements de votre territoire se mobilisent en 2026",
+      "events": [
+        {
+          "title": "Octobre Rose à Pessac — 13e édition",
+          "text": "Mercredi 7 octobre 2026, de 14h à 18h, place de la Ve République : marche rose de 4 km dans la ville (échauffement à 14h30, départ à 15h) et village d'information et d'animations avec la Ligue contre le Cancer Gironde.",
+          "items": [],
+          "link": { "label": "Voir notre actualité Octobre Rose à Pessac", "url": "/actualites/octobre-rose-pessac-2026" }
+        },
+        {
+          "title": "Marche Rose — Saint-Jean-d'Illac",
+          "text": "Samedi 24 octobre 2026, départ à 9h depuis le parvis de l'Espace Quérandeau (140 avenue du Las). Une marche solidaire de 5 km ouverte à tous, en faveur de la lutte contre le cancer du sein.",
+          "items": [],
+          "link": { "label": "mairie-stjeandillac.fr", "url": "https://www.mairie-stjeandillac.fr/mes-activites/agendas/detail/marche-rose" }
+        },
+        {
+          "title": "Octobre Rose à Martignas-sur-Jalle",
+          "text": "La Ville se mobilise aux côtés des professionnels de santé et de la Ligue contre le cancer, avec plusieurs rendez-vous ouverts à tous :",
+          "items": [
+            "Mercredi 7 octobre, 9h30–12h : stand de la Ligue contre le cancer au Café des Écureuils",
+            "Samedi 10 octobre, 10h–17h : journée sportive et stand de la Ligue contre le cancer, salle du Pays des Graves (gratuit, sans inscription)",
+            "Samedi 10 octobre, 20h30 : lecture musicale « Quatorze millimètres », salle Gérard-Philipe (gratuit, sur réservation)",
+            "Dimanche 11 octobre : La Marche de Laurène, rendez-vous devant la salle Gérard-Philipe, plaine André-Dolange — 8 km (départ 9h) ou 4 km (départ 10h), participation libre, inscription recommandée",
+            "Mardi 10 novembre, 20h : conférence « Prévenir, dépister, chercher » de la Ligue contre le cancer, salle Claude-Monet"
+          ],
+          "link": { "label": "ville-martignas.fr", "url": "https://www.ville-martignas.fr/actualites/octobre-rose/" }
+        },
+        {
+          "title": "Institut Bergonié — Bordeaux",
+          "text": "Le centre de lutte contre le cancer propose tout au long du mois des animations à l'Institut et avec ses partenaires :",
+          "items": [
+            "Jeudi 1er octobre, 10h–12h et 14h–16h : forum des associations et stand de prévention, hall A",
+            "Mardi 6 octobre : info-café avec Sœurs d'Encre et atelier culinaire à 12h (inscription auprès de la Maison des Usagers, 05 56 33 33 54)",
+            "Du 7 au 11 octobre : spectacle « Sein dessus dessous » au Théâtre du Pont Tournant",
+            "Samedi 10 octobre : tournoi Bergo Rugby Rose, plaine des sports Colette Besson",
+            "Lundi 12 octobre, 10h30–12h : atelier Belle et Bien, bibliothèque de l'Institut (inscription au 05 56 33 33 54)",
+            "Jeudi 29 octobre : action de prévention avec le Bergo'bus à La Grande Poste, Bordeaux"
+          ],
+          "link": { "label": "bergonie.fr — programme complet", "url": "https://www.bergonie.fr/octobre-rose-2026/" }
+        },
+        {
+          "title": "CHU de Bordeaux — hôpital Pellegrin",
+          "text": "Du 12 au 16 octobre 2026, dans le hall de la maternité du Centre Aliénor d'Aquitaine : une semaine d'information et d'échanges autour de la prévention et du dépistage du cancer du sein.",
+          "items": [
+            "Ateliers d'auto-palpation (buste pédagogique), roue éducative et espace d'écoute et de soutien : de 10h à 12h et de 14h à 16h",
+            "Rencontres avec des professionnels de santé : de 13h30 à 14h30"
+          ],
+          "link": { "label": "chu-bordeaux.fr — programme", "url": "https://www.chu-bordeaux.fr/Espace-m%C3%A9dia/Actualit%C3%A9s/Octobre-Rose-2026-:-le-CHU-de-Bordeaux-mobilis%C3%A9-pour-la-pr%C3%A9vention-et-le-d%C3%A9pistage-du-cancer-du-sein/" }
+        }
+      ]
+    }
+  ]
+}

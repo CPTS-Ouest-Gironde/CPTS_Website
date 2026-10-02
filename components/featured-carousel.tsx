@@ -73,7 +73,7 @@ export function FeaturedCarousel() {
                   src={slide.image}
                   alt={slide.alt}
                   fill
-                  className="object-cover"
+                  className={slide.imageFit === "contain" ? "object-contain" : "object-cover"}
                   priority={index === 0}
                   loading={index === 0 ? undefined : "lazy"}
                   sizes="(max-width: 1280px) 100vw, 1280px"
