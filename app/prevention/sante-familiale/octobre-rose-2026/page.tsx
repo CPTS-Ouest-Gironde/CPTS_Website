@@ -54,8 +54,8 @@ export default function OctobreRose2026Page() {
               {data.title}
             </h1>
             <div className="rounded-2xl overflow-hidden shadow-xl">
-              <div className="relative w-full aspect-[16/9]">
-                <Image src={data.image} alt={data.imageAlt} fill className="object-cover" priority sizes="(max-width: 768px) 100vw, 900px" />
+              <div className="relative w-full aspect-[16/9] bg-muted">
+                <Image src={data.image} alt={data.imageAlt} fill className="object-contain" priority sizes="(max-width: 768px) 100vw, 900px" />
               </div>
             </div>
           </div>

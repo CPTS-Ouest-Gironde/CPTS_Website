@@ -2,6 +2,7 @@
   "slides": [
     {
       "image": "/prevention/sante-famille/octobre-rose-2.webp",
+      "imageFit": "contain",
       "title": "Octobre Rose 2026 : le dépistage du cancer du sein et les rendez-vous sur votre territoire",
       "alt": "Octobre Rose 2026 : deux mains peintes en rose forment le ruban rose du dépistage du cancer du sein",
       "link": "/prevention/sante-familiale/octobre-rose-2026"
