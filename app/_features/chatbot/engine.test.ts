@@ -425,14 +425,14 @@ test("processQuickReply branche patient mène à documents-patient sans ressourc
   assert.ok(suggestedResourceIds.every((resourceId) => !proResourceIds.includes(resourceId)))
 })
 
-test("processUserInput mammographie matche sf-octobre-rose-2025", () => {
+test("processUserInput mammographie matche sf-octobre-rose-2026", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "mammographie", chatbotConfig)
 
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
 
   assert.ok(suggestionMessage)
-  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-octobre-rose-2025"))
+  assert.ok(suggestionMessage.suggestions?.some((item) => item.resource.id === "sf-octobre-rose-2026"))
 })
 
 test("processUserInput oriente la douleur ovarienne sans matcher urgence-17", () => {
@@ -452,7 +452,7 @@ test("processUserInput filtre les ressources récemment proposées", () => {
   const secondState = processUserInput(firstState, "mammographie", chatbotConfig)
   const lastBotMessage = getLastBotMessage(secondState.messages)
 
-  assert.ok(firstState.recentlySuggested.includes("sf-octobre-rose-2025"))
+  assert.ok(firstState.recentlySuggested.includes("sf-octobre-rose-2026"))
   assert.equal(secondState.currentNodeId, "fallback")
   assert.match(lastBotMessage?.text ?? "", /pas bien compris/i)
 })
@@ -544,7 +544,7 @@ test("processUserInput marqueur exploratoire \"comment se passe le dépistage co
 
   assert.ok(extractMessage, "extrait Mars Bleu attendu sur dépistage colorectal")
   assert.ok(suggestionIds.includes("sf-mars-bleu-2026"), "sf-mars-bleu-2026 attendu en suggestion")
-  assert.ok(!suggestionIds.includes("sf-octobre-rose-2025"), "sf-octobre-rose-2025 (cancer du sein) ne doit pas remonter sur dépistage colorectal")
+  assert.ok(!suggestionIds.includes("sf-octobre-rose-2026"), "sf-octobre-rose-2026 (cancer du sein) ne doit pas remonter sur dépistage colorectal")
 })
 
 test("processUserInput marqueur exploratoire \"j'ai des questions sur l'endométriose\" cible l'article endométriose pas Questions Psy", () => {
@@ -1051,7 +1051,7 @@ test("ACTION 6 — hydrateState fallback si version persistée obsolète", () =>
     state: {
       currentNodeId: "start",
       messages: [],
-      recentlySuggested: ["sf-octobre-rose-2025"],
+      recentlySuggested: ["sf-octobre-rose-2026"],
       audienceContext: "patient",
     },
   }
@@ -1340,7 +1340,7 @@ test("processUserInput \"octobre rose\" propose l'actualité et la page prévent
   const suggestionIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
 
   assert.ok(suggestionIds.includes("actu-octobre-rose-pessac-2026"), "l'actualité Octobre Rose Pessac attendue")
-  assert.ok(suggestionIds.includes("sf-octobre-rose-2025"), "la page prévention Octobre Rose attendue")
+  assert.ok(suggestionIds.includes("sf-octobre-rose-2026"), "la page prévention Octobre Rose attendue")
 })
 
 test("processUserInput \"mammographie\" garde la page prévention en tête, pas l'événement", () => {
@@ -1349,7 +1349,7 @@ test("processUserInput \"mammographie\" garde la page prévention en tête, pas 
 
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
 
-  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sf-octobre-rose-2025")
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sf-octobre-rose-2026")
 })
 
 test("processUserInput \"soirée santé mentale des jeunes\" remonte l'actualité avec un extrait", () => {
