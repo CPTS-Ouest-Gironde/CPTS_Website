@@ -87,13 +87,13 @@
         },
         {
           "label": "FIL SANTE JEUNES",
-          "text": "0 800 235 236 : espace de discussion et de chat pour les 12/25 ans. Anonyme et accessible de 09h à 23h et ce 24H SUR 24H.",
+          "text": "0 800 235 236 : écoute et tchat pour les 12-25 ans. Anonyme et gratuit, tous les jours de 9h à 23h.",
           "image": null,
           "imageAlt": null
         },
         {
           "label": "NIGHTLINE",
-          "text": "Service d'écoute confidentiel et anonyme tenu par des étudiants de 21h à 02H20. Possibilité de s'exprimer en anglais.",
+          "text": "Ligne d'écoute par et pour les étudiants, tous les soirs de 21h à 2h30 : 0 809 104 104 (en français) ou 0 809 104 105 (en anglais), et par tchat sur nightline.fr. Gratuit, anonyme et confidentiel.",
           "image": null,
           "imageAlt": null
         },
@@ -123,7 +123,19 @@
         },
         {
           "label": "DROGUES INFO SERVICE",
-          "text": "Pour les jeunes en difficultés en lien avec des ADDICTIONS : 0 800 23 13 13 tous les jours de 08H à 02H.",
+          "text": "Pour les jeunes en difficulté en lien avec des ADDICTIONS : 0 800 23 13 13, appel gratuit et anonyme tous les jours de 8h à 23h (tchat de 12h à 19h).",
+          "image": null,
+          "imageAlt": null
+        },
+        {
+          "label": "ALCOOL INFO SERVICE",
+          "text": "0 980 980 930 : appel anonyme et non surtaxé, tous les jours de 8h à 2h. Tchat individuel sur alcool-info-service.fr.",
+          "image": null,
+          "imageAlt": null
+        },
+        {
+          "label": "TABAC INFO SERVICE",
+          "text": "39 89 : accompagnement gratuit par un tabacologue, du lundi au samedi de 8h à 20h.",
           "image": null,
           "imageAlt": null
         }
