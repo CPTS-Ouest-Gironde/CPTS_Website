@@ -191,6 +191,50 @@ test("processUserInput dispositifs du territoire matche la ressource professionn
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "pro-dispositifs-territoire")
 })
 
+const proCases: Array<[string, string]> = [
+  ["rcp cas complexe", "pro-rcp-cas-complexes"],
+  ["questionnaire rcp", "pro-rcp-cas-complexes"],
+  ["questionnaire requérant", "pro-rcp-cas-complexes"],
+  ["requête patient", "pro-rcp-cas-complexes"],
+  ["rcp psy questionnaire", "pro-rcp-psy"],
+  ["orientation psy", "pro-rcp-psy"],
+  ["guichet unique", "pro-chu-guichet-unique"],
+  ["numéro villehop", "pro-chu-guichet-unique"],
+  ["télé-expertise CHU", "pro-chu-tele-expertise"],
+]
+
+for (const [input, expectedId] of proCases) {
+  test(`processUserInput "${input}" (pro) place ${expectedId} en tête`, () => {
+    const initialState = { ...createInitialState(chatbotConfig), audienceContext: "pro" as const }
+    const nextState = processUserInput(initialState, input, chatbotConfig)
+
+    const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+    assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, expectedId)
+  })
+}
+
+test("processUserInput \"questionnaire rcp\" (pro) propose les RCP cas complexes et psy", () => {
+  const initialState = { ...createInitialState(chatbotConfig), audienceContext: "pro" as const }
+  const nextState = processUserInput(initialState, "questionnaire rcp", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("pro-rcp-cas-complexes"))
+  assert.ok(suggestedIds.includes("pro-rcp-psy"))
+})
+
+test("processUserInput \"guichet unique\" sans contexte pro ne propose pas la ressource CHU", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "guichet unique", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(!suggestedIds.includes("pro-chu-guichet-unique"))
+})
+
 test("processUserInput matche une douleur à la tête en phrase naturelle", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "j'ai mal à la tête", chatbotConfig)
