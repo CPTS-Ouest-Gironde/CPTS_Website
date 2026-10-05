@@ -201,6 +201,8 @@ const proCases: Array<[string, string]> = [
   ["guichet unique", "pro-chu-guichet-unique"],
   ["numéro villehop", "pro-chu-guichet-unique"],
   ["télé-expertise CHU", "pro-chu-tele-expertise"],
+  ["convention vis ma vie", "ao-convention-vis-ma-vie"],
+  ["immersion chez un confrère", "ao-convention-vis-ma-vie"],
 ]
 
 for (const [input, expectedId] of proCases) {

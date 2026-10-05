@@ -1210,20 +1210,36 @@ export const accordionItemsParcours: AccordionItem[] = [
           </p>
         </div>
 
-        {/* Le principe */}
+        {/* Le principe (source : article 1 de la convention) */}
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-foreground">Le principe</h3>
           <p className="text-muted-foreground leading-relaxed">
-            Ouvrir son cabinet à d&apos;autres spécialités, accompagner sur du
-            domicile (avec l&apos;accord du patient).
+            Une immersion d&apos;une{" "}
+            <strong className="text-foreground">
+              demi-journée, indemnisée par la CPTS
+            </strong>
+            , chez un professionnel de santé ou dans une structure du
+            territoire, encadrée par une convention signée entre les deux
+            parties.
           </p>
           <div className="bg-primary/5 p-5 rounded-lg border-l-4 border-primary">
             <p className="text-foreground leading-relaxed">
-              Passer une <strong>demi-journée, indemnisée par la CPTS</strong>,
-              avec un professionnel de santé et découvrir son organisation, ses
-              compétences, ses contraintes — afin d&apos;améliorer le parcours
-              patient.
+              L&apos;objectif : mieux se connaître et appréhender les
+              spécificités de l&apos;exercice de chacun, découvrir la
+              coordination de parcours auprès des personnes accompagnées,
+              identifier les besoins spécifiques liés aux différents profils
+              de patients, et se sensibiliser aux bonnes pratiques des
+              professionnels habitués à accompagner des publics spécifiques.
             </p>
+          </div>
+          <p className="text-muted-foreground leading-relaxed">
+            Le temps passé peut être déclaré conjointement à la CPTS.
+          </p>
+          <div className="grid gap-3">
+            <DownloadButton
+              fileName="Convention Vis ma vie (à compléter et signer)"
+              fileUrl="/actions-outils/vis-ma-vie/convention-vis-ma-vie.pdf"
+            />
           </div>
         </div>
 
