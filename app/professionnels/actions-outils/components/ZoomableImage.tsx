@@ -16,6 +16,8 @@ type ZoomableImageProps = {
   width: number;
   height: number;
   sizes?: string;
+  /** Zoom aussi sur desktop (par défaut, l'image n'est agrandissable que sur mobile/tablette). */
+  alwaysZoomable?: boolean;
 };
 
 export function ZoomableImage({
@@ -24,6 +26,7 @@ export function ZoomableImage({
   width,
   height,
   sizes,
+  alwaysZoomable = false,
 }: ZoomableImageProps) {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -33,7 +36,9 @@ export function ZoomableImage({
         type="button"
         onClick={() => setIsOpen(true)}
         aria-label={`Agrandir l'image : ${alt}`}
-        className="relative block w-full cursor-zoom-in border border-primary/15 bg-white lg:pointer-events-none lg:cursor-default"
+        className={`relative block w-full cursor-zoom-in border border-primary/15 bg-white ${
+          alwaysZoomable ? "" : "lg:pointer-events-none lg:cursor-default"
+        }`}
       >
         <Image
           src={src}
@@ -45,7 +50,9 @@ export function ZoomableImage({
         />
         <span
           aria-hidden="true"
-          className="absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-background/80 backdrop-blur-sm lg:hidden"
+          className={`absolute top-3 right-3 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-background/80 backdrop-blur-sm ${
+            alwaysZoomable ? "" : "lg:hidden"
+          }`}
         >
           <ZoomIn className="h-4 w-4 text-foreground" />
         </span>

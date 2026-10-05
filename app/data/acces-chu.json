@@ -1,0 +1,39 @@
+{
+  "intro": "Le CHU de Bordeaux met à disposition des professionnels de ville deux portes d'entrée pour joindre ses services, demander un avis ou adresser un patient.",
+  "guichet": {
+    "title": "Guichet unique ville-hôpital",
+    "subtitle": "Un seul numéro, toute l'expertise du CHU à votre portée",
+    "flyer": {
+      "src": "/actions-outils/acces-chu/flyer-guichet-unique-ville-hopital.webp",
+      "alt": "Flyer du guichet unique ville-hôpital du CHU de Bordeaux : 05 57 821 821 du lundi au vendredi de 9h à 17h, villehop@chu-bordeaux.fr",
+      "width": 724,
+      "height": 1024
+    },
+    "phone": "05 57 821 821",
+    "hours": "Du lundi au vendredi, de 9h à 17h",
+    "emails": ["villehop@chu-bordeaux.fr", "villehop@chu-bordeaux.mssante.fr"],
+    "usages": [
+      "Demander un avis d'expert",
+      "Prendre un rendez-vous",
+      "Obtenir un document",
+      "Être mis en relation",
+      "Solliciter une hospitalisation"
+    ],
+    "legende": {
+      "title": "Le guichet unique en chiffres",
+      "paragraphs": [
+        "Le guichet unique couvre actuellement la Gironde (33), avec une extension à venir aux départements 47 et 64.",
+        "Qui sollicite le guichet ? Médecins généralistes 51 %, médecins libéraux 30 %, pharmacies 10 %. Les établissements extérieurs représentent 67 % des sollicitations.",
+        "Pour quelles demandes ? 60 % de demandes de courriers ou de résultats (biologie, imagerie), 10 % d'ordonnances non conformes, suspicions de fraude ou changements de molécule, 20 % d'adressages ou d'avis spécialisés. Filières les plus sollicitées : ORL, pédiatrie, neurologie et médecine interne."
+      ]
+    }
+  },
+  "teleExpertise": {
+    "title": "Télé-expertise du CHU de Bordeaux",
+    "text": "Pour accéder à des consultations et des avis spécialisés, contactez les différents services en transmettant les documents du patient de façon sécurisée. De nombreuses spécialités sont représentées.",
+    "link": {
+      "label": "Accéder à la télé-expertise du CHU",
+      "url": "https://www.chu-bordeaux.fr/Professionnels-recherche/TELEEXPERTISE-OU-AVIS-SPECIALISE-/"
+    }
+  }
+}

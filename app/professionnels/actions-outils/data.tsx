@@ -6,8 +6,9 @@ import { RcpTeamCard } from "./components/RcpTeamCard";
 import { ZoomableImage } from "./components/ZoomableImage";
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Mail, Phone, Clock } from "lucide-react";
 import { DownloadButton } from "@/components/download-button";
+import accesChu from "@/app/data/acces-chu.json";
 
 export const accordionItemsAcces: AccordionItem[] = [
   {
@@ -134,6 +135,104 @@ Comment : Saisir la CPAM de situations d'assurés via un formulaire de saisine �
             </ol>
           </li>
         </ul>
+      </div>
+    ),
+  },
+  {
+    id: "acces-chu",
+    title: "Accès au service hospitalier public, CHU",
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-8">
+        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl">
+          <p className="text-foreground leading-relaxed text-lg">{accesChu.intro}</p>
+        </div>
+
+        {/* Guichet unique ville-hôpital */}
+        <div className="bg-primary/5 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-6">
+          <div>
+            <h3 className="text-2xl font-bold text-foreground">{accesChu.guichet.title}</h3>
+            <p className="text-primary font-semibold mt-1">{accesChu.guichet.subtitle}</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-[260px_1fr] lg:grid-cols-[300px_1fr] items-start">
+            <div className="mx-auto w-full max-w-[300px] overflow-hidden rounded-xl shadow-md">
+              <ZoomableImage
+                src={accesChu.guichet.flyer.src}
+                alt={accesChu.guichet.flyer.alt}
+                width={accesChu.guichet.flyer.width}
+                height={accesChu.guichet.flyer.height}
+                sizes="(max-width: 768px) 100vw, 300px"
+                alwaysZoomable
+              />
+            </div>
+            <div className="space-y-4">
+              <div className="bg-white p-5 rounded-lg border-l-4 border-primary space-y-3">
+                <a
+                  href={`tel:${accesChu.guichet.phone.replace(/\s/g, "")}`}
+                  className="flex items-center gap-3 text-xl font-bold text-primary hover:underline"
+                >
+                  <Phone className="w-5 h-5 flex-shrink-0" />
+                  {accesChu.guichet.phone}
+                </a>
+                <p className="flex items-center gap-3 text-sm text-muted-foreground">
+                  <Clock className="w-4 h-4 flex-shrink-0" />
+                  {accesChu.guichet.hours}
+                </p>
+                <div className="space-y-1.5">
+                  {accesChu.guichet.emails.map((email) => (
+                    <a
+                      key={email}
+                      href={`mailto:${email}`}
+                      className="flex items-center gap-3 text-sm font-semibold text-foreground hover:text-primary break-all"
+                    >
+                      <Mail className="w-4 h-4 flex-shrink-0 text-primary" />
+                      {email}
+                    </a>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="font-semibold text-foreground mb-2">
+                  Vous êtes professionnel de santé et vous avez besoin d'une
+                  information, d'un rendez-vous ou de joindre un service ?
+                  Appelez ou écrivez au guichet pour :
+                </p>
+                <ul className="space-y-2">
+                  {accesChu.guichet.usages.map((usage) => (
+                    <li key={usage} className="flex items-start gap-3 text-muted-foreground">
+                      <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-2" />
+                      {usage}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white p-5 rounded-lg border border-primary/15 space-y-3">
+            <h4 className="font-bold text-foreground">{accesChu.guichet.legende.title}</h4>
+            {accesChu.guichet.legende.paragraphs.map((paragraph, index) => (
+              <p key={index} className="text-sm text-muted-foreground leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+
+        {/* Télé-expertise */}
+        <div className="bg-secondary/60 border-2 border-primary/15 rounded-xl p-6 lg:p-8 space-y-4">
+          <h3 className="text-2xl font-bold text-foreground">{accesChu.teleExpertise.title}</h3>
+          <p className="text-muted-foreground leading-relaxed">{accesChu.teleExpertise.text}</p>
+          <a
+            href={accesChu.teleExpertise.link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
+          >
+            <ExternalLink className="w-4 h-4" />
+            {accesChu.teleExpertise.link.label}
+          </a>
+        </div>
       </div>
     ),
   },
