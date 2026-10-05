@@ -237,8 +237,8 @@ export const accordionItemsParcours: AccordionItem[] = [
                     1
                   </span>
                   <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Remplir le questionnaire requérant (disponible sur Plexus
-                    Santé - Projet RCP 'boite à outils')
+                    Remplir le questionnaire requérant (à télécharger
+                    ci-dessous)
                   </p>
                 </li>
                 <li className="flex items-start gap-3">
@@ -246,8 +246,8 @@ export const accordionItemsParcours: AccordionItem[] = [
                     2
                   </span>
                   <p className="text-muted-foreground leading-relaxed pt-0.5">
-                    Proposer le questionnaire patient à votre patient (même
-                    espace Plexus)
+                    Proposer le questionnaire patient à votre patient (à
+                    télécharger ci-dessous)
                   </p>
                 </li>
                 <li className="flex items-start gap-3">
@@ -263,6 +263,21 @@ export const accordionItemsParcours: AccordionItem[] = [
                   </p>
                 </li>
               </ol>
+            </div>
+            <div>
+              <h4 className="text-xl font-bold text-foreground mb-4">
+                Les questionnaires à télécharger
+              </h4>
+              <div className="grid gap-3">
+                <DownloadButton
+                  fileName="Questionnaire requérant – RCP cas complexes"
+                  fileUrl="/actions-outils/rcp-cas-complexes/questionnaire-requerant.pdf"
+                />
+                <DownloadButton
+                  fileName="Questionnaire patient – RCP cas complexes"
+                  fileUrl="/actions-outils/rcp-cas-complexes/questionnaire-patient.pdf"
+                />
+              </div>
             </div>
             <p className="text-primary font-semibold">
               40 minutes d'échanges par dossier maximum
