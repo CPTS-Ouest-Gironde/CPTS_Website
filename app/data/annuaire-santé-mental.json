@@ -1,5 +1,5 @@
 {
-  "version_date": "2026-02-08",
+  "version_date": "2026-10-03",
   "scope": "CPTS Ouest Gironde",
   "topic": "Annuaire santé mentale",
   "age_groups": [
@@ -209,6 +209,18 @@
           "section_title": "Addictions",
           "resources": [
             {
+              "name": "Consultation Jeunes Consommateurs (CJC) de Bordeaux – Addictions France",
+              "type": "CJC",
+              "address": "39-41 rue Sainte-Colombe, 33000 Bordeaux (locaux CAAN'ABUS)",
+              "phone": "05 57 57 00 77",
+              "email": "na33@addictions-france.org",
+              "website": "https://addictions-france.org/etablissements/cjc-de-bordeaux/",
+              "coverage": "locale",
+              "access": "Jeunes et entourage",
+              "notes": "Jeunes consommateurs et entourage. Consultations les mardis et vendredis de 14h à 17h, les mercredis de 14h à 18h, les jeudis de 10h à 12h et de 14h à 17h.",
+              "source": "addictions-france.org (vérifié le 2026-10-03)"
+            },
+            {
               "name": "CSAPA de Bordeaux – Addictions France",
               "type": "CSAPA",
               "address": "67 rue Chevalier, 33000 Bordeaux",
@@ -354,12 +366,12 @@
               "name": "Drogues Info Service",
               "type": "Numéro national",
               "address": "non précisé",
-              "phone": "0800 23 13 13",
-              "website": "non précisé",
+              "phone": "0 800 23 13 13",
+              "website": "https://www.drogues-info-service.fr/",
               "coverage": "nationale",
               "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "notes": "Appel gratuit et anonyme, 7 jours sur 7 de 8h à 23h. Chat individuel 7j/7 de 12h à 19h.",
+              "source": "drogues-info-service.fr (vérifié le 2026-10-03)"
             },
             {
               "name": "Écoute Cannabis",
@@ -377,22 +389,22 @@
               "type": "Numéro national",
               "address": "non précisé",
               "phone": "0 980 980 930",
-              "website": "non précisé",
+              "website": "https://www.alcool-info-service.fr/",
               "coverage": "nationale",
               "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "notes": "Appel anonyme et non surtaxé, 7 jours sur 7 de 8h à 2h. Chat individuel sur le site.",
+              "source": "alcool-info-service.fr (vérifié le 2026-10-03)"
             },
             {
               "name": "Tabac info service",
               "type": "Numéro national",
               "address": "non précisé",
               "phone": "39 89",
-              "website": "non précisé",
+              "website": "https://www.tabac-info-service.fr/",
               "coverage": "nationale",
               "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "notes": "Accompagnement gratuit par un tabacologue, du lundi au samedi de 8h à 20h. Application d'aide à l'arrêt disponible.",
+              "source": "tabac-info-service.fr (vérifié le 2026-10-03)"
             },
             {
               "name": "Joueurs Info Service",
@@ -416,15 +428,16 @@
           "section_title": "Soins et accompagnement",
           "resources": [
             {
-              "name": "Espace Santé Étudiant",
+              "name": "Espace Santé Étudiants (ESE) – Université de Bordeaux",
               "type": "Service étudiant",
-              "address": "22 avenue Pey Berland, 33600 Pessac",
+              "address": "22 avenue Pey-Berland, 33600 Pessac (tram B, arrêt Doyen Brus)",
               "phone": "05 33 51 42 00",
-              "website": "non précisé",
+              "website": "https://www.sante-etudiants-bdx.fr/",
               "coverage": "locale",
-              "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "access": "Étudiants",
+              "notes": "Consultations de médecine générale, psychologiques et psychiatriques, addictions, contraception, dépistage IST, vaccinations, diététique, ateliers de gestion du stress. Rendez-vous sur Doctolib.",
+              "source": "u-bordeaux.fr (vérifié le 2026-10-03)",
+              "email": "ese@u-bordeaux.fr"
             },
             {
               "name": "Santé Psy Étudiant",
@@ -447,6 +460,130 @@
               "access": "non précisé",
               "notes": "non précisé",
               "source": "email"
+            }
+          ]
+        },
+        {
+          "section_title": "Écoute et soutien (gratuit, anonyme)",
+          "resources": [
+            {
+              "name": "Nightline – ligne d'écoute par et pour les étudiants",
+              "type": "Ligne d'écoute nationale",
+              "address": "non précisé",
+              "phone": "0 809 104 104 (français) / 0 809 104 105 (anglais)",
+              "website": "https://www.nightline.fr/services-decoute",
+              "coverage": "nationale",
+              "access": "Étudiants – gratuit, anonyme",
+              "notes": "Écoute par des étudiants bénévoles, tous les soirs de 21h à 2h30, par téléphone ou par tchat. 100 % gratuit, anonyme et confidentiel.",
+              "source": "nightline.fr (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "Fil Santé Jeunes",
+              "type": "Ligne d'écoute nationale",
+              "address": "non précisé",
+              "phone": "0 800 235 236",
+              "website": "https://www.filsantejeunes.com/",
+              "coverage": "nationale",
+              "access": "12-25 ans – gratuit, anonyme",
+              "notes": "Service anonyme et gratuit pour les 12-25 ans, tous les jours de 9h à 23h. Tchat individuel sur le site.",
+              "source": "filsantejeunes.com (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "3114 – Numéro national de prévention du suicide",
+              "type": "Ligne d'écoute nationale",
+              "address": "non précisé",
+              "phone": "3114",
+              "website": "https://www.3114.fr/",
+              "coverage": "nationale",
+              "access": "Gratuit, 24h/24",
+              "notes": "Un professionnel du soin formé à la prévention du suicide à votre écoute, 24h/24 et 7j/7, gratuitement. Pour soi, pour un proche ou pour un professionnel.",
+              "source": "3114.fr (vérifié le 2026-10-03)"
+            }
+          ]
+        },
+        {
+          "section_title": "Addictions",
+          "resources": [
+            {
+              "name": "Consultation Jeunes Consommateurs (CJC) de Bordeaux – Addictions France",
+              "type": "CJC",
+              "address": "39-41 rue Sainte-Colombe, 33000 Bordeaux (locaux CAAN'ABUS)",
+              "phone": "05 57 57 00 77",
+              "email": "na33@addictions-france.org",
+              "website": "https://addictions-france.org/etablissements/cjc-de-bordeaux/",
+              "coverage": "locale",
+              "access": "Jeunes et entourage",
+              "notes": "Jeunes consommateurs et entourage. Consultations les mardis et vendredis de 14h à 17h, les mercredis de 14h à 18h, les jeudis de 10h à 12h et de 14h à 17h.",
+              "source": "addictions-france.org (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "CSAPA de Bordeaux – Addictions France",
+              "type": "CSAPA",
+              "address": "67 rue Chevalier, 33000 Bordeaux",
+              "phone": "05 57 57 00 77",
+              "email": "na33@addictions-france.org",
+              "website": "https://addictions-france.org/etablissements/csapa-de-bordeaux/",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "Prévention, soins et réduction des risques, Consultation Jeunes Consommateurs, accompagnement de l'entourage. Du lundi au jeudi de 8h30 à 19h, le vendredi de 8h30 à 17h.",
+              "source": "addictions-france.org (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "CSAPA CEID – Centre Maurice Sérisé",
+              "type": "CSAPA",
+              "address": "24 rue du Parlement Saint-Pierre, 33000 Bordeaux",
+              "phone": "05 56 44 84 86",
+              "email": "saint-pierre@ceid-addiction.com",
+              "website": "https://ceid-addiction.com/services/centres-daccueil/",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "Du lundi au vendredi de 9h à 13h et de 14h à 17h (mercredi 14h-17h).",
+              "source": "ceid-addiction.com (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "CAARUD CEID – Centre Planterose",
+              "type": "CAARUD",
+              "address": "16 rue Planterose, 33000 Bordeaux",
+              "phone": "05 56 91 07 23",
+              "email": "planterose@ceid-addiction.com",
+              "website": "https://ceid-addiction.com/services/reduction-des-risques/",
+              "coverage": "locale",
+              "access": "Personnes majeures",
+              "notes": "Accueil et réduction des risques pour les usagers de drogues. Du lundi au vendredi de 9h à 13h et de 14h à 17h.",
+              "source": "ceid-addiction.com (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "Drogues Info Service",
+              "type": "Ligne d'écoute nationale",
+              "address": "non précisé",
+              "phone": "0 800 23 13 13",
+              "website": "https://www.drogues-info-service.fr/",
+              "coverage": "nationale",
+              "access": "Gratuit, anonyme",
+              "notes": "Appel gratuit et anonyme, 7 jours sur 7 de 8h à 23h. Chat individuel 7j/7 de 12h à 19h.",
+              "source": "drogues-info-service.fr (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "Alcool info service",
+              "type": "Ligne d'écoute nationale",
+              "address": "non précisé",
+              "phone": "0 980 980 930",
+              "website": "https://www.alcool-info-service.fr/",
+              "coverage": "nationale",
+              "access": "Anonyme, non surtaxé",
+              "notes": "Appel anonyme et non surtaxé, 7 jours sur 7 de 8h à 2h. Chat individuel sur le site.",
+              "source": "alcool-info-service.fr (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "Tabac info service",
+              "type": "Ligne d'écoute nationale",
+              "address": "non précisé",
+              "phone": "39 89",
+              "website": "https://www.tabac-info-service.fr/",
+              "coverage": "nationale",
+              "access": "Gratuit",
+              "notes": "Accompagnement gratuit par un tabacologue, du lundi au samedi de 8h à 20h. Application d'aide à l'arrêt disponible.",
+              "source": "tabac-info-service.fr (vérifié le 2026-10-03)"
             }
           ]
         }
@@ -530,6 +667,30 @@
               "access": "non précisé",
               "notes": "non précisé",
               "source": "email"
+            },
+            {
+              "name": "CSAPA CEID – Centre Maurice Sérisé",
+              "type": "CSAPA",
+              "address": "24 rue du Parlement Saint-Pierre, 33000 Bordeaux",
+              "phone": "05 56 44 84 86",
+              "email": "saint-pierre@ceid-addiction.com",
+              "website": "https://ceid-addiction.com/services/centres-daccueil/",
+              "coverage": "locale",
+              "access": "non précisé",
+              "notes": "Du lundi au vendredi de 9h à 13h et de 14h à 17h (mercredi 14h-17h).",
+              "source": "ceid-addiction.com (vérifié le 2026-10-03)"
+            },
+            {
+              "name": "CAARUD CEID – Centre Planterose",
+              "type": "CAARUD",
+              "address": "16 rue Planterose, 33000 Bordeaux",
+              "phone": "05 56 91 07 23",
+              "email": "planterose@ceid-addiction.com",
+              "website": "https://ceid-addiction.com/services/reduction-des-risques/",
+              "coverage": "locale",
+              "access": "Personnes majeures",
+              "notes": "Accueil et réduction des risques pour les usagers de drogues. Du lundi au vendredi de 9h à 13h et de 14h à 17h.",
+              "source": "ceid-addiction.com (vérifié le 2026-10-03)"
             }
           ]
         },
@@ -642,12 +803,12 @@
               "name": "Drogues Info Service",
               "type": "Numéro national",
               "address": "non précisé",
-              "phone": "0800 23 13 13",
-              "website": "non précisé",
+              "phone": "0 800 23 13 13",
+              "website": "https://www.drogues-info-service.fr/",
               "coverage": "nationale",
               "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "notes": "Appel gratuit et anonyme, 7 jours sur 7 de 8h à 23h. Chat individuel 7j/7 de 12h à 19h.",
+              "source": "drogues-info-service.fr (vérifié le 2026-10-03)"
             },
             {
               "name": "Écoute Cannabis",
@@ -665,22 +826,22 @@
               "type": "Numéro national",
               "address": "non précisé",
               "phone": "0 980 980 930",
-              "website": "non précisé",
+              "website": "https://www.alcool-info-service.fr/",
               "coverage": "nationale",
               "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "notes": "Appel anonyme et non surtaxé, 7 jours sur 7 de 8h à 2h. Chat individuel sur le site.",
+              "source": "alcool-info-service.fr (vérifié le 2026-10-03)"
             },
             {
               "name": "Tabac info service",
               "type": "Numéro national",
               "address": "non précisé",
               "phone": "39 89",
-              "website": "non précisé",
+              "website": "https://www.tabac-info-service.fr/",
               "coverage": "nationale",
               "access": "non précisé",
-              "notes": "non précisé",
-              "source": "email"
+              "notes": "Accompagnement gratuit par un tabacologue, du lundi au samedi de 8h à 20h. Application d'aide à l'arrêt disponible.",
+              "source": "tabac-info-service.fr (vérifié le 2026-10-03)"
             },
             {
               "name": "Joueurs Info Service",

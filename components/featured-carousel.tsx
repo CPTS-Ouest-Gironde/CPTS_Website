@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowUpRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import heroData from "@/app/data/hero-slides.json";
@@ -20,29 +20,35 @@ export function FeaturedCarousel() {
     return () => clearInterval(timer);
   }, [resetTimer]);
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  const goTo = (index: number) => {
+    setCurrentSlide(index);
     setResetTimer((prev) => prev + 1);
   };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setResetTimer((prev) => prev + 1);
-  };
+  const nextSlide = () => goTo((currentSlide + 1) % slides.length);
+  const prevSlide = () => goTo((currentSlide - 1 + slides.length) % slides.length);
 
   return (
-    <section className="pt-8 pb-12 md:pb-14 lg:pb-16 bg-background overflow-x-clip">
+    <section
+      id="a-la-une"
+      className="scroll-mt-28 pt-12 pb-14 md:pt-14 md:pb-16 lg:pt-16 lg:pb-20 overflow-x-clip bg-primary/5 border-y border-primary/10"
+    >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="text-center mb-8 md:mb-8 lg:mb-10">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-3">
-            À la une
+        {/* En-tête de section */}
+        <div className="text-center mb-8 lg:mb-10">
+          <p className="inline-flex items-center gap-2 text-primary text-xs md:text-sm font-semibold uppercase tracking-wider mb-3">
+            <span className="w-8 h-0.5 bg-primary" />
+            Actualités récentes
+            <span className="w-8 h-0.5 bg-primary" />
+          </p>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3">
+            À la une : nos dernières actualités
           </h2>
-          <p className="text-base md:text-base lg:text-lg text-muted-foreground px-4">
-            Découvrez nos dernières campagnes et informations importantes
+          <p className="text-base lg:text-lg text-muted-foreground px-4">
+            Campagnes, événements et informations santé récentes sur votre territoire
           </p>
         </div>
 
-        <div className="relative max-w-[58rem] mx-auto">
+        <div className="relative mx-auto max-w-[64rem]">
           {/* Decorative shapes - desktop only */}
           <div className="hidden lg:block absolute -bottom-6 -left-6 w-40 h-40 bg-primary/15 rounded-3xl -z-10" />
           <div className="hidden lg:block absolute -top-6 -right-6 w-28 h-28 bg-primary/10 rounded-3xl -z-10" />
@@ -58,7 +64,7 @@ export function FeaturedCarousel() {
             />
           </div>
 
-          <div className="aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden bg-muted relative shadow-xl md:shadow-2xl">
+          <div className="aspect-[4/3] md:aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden bg-muted relative shadow-xl md:shadow-2xl">
             {slides.map((slide, index) => (
               <Link
                 key={index}
@@ -80,7 +86,16 @@ export function FeaturedCarousel() {
                   quality={85}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                <div className="absolute top-4 right-4 md:top-6 md:right-6 lg:top-10 lg:right-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-colors">
+
+                {/* Badge Nouveau sur la première slide */}
+                {index === 0 && (
+                  <span className="absolute top-4 left-4 md:top-6 md:left-6 lg:top-8 lg:left-8 inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary text-primary-foreground text-xs md:text-sm font-bold uppercase tracking-wide shadow-lg">
+                    <Sparkles className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                    Nouveau
+                  </span>
+                )}
+
+                <div className="absolute top-4 right-4 md:top-6 md:right-6 lg:top-8 lg:right-8 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-white/30 transition-colors">
                   <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6 text-white" />
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 lg:p-8 text-white">
@@ -90,6 +105,11 @@ export function FeaturedCarousel() {
                 </div>
               </Link>
             ))}
+
+            {/* Compteur */}
+            <span className="absolute bottom-4 right-4 md:bottom-6 md:right-6 px-2.5 py-1 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs md:text-sm font-semibold tabular-nums">
+              {currentSlide + 1} / {slides.length}
+            </span>
           </div>
 
           {slides.length > 1 && (
@@ -108,32 +128,39 @@ export function FeaturedCarousel() {
               >
                 <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
               </button>
-
-              <div
-                className="absolute -bottom-5 md:-bottom-6 left-1/2 -translate-x-1/2 flex gap-2"
-                role="group"
-                aria-label="Navigation carousel"
-              >
-                {slides.map((slide, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setCurrentSlide(index);
-                      setResetTimer((prev) => prev + 1);
-                    }}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentSlide
-                        ? "bg-primary w-6 md:w-8"
-                        : "bg-muted-foreground/30"
-                    }`}
-                    aria-label={`Aller à ${slide.title}`}
-                    aria-current={index === currentSlide ? "true" : "false"}
-                  />
-                ))}
-              </div>
             </>
           )}
         </div>
+
+        {/* Vignettes de navigation */}
+        {slides.length > 1 && (
+          <div
+            className="mt-6 md:mt-8 mx-auto max-w-[64rem] flex gap-2 md:gap-3 overflow-x-auto pb-2 justify-start md:justify-center snap-x"
+            role="group"
+            aria-label="Navigation carousel"
+          >
+            {slides.map((slide, index) => (
+              <button
+                key={index}
+                onClick={() => goTo(index)}
+                className={`relative flex-shrink-0 w-24 md:w-32 aspect-[16/10] rounded-lg md:rounded-xl overflow-hidden snap-start transition-all ring-offset-2 ring-offset-background ${
+                  index === currentSlide
+                    ? "ring-2 ring-primary opacity-100"
+                    : "opacity-60 hover:opacity-100"
+                }`}
+                aria-label={`Aller à ${slide.title}`}
+                aria-current={index === currentSlide ? "true" : "false"}
+              >
+                <Image src={slide.image} alt="" fill className="object-cover" sizes="144px" />
+                {index === 0 && (
+                  <span className="absolute top-1 left-1 px-1.5 py-0.5 rounded bg-primary text-primary-foreground text-[10px] font-bold uppercase">
+                    Nouveau
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
