@@ -1235,12 +1235,6 @@ export const accordionItemsParcours: AccordionItem[] = [
           <p className="text-muted-foreground leading-relaxed">
             Le temps passé peut être déclaré conjointement à la CPTS.
           </p>
-          <div className="grid gap-3">
-            <DownloadButton
-              fileName="Convention Vis ma vie (à compléter et signer)"
-              fileUrl="/actions-outils/vis-ma-vie/convention-vis-ma-vie.pdf"
-            />
-          </div>
         </div>
 
         {/* Exemples de binômes */}

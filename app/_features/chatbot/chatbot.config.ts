@@ -586,15 +586,6 @@ export const chatbotConfig: ChatbotConfig = {
       audience: "pro",
       href: "/actions-outils/rcp-cas-complexes/questionnaire-patient.pdf",
     },
-    "ao-convention-vis-ma-vie": {
-      id: "ao-convention-vis-ma-vie",
-      type: "external",
-      title: "Convention Vis ma vie (PDF à compléter et signer)",
-      description:
-        "Immersion d'une demi-journée, indemnisée par la CPTS, chez un professionnel de santé ou une structure du territoire, encadrée par une convention signée entre les deux parties.",
-      audience: "pro",
-      href: "/actions-outils/vis-ma-vie/convention-vis-ma-vie.pdf",
-    },
     "ao-questions-psy": {
       id: "ao-questions-psy",
       type: "external",
@@ -1432,9 +1423,6 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "aderer", resourceId: "pro-adhesion", scoreBoost: 12 },
 
     { keyword: "formulaire mas", resourceId: "ao-formulaire-mas", scoreBoost: 10 },
-    { keyword: "vis ma vie", resourceId: "ao-convention-vis-ma-vie", scoreBoost: 24 },
-    { keyword: "convention vis ma vie", resourceId: "ao-convention-vis-ma-vie", scoreBoost: 30 },
-    { keyword: "immersion", resourceId: "ao-convention-vis-ma-vie", scoreBoost: 16 },
     { keyword: "pharmacies participantes", resourceId: "ao-affiche-pharmacies", scoreBoost: 10 },
     { keyword: "livret mss", resourceId: "ao-livret-mss", scoreBoost: 10 },
     { keyword: "pole etp", resourceId: "ao-poletp", scoreBoost: 10 },
