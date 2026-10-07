@@ -135,7 +135,7 @@ export function FeaturedCarousel() {
         {/* Vignettes de navigation */}
         {slides.length > 1 && (
           <div
-            className="mt-6 md:mt-8 mx-auto max-w-[64rem] flex gap-2 md:gap-3 overflow-x-auto pb-2 justify-start md:justify-center snap-x"
+            className="mt-5 md:mt-7 mx-auto max-w-[calc(64rem+1rem)] flex gap-2 md:gap-3 overflow-x-auto px-2 py-2 justify-start md:justify-center snap-x"
             role="group"
             aria-label="Navigation carousel"
           >
