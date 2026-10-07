@@ -111,6 +111,63 @@
       ]
     },
     {
+      "articleId": "feu-du-porge",
+      "resourceId": "actu-feu-du-porge",
+      "title": "feu-du-porge",
+      "chunks": [
+        {
+          "sectionTitle": "alert",
+          "text": "alert Les fumées du gigantesque feu du Porge sont arrivées sur notre territoire",
+          "sectionIndex": 0
+        },
+        {
+          "sectionTitle": "emergencyNumbers",
+          "text": "emergencyNumbers 15 SAMU Essoufflement, douleur thoracique, palpitations, confusion, toux persistante 18 Pompiers Suspicion d'intoxication au monoxyde de carbone (CO) FR-Alert Consignes officielles France Bleu, France Info et l'application FR-Alert",
+          "sectionIndex": 1
+        },
+        {
+          "sectionTitle": "risks",
+          "text": "risks Les risques des fumées d'incendie Pour les poumons et le cœur Particules fines PM2.5 Elles pénètrent profondément dans les poumons. Risque d'irritation, de toux, de crise d'asthme et de bronchite. Gaz toxiques Monoxyde de carbone (CO) : inodore et mortel. Cyanure, dioxines, formaldéhyde…",
+          "sectionIndex": 2
+        },
+        {
+          "sectionTitle": "recommendations",
+          "text": "recommendations Les 8 recommandations à appliquer Si vous êtes chez vous et que la fumée arrive Restez confiné(e) Fermez les fenêtres, portes, volets et aérations. Calfeutrez avec des serviettes mouillées sous les portes. Coupez la VMC et la climatisation Si vous utilisez la clim, mettez-la en…",
+          "sectionIndex": 3
+        },
+        {
+          "sectionTitle": "vigilance",
+          "text": "vigilance Personnes devant être particulièrement vigilantes Contactez le 15 si vous ressentez : essoufflement, douleur thoracique, palpitations, confusion, toux persistante. Cela concerne notamment : Les enfants de moins de 5 ans Les personnes de plus de 65 ans Les personnes asthmatiques,…",
+          "sectionIndex": 4
+        },
+        {
+          "sectionTitle": "aftermath",
+          "text": "aftermath Après l'incendie Aérez 10 minutes Uniquement lorsque les autorités indiquent que la qualité de l'air est redevenue correcte. Lavez à l'eau claire Lavez les fruits et légumes du jardin ainsi que les surfaces avec de l'eau.",
+          "sectionIndex": 5
+        },
+        {
+          "sectionTitle": "samu",
+          "text": "samu Information à destination des patients Compte-tenu des expositions de la population générale aux fumées d'incendie, les questions suivantes se posent. Doit-on dépister les intoxications au monoxyde de carbone dans la population générale exposée aux fumées ? En l'absence de signes…",
+          "sectionIndex": 6
+        },
+        {
+          "sectionTitle": "ozone",
+          "text": "ozone Qu'est-ce que l'ozone ? L'ozone est un gaz polluant irritant qui pose problème pour la santé. Comment le reconnaître ? Vous ne pouvez pas le voir ni le sentir à faible dose. Une odeur piquante peut apparaître à forte concentration, mais ce n'est pas fiable. Le seul moyen de le connaître est…",
+          "sectionIndex": 7
+        },
+        {
+          "sectionTitle": "airQuality",
+          "text": "airQuality Suivez la qualité de l'air en temps réel Consultez l'indice de qualité de l'air de votre commune pour adapter vos activités et savoir quand aérer.",
+          "sectionIndex": 8
+        },
+        {
+          "sectionTitle": "goldenRule",
+          "text": "goldenRule Règle d'or Si vous sentez la fumée et que vous avez des maux de tête et des nausées, cela peut être le signe d'une intoxication au CO. Aérez, sortez, et appelez le 18.",
+          "sectionIndex": 9
+        }
+      ]
+    },
+    {
       "articleId": "octobre-rose-2026",
       "resourceId": "sf-octobre-rose-2026",
       "title": "OCTOBRE ROSE 2026",

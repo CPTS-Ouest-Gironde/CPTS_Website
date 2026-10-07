@@ -9,6 +9,7 @@ import Link from "next/link";
 import { ExternalLink, Mail, Phone, Clock } from "lucide-react";
 import { DownloadButton } from "@/components/download-button";
 import accesChu from "@/app/data/acces-chu.json";
+import sseEte2026 from "@/app/data/sse-ete-2026.json";
 
 export const accordionItemsAcces: AccordionItem[] = [
   {
@@ -1600,6 +1601,117 @@ export const accordionItemsSSE: AccordionItem[] = [
                 <svg className="w-4 h-4 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" /></svg>
               </div>
             </button>
+          </div>
+        </div>
+      </div>
+    ),
+  },
+  {
+    id: "sse-ete-2026",
+    title: sseEte2026.title,
+    content: "",
+    files: [],
+    customContent: (
+      <div className="space-y-6">
+        <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-6 rounded-xl space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+            {sseEte2026.periode}
+          </p>
+          {sseEte2026.paragraphs.map((paragraph, index) => (
+            <p key={index} className="text-foreground leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div>
+          <h4 className="font-semibold text-primary text-sm uppercase tracking-wide mb-3">
+            Ce que la CPTS a mis en place
+          </h4>
+          <ul className="grid gap-2 sm:grid-cols-2">
+            {sseEte2026.actions.map((action) => (
+              <li
+                key={action}
+                className="flex items-start gap-3 p-3 rounded-lg bg-white border border-primary/15 text-sm text-foreground"
+              >
+                <span className="flex-shrink-0 w-2 h-2 bg-primary rounded-full mt-1.5" />
+                {action}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Galerie d'affiches : lightbox via l'événement open-sse-image géré par la page */}
+        <div>
+          <h4 className="font-semibold text-primary text-sm uppercase tracking-wide mb-3">
+            {sseEte2026.affiches.title}
+          </h4>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            {sseEte2026.affiches.items.map((affiche) => (
+              <button
+                key={affiche.src}
+                type="button"
+                className="group relative block text-left"
+                onClick={() =>
+                  window.dispatchEvent(
+                    new CustomEvent("open-sse-image", {
+                      detail: { src: affiche.src, alt: affiche.alt },
+                    }),
+                  )
+                }
+                aria-label={`Agrandir l'affiche : ${affiche.caption}`}
+              >
+                <div className="relative aspect-[3/4] overflow-hidden rounded-xl border border-border bg-muted shadow-sm">
+                  <Image
+                    src={affiche.src}
+                    alt={affiche.alt}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 240px"
+                    className="object-cover object-top group-hover:opacity-90 transition-opacity"
+                  />
+                  <span
+                    className={`absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                      affiche.origine === "CPTS"
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-white/90 text-foreground"
+                    }`}
+                  >
+                    {affiche.origine === "CPTS" ? "Affiche CPTS" : "Relais"}
+                  </span>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground leading-snug">
+                  {affiche.caption}
+                </p>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h4 className="font-semibold text-primary text-sm uppercase tracking-wide mb-3">
+            {sseEte2026.liens.title}
+          </h4>
+          <div className="grid gap-3 md:grid-cols-3">
+            {sseEte2026.liens.items.map((lien) => (
+              <Link
+                key={lien.href}
+                href={lien.href}
+                className="group flex items-center gap-3 p-3 rounded-xl bg-white border border-primary/15 hover:border-primary/40 hover:shadow-md transition-all"
+              >
+                <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
+                  <Image
+                    src={lien.image}
+                    alt=""
+                    fill
+                    sizes="64px"
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-sm font-semibold text-foreground group-hover:text-primary leading-snug">
+                  {lien.label}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

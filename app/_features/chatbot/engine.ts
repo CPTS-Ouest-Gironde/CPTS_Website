@@ -192,10 +192,31 @@ function filterAudienceMatches<T extends ResourceMatch>(
   }
 
   // Strict patient default: any user who hasn't explicitly declared as "pro" via the
-  // documents-role-check flow is treated as a patient and never sees pro-only resources.
-  // A pro reaches their resources via the "Ressources professionnels" quick reply or
-  // by going through documents-role-check.
-  return matches.filter((match) => match.resource.audience !== "pro")
+  // documents-role-check flow is treated as a patient and never sees pro-only resources,
+  // except those carrying a publicVersion (shown with their public description and the
+  // pro-space link). A pro reaches the full resources via the "Ressources professionnels"
+  // quick reply or by going through documents-role-check.
+  return matches.flatMap((match) => {
+    const { resource } = match
+    if (resource.audience !== "pro") {
+      return [match]
+    }
+    if (resource.type !== "internal" || !resource.publicVersion) {
+      return []
+    }
+    const { publicVersion } = resource
+    return [
+      {
+        ...match,
+        resource: {
+          ...resource,
+          title: publicVersion.title ?? resource.title,
+          description: publicVersion.description,
+          href: publicVersion.href,
+        },
+      },
+    ]
+  })
 }
 
 function hasVaccinationIntent(normalizedInput: string): boolean {
@@ -830,7 +851,14 @@ export function processUserInput(
   }
 
   if (numericSafeMatches.length > 0) {
-    const filteredMatches = filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
+    // Anti-répétition : si l'utilisateur répète exactement la même demande, on écarte les
+    // ressources déjà proposées (fallback s'il ne reste rien). Pour une question nouvelle
+    // (ex. « psy » puis « rcp » puis « rcp psy »), toutes les ressources trouvées sont
+    // proposées, dans l'ordre des scores.
+    const isRepeatedInput = trimmed === (state.lastUserInput ?? "").trim()
+    const filteredMatches = isRepeatedInput
+      ? filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
+      : numericSafeMatches
     if (!filteredMatches.length) {
       return buildFallbackState(config, messagesWithUser, state.recentlySuggested, undefined, state.audienceContext)
     }

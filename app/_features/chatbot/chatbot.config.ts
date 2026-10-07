@@ -362,6 +362,39 @@ export const chatbotConfig: ChatbotConfig = {
       audience: "patient",
       href: "/prevention/sante-familiale/prevention-cancer-colorectal-mars-bleu-2026",
     },
+    "actu-feu-du-porge": {
+      id: "actu-feu-du-porge",
+      type: "internal",
+      title: "Fumées d'incendie : risques et recommandations",
+      description:
+        "Que faire quand les fumées d'incendie arrivent : rester confiné, couper la VMC, masque FFP2 si vous sortez, ozone et qualité de l'air, nettoyage après l'incendie, quand appeler le 15 et numéros utiles.",
+      audience: "any",
+      href: "/actualites/feu-du-porge",
+    },
+    "actu-affiches-incendie": {
+      id: "actu-affiches-incendie",
+      type: "internal",
+      title: "Affiches : conseils face aux fumées d'incendie",
+      description:
+        "Les 8 recommandations face aux fumées d'incendie et les réponses aux questions fréquentes (monoxyde de carbone, oxygène, caisson hyperbare), à télécharger et afficher.",
+      audience: "any",
+      href: "/actualites/affiches-incendie",
+    },
+    "pro-sse-ete-2026": {
+      id: "pro-sse-ete-2026",
+      type: "internal",
+      title: "SSE de l'été 2026 : incendies de Saint-Jean-d'Illac",
+      description:
+        "Retour sur le plan de situation sanitaire exceptionnelle activé à la demande de l'ARS : mobilisation des professionnels en appui des hubs, patients refusant d'évacuer, lien direct avec les mairies, affiches et communication aux patients.",
+      audience: "pro",
+      href: "/professionnels/actions-outils#sse-ete-2026",
+      publicVersion: {
+        title: "Incendies de l'été 2026 : la mobilisation de la CPTS (professionnels)",
+        description:
+          "Lors des incendies de l'été 2026, la CPTS a activé son plan de situation sanitaire exceptionnelle pour appuyer les professionnels de santé et les mairies du territoire. Réservé aux professionnels, accès via l'espace pro.",
+        href: "/professionnels/actions-outils#sse-ete-2026",
+      },
+    },
     "actu-journee-coeur-des-femmes": {
       id: "actu-journee-coeur-des-femmes",
       type: "internal",
@@ -499,6 +532,12 @@ export const chatbotConfig: ChatbotConfig = {
         "Réunion de concertation pluriprofessionnelle de la CPTS pour les prises en charge complexes. Remplissez le questionnaire requérant, proposez le questionnaire patient, la CPTS organise un temps d'échanges pluriprofessionnel (40 minutes par dossier maximum).",
       audience: "pro",
       href: "/professionnels/actions-outils#reunions-concertation",
+      publicVersion: {
+        title: "RCP cas complexes (professionnels)",
+        description:
+          "La CPTS organise des réunions de concertation pluriprofessionnelles (RCP) pour les situations complexes. Réservé aux professionnels, accès via l'espace pro.",
+        href: "/professionnels/actions-outils#reunions-concertation",
+      },
     },
     "pro-rcp-psy": {
       id: "pro-rcp-psy",
@@ -508,6 +547,12 @@ export const chatbotConfig: ChatbotConfig = {
         "Réunion de concertation pluriprofessionnelle santé mentale de la CPTS : appui diagnostic, avis thérapeutique, aide à l'orientation vers les dispositifs sanitaires ou médico-sociaux. Remplissez le questionnaire requérant et proposez le questionnaire patient, puis envoyez-les aux membres de la RCP.",
       audience: "pro",
       href: "/professionnels/actions-outils#reunions-concertation",
+      publicVersion: {
+        title: "RCP Psy (professionnels)",
+        description:
+          "La CPTS réunit les professionnels autour des situations de santé mentale complexes (RCP Psy) pour coordonner la prise en charge. Réservé aux professionnels, accès via l'espace pro.",
+        href: "/professionnels/actions-outils#reunions-concertation",
+      },
     },
     "pro-chu-guichet-unique": {
       id: "pro-chu-guichet-unique",
@@ -517,6 +562,12 @@ export const chatbotConfig: ChatbotConfig = {
         "Point d'entrée unique des professionnels de ville vers le CHU de Bordeaux : courriers et résultats, ordonnances, adressages et avis spécialisés. 05 57 821 821 du lundi au vendredi de 9h à 17h, villehop@chu-bordeaux.fr ou villehop@chu-bordeaux.mssante.fr.",
       audience: "pro",
       href: "/professionnels/actions-outils#acces-chu",
+      publicVersion: {
+        title: "Guichet unique ville-hôpital (professionnels)",
+        description:
+          "Le CHU de Bordeaux propose aux professionnels de ville un point d'entrée unique pour joindre ses services et adresser leurs patients. Réservé aux professionnels, accès via l'espace pro.",
+        href: "/professionnels/actions-outils#acces-chu",
+      },
     },
     "pro-chu-tele-expertise": {
       id: "pro-chu-tele-expertise",
@@ -526,6 +577,12 @@ export const chatbotConfig: ChatbotConfig = {
         "Accès à des avis spécialisés du CHU de Bordeaux en transmettant les documents du patient de façon sécurisée. De nombreuses spécialités sont représentées.",
       audience: "pro",
       href: "/professionnels/actions-outils#acces-chu",
+      publicVersion: {
+        title: "Télé-expertise du CHU (professionnels)",
+        description:
+          "Les professionnels de santé peuvent solliciter l'avis des spécialistes du CHU de Bordeaux par télé-expertise. Réservé aux professionnels, accès via l'espace pro.",
+        href: "/professionnels/actions-outils#acces-chu",
+      },
     },
     "pro-supports": {
       id: "pro-supports",
@@ -1243,6 +1300,27 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "animation octobre rose", resourceId: "actu-octobre-rose-pessac-2026", scoreBoost: 24 },
     { keyword: "mars bleu", resourceId: "sf-mars-bleu-2026", scoreBoost: 16 },
     { keyword: "cancer colorectal", resourceId: "sf-mars-bleu-2026", scoreBoost: 14 },
+    { keyword: "incendie", resourceId: "actu-feu-du-porge", scoreBoost: 20 },
+    { keyword: "incendies", resourceId: "actu-feu-du-porge", scoreBoost: 20 },
+    { keyword: "feu", resourceId: "actu-feu-du-porge", scoreBoost: 14 },
+    { keyword: "feu du porge", resourceId: "actu-feu-du-porge", scoreBoost: 26 },
+    { keyword: "fumee", resourceId: "actu-feu-du-porge", scoreBoost: 22 },
+    { keyword: "fumees", resourceId: "actu-feu-du-porge", scoreBoost: 22 },
+    { keyword: "fumees d'incendie", resourceId: "actu-feu-du-porge", scoreBoost: 26 },
+    { keyword: "ozone", resourceId: "actu-feu-du-porge", scoreBoost: 22 },
+    { keyword: "qualite de l'air", resourceId: "actu-feu-du-porge", scoreBoost: 18 },
+    { keyword: "masque ffp2", resourceId: "actu-feu-du-porge", scoreBoost: 18 },
+    { keyword: "cendres", resourceId: "actu-feu-du-porge", scoreBoost: 16 },
+    { keyword: "incendie", resourceId: "actu-affiches-incendie", scoreBoost: 14 },
+    { keyword: "affiche incendie", resourceId: "actu-affiches-incendie", scoreBoost: 26 },
+    { keyword: "affiches fumees", resourceId: "actu-affiches-incendie", scoreBoost: 24 },
+    { keyword: "incendie", resourceId: "pro-sse-ete-2026", scoreBoost: 12 },
+    { keyword: "fumee", resourceId: "pro-sse-ete-2026", scoreBoost: 10 },
+    { keyword: "ozone", resourceId: "pro-sse-ete-2026", scoreBoost: 10 },
+    { keyword: "sse", resourceId: "pro-sse-ete-2026", scoreBoost: 22 },
+    { keyword: "situation sanitaire exceptionnelle", resourceId: "pro-sse-ete-2026", scoreBoost: 26 },
+    { keyword: "saint-jean-d'illac incendie", resourceId: "pro-sse-ete-2026", scoreBoost: 26 },
+    { keyword: "plan sse", resourceId: "pro-sse-ete-2026", scoreBoost: 26 },
     { keyword: "journee du coeur des femmes", resourceId: "actu-journee-coeur-des-femmes", scoreBoost: 20 },
     { keyword: "coeur des femmes", resourceId: "actu-journee-coeur-des-femmes", scoreBoost: 18 },
     { keyword: "agir pour le coeur des femmes", resourceId: "actu-journee-coeur-des-femmes", scoreBoost: 20 },
@@ -1370,6 +1448,10 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "orientation psychiatrie", resourceId: "pro-dispositifs-territoire", scoreBoost: 16 },
     { keyword: "rcp psy", resourceId: "pro-dispositifs-territoire", scoreBoost: 12 },
     { keyword: "rcp", resourceId: "pro-rcp-cas-complexes", scoreBoost: 14 },
+    { keyword: "rcp", resourceId: "pro-rcp-psy", scoreBoost: 14 },
+    { keyword: "concertation", resourceId: "pro-rcp-cas-complexes", scoreBoost: 16 },
+    { keyword: "concertation", resourceId: "pro-rcp-psy", scoreBoost: 16 },
+    { keyword: "psy", resourceId: "pro-rcp-psy", scoreBoost: 10 },
     { keyword: "rcp cas complexe", resourceId: "pro-rcp-cas-complexes", scoreBoost: 24 },
     { keyword: "rcp cas complexes", resourceId: "pro-rcp-cas-complexes", scoreBoost: 24 },
     { keyword: "cas complexe", resourceId: "pro-rcp-cas-complexes", scoreBoost: 18 },
@@ -1383,7 +1465,9 @@ export const chatbotConfig: ChatbotConfig = {
     { keyword: "requete patient", resourceId: "ao-rcp-questionnaire-patient", scoreBoost: 14 },
     { keyword: "reunion de concertation", resourceId: "pro-rcp-cas-complexes", scoreBoost: 20 },
     { keyword: "concertation pluriprofessionnelle", resourceId: "pro-rcp-cas-complexes", scoreBoost: 20 },
-    { keyword: "rcp psy", resourceId: "pro-rcp-psy", scoreBoost: 20 },
+    { keyword: "rcp psy", resourceId: "pro-rcp-psy", scoreBoost: 24 },
+    { keyword: "rcp psychiatrie", resourceId: "pro-rcp-psy", scoreBoost: 24 },
+    { keyword: "concertation psy", resourceId: "pro-rcp-psy", scoreBoost: 24 },
     { keyword: "rcp psy questionnaire", resourceId: "pro-rcp-psy", scoreBoost: 26 },
     { keyword: "questionnaire rcp psy", resourceId: "pro-rcp-psy", scoreBoost: 26 },
     { keyword: "questionnaire requerant", resourceId: "pro-rcp-psy", scoreBoost: 16 },

@@ -145,6 +145,11 @@ const ARTICLE_SOURCES: ArticleSource[] = [
     path: "app/data/cancer-colorectal-mars-bleu-2026.json",
   },
   {
+    slug: "feu-du-porge",
+    resourceId: "actu-feu-du-porge",
+    path: "app/data/feu-du-porge.json",
+  },
+  {
     slug: "octobre-rose-2026",
     resourceId: "sf-octobre-rose-2026",
     path: "app/data/octobre-rose-2026.json",
