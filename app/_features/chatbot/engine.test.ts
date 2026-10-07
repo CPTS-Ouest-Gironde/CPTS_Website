@@ -260,6 +260,34 @@ for (const [input, expectedId] of publicCases) {
   })
 }
 
+const incendieCases: Array<[string, string]> = [
+  ["incendie", "actu-feu-du-porge"],
+  ["que faire avec la fumée", "actu-feu-du-porge"],
+  ["ozone", "actu-feu-du-porge"],
+  ["affiche incendie", "actu-affiches-incendie"],
+]
+
+for (const [input, expectedId] of incendieCases) {
+  test(`processUserInput "${input}" propose ${expectedId}`, () => {
+    const initialState = createInitialState(chatbotConfig)
+    const nextState = processUserInput(initialState, input, chatbotConfig)
+
+    const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+    const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+
+    assert.ok(suggestedIds.includes(expectedId), `${expectedId} attendu pour "${input}"`)
+  })
+}
+
+test("processUserInput \"sse\" (pro) place la SSE de l'été 2026 en tête", () => {
+  const initialState = { ...createInitialState(chatbotConfig), audienceContext: "pro" as const }
+  const nextState = processUserInput(initialState, "sse", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "pro-sse-ete-2026")
+})
+
 test("processUserInput \"psy\" sans contexte pro garde l'annuaire santé mentale en tête", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "psy", chatbotConfig)

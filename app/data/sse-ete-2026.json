@@ -1,0 +1,68 @@
+{
+  "title": "SSE de l'été 2026 : incendies de Saint-Jean-d'Illac",
+  "periode": "Été 2026",
+  "paragraphs": [
+    "À l'été 2026, les incendies de Saint-Jean-d'Illac, après ceux du Porge dont les fumées ont atteint notre territoire, ont conduit la CPTS Ouest Gironde à activer son dispositif de situation sanitaire exceptionnelle.",
+    "Le plan a été déclenché à la demande de l'ARS afin de mobiliser les professionnels de santé du territoire en appui des hubs, avec un lien direct établi avec les mairies pour identifier leurs besoins au fil des jours.",
+    "Les professionnels ont pris en charge les patients refusant d'évacuer leur domicile et assuré la continuité des soins auprès des habitants et des équipes engagées sur le feu.",
+    "En parallèle, une stratégie de communication a été mise en place dès les premières heures : conseils aux patients sur les fumées et l'ozone, port du masque FFP2, nettoyage des cendres et des surfaces, numéros utiles.",
+    "Deux affiches CPTS (« Les 8 recommandations face aux fumées d'incendie » et « Vos questions face aux fumées ») ont été diffusées aux adhérents, en officine et sur les réseaux, en relais des visuels de la Préfecture et du CHU de Bordeaux."
+  ],
+  "actions": [
+    "Déclenchement du plan SSE à la demande de l'ARS",
+    "Mobilisation des professionnels en appui des hubs",
+    "Prise en charge des patients refusant d'évacuer",
+    "Lien direct avec les mairies pour identifier leurs besoins",
+    "Information des patients : fumées, ozone, masques, nettoyage des cendres",
+    "Affiches et communication en continu sur le site et les réseaux"
+  ],
+  "affiches": {
+    "title": "Les affiches diffusées",
+    "items": [
+      {
+        "src": "/actions-outils/SSE/ete-2026/affiche-1.webp",
+        "alt": "Affiche CPTS — Conseils aux patients : les 8 recommandations à appliquer face aux risques des fumées d'incendie",
+        "caption": "Les 8 recommandations face aux fumées",
+        "origine": "CPTS"
+      },
+      {
+        "src": "/actions-outils/SSE/ete-2026/affiche-2.webp",
+        "alt": "Affiche CPTS — Vos questions face aux fumées d'incendie : monoxyde de carbone, oxygène, caisson hyperbare, quand appeler le 15",
+        "caption": "Vos questions face aux fumées",
+        "origine": "CPTS"
+      },
+      {
+        "src": "/actions-outils/SSE/ete-2026/affiche-3.webp",
+        "alt": "Visuel de la Préfecture — Incendies : numéros utiles, cellule d'information du public 09 70 80 90 40 et cellule de coordination médico-psychologique 0 800 719 912",
+        "caption": "Numéros utiles (Préfecture)",
+        "origine": "Relais"
+      },
+      {
+        "src": "/actions-outils/SSE/ete-2026/affiche-4.webp",
+        "alt": "Visuel du CHU de Bordeaux — Incendies : message à l'attention des femmes enceintes proches du terme, urgences obstétricales 05 57 82 01 01",
+        "caption": "Femmes enceintes (CHU de Bordeaux)",
+        "origine": "Relais"
+      }
+    ]
+  },
+  "liens": {
+    "title": "Pour aller plus loin",
+    "items": [
+      {
+        "label": "Incendies à Saint-Jean-d'Illac : cinq jours pour prendre soin de ceux qui luttaient contre le feu",
+        "href": "/presentation/suivi-activites/incendies-saint-jean-dillac-msp-aout-2026",
+        "image": "/suivi-activite/articles/11-08-2026/post-st-jean-dillac.webp"
+      },
+      {
+        "label": "Les fumées du feu du Porge sont arrivées sur notre territoire : risques, recommandations, ozone",
+        "href": "/actualites/feu-du-porge",
+        "image": "/feu/image-feu-post-insta.png"
+      },
+      {
+        "label": "Conseils face aux fumées d'incendie : les affiches",
+        "href": "/actualites/affiches-incendie",
+        "image": "/actions-outils/SSE/ete-2026/affiche-1.webp"
+      }
+    ]
+  }
+}
