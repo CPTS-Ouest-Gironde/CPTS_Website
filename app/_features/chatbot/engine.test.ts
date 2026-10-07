@@ -295,6 +295,56 @@ test("processUserInput \"psy\" sans contexte pro garde l'annuaire santé mentale
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
 
   assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sante-mentale-annuaire")
+  assert.equal(suggestionMessage?.suggestions?.[1]?.resource.id, "pro-rcp-psy")
+})
+
+test("processUserInput \"rcp\" sans contexte pro propose les deux RCP en version publique", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "rcp", chatbotConfig)
+
+  const suggestions = getLastBotMessageWithSuggestions(nextState.messages)?.suggestions ?? []
+  const suggestedIds = suggestions.map((item) => item.resource.id)
+
+  assert.ok(suggestedIds.includes("pro-rcp-cas-complexes"))
+  assert.ok(suggestedIds.includes("pro-rcp-psy"))
+  assert.ok(suggestions.every((item) => !/questionnaire|40 minutes|Dr /.test(item.resource.description ?? "")))
+})
+
+test("processUserInput \"rcp psy\" sans contexte pro place RCP psy en premier puis RCP cas complexes", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "rcp psy", chatbotConfig)
+
+  const suggestedIds = getLastBotMessageWithSuggestions(nextState.messages)?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.equal(suggestedIds[0], "pro-rcp-psy")
+  assert.ok(suggestedIds.includes("pro-rcp-cas-complexes"))
+})
+
+test("processUserInput \"concertation\" sans contexte pro propose les deux RCP", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "concertation", chatbotConfig)
+
+  const suggestedIds = getLastBotMessageWithSuggestions(nextState.messages)?.suggestions?.map((item) => item.resource.id) ?? []
+
+  assert.ok(suggestedIds.includes("pro-rcp-cas-complexes"))
+  assert.ok(suggestedIds.includes("pro-rcp-psy"))
+})
+
+test("enchaînement psy → rcp → rcp psy : les RCP restent proposées malgré recentlySuggested", () => {
+  const first = processUserInput(createInitialState(chatbotConfig), "psy", chatbotConfig)
+  const firstIds = getLastBotMessageWithSuggestions(first.messages)?.suggestions?.map((item) => item.resource.id) ?? []
+  assert.equal(firstIds[0], "sante-mentale-annuaire")
+  assert.equal(firstIds[1], "pro-rcp-psy")
+
+  const second = processUserInput(first, "rcp", chatbotConfig)
+  const secondIds = getLastBotMessageWithSuggestions(second.messages)?.suggestions?.map((item) => item.resource.id) ?? []
+  assert.ok(secondIds.includes("pro-rcp-cas-complexes"))
+  assert.ok(secondIds.includes("pro-rcp-psy"))
+
+  const third = processUserInput(second, "rcp psy", chatbotConfig)
+  const thirdIds = getLastBotMessageWithSuggestions(third.messages)?.suggestions?.map((item) => item.resource.id) ?? []
+  assert.notEqual(third.currentNodeId, "fallback")
+  assert.equal(thirdIds[0], "pro-rcp-psy")
 })
 
 test("processUserInput \"rcp psy\" avec contexte pro garde la description opérationnelle", () => {

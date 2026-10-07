@@ -851,7 +851,14 @@ export function processUserInput(
   }
 
   if (numericSafeMatches.length > 0) {
-    const filteredMatches = filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
+    // Anti-répétition : si l'utilisateur répète exactement la même demande, on écarte les
+    // ressources déjà proposées (fallback s'il ne reste rien). Pour une question nouvelle
+    // (ex. « psy » puis « rcp » puis « rcp psy »), toutes les ressources trouvées sont
+    // proposées, dans l'ordre des scores.
+    const isRepeatedInput = trimmed === (state.lastUserInput ?? "").trim()
+    const filteredMatches = isRepeatedInput
+      ? filterRecentlySuggested(numericSafeMatches, state.recentlySuggested)
+      : numericSafeMatches
     if (!filteredMatches.length) {
       return buildFallbackState(config, messagesWithUser, state.recentlySuggested, undefined, state.audienceContext)
     }
