@@ -225,14 +225,59 @@ test("processUserInput \"questionnaire rcp\" (pro) propose les RCP cas complexes
   assert.ok(suggestedIds.includes("pro-rcp-psy"))
 })
 
-test("processUserInput \"guichet unique\" sans contexte pro ne propose pas la ressource CHU", () => {
+test("processUserInput \"guichet unique\" sans contexte pro propose la version grand public de la ressource CHU", () => {
   const initialState = createInitialState(chatbotConfig)
   const nextState = processUserInput(initialState, "guichet unique", chatbotConfig)
 
   const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
-  const suggestedIds = suggestionMessage?.suggestions?.map((item) => item.resource.id) ?? []
+  const match = suggestionMessage?.suggestions?.find((item) => item.resource.id === "pro-chu-guichet-unique")
 
-  assert.ok(!suggestedIds.includes("pro-chu-guichet-unique"))
+  assert.ok(match, "ressource CHU attendue en version grand public")
+  assert.match(match.resource.description ?? "", /Réservé aux professionnels/)
+  assert.equal(match.resource.type === "internal" ? match.resource.href : "", "/professionnels/actions-outils#acces-chu")
+})
+
+const publicCases: Array<[string, string]> = [
+  ["psy", "pro-rcp-psy"],
+  ["rcp", "pro-rcp-cas-complexes"],
+  ["rcp psy", "pro-rcp-psy"],
+  ["cas complexe", "pro-rcp-cas-complexes"],
+  ["guichet unique", "pro-chu-guichet-unique"],
+  ["télé-expertise", "pro-chu-tele-expertise"],
+]
+
+for (const [input, expectedId] of publicCases) {
+  test(`processUserInput "${input}" sans contexte pro propose ${expectedId} en version grand public`, () => {
+    const initialState = createInitialState(chatbotConfig)
+    const nextState = processUserInput(initialState, input, chatbotConfig)
+
+    const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+    const match = suggestionMessage?.suggestions?.find((item) => item.resource.id === expectedId)
+
+    assert.ok(match, `${expectedId} attendu`)
+    assert.match(match.resource.description ?? "", /Réservé aux professionnels, accès via l'espace pro/)
+    assert.ok(match.resource.type === "internal" && match.resource.href.startsWith("/professionnels/actions-outils#"))
+  })
+}
+
+test("processUserInput \"psy\" sans contexte pro garde l'annuaire santé mentale en tête", () => {
+  const initialState = createInitialState(chatbotConfig)
+  const nextState = processUserInput(initialState, "psy", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+
+  assert.equal(suggestionMessage?.suggestions?.[0]?.resource.id, "sante-mentale-annuaire")
+})
+
+test("processUserInput \"rcp psy\" avec contexte pro garde la description opérationnelle", () => {
+  const initialState = { ...createInitialState(chatbotConfig), audienceContext: "pro" as const }
+  const nextState = processUserInput(initialState, "rcp psy", chatbotConfig)
+
+  const suggestionMessage = getLastBotMessageWithSuggestions(nextState.messages)
+  const match = suggestionMessage?.suggestions?.find((item) => item.resource.id === "pro-rcp-psy")
+
+  assert.ok(match)
+  assert.doesNotMatch(match.resource.description ?? "", /Réservé aux professionnels/)
 })
 
 test("processUserInput matche une douleur à la tête en phrase naturelle", () => {

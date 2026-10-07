@@ -9,9 +9,17 @@ export interface BaseResource {
   sensitivityCategory?: "violence" | "suicide" | "danger-vital"
 }
 
+/** Version grand public d'une ressource pro : ce que la CPTS met en place, sans détail opérationnel. */
+export interface PublicVersion {
+  title?: string
+  description: string
+  href: string
+}
+
 export interface InternalResource extends BaseResource {
   type: "internal"
   href: string
+  publicVersion?: PublicVersion
 }
 
 export interface ExternalResource extends BaseResource {
